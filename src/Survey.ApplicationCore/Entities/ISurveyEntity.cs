@@ -4,6 +4,7 @@
 
 namespace Survey.ApplicationCore.Entities
 {
+  /// <summary>Represents a survey entity.</summary>
   public interface ISurveyEntity : ISurveyIdentity, ISurveyData
   {
   }

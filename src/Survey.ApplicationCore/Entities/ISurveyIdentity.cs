@@ -4,8 +4,10 @@
 
 namespace Survey.ApplicationCore.Entities
 {
+  /// <summary>Represents a survey identity.</summary>
   public interface ISurveyIdentity
   {
+    /// <summary>Gets an object that represents an identity of a survey.</summary>
     public Guid SurveyId { get; }
   }
 }

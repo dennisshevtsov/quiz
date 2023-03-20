@@ -4,10 +4,13 @@
 
 namespace Survey.ApplicationCore.Entities
 {
+  /// <summary>Represents survey data.</summary>
   public interface ISurveyData
   {
+    /// <summary>Gets an object that represents a name of a survey.</summary>
     public string Name { get; }
 
+    /// <summary>Gets an object that represents a description of survey.</summary>
     public string Description { get; }
   }
 }
