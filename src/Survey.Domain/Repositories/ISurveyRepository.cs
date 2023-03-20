@@ -10,9 +10,9 @@ namespace Survey.Domain.Repositories
   public interface ISurveyRepository
   {
     /// <summary>Saves a new survey entity to the storage.</summary>
-    /// <param name="surveyData">An object that represents survey data.</param>
+    /// <param name="surveyEntity">An object that represents a survey entity.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
     /// <returns>An object that represents an asynchronous operation.</returns>
-    public Task InsertAsync(ISurveyData surveyData, CancellationToken cancellationToken);
+    public Task InsertAsync(ISurveyEntity surveyEntity, CancellationToken cancellationToken);
   }
 }
