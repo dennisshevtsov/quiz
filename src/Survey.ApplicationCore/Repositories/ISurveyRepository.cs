@@ -6,13 +6,13 @@ namespace Survey.ApplicationCore.Repositories
 {
   using Survey.ApplicationCore.Entities;
 
-  /// <summary>Provides a simple API to the storage of the survey entity.</summary>
+  /// <summary>Provides a simple API to the storage of the <see cref="Survey.ApplicationCore.Entities.ISurveyEntity"/>.</summary>
   public interface ISurveyRepository
   {
     /// <summary>Saves a new survey entity to the storage.</summary>
-    /// <param name="surveyEntity">An object that represents a survey entity.</param>
+    /// <param name="surveyData">An object that represents survey data.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
     /// <returns>An object that represents an asynchronous operation.</returns>
-    public Task InsertAsync(ISurveyEntity surveyEntity, CancellationToken cancellationToken);
+    public Task InsertAsync(ISurveyData surveyData, CancellationToken cancellationToken);
   }
 }
