@@ -2,14 +2,14 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Api.Controllers
+namespace Survey.Web.Controllers
 {
   using System;
 
   using Microsoft.AspNetCore.Mvc;
 
-  using Survey.Api.Defaults;
-  using Survey.Api.ViewModels;
+  using Survey.Web.Defaults;
+  using Survey.Web.ViewModels;
   using Survey.Domain.Services;
 
   /// <summary>Provides a simple API to handle HTTP request.</summary>
