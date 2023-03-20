@@ -11,10 +11,12 @@ namespace Survey.Api.Controllers
 
   /// <summary>Provides a simple API to handle HTTP request.</summary>
   [ApiController]
-  [Route("api/survey")]
+  [Route(SurveyController.SurveyRoute)]
   [Produces(ContentType.Json)]
   public sealed class SurveyController : ControllerBase
   {
+    private const string SurveyRoute = "api/survey";
+
     [HttpPost(Name = nameof(SurveyController.AddSurvey))]
     [Consumes(typeof(SurveyViewModel), ContentType.Json)]
     public IActionResult AddSurvey([FromBody] SurveyViewModel vm)
