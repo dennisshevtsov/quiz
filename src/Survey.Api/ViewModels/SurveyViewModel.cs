@@ -6,7 +6,7 @@ namespace Survey.Api.ViewModels
 {
   using System.ComponentModel.DataAnnotations;
 
-  using Survey.ApplicationCore.Entities;
+  using Survey.Domain.Entities;
 
   /// <summary>Represents a survey view model.</summary>
   public class SurveyViewModel : ISurveyData

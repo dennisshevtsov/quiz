@@ -10,7 +10,7 @@ namespace Survey.Api.Controllers
 
   using Survey.Api.Defaults;
   using Survey.Api.ViewModels;
-  using Survey.ApplicationCore.Services;
+  using Survey.Domain.Services;
 
   /// <summary>Provides a simple API to handle HTTP request.</summary>
   [ApiController]

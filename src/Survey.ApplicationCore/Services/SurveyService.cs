@@ -6,8 +6,9 @@ namespace Survey.ApplicationCore.Services
 {
   using System;
 
-  using Survey.ApplicationCore.Entities;
-  using Survey.ApplicationCore.Repositories;
+  using Survey.Domain.Entities;
+  using Survey.Domain.Repositories;
+  using Survey.Domain.Services;
 
   /// <summary>Provides a simple API to the survey entity.</summary>
   public sealed class SurveyService : ISurveyService
