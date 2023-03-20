@@ -4,12 +4,7 @@
 
 namespace Survey.ApplicationCore.Entities
 {
-  public interface ISurveyEntity
+  public interface ISurveyEntity : ISurveyIdentity, ISurveyData
   {
-    public Guid SurveyId { get; }
-
-    public string Name { get; }
-
-    public string Description { get; }
   }
 }
