@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Survey.ApplicationCore\Survey.Application.csproj" />
+    <ProjectReference Include="..\Survey.Domain\Survey.Domain.csproj" />
   </ItemGroup>
 
 </Project>
