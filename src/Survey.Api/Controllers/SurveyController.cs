@@ -6,16 +6,17 @@ namespace Survey.Api.Controllers
 {
   using Microsoft.AspNetCore.Mvc;
 
+  using Survey.Api.Defaults;
   using Survey.Api.ViewModels;
 
   /// <summary>Provides a simple API to handle HTTP request.</summary>
   [ApiController]
   [Route("api/survey")]
-  [Produces("application/json")]
+  [Produces(ContentType.Json)]
   public sealed class SurveyController : ControllerBase
   {
     [HttpPost(Name = nameof(SurveyController.AddSurvey))]
-    [Consumes(typeof(SurveyViewModel), "application/json")]
+    [Consumes(typeof(SurveyViewModel), ContentType.Json)]
     public IActionResult AddSurvey([FromBody] SurveyViewModel vm)
     {
       return Ok(vm);
