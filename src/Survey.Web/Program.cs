@@ -5,6 +5,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddSwaggerGen();
 
 builder.Services.SetUpApplication();
 builder.Services.SetUpInfrastructure();
@@ -12,6 +13,7 @@ builder.Services.SetUpInfrastructure();
 var app = builder.Build();
 
 app.UseSwagger();
+
 app.MapControllers();
 
 app.Run();
