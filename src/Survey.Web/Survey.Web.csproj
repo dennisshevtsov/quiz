@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Survey.Domain\Survey.Domain.csproj" />
+    <ProjectReference Include="..\Survey.Application\Survey.Application.csproj" />
+    <ProjectReference Include="..\Survey.Infrastructure\Survey.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
