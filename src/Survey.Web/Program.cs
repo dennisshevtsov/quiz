@@ -4,9 +4,13 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+
 builder.Services.SetUpApplication();
 builder.Services.SetUpInfrastructure();
 
 var app = builder.Build();
+
+app.MapControllers();
 
 app.Run();
