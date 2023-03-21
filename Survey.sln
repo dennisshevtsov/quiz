@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Survey.Web", "src\Survey.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Survey.Application", "src\Survey.Application\Survey.Application.csproj", "{29D7D71C-371F-4020-8BDD-E7D7AD074D03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Survey.Infrastructure", "src\Survey.Infrastructure\Survey.Infrastructure.csproj", "{01FB3A8A-7B9A-459C-996E-FCB8B5BECF3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Survey.Infrastructure", "src\Survey.Infrastructure\Survey.Infrastructure.csproj", "{01FB3A8A-7B9A-459C-996E-FCB8B5BECF3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Survey.Domain", "src\Survey.Domain\Survey.Domain.csproj", "{4E51A08D-3666-41AC-B68C-1D940CE92746}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Survey.Domain", "src\Survey.Domain\Survey.Domain.csproj", "{4E51A08D-3666-41AC-B68C-1D940CE92746}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Survey.Test", "test\Survey.Test\Survey.Test.csproj", "{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4E51A08D-3666-41AC-B68C-1D940CE92746}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E51A08D-3666-41AC-B68C-1D940CE92746}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E51A08D-3666-41AC-B68C-1D940CE92746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
