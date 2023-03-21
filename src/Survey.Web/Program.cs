@@ -11,6 +11,7 @@ builder.Services.SetUpInfrastructure();
 
 var app = builder.Build();
 
+app.UseSwagger();
 app.MapControllers();
 
 app.Run();
