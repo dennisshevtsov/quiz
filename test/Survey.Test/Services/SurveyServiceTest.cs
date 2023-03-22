@@ -4,7 +4,9 @@
 
 namespace Survey.Application.Services.Test
 {
+  using Survey.Domain.Entities;
   using Survey.Domain.Repositories;
+  using Survey.Web.ViewModels;
 
   [TestClass]
   public sealed class SurveyServiceTest
@@ -21,6 +23,32 @@ namespace Survey.Application.Services.Test
       _surveyRepositoryMock = new Mock<ISurveyRepository>();
 
       _surveyService = new SurveyService(_surveyRepositoryMock.Object);
+    }
+
+    [TestMethod]
+    public async Task AddNewSurveyAsync_Should_Save_Survey()
+    {
+      _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<ISurveyEntity>(), It.IsAny<CancellationToken>()))
+                           .Returns(Task.CompletedTask)
+                           .Verifiable();
+
+      var surveyData = new SurveyViewModel
+      {
+        Name = Guid.NewGuid().ToString(),
+        Description = Guid.NewGuid().ToString(),
+      };
+
+      var surveyIdentity =
+        await _surveyService.AddNewSurveyAsync(surveyData, CancellationToken.None);
+
+      Assert.IsNotNull(surveyIdentity);
+
+      _surveyRepositoryMock.Verify(
+        repository => repository.AddSurveyAsync(
+          It.Is<ISurveyEntity>(entity => entity.Name == surveyData.Name && entity.Description == surveyData.Description),
+          CancellationToken.None));
+
+      _surveyRepositoryMock.VerifyNoOtherCalls();
     }
   }
 }
