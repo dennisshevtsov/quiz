@@ -6,7 +6,6 @@ namespace Survey.Application.Services.Test
 {
   using Survey.Domain.Entities;
   using Survey.Domain.Repositories;
-  using Survey.Web.ViewModels;
 
   [TestClass]
   public sealed class SurveyServiceTest
@@ -32,11 +31,7 @@ namespace Survey.Application.Services.Test
                            .Returns(Task.CompletedTask)
                            .Verifiable();
 
-      var surveyData = new SurveyViewModel
-      {
-        Name = Guid.NewGuid().ToString(),
-        Description = Guid.NewGuid().ToString(),
-      };
+      var surveyData = new TestSurveyData();
 
       var surveyIdentity =
         await _surveyService.AddNewSurveyAsync(surveyData, CancellationToken.None);
@@ -49,6 +44,13 @@ namespace Survey.Application.Services.Test
           CancellationToken.None));
 
       _surveyRepositoryMock.VerifyNoOtherCalls();
+    }
+
+    private sealed class TestSurveyData : ISurveyData
+    {
+      public string Name { get; } = Guid.NewGuid().ToString();
+
+      public string Description { get; } = Guid.NewGuid().ToString();
     }
   }
 }
