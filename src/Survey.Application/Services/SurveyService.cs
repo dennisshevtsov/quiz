@@ -31,7 +31,7 @@ namespace Survey.Application.Services
     {
       var surveyEntity = new SurveyEntity(surveyData);
 
-      await  _surveyRepository.AddSurveyAsync(surveyEntity, cancellationToken);
+      await _surveyRepository.AddSurveyAsync(surveyEntity, cancellationToken);
 
       return surveyEntity;
     }
