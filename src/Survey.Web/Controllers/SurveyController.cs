@@ -8,9 +8,9 @@ namespace Survey.Web.Controllers
 
   using Microsoft.AspNetCore.Mvc;
 
+  using Survey.Domain.Services;
   using Survey.Web.Defaults;
   using Survey.Web.ViewModels;
-  using Survey.Domain.Services;
 
   /// <summary>Provides a simple API to handle HTTP request.</summary>
   [ApiController]
@@ -19,6 +19,7 @@ namespace Survey.Web.Controllers
   public sealed class SurveyController : ControllerBase
   {
     private const string SurveyRoute = "api/survey";
+    private const string GetSurveySubRoute = "{surveyId}";
 
     private readonly ISurveyService _surveyService;
 
@@ -41,6 +42,25 @@ namespace Survey.Web.Controllers
       await _surveyService.AddNewSurveyAsync(vm, cancellationToken);
 
       return Ok();
+    }
+
+    /// <summary>Handles the add survey command request.</summary>
+    /// <param name="surveyId">An object that represents an identity of a survey.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpGet(SurveyController.GetSurveySubRoute, Name = nameof(SurveyController.GetSurvey))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(SurveyViewModel), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetSurvey([FromRoute] Guid surveyId, CancellationToken cancellationToken)
+    {
+      var surveyEntity = await _surveyService.GetSurveyAsync(surveyId, cancellationToken);
+
+      if (surveyEntity == null)
+      {
+        return NotFound();
+      }
+
+      return Ok(new SurveyViewModel(surveyEntity));
     }
   }
 }
