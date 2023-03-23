@@ -38,11 +38,7 @@ namespace Survey.Application.Services.Test
 
       Assert.IsNotNull(surveyIdentity);
 
-      _surveyRepositoryMock.Verify(
-        repository => repository.AddSurveyAsync(
-          It.Is<ISurveyEntity>(entity => entity.Name == surveyData.Name && entity.Description == surveyData.Description),
-          CancellationToken.None));
-
+      _surveyRepositoryMock.Verify(repository => repository.AddSurveyAsync(It.Is<ISurveyEntity>(entity => surveyData.Equals(entity)), CancellationToken.None));
       _surveyRepositoryMock.VerifyNoOtherCalls();
     }
 
@@ -72,6 +68,9 @@ namespace Survey.Application.Services.Test
       public string Name { get; } = Guid.NewGuid().ToString();
 
       public string Description { get; } = Guid.NewGuid().ToString();
+
+      public bool Equals(ISurveyData other)
+        => Name == other.Name && Description == other.Description;
     }
 
     private sealed class TestSurveyEntity : ISurveyEntity
