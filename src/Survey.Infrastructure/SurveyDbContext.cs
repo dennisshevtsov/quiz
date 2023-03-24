@@ -9,7 +9,7 @@ namespace Survey.Infrastructure
   using Survey.Infrastructure.Configurations;
 
   /// <summary>Represents a session with the database and can be used to query and save instances of your entities.</summary>
-  public sealed class ApplicationDbContext : DbContext
+  public sealed class SurveyDbContext : DbContext
   {
     /// <summary>Configures the model.</summary>
     /// <param name="modelBuilder">An object that provides a simple API surface for configuring the model.</param>
