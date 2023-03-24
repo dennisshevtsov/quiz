@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
     /// <returns>An object that specifies the contract for a collection of service descriptors.</returns>
     public static IServiceCollection SetUpDatabase(this IServiceCollection services)
     {
-      services.AddDbContext<DbContext, SurveyDbContext>(options => options.UseNpgsql("Host=localhost;Port=5433;Database=surveydb;Username=dev;Password=dev"));
+      services.AddDbContext<DbContext, SurveyDbContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=surveydb;Username=dev;Password=dev"));
 
       return services;
     }
