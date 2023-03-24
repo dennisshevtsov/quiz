@@ -12,7 +12,7 @@ namespace Survey.Domain.Services
     /// <summary>Creates a new survey.</summary>
     /// <param name="surveyData">An object that represents survey data.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
-    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Survey.Domain.Entities.ISurveyIdentity"/></returns>
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Survey.Domain.Entities.ISurveyIdentity"/>.</returns>
     public Task<ISurveyIdentity> AddNewSurveyAsync(ISurveyData surveyData, CancellationToken cancellationToken);
   }
 }
