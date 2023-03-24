@@ -6,6 +6,7 @@ namespace Survey.Infrastructure.Configurations
 {
   using Microsoft.EntityFrameworkCore;
   using Microsoft.EntityFrameworkCore.Metadata.Builders;
+  using Microsoft.EntityFrameworkCore.ValueGeneration;
 
   using Survey.Infrastructure.Entities;
 
@@ -20,7 +21,9 @@ namespace Survey.Infrastructure.Configurations
       builder.HasKey(e => e.SurveyId);
 
       builder.Property(entity => entity.SurveyId)
-             .HasColumnName("id");
+             .HasColumnName("id")
+             .ValueGeneratedOnAdd()
+             .HasValueGenerator<GuidValueGenerator>();
 
       builder.Property(entity => entity.Name)
              .HasColumnName("name")
