@@ -28,7 +28,7 @@ namespace Survey.Application.Services.Test
     public async Task AddNewSurveyAsync_Should_Save_Survey()
     {
       _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<ISurveyEntity>(), It.IsAny<CancellationToken>()))
-                           .Returns(Task.CompletedTask)
+                           .ReturnsAsync(new TestSurveyEntity())
                            .Verifiable();
 
       var surveyData = new TestSurveyData();
@@ -38,16 +38,45 @@ namespace Survey.Application.Services.Test
 
       Assert.IsNotNull(surveyIdentity);
 
-      _surveyRepositoryMock.Verify(
-        repository => repository.AddSurveyAsync(
-          It.Is<ISurveyEntity>(entity => entity.Name == surveyData.Name && entity.Description == surveyData.Description),
-          CancellationToken.None));
+      _surveyRepositoryMock.Verify(repository => repository.AddSurveyAsync(It.Is<ISurveyEntity>(entity => surveyData.Equals(entity)), CancellationToken.None));
+      _surveyRepositoryMock.VerifyNoOtherCalls();
+    }
 
+    [TestMethod]
+    public async Task GetSurveyAsync_Should_Get_Survey()
+    {
+      var controlSurveyEntity = new TestSurveyEntity();
+
+      _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                           .ReturnsAsync(controlSurveyEntity)
+                           .Verifiable();
+
+      var surveyId = Guid.NewGuid();
+
+      var actualSurveyEntity =
+        await _surveyService.GetSurveyAsync(surveyId, CancellationToken.None);
+
+      Assert.IsNotNull(actualSurveyEntity);
+      Assert.AreEqual(controlSurveyEntity, actualSurveyEntity);
+
+      _surveyRepositoryMock.Verify(repository => repository.GetSurveyAsync(surveyId, CancellationToken.None));
       _surveyRepositoryMock.VerifyNoOtherCalls();
     }
 
     private sealed class TestSurveyData : ISurveyData
     {
+      public string Name { get; } = Guid.NewGuid().ToString();
+
+      public string Description { get; } = Guid.NewGuid().ToString();
+
+      public bool Equals(ISurveyData other)
+        => Name == other.Name && Description == other.Description;
+    }
+
+    private sealed class TestSurveyEntity : ISurveyEntity
+    {
+      public Guid SurveyId { get; } = Guid.NewGuid();
+
       public string Name { get; } = Guid.NewGuid().ToString();
 
       public string Description { get; } = Guid.NewGuid().ToString();

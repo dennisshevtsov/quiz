@@ -12,21 +12,21 @@ namespace Survey.Application.Entities.Test
     [TestMethod]
     public void Constructor_Should_Copy_Data()
     {
-      var testSurveyData = new TestSurveyData();
-      var testSurveyEntity = new SurveyEntity(testSurveyData);
+      var controlSurveyData = new TestSurveyData();
+      var actualSurveyEntity = new SurveyEntity(controlSurveyData);
 
-      Assert.AreEqual(testSurveyData.Name, testSurveyEntity.Name);
-      Assert.AreEqual(testSurveyData.Description, testSurveyEntity.Description);
+      Assert.AreEqual(controlSurveyData.Name, actualSurveyEntity.Name);
+      Assert.AreEqual(controlSurveyData.Description, actualSurveyEntity.Description);
     }
 
     [TestMethod]
     public void Constructor_Should_Copy_Entity()
     {
-      var testSurveyEntity = new TestSurveyEntity();
-      var actualSurveyEntity = new SurveyEntity(testSurveyEntity);
+      var controlSurveyEntity = new TestSurveyEntity();
+      var actualSurveyEntity = new SurveyEntity(controlSurveyEntity);
 
-      Assert.AreEqual(testSurveyEntity.Name, actualSurveyEntity.Name);
-      Assert.AreEqual(testSurveyEntity.Description, actualSurveyEntity.Description);
+      Assert.AreEqual(controlSurveyEntity.Name, actualSurveyEntity.Name);
+      Assert.AreEqual(controlSurveyEntity.Description, actualSurveyEntity.Description);
     }
 
     private sealed class TestSurveyData : ISurveyData
