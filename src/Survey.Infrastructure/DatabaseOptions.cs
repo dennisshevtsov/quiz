@@ -5,7 +5,7 @@
 namespace Survey.Infrastructure
 {
   /// <summary>Represents database options.</summary>
-  public sealed class DbOptions
+  public sealed class DatabaseOptions
   {
     /// <summary>Gets/sets an object that represents a connection string of the database.</summary>
     public string? ConnectionString { get; set; }
