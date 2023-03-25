@@ -36,12 +36,12 @@ namespace Survey.Web.Controllers
     /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
     [HttpPost(Name = nameof(SurveyController.AddSurvey))]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [Consumes(typeof(SurveyViewModel), ContentType.Json)]
-    public async Task<IActionResult> AddSurvey([FromBody] SurveyViewModel vm, CancellationToken cancellationToken)
+    [Consumes(typeof(AddSurveyViewModel), ContentType.Json)]
+    public async Task<IActionResult> AddSurvey([FromBody] AddSurveyViewModel vm, CancellationToken cancellationToken)
     {
-      var surveyIdentity = await _surveyService.AddNewSurveyAsync(vm, cancellationToken);
+      var surveyEntity = await _surveyService.AddNewSurveyAsync(vm, cancellationToken);
 
-      return CreatedAtRoute(nameof(SurveyController.GetSurvey), new { surveyId = surveyIdentity.SurveyId }, null);
+      return CreatedAtRoute(nameof(SurveyController.GetSurvey), new { surveyId = surveyEntity.SurveyId }, new GetSurveyViewModel(surveyEntity));
     }
 
     /// <summary>Handles the add survey command request.</summary>
@@ -50,7 +50,7 @@ namespace Survey.Web.Controllers
     /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
     [HttpGet(SurveyController.GetSurveySubRoute, Name = nameof(SurveyController.GetSurvey))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(SurveyViewModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(GetSurveyViewModel), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetSurvey([FromRoute] Guid surveyId, CancellationToken cancellationToken)
     {
       var surveyEntity = await _surveyService.GetSurveyAsync(surveyId, cancellationToken);
@@ -60,7 +60,7 @@ namespace Survey.Web.Controllers
         return NotFound();
       }
 
-      return Ok(new SurveyViewModel(surveyEntity));
+      return Ok(new GetSurveyViewModel(surveyEntity));
     }
   }
 }

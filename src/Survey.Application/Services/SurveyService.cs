@@ -26,8 +26,8 @@ namespace Survey.Application.Services
     /// <summary>Creates a new survey.</summary>
     /// <param name="surveyData">An object that represents survey data.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
-    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Survey.Domain.Entities.ISurveyIdentity"/>.</returns>
-    public async Task<ISurveyIdentity> AddNewSurveyAsync(ISurveyData surveyData, CancellationToken cancellationToken)
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Survey.Domain.Entities.ISurveyEntity"/>.</returns>
+    public async Task<ISurveyEntity> AddNewSurveyAsync(ISurveyData surveyData, CancellationToken cancellationToken)
       => await _surveyRepository.AddSurveyAsync(new SurveyEntity(surveyData), cancellationToken);
 
     /// <summary>Gets a survey.</summary>

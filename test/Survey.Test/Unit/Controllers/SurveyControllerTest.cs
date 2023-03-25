@@ -31,10 +31,10 @@ namespace Survey.Web.Controllers.Test
     public async Task AddSurvey_Should_Save_Survey()
     {
       _surveyServiceMock.Setup(service => service.AddNewSurveyAsync(It.IsAny<ISurveyData>(), It.IsAny<CancellationToken>()))
-                        .ReturnsAsync(new TestSurveyIdentity())
+                        .ReturnsAsync(new TestSurveyEntity())
                         .Verifiable();
 
-      var vm = new SurveyViewModel
+      var vm = new AddSurveyViewModel
       {
         Name = Guid.NewGuid().ToString(),
         Description = Guid.NewGuid().ToString(),
@@ -53,9 +53,13 @@ namespace Survey.Web.Controllers.Test
       _surveyServiceMock.VerifyNoOtherCalls();
     }
 
-    private sealed class TestSurveyIdentity : ISurveyIdentity
+    private sealed class TestSurveyEntity : ISurveyEntity
     {
-      public Guid SurveyId { get; set; }
+      public Guid SurveyId { get; } = Guid.NewGuid();
+
+      public string Name { get; } = Guid.NewGuid().ToString();
+
+      public string Description { get; } = Guid.NewGuid().ToString();
     }
   }
 }

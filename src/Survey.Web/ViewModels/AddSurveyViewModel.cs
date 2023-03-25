@@ -9,14 +9,14 @@ namespace Survey.Web.ViewModels
   using Survey.Domain.Entities;
 
   /// <summary>Represents a survey view model.</summary>
-  public class SurveyViewModel : ISurveyData
+  public class AddSurveyViewModel : ISurveyData
   {
-    /// <summary>Initializes a new instance of the <see cref="Survey.Api.ViewModels.SurveyViewModel"/> class.</summary>
-    public SurveyViewModel() {}
+    /// <summary>Initializes a new instance of the <see cref="Survey.Web.ViewModels.AddSurveyViewModel"/> class.</summary>
+    public AddSurveyViewModel() {}
 
-    /// <summary>Initializes a new instance of the <see cref="Survey.Api.ViewModels.SurveyViewModel"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Survey.Web.ViewModels.AddSurveyViewModel"/> class.</summary>
     /// <param name="surveyData">An object that represents survey data.</param>
-    public SurveyViewModel(ISurveyData surveyData)
+    public AddSurveyViewModel(ISurveyData surveyData)
     {
       Name = surveyData.Name;
       Description = surveyData.Description;
