@@ -41,7 +41,7 @@ namespace Survey.Web.Controllers
     {
       var surveyIdentity = await _surveyService.AddNewSurveyAsync(vm, cancellationToken);
 
-      return CreatedAtAction(nameof(SurveyController.GetSurvey), new { surveyId = surveyIdentity.SurveyId }, null);
+      return CreatedAtRoute(nameof(SurveyController.GetSurvey), new { surveyId = surveyIdentity.SurveyId }, null);
     }
 
     /// <summary>Handles the add survey command request.</summary>

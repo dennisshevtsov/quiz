@@ -31,7 +31,7 @@ namespace Survey.Web.Controllers.Test
     public async Task AddSurvey_Should_Save_Survey()
     {
       _surveyServiceMock.Setup(service => service.AddNewSurveyAsync(It.IsAny<ISurveyData>(), It.IsAny<CancellationToken>()))
-                        .ReturnsAsync(new SurveyIdentity())
+                        .ReturnsAsync(new TestSurveyIdentity())
                         .Verifiable();
 
       var vm = new SurveyViewModel
@@ -43,13 +43,17 @@ namespace Survey.Web.Controllers.Test
       var actionResult = await _surveyController.AddSurvey(vm, CancellationToken.None);
 
       Assert.IsNotNull(actionResult);
-      Assert.IsInstanceOfType(actionResult, typeof(OkResult));
+
+      var createdAtRouteResult = actionResult as CreatedAtRouteResult;
+
+      Assert.IsNotNull(createdAtRouteResult);
+      Assert.AreEqual(nameof(SurveyController.GetSurvey), createdAtRouteResult.RouteName);
 
       _surveyServiceMock.Verify(service => service.AddNewSurveyAsync(It.Is<ISurveyData>(data => data.Name == vm.Name && data.Description == vm.Description), CancellationToken.None));
       _surveyServiceMock.VerifyNoOtherCalls();
     }
 
-    private sealed class SurveyIdentity : ISurveyIdentity
+    private sealed class TestSurveyIdentity : ISurveyIdentity
     {
       public Guid SurveyId { get; set; }
     }
