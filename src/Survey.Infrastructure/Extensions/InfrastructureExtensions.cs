@@ -7,6 +7,7 @@ namespace Microsoft.Extensions.DependencyInjection
   using Microsoft.EntityFrameworkCore;
   using Microsoft.Extensions.Configuration;
   using Microsoft.Extensions.Options;
+
   using Survey.Domain.Repositories;
   using Survey.Infrastructure;
   using Survey.Infrastructure.Repositories;
