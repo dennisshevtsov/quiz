@@ -31,26 +31,26 @@ namespace Survey.Web.Controllers
     }
 
     /// <summary>Handles the add survey command request.</summary>
-    /// <param name="vm"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+    /// <param name="vm">An object that represents a survey view model.</param>
+    /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
     [HttpPost(Name = nameof(SurveyController.AddSurvey))]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [Consumes(typeof(SurveyViewModel), ContentType.Json)]
-    public async Task<IActionResult> AddSurvey([FromBody] SurveyViewModel vm, CancellationToken cancellationToken)
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [Consumes(typeof(AddSurveyViewModel), ContentType.Json)]
+    public async Task<IActionResult> AddSurvey([FromBody] AddSurveyViewModel vm, CancellationToken cancellationToken)
     {
-      await _surveyService.AddNewSurveyAsync(vm, cancellationToken);
+      var surveyEntity = await _surveyService.AddNewSurveyAsync(vm, cancellationToken);
 
-      return Ok();
+      return CreatedAtRoute(nameof(SurveyController.GetSurvey), new { surveyId = surveyEntity.SurveyId }, new GetSurveyViewModel(surveyEntity));
     }
 
     /// <summary>Handles the add survey command request.</summary>
     /// <param name="surveyId">An object that represents an identity of a survey.</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+    /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
     [HttpGet(SurveyController.GetSurveySubRoute, Name = nameof(SurveyController.GetSurvey))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(SurveyViewModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(GetSurveyViewModel), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetSurvey([FromRoute] Guid surveyId, CancellationToken cancellationToken)
     {
       var surveyEntity = await _surveyService.GetSurveyAsync(surveyId, cancellationToken);
@@ -60,7 +60,7 @@ namespace Survey.Web.Controllers
         return NotFound();
       }
 
-      return Ok(new SurveyViewModel(surveyEntity));
+      return Ok(new GetSurveyViewModel(surveyEntity));
     }
   }
 }

@@ -13,7 +13,7 @@ namespace Survey.Web.ViewModels.Test
     public void Constructor_Should_Copy_Data()
     {
       var controlSurveyData = new TestSurveyData();
-      var actualSurveyViewModel = new SurveyViewModel(controlSurveyData);
+      var actualSurveyViewModel = new AddSurveyViewModel(controlSurveyData);
 
       Assert.AreEqual(controlSurveyData.Name, actualSurveyViewModel.Name);
       Assert.AreEqual(controlSurveyData.Description, actualSurveyViewModel.Description);

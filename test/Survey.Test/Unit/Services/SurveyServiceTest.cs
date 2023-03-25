@@ -28,7 +28,7 @@ namespace Survey.Application.Services.Test
     public async Task AddNewSurveyAsync_Should_Save_Survey()
     {
       _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<ISurveyEntity>(), It.IsAny<CancellationToken>()))
-                           .Returns(Task.CompletedTask)
+                           .ReturnsAsync(new TestSurveyEntity())
                            .Verifiable();
 
       var surveyData = new TestSurveyData();
