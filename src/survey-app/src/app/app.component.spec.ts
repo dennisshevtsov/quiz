@@ -1,4 +1,8 @@
-import { TestBed             } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
+import { By } from '@angular/platform-browser';
+
+import { RouterOutlet        } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
@@ -19,16 +23,11 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  // it(`should have as title 'survey-app'`, () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.componentInstance;
-  //   expect(app.title).toEqual('survey-app');
-  // });
+  it('should contain router-outlet', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const outlet  = fixture.debugElement.query(By.directive(RouterOutlet));
 
-  // it('should render title', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('.content span')?.textContent).toContain('survey-app app is running!');
-  // });
+    expect(outlet).not.toBeNull();
+    expect(outlet.componentInstance).not.toBeNull();
+  });
 });
