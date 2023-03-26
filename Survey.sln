@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Survey.Infrastructure", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Survey.Domain", "src\Survey.Domain\Survey.Domain.csproj", "{4E51A08D-3666-41AC-B68C-1D940CE92746}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Survey.Test", "test\Survey.Test\Survey.Test.csproj", "{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Survey.Test", "test\Survey.Test\Survey.Test.csproj", "{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "survey-app", "src\survey-app\survey-app.esproj", "{B345E357-8E58-4270-8187-700B5F551866}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,12 @@ Global
 		{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B345E357-8E58-4270-8187-700B5F551866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B345E357-8E58-4270-8187-700B5F551866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B345E357-8E58-4270-8187-700B5F551866}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B345E357-8E58-4270-8187-700B5F551866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B345E357-8E58-4270-8187-700B5F551866}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B345E357-8E58-4270-8187-700B5F551866}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
