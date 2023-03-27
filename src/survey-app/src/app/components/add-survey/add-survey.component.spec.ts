@@ -1,11 +1,38 @@
-import { TestBed } from '@angular/core/testing';
+import { Component    } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { Input        } from '@angular/core';
+import { Output       } from '@angular/core';
+import { TestBed      } from '@angular/core/testing';
 
+import { SurveyData         } from '../../entities';
 import { AddSurveyComponent } from './add-survey.component';
+
+@Component({
+  selector: 'app-survey',
+})
+class TestSurveyComponent {
+  private okValue: EventEmitter<void>;
+
+  public constructor() {
+    this.okValue = new EventEmitter<void>();
+  }
+
+  @Input()
+  public set survey(value: SurveyData) {}
+
+  @Output()
+  public get ok(): EventEmitter<void> {
+    return this.okValue;
+  }
+}
 
 describe('AddSurveyComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-                   declarations: [AddSurveyComponent],
+                   declarations: [
+                    TestSurveyComponent,
+                    AddSurveyComponent,
+                  ],
                  })
                  .compileComponents();
   });
