@@ -1,1 +1,9 @@
-<p>survey works!</p>
+<form [formGroup]="form">
+  <label>Name:</label>
+  <input type="text" formControlName="name">
+  <br>
+  <label>Description:</label>
+  <textarea formControlName="name"></textarea>
+  <br>
+  <button (click)="okPressed()"><span>Ok</span></button>
+</form>
