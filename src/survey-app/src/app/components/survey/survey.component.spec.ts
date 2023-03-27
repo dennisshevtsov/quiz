@@ -1,11 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed             } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { SurveyComponent } from './survey.component';
 
 describe('SurveyComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-                   declarations: [ SurveyComponent ]
+                   imports: [ReactiveFormsModule],
+                   declarations: [SurveyComponent]
                  })
                  .compileComponents();
   });
