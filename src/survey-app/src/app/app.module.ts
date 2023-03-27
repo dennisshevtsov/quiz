@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent     } from './app.component';
 
 import { AddSurveyComponent } from './components';
+import { SurveyComponent } from './components/survey/survey.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddSurveyComponent,
+    SurveyComponent,
   ],
   imports: [
     BrowserModule,
