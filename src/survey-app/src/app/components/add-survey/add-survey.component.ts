@@ -1,20 +1,33 @@
 import { Component } from '@angular/core';
+import { OnDestroy } from '@angular/core';
+
+import { Subscription } from 'rxjs';
 
 import { SurveyData         } from '../../entities';
 import { AddSurveyViewModel } from './add-survey.view-model';
 
 @Component({
   templateUrl: './add-survey.component.html',
-  providers: [AddSurveyViewModel],
+  providers: [
+    AddSurveyViewModel,
+    { provide: Subscription, useFactory: () => new Subscription(), },
+  ],
 })
-export class AddSurveyComponent {
-  public constructor(private readonly vm: AddSurveyViewModel) {}
+export class AddSurveyComponent implements OnDestroy {
+  public constructor(
+    private readonly vm : AddSurveyViewModel,
+    private readonly sub: Subscription,
+  ) {}
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 
   public get survey(): SurveyData {
     return this.vm.survey;
   }
 
   public ok(): void {
-    this.vm.add();
+    this.sub.add(this.vm.add().subscribe());
   }
 }
