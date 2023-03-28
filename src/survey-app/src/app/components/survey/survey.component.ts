@@ -44,7 +44,7 @@ export class SurveyComponent {
 
   @Output()
   public get ok(): EventEmitter<void> {
-    return this.ok;
+    return this.okValue;
   }
 
   public get form(): FormGroup<SurveyFormScheme> {
