@@ -8,7 +8,9 @@ import { Observable } from 'rxjs';
 import { SurveyData   } from '../entities';
 import { SurveyEntity } from '../entities';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class SurveyService {
   public constructor(private readonly http: HttpClient) {}
 
