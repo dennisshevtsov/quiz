@@ -36,6 +36,11 @@ export class SurveyComponent {
   public set survey(value: SurveyData) {
     this.surveyValue = value;
 
+    this.form.setValue({
+      name       : value.name,
+      description: value.description,
+    });
+
     this.form.valueChanges.subscribe(value => {
       this.survey.name        = value.name        ?? '';
       this.survey.description = value.description ?? '';
