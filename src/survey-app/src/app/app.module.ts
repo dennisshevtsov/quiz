@@ -7,15 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent     } from './app.component';
 
 import { AddSurveyComponent } from './components';
+import { GetSurveyComponent } from './components';
 import { SurveyComponent    } from './components';
-import { GetSurveyComponent } from './components/get-survey/get-survey.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddSurveyComponent,
-    SurveyComponent,
     GetSurveyComponent,
+    SurveyComponent,
   ],
   imports: [
     BrowserModule,
