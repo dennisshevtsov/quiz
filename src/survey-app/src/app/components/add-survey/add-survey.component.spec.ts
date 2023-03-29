@@ -6,6 +6,7 @@ import { TestBed      } from '@angular/core/testing';
 
 import { SurveyData         } from '../../entities';
 import { AddSurveyComponent } from './add-survey.component';
+import { AddSurveyViewModel } from './add-survey.view-model';
 
 @Component({
   selector: 'app-survey',
@@ -28,13 +29,18 @@ class TestSurveyComponent {
 
 describe('AddSurveyComponent', () => {
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-                   declarations: [
-                    TestSurveyComponent,
-                    AddSurveyComponent,
-                  ],
-                 })
-                 .compileComponents();
+    TestBed.configureTestingModule({
+      declarations: [
+        TestSurveyComponent,
+        AddSurveyComponent,
+      ],
+    });
+
+    TestBed.overrideProvider(
+      AddSurveyViewModel,
+      {useValue: jasmine.createSpyObj(AddSurveyViewModel,['addSurvey'])});
+
+    await TestBed.compileComponents();
   });
 
   it('should create component', () => {
