@@ -4,9 +4,11 @@ import { Input        } from '@angular/core';
 import { Output       } from '@angular/core';
 import { TestBed      } from '@angular/core/testing';
 
-import { SurveyData         } from '../../entities';
-import { AddSurveyComponent } from './add-survey.component';
-import { AddSurveyViewModel } from './add-survey.view-model';
+import { RouterTestingModule } from '@angular/router/testing';
+
+import { SurveyData            } from '../../entities';
+import { UpdateSurveyComponent } from './update-survey.component';
+import { UpdateSurveyViewModel } from './update-survey.view-model';
 
 @Component({
   selector: 'app-survey',
@@ -27,24 +29,25 @@ class TestSurveyComponent {
   }
 }
 
-describe('AddSurveyComponent', () => {
+describe('UpdateSurveyComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [
+        UpdateSurveyComponent,
         TestSurveyComponent,
-        AddSurveyComponent,
       ],
-    });
+      imports: [RouterTestingModule],
+    })
 
     TestBed.overrideProvider(
-      AddSurveyViewModel,
-      {useValue: jasmine.createSpyObj(AddSurveyViewModel,['addSurvey'])});
+      UpdateSurveyViewModel,
+      {useValue: jasmine.createSpyObj(UpdateSurveyViewModel,['getSurvey'])});
 
     await TestBed.compileComponents();
   });
 
   it('should create component', () => {
-    const fixture = TestBed.createComponent(AddSurveyComponent);
+    const fixture = TestBed.createComponent(UpdateSurveyComponent);
     const component = fixture.componentInstance;
 
     fixture.detectChanges();
