@@ -1,17 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GetSurveyComponent } from './get-survey.component';
+import { UpdateSurveyComponent } from './update-survey.component';
 
 describe('GetSurveyComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-                   declarations: [GetSurveyComponent]
+                   declarations: [UpdateSurveyComponent]
                  })
                  .compileComponents();
   });
 
   it('should create component', () => {
-    const fixture = TestBed.createComponent(GetSurveyComponent);
+    const fixture = TestBed.createComponent(UpdateSurveyComponent);
     const component = fixture.componentInstance;
 
     fixture.detectChanges();
