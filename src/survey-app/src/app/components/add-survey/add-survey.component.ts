@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 
+import { Router } from '@angular/router';
+
 import { Subscription } from 'rxjs';
 
 import { SurveyData         } from '../../entities';
@@ -15,8 +17,9 @@ import { AddSurveyViewModel } from './add-survey.view-model';
 })
 export class AddSurveyComponent implements OnDestroy {
   public constructor(
-    private readonly vm : AddSurveyViewModel,
-    private readonly sub: Subscription,
+    private readonly vm    : AddSurveyViewModel,
+    private readonly sub   : Subscription,
+    private readonly router: Router,
   ) {}
 
   public ngOnDestroy(): void {
@@ -28,6 +31,7 @@ export class AddSurveyComponent implements OnDestroy {
   }
 
   public ok(): void {
-    this.sub.add(this.vm.add().subscribe());
+    this.sub.add(this.vm.add().subscribe(() =>
+    this.router.navigate(['survey', this.vm.survey.surveyId])));
   }
 }

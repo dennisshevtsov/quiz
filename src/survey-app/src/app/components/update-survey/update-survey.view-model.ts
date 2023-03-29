@@ -13,7 +13,7 @@ export class UpdateSurveyViewModel {
 
   public constructor(private readonly service: SurveyService) {}
 
-  public survey(): SurveyEntity {
+  public get survey(): SurveyEntity {
     if (!this.surveyValue) {
       this.surveyValue = {
         surveyId   : '',
@@ -26,7 +26,7 @@ export class UpdateSurveyViewModel {
   }
 
   public initialize(): Observable<void> {
-    return this.service.getSurvey(this.survey())
+    return this.service.getSurvey(this.survey)
                        .pipe(map(survey => {
                          this.surveyValue = survey;
                        }))

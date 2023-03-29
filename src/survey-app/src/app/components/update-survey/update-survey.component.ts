@@ -27,7 +27,7 @@ export class UpdateSurveyComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     const project = (params: ParamMap) => {
-      this.vm.survey().surveyId = params.get('surveyId')!;
+      this.vm.survey.surveyId = params.get('surveyId')!;
 
       return this.vm.initialize();
     }
@@ -42,7 +42,7 @@ export class UpdateSurveyComponent implements OnInit, OnDestroy {
   }
 
   public get survey(): SurveyData {
-    return this.vm.survey();
+    return this.vm.survey;
   }
 
   public ok(): void {
