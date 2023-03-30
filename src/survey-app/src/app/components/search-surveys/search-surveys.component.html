@@ -1,0 +1,17 @@
+<table>
+
+  <thead>
+    <tr>
+      <th><span>Survey</span></th>
+      <th><span>Description</span></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let survey of surveys">
+      <td><a [routerLink]="['survey', survey.surveyId]"><span>{{survey.name}}</span></a></td>
+      <td><span>{{survey.description}}</span></td>
+    </tr>
+  </tbody>
+
+</table>
