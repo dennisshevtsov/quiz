@@ -6,18 +6,18 @@ import { BrowserModule       } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent     } from './app.component';
 
-import { AddSurveyComponent    } from './components';
-import { SurveyComponent       } from './components';
-import { UpdateSurveyComponent } from './components';
-import { SearchSurveysComponent } from './components/search-surveys/search-surveys.component';
+import { AddSurveyComponent     } from './components';
+import { SearchSurveysComponent } from './components';
+import { SurveyComponent        } from './components';
+import { UpdateSurveyComponent  } from './components';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddSurveyComponent,
+    SearchSurveysComponent,
     SurveyComponent,
     UpdateSurveyComponent,
-    SearchSurveysComponent,
   ],
   imports: [
     BrowserModule,
