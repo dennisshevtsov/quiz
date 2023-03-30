@@ -16,9 +16,11 @@ export class SurveyService {
   public constructor(private readonly http: HttpClient) {}
 
   public getSurvey(survey: SurveyIdentity): Observable<SurveyEntity> {
-    const url     = `api/survey/${survey.surveyId}`;
+    return this.http.get<SurveyEntity>(`api/survey/${survey.surveyId}`);
+  }
 
-    return this.http.get<SurveyEntity>(url);
+  public searchSurveys(): Observable<SurveyEntity[]> {
+    return this.http.get<SurveyEntity[]>('api/survey/');
   }
 
   public addSurvey(survey: SurveyData): Observable<SurveyEntity> {
