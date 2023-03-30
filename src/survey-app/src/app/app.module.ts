@@ -9,6 +9,7 @@ import { AppComponent     } from './app.component';
 import { AddSurveyComponent    } from './components';
 import { SurveyComponent       } from './components';
 import { UpdateSurveyComponent } from './components';
+import { SearchSurveysComponent } from './components/search-surveys/search-surveys.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { UpdateSurveyComponent } from './components';
     AddSurveyComponent,
     SurveyComponent,
     UpdateSurveyComponent,
+    SearchSurveysComponent,
   ],
   imports: [
     BrowserModule,
