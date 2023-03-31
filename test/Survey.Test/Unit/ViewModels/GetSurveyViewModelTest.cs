@@ -14,11 +14,11 @@ namespace Survey.Web.ViewModels.Test
     public void Constructor_Should_Copy_Data()
     {
       var controlSurveyEntity = new TestSurveyEntity();
-      var actualSurveyViewModel = new GetSurveyViewModel(controlSurveyEntity);
+      var actualGetSurveyViewModel = new GetSurveyViewModel(controlSurveyEntity);
 
-      Assert.AreEqual(controlSurveyEntity.SurveyId, actualSurveyViewModel.SurveyId);
-      Assert.AreEqual(controlSurveyEntity.Name, actualSurveyViewModel.Name);
-      Assert.AreEqual(controlSurveyEntity.Description, actualSurveyViewModel.Description);
+      Assert.AreEqual(controlSurveyEntity.SurveyId, actualGetSurveyViewModel.SurveyId);
+      Assert.AreEqual(controlSurveyEntity.Name, actualGetSurveyViewModel.Name);
+      Assert.AreEqual(controlSurveyEntity.Description, actualGetSurveyViewModel.Description);
     }
 
     private sealed class TestSurveyEntity : ISurveyEntity
