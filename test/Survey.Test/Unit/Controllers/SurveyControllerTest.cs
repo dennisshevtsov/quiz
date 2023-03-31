@@ -53,6 +53,24 @@ namespace Survey.Web.Controllers.Test
       _surveyServiceMock.VerifyNoOtherCalls();
     }
 
+    [TestMethod]
+    public async Task GetSurvey_Should_Return_Not_Found()
+    {
+      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                        .ReturnsAsync(default(ISurveyEntity))
+                        .Verifiable();
+
+      var surveyId = Guid.NewGuid();
+
+      var actionResult = await _surveyController.GetSurvey(surveyId, CancellationToken.None);
+
+      Assert.IsNotNull(actionResult);
+      Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+
+      _surveyServiceMock.Verify(service => service.GetSurveyAsync(surveyId, CancellationToken.None));
+      _surveyServiceMock.VerifyNoOtherCalls();
+    }
+
     private sealed class TestSurveyEntity : ISurveyEntity
     {
       public Guid SurveyId { get; } = Guid.NewGuid();
