@@ -102,6 +102,32 @@ namespace Survey.Web.Controllers.Test
       _surveyServiceMock.VerifyNoOtherCalls();
     }
 
+    [TestMethod]
+    public async Task GetSurveys_Should_Return_Ok()
+    {
+      var controlSurveyEntityCollection = new TestSurveyEntity[0];
+
+      _surveyServiceMock.Setup(service => service.GetSurveysAsync(It.IsAny<CancellationToken>()))
+                        .ReturnsAsync(controlSurveyEntityCollection)
+                        .Verifiable();
+
+      var actionResult = await _surveyController.GetSurveys(CancellationToken.None);
+
+      Assert.IsNotNull(actionResult);
+
+      var okObjectResult = actionResult as OkObjectResult;
+
+      Assert.IsNotNull(okObjectResult);
+      Assert.IsNotNull(okObjectResult.Value);
+
+      var getSurveyCollectionViewModel = okObjectResult.Value as GetSurveyCollectionViewModel;
+
+      Assert.IsNotNull(getSurveyCollectionViewModel);
+
+      _surveyServiceMock.Verify(service => service.GetSurveysAsync(CancellationToken.None));
+      _surveyServiceMock.VerifyNoOtherCalls();
+    }
+
     private sealed class TestSurveyEntity : ISurveyEntity
     {
       public Guid SurveyId { get; } = Guid.NewGuid();
