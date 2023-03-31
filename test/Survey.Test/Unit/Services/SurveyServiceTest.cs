@@ -63,6 +63,25 @@ namespace Survey.Application.Services.Test
       _surveyRepositoryMock.VerifyNoOtherCalls();
     }
 
+    [TestMethod]
+    public async Task GetSurveysAsync_Should_Get_Survey_Collection()
+    {
+      var controlSurveyEntityCollection = new TestSurveyEntity[0];
+
+      _surveyRepositoryMock.Setup(repository => repository.GetSurveysAsync(It.IsAny<CancellationToken>()))
+                           .ReturnsAsync(controlSurveyEntityCollection)
+                           .Verifiable();
+
+      var actualSurveyEntityCollection =
+        await _surveyService.GetSurveysAsync(CancellationToken.None);
+
+      Assert.IsNotNull(actualSurveyEntityCollection);
+      Assert.AreEqual(controlSurveyEntityCollection, actualSurveyEntityCollection);
+
+      _surveyRepositoryMock.Verify(repository => repository.GetSurveysAsync(CancellationToken.None));
+      _surveyRepositoryMock.VerifyNoOtherCalls();
+    }
+
     private sealed class TestSurveyData : ISurveyData
     {
       public string Name { get; } = Guid.NewGuid().ToString();
