@@ -20,7 +20,12 @@ namespace Survey.Domain.Repositories
     /// <summary>Gets a survey.</summary>
     /// <param name="surveyId">An object that represents an identity of a survey.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
-    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Survey.Domain.Entities.ISurveyEntity"/> class.</returns>
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Survey.Domain.Entities.ISurveyEntity"/>.</returns>
     public Task<ISurveyEntity?> GetSurveyAsync(Guid surveyId, CancellationToken cancellationToken);
+
+    /// <summary>Gets a collection of surveys.</summary>
+    /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an collection of the <see cref="Survey.Domain.Entities.ISurveyEntity"/>.</returns>
+    public Task<ISurveyEntity[]> GetSurveysAsync(CancellationToken cancellationToken);
   }
 }

@@ -46,5 +46,14 @@ namespace Survey.Infrastructure.Repositories
                          .AsNoTracking()
                          .Where(entity => entity.SurveyId == surveyId)
                          .SingleOrDefaultAsync(cancellationToken);
+
+    /// <summary>Gets a collection of surveys.</summary>
+    /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an collection of the <see cref="Survey.Domain.Entities.ISurveyEntity"/>.</returns>
+    public async Task<ISurveyEntity[]> GetSurveysAsync(CancellationToken cancellationToken)
+      => await _dbContext.Set<SurveyEntity>()
+                         .AsNoTracking()
+                         .OrderBy(entity => entity.SurveyId)
+                         .ToArrayAsync(cancellationToken);
   }
 }
