@@ -17,7 +17,7 @@ namespace Survey.Application.Services
     private readonly ISurveyRepository _surveyRepository;
 
     /// <summary>Initializes a new instance of the <see cref="Survey.ApplicationCore.Services.SurveyService"/> class.</summary>
-    /// <param name="surveyRepository">An object that provides a simple API to the storage of the <see cref="urvey.ApplicationCore.Entities.ISurveyEntity"/>.</param>
+    /// <param name="surveyRepository">An object that provides a simple API to the storage of the <see cref="Survey.Domain.Entities.ISurveyEntity"/>.</param>
     public SurveyService(ISurveyRepository surveyRepository)
     {
       _surveyRepository = surveyRepository ?? throw new ArgumentNullException(nameof(surveyRepository));
@@ -26,14 +26,21 @@ namespace Survey.Application.Services
     /// <summary>Creates a new survey.</summary>
     /// <param name="surveyData">An object that represents survey data.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
-    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Survey.Domain.Entities.ISurveyIdentity"/></returns>
-    public async Task<ISurveyIdentity> AddNewSurveyAsync(ISurveyData surveyData, CancellationToken cancellationToken)
-    {
-      var surveyEntity = new SurveyEntity(surveyData);
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Survey.Domain.Entities.ISurveyEntity"/>.</returns>
+    public async Task<ISurveyEntity> AddNewSurveyAsync(ISurveyData surveyData, CancellationToken cancellationToken)
+      => await _surveyRepository.AddSurveyAsync(new SurveyEntity(surveyData), cancellationToken);
 
-      await _surveyRepository.AddSurveyAsync(surveyEntity, cancellationToken);
+    /// <summary>Gets a survey.</summary>
+    /// <param name="surveyId">An object that represents an identity of a survey.</param>
+    /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Survey.Domain.Entities.ISurveyEntity"/>.</returns>
+    public async Task<ISurveyEntity?> GetSurveyAsync(Guid surveyId, CancellationToken cancellationToken)
+      => await _surveyRepository.GetSurveyAsync(surveyId, cancellationToken);
 
-      return surveyEntity;
-    }
+    /// <summary>Gets a collection of surveys.</summary>
+    /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an collection of the <see cref="Survey.Domain.Entities.ISurveyEntity"/>.</returns>
+    public async Task<ISurveyEntity[]> GetSurveysAsync(CancellationToken cancellationToken)
+      => await _surveyRepository.GetSurveysAsync(cancellationToken);
   }
 }

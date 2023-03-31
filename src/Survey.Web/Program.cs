@@ -4,15 +4,17 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
 
 builder.Services.SetUpApplication();
-builder.Services.SetUpInfrastructure();
+builder.Services.SetUpInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
 app.UseSwagger();
+app.UseStaticFiles();
+app.UseRouting();
 
 app.MapControllers();
 
