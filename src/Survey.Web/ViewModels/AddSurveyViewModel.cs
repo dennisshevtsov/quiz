@@ -9,7 +9,7 @@ namespace Survey.Web.ViewModels
   using Survey.Domain.Entities;
 
   /// <summary>Represents a survey view model.</summary>
-  public class AddSurveyViewModel : ISurveyData
+  public sealed class AddSurveyViewModel : ISurveyData
   {
     /// <summary>Initializes a new instance of the <see cref="Survey.Web.ViewModels.AddSurveyViewModel"/> class.</summary>
     public AddSurveyViewModel() {}
