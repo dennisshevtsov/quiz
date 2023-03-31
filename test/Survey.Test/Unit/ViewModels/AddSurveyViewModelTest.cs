@@ -7,7 +7,7 @@ namespace Survey.Web.ViewModels.Test
   using Survey.Domain.Entities;
 
   [TestClass]
-  public sealed class SurveyViewModelTest
+  public sealed class AddSurveyViewModelTest
   {
     [TestMethod]
     public void Constructor_Should_Copy_Data()
