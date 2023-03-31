@@ -7,7 +7,7 @@ namespace Survey.Web.ViewModels
   using Survey.Domain.Entities;
 
   /// <summary>Represents a survey view model.</summary>
-  public class GetSurveyViewModel : ISurveyEntity
+  public sealed class GetSurveyViewModel : ISurveyEntity
   {
     /// <summary>Initializes a new instance of the <see cref="Survey.Web.ViewModels.GetSurveyViewModel"/> class.</summary>
     /// <param name="surveyData">An object that represents survey data.</param>

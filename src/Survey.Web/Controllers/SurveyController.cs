@@ -44,7 +44,7 @@ namespace Survey.Web.Controllers
       return CreatedAtRoute(nameof(SurveyController.GetSurvey), new { surveyId = surveyEntity.SurveyId }, new GetSurveyViewModel(surveyEntity));
     }
 
-    /// <summary>Handles the add survey command request.</summary>
+    /// <summary>Handles the add survey query request.</summary>
     /// <param name="surveyId">An object that represents an identity of a survey.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
     /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
@@ -61,6 +61,22 @@ namespace Survey.Web.Controllers
       }
 
       return Ok(new GetSurveyViewModel(surveyEntity));
+    }
+
+    /// <summary>Handles the get surveys query request.</summary>
+    /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
+    [HttpGet(SurveyController.GetSurveySubRoute, Name = nameof(SurveyController.GetSurvey))]
+    [ProducesResponseType(typeof(GetSurveyCollectionViewModel), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetSurveys(CancellationToken cancellationToken)
+    {
+      var surveyEntityCollection =
+        await _surveyService.GetSurveysAsync(cancellationToken);
+
+      var getSurveyCollectionViewModel =
+        new GetSurveyCollectionViewModel(surveyEntityCollection);
+
+      return Ok(getSurveyCollectionViewModel);
     }
   }
 }

@@ -53,6 +53,81 @@ namespace Survey.Web.Controllers.Test
       _surveyServiceMock.VerifyNoOtherCalls();
     }
 
+    [TestMethod]
+    public async Task GetSurvey_Should_Return_Not_Found()
+    {
+      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                        .ReturnsAsync(default(ISurveyEntity))
+                        .Verifiable();
+
+      var surveyId = Guid.NewGuid();
+
+      var actionResult = await _surveyController.GetSurvey(surveyId, CancellationToken.None);
+
+      Assert.IsNotNull(actionResult);
+      Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+
+      _surveyServiceMock.Verify(service => service.GetSurveyAsync(surveyId, CancellationToken.None));
+      _surveyServiceMock.VerifyNoOtherCalls();
+    }
+
+    [TestMethod]
+    public async Task GetSurvey_Should_Return_Ok()
+    {
+      var controlSurveyEntity = new TestSurveyEntity();
+
+      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                        .ReturnsAsync(controlSurveyEntity)
+                        .Verifiable();
+
+      var surveyId = Guid.NewGuid();
+
+      var actionResult = await _surveyController.GetSurvey(surveyId, CancellationToken.None);
+
+      Assert.IsNotNull(actionResult);
+
+      var okObjectResult = actionResult as OkObjectResult;
+
+      Assert.IsNotNull(okObjectResult);
+      Assert.IsNotNull(okObjectResult.Value);
+
+      var getSurveyViewModel = okObjectResult.Value as GetSurveyViewModel;
+
+      Assert.IsNotNull(getSurveyViewModel);
+      Assert.AreEqual(controlSurveyEntity.SurveyId, getSurveyViewModel.SurveyId);
+      Assert.AreEqual(controlSurveyEntity.Name, getSurveyViewModel.Name);
+      Assert.AreEqual(controlSurveyEntity.Description, getSurveyViewModel.Description);
+
+      _surveyServiceMock.Verify(service => service.GetSurveyAsync(surveyId, CancellationToken.None));
+      _surveyServiceMock.VerifyNoOtherCalls();
+    }
+
+    [TestMethod]
+    public async Task GetSurveys_Should_Return_Ok()
+    {
+      var controlSurveyEntityCollection = new TestSurveyEntity[0];
+
+      _surveyServiceMock.Setup(service => service.GetSurveysAsync(It.IsAny<CancellationToken>()))
+                        .ReturnsAsync(controlSurveyEntityCollection)
+                        .Verifiable();
+
+      var actionResult = await _surveyController.GetSurveys(CancellationToken.None);
+
+      Assert.IsNotNull(actionResult);
+
+      var okObjectResult = actionResult as OkObjectResult;
+
+      Assert.IsNotNull(okObjectResult);
+      Assert.IsNotNull(okObjectResult.Value);
+
+      var getSurveyCollectionViewModel = okObjectResult.Value as GetSurveyCollectionViewModel;
+
+      Assert.IsNotNull(getSurveyCollectionViewModel);
+
+      _surveyServiceMock.Verify(service => service.GetSurveysAsync(CancellationToken.None));
+      _surveyServiceMock.VerifyNoOtherCalls();
+    }
+
     private sealed class TestSurveyEntity : ISurveyEntity
     {
       public Guid SurveyId { get; } = Guid.NewGuid();
