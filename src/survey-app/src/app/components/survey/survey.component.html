@@ -1,9 +1,23 @@
 <form [formGroup]="form">
-  <label>Name:</label>
-  <input type="text" formControlName="name">
-  <br>
-  <label>Description:</label>
-  <textarea formControlName="description"></textarea>
-  <br>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter this survey name.</mat-label>
+      <input matInput
+             placeholder="This survey name"
+             formControlName="name">
+      <mat-error *ngIf="form.controls.name.invalid">You must enter a name.</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter this survey description.</mat-label>
+      <textarea matInput
+                formControlName="description">
+      </textarea>
+      <mat-error *ngIf="form.controls.name.invalid">You must enter a name.</mat-error>
+    </mat-form-field>
+  </div>
+
   <button (click)="okPressed()"><span>Ok</span></button>
 </form>
