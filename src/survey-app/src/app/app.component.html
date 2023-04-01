@@ -1,1 +1,24 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container fullscreen>
+  <mat-sidenav mode="side" opened>
+    <mat-nav-list>
+      <mat-list-item>
+        <mat-icon matListItemIcon>quiz</mat-icon>
+        <span matListItemTitle>Surveys</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <mat-toolbar>
+      <button mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Survey App</span>
+    </mat-toolbar>
+
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

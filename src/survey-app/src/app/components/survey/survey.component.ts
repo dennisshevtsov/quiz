@@ -17,6 +17,7 @@ type SurveyFormScheme = {
 @Component({
   selector: 'app-survey',
   templateUrl: './survey.component.html',
+  styleUrls: ['survey.component.scss'],
 })
 export class SurveyComponent {
   private surveyValue: undefined | SurveyData;

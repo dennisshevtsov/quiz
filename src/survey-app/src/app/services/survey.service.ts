@@ -19,8 +19,8 @@ export class SurveyService {
     return this.http.get<SurveyEntity>(`api/survey/${survey.surveyId}`);
   }
 
-  public searchSurveys(): Observable<SurveyEntity[]> {
-    return this.http.get<SurveyEntity[]>('api/survey/');
+  public searchSurveys(): Observable<{surveys: SurveyEntity[]}> {
+    return this.http.get<{surveys: SurveyEntity[]}>('api/survey/');
   }
 
   public addSurvey(survey: SurveyData): Observable<SurveyEntity> {

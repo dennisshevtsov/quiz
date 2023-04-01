@@ -66,7 +66,7 @@ namespace Survey.Web.Controllers
     /// <summary>Handles the get surveys query request.</summary>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
     /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
-    [HttpGet(SurveyController.GetSurveySubRoute, Name = nameof(SurveyController.GetSurvey))]
+    [HttpGet(Name = nameof(SurveyController.GetSurveys))]
     [ProducesResponseType(typeof(GetSurveyCollectionViewModel), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetSurveys(CancellationToken cancellationToken)
     {

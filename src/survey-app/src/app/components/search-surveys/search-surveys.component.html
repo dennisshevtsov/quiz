@@ -9,7 +9,7 @@
 
   <tbody>
     <tr *ngFor="let survey of surveys">
-      <td><a [routerLink]="['survey', survey.surveyId]"><span>{{survey.name}}</span></a></td>
+      <td><a [routerLink]="survey.surveyId"><span>{{survey.name}}</span></a></td>
       <td><span>{{survey.description}}</span></td>
     </tr>
   </tbody>
