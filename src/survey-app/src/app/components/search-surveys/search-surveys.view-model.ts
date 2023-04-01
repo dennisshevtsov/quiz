@@ -18,8 +18,8 @@ export class SearchSurveysViewModel {
 
   public initialize(): Observable<void> {
     return this.service.searchSurveys()
-                       .pipe(map(surveys => {
-                         this.surveysValue = surveys;
+                       .pipe(map(collection => {
+                         this.surveysValue = collection.surveys;
                        }));
   }
 }
