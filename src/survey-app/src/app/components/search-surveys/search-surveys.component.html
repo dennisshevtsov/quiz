@@ -1,17 +1,18 @@
-<table>
+<table mat-table [dataSource]="surveys">
 
-  <thead>
-    <tr>
-      <th><span>Survey</span></th>
-      <th><span>Description</span></th>
-    </tr>
-  </thead>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef><span>Name</span></th>
+    <td mat-cell *matCellDef="let survey">
+      <a [routerLink]="survey.surveyId"><span>{{survey.name}}</span></a>
+    </td>
+  </ng-container>
 
-  <tbody>
-    <tr *ngFor="let survey of surveys">
-      <td><a [routerLink]="survey.surveyId"><span>{{survey.name}}</span></a></td>
-      <td><span>{{survey.description}}</span></td>
-    </tr>
-  </tbody>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef><span>Description</span></th>
+    <td mat-cell *matCellDef="let survey">{{survey.description}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['name', 'description']"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: ['name', 'description'];"></tr>
 
 </table>
