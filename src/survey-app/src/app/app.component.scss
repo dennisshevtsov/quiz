@@ -1,3 +1,16 @@
+mat-drawer-container {
+  height: calc(100vh - 64px);
+}
+
+.app-nav-list {
+  min-width: 200px;
+
+  &__icon {
+    margin-left: 28px !important;
+    margin-right: 12px !important;
+  }
+}
+
 main {
   margin: 1em;
 }
