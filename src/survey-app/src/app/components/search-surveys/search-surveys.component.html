@@ -1,3 +1,11 @@
+<div style="text-align: right; margin-bottom: 12px;">
+  <button mat-mini-fab
+          color="primary"
+          [routerLink]="['new']">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
 <table mat-table [dataSource]="surveys">
 
   <ng-container matColumnDef="name">
