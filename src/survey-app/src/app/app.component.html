@@ -1,24 +1,25 @@
-<mat-sidenav-container fullscreen>
-  <mat-sidenav mode="side" opened>
-    <mat-nav-list>
-      <mat-list-item>
-        <mat-icon matListItemIcon>quiz</mat-icon>
+<mat-toolbar color="primary">
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Survey App</span>
+</mat-toolbar>
+
+<mat-drawer-container>
+
+  <mat-drawer mode="side" opened>
+    <mat-nav-list class="app-nav-list">
+      <mat-list-item [routerLink]="['survey']">
+        <mat-icon class="app-nav-list__icon" matListItemIcon>quiz</mat-icon>
         <span matListItemTitle>Surveys</span>
       </mat-list-item>
     </mat-nav-list>
-  </mat-sidenav>
+  </mat-drawer>
 
-  <mat-sidenav-content>
-
-    <mat-toolbar>
-      <button mat-icon-button>
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>Survey App</span>
-    </mat-toolbar>
-
+  <mat-drawer-content>
     <main>
       <router-outlet></router-outlet>
     </main>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </mat-drawer-content>
+
+</mat-drawer-container>
