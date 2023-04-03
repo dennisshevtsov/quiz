@@ -12,6 +12,8 @@ builder.Services.SetUpInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
+app.SetUpDatabase();
+
 app.UseSwagger();
 app.UseStaticFiles();
 app.UseRouting();
