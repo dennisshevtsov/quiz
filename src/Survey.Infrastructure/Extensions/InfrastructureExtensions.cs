@@ -10,9 +10,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
   using Survey.Domain.Repositories;
   using Survey.Infrastructure;
+  using Survey.Infrastructure.Initialization;
   using Survey.Infrastructure.Repositories;
 
-  /// <summary>Extends a API of the <see cref="IServiceCollection"/> class.</summary>
+  /// <summary>Extends a API of the <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection"/> class.</summary>
   public static class InfrastructureExtensions
   {
     /// <summary>Registers the application services.</summary>
@@ -22,6 +23,7 @@ namespace Microsoft.Extensions.DependencyInjection
     public static IServiceCollection SetUpInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
       services.SetUpDatabase(configuration);
+      services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
       services.AddScoped<ISurveyRepository, SurveyRepository>();
 
       return services;

@@ -23,7 +23,7 @@ namespace Survey.Web.Controllers
 
     private readonly ISurveyService _surveyService;
 
-    /// <summary>Initializes a new instance of the <see cref="Survey.Api.Controllers.SurveyController"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Survey.Web.Controllers.SurveyController"/> class.</summary>
     /// <param name="surveyService">An object that provides a simple API to the survey entity.</param>
     public SurveyController(ISurveyService surveyService)
     {
