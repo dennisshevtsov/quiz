@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Test.Integration
+namespace Survey.Infrastructure.Initialization.Test
 {
   using Microsoft.EntityFrameworkCore;
   using Microsoft.Extensions.Configuration;
@@ -31,7 +31,7 @@ namespace Survey.Test.Integration
       var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json")
                                                     .Build();
 
-      _scope = new ServiceCollection().SetUpDatabase(configuration)
+      _scope = new ServiceCollection().SetUpInfrastructure(configuration)
                                       .BuildServiceProvider()
                                       .CreateScope();
 
@@ -46,6 +46,7 @@ namespace Survey.Test.Integration
       _scope?.Dispose();
     }
 
+    [TestMethod]
     public async Task Initialize_Should_Create_New_Database()
     {
       await _dbContext.Database.EnsureDeletedAsync(_cancellationToken);
