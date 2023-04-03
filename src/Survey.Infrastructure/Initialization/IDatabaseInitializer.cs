@@ -5,7 +5,7 @@
 namespace Survey.Infrastructure.Initialization
 {
   /// <summary>Provides a simple API to initialize the database.</summary>
-  public interface IInitializer
+  public interface IDatabaseInitializer
   {
     /// <summary>Initializes the database.</summary>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>

@@ -23,7 +23,7 @@ namespace Microsoft.Extensions.DependencyInjection
     public static IServiceCollection SetUpInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
       services.SetUpDatabase(configuration);
-      services.AddScoped<IInitializer, Initializer>();
+      services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
       services.AddScoped<ISurveyRepository, SurveyRepository>();
 
       return services;

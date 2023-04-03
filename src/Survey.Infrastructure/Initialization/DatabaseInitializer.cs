@@ -9,13 +9,13 @@ namespace Survey.Infrastructure.Initialization
   using Microsoft.EntityFrameworkCore;
 
   /// <summary>Provides a simple API to initialize the database.</summary>
-  public sealed class Initializer : IInitializer
+  public sealed class DatabaseInitializer : IDatabaseInitializer
   {
     private readonly DbContext _dbContext;
 
-    /// <summary>Initializes a new instance of the <see cref="Survey.Infrastructure.Initialization.Initializer"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Survey.Infrastructure.Initialization.DatabaseInitializer"/> class.</summary>
     /// <param name="dbContext">An object that represents a session with the database and can be used to query and save instances of your entities.</param>
-    public Initializer(DbContext dbContext)
+    public DatabaseInitializer(DbContext dbContext)
     {
       _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }
