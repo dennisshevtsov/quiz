@@ -9,6 +9,7 @@ namespace Survey.Infrastructure.Repositories.Test
   using Microsoft.EntityFrameworkCore;
   using Microsoft.Extensions.DependencyInjection;
 
+  using Survey.Domain.Entities;
   using Survey.Domain.Repositories;
   using Survey.Infrastructure.Entities;
   using Survey.Test.Integration;
@@ -44,6 +45,26 @@ namespace Survey.Infrastructure.Repositories.Test
       IsDetached(controlSurveyEntity);
     }
 
+    [TestMethod]
+    public async Task GetSurveyAsync_Should_Return_Detached_Entity()
+    {
+      var controlSurveyEntity = SurveyRepositoryTest.GenerateTestSurvey();
+      var controlSurveyEntityEntry = DbContext.Add(controlSurveyEntity);
+
+      await DbContext.SaveChangesAsync(CancellationToken);
+
+      controlSurveyEntityEntry.State = EntityState.Detached;
+
+      var actualSurveyEntity =
+        await _surveyRepository.GetSurveyAsync(
+          controlSurveyEntity.SurveyId, CancellationToken);
+
+      Assert.IsNotNull(actualSurveyEntity);
+
+      SurveyRepositoryTest.AreEqual(controlSurveyEntity, actualSurveyEntity);
+      IsDetached(controlSurveyEntity);
+    }
+
     private static SurveyEntity GenerateTestSurvey() => new()
     {
       SurveyId    = Guid.NewGuid(),
@@ -51,7 +72,7 @@ namespace Survey.Infrastructure.Repositories.Test
       Description = Guid.NewGuid().ToString(),
     };
 
-    private static void AreEqual(SurveyEntity control, SurveyEntity actual)
+    private static void AreEqual(ISurveyEntity control, ISurveyEntity actual)
     {
       Assert.AreEqual(control.SurveyId, actual.SurveyId);
       Assert.AreEqual(control.Name, actual.Name);
