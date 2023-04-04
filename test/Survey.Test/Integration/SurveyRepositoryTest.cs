@@ -4,41 +4,22 @@
 
 namespace Survey.Infrastructure.Repositories.Test
 {
-  using Microsoft.Extensions.Configuration;
   using Microsoft.Extensions.DependencyInjection;
 
   using Survey.Domain.Repositories;
+  using Survey.Test.Integration;
 
   [TestClass]
-  public sealed class SurveyRepositoryTest
+  public sealed class SurveyRepositoryTest : IntegrationTestBase
   {
-    private CancellationToken _cancellationToken;
 
 #pragma warning disable CS8618
-    private IServiceScope _scope;
-
     private ISurveyRepository _surveyRepository;
 #pragma warning restore CS8618
 
-    [TestInitialize]
-    public void Initialize()
+    protected override void InitializeInternal()
     {
-      _cancellationToken = CancellationToken.None;
-
-      var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json")
-                                                    .Build();
-
-      _scope = new ServiceCollection().SetUpInfrastructure(configuration)
-                                      .BuildServiceProvider()
-                                      .CreateScope();
-
-      _surveyRepository = _scope.ServiceProvider.GetRequiredService<ISurveyRepository>();
-    }
-
-    [TestCleanup]
-    public void Cleanup()
-    {
-      _scope?.Dispose();
+      _surveyRepository = ServiceProvider.GetRequiredService<ISurveyRepository>();
     }
   }
 }

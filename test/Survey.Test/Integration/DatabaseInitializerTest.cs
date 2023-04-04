@@ -5,62 +5,40 @@
 namespace Survey.Infrastructure.Initialization.Test
 {
   using Microsoft.EntityFrameworkCore;
-  using Microsoft.Extensions.Configuration;
   using Microsoft.Extensions.DependencyInjection;
 
   using Survey.Infrastructure.Entities;
   using Survey.Infrastructure.Initialization;
+  using Survey.Test.Integration;
 
   [TestClass]
-  public sealed class DatabaseInitializerTest
+  public sealed class DatabaseInitializerTest : IntegrationTestBase
   {
-    private CancellationToken _cancellationToken;
 
 #pragma warning disable CS8618
-    private IServiceScope _scope;
-
-    private DbContext _dbContext;
     private IDatabaseInitializer _databaseInitializer;
 #pragma warning restore CS8618
 
-    [TestInitialize]
-    public void Initialize()
+    protected override void InitializeInternal()
     {
-      _cancellationToken = CancellationToken.None;
-
-      var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json")
-                                                    .Build();
-
-      _scope = new ServiceCollection().SetUpInfrastructure(configuration)
-                                      .BuildServiceProvider()
-                                      .CreateScope();
-
-      _dbContext = _scope.ServiceProvider.GetRequiredService<DbContext>();
-      _databaseInitializer = _scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>();
-    }
-
-    [TestCleanup]
-    public void Cleanup()
-    {
-      _dbContext?.Database?.EnsureDeleted();
-      _scope?.Dispose();
+      _databaseInitializer = ServiceProvider.GetRequiredService<IDatabaseInitializer>();
     }
 
     [TestMethod]
     public async Task Initialize_Should_Create_New_Database()
     {
-      await _dbContext.Database.EnsureDeletedAsync(_cancellationToken);
-      await _databaseInitializer.InitializeAsync(_cancellationToken);
+      await DbContext.Database.EnsureDeletedAsync(CancellationToken);
+      await _databaseInitializer.InitializeAsync(CancellationToken);
 
-      Assert.AreEqual(0, await _dbContext.Set<SurveyEntity>().CountAsync(_cancellationToken));
+      Assert.AreEqual(0, await DbContext.Set<SurveyEntity>().CountAsync(CancellationToken));
 
-      _dbContext.Add(DatabaseInitializerTest.GenerateTestSurvey());
-      await _dbContext.SaveChangesAsync(_cancellationToken);
+      DbContext.Add(DatabaseInitializerTest.GenerateTestSurvey());
+      await DbContext.SaveChangesAsync(CancellationToken);
 
-      Assert.AreEqual(1, await _dbContext.Set<SurveyEntity>().CountAsync(_cancellationToken));
+      Assert.AreEqual(1, await DbContext.Set<SurveyEntity>().CountAsync(CancellationToken));
     }
 
-    private static SurveyEntity GenerateTestSurvey() => new SurveyEntity
+    private static SurveyEntity GenerateTestSurvey() => new()
     {
       Name = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
