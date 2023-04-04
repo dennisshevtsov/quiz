@@ -115,7 +115,8 @@ namespace Survey.Infrastructure.Repositories.Test
         surveyEntityCollection[i] = SurveyRepositoryTest.GenerateTestSurveyEntity();
       }
 
-      return surveyEntityCollection;
+      return surveyEntityCollection.OrderBy(entity => entity.SurveyId)
+                                   .ToArray();
     }
 
     private static void AreEqual(ISurveyEntity control, ISurveyEntity actual)
