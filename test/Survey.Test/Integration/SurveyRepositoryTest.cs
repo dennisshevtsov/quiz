@@ -29,7 +29,7 @@ namespace Survey.Infrastructure.Repositories.Test
     [TestMethod]
     public async Task AddSurveyAsync_Should_Create_New_Survey()
     {
-      var controlSurveyEntity = SurveyRepositoryTest.GenerateTestSurvey();
+      var controlSurveyEntity = SurveyRepositoryTest.GenerateTestSurveyEntity();
 
       await _surveyRepository.AddSurveyAsync(controlSurveyEntity, CancellationToken);
 
@@ -48,7 +48,7 @@ namespace Survey.Infrastructure.Repositories.Test
     [TestMethod]
     public async Task GetSurveyAsync_Should_Return_Detached_Entity()
     {
-      var controlSurveyEntity = SurveyRepositoryTest.GenerateTestSurvey();
+      var controlSurveyEntity = SurveyRepositoryTest.GenerateTestSurveyEntity();
       var controlSurveyEntityEntry = DbContext.Add(controlSurveyEntity);
 
       await DbContext.SaveChangesAsync(CancellationToken);
@@ -68,7 +68,7 @@ namespace Survey.Infrastructure.Repositories.Test
     [TestMethod]
     public async Task GetSurveyAsync_Should_Return_Null()
     {
-      var controlSurveyEntity = SurveyRepositoryTest.GenerateTestSurvey();
+      var controlSurveyEntity = SurveyRepositoryTest.GenerateTestSurveyEntity();
       var controlSurveyEntityEntry = DbContext.Add(controlSurveyEntity);
 
       await DbContext.SaveChangesAsync(CancellationToken);
@@ -82,12 +82,41 @@ namespace Survey.Infrastructure.Repositories.Test
       Assert.IsNull(actualSurveyEntity);
     }
 
-    private static SurveyEntity GenerateTestSurvey() => new()
+    [TestMethod]
+    public async Task GetSurveysAsync_Should_Return_Detached_Entities()
     {
-      SurveyId    = Guid.NewGuid(),
-      Name        = Guid.NewGuid().ToString(),
+      var controlSurveyEntityCollection =
+        SurveyRepositoryTest.GenerateTestSurveyEntityCollection(5);
+
+      await SaveChangesAsync(controlSurveyEntityCollection, CancellationToken);
+
+      var actualSurveyEntityCollection =
+        await _surveyRepository.GetSurveysAsync(CancellationToken);
+
+      Assert.IsNotNull(actualSurveyEntityCollection);
+
+      SurveyRepositoryTest.AreEqual(controlSurveyEntityCollection, actualSurveyEntityCollection);
+      AreDetached(controlSurveyEntityCollection);
+    }
+
+    private static SurveyEntity GenerateTestSurveyEntity() => new()
+    {
+      SurveyId = Guid.NewGuid(),
+      Name = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
     };
+
+    private static SurveyEntity[] GenerateTestSurveyEntityCollection(int surveys)
+    {
+      var surveyEntityCollection = new SurveyEntity[surveys];
+
+      for (int i = 0; i < surveys; i++)
+      {
+        surveyEntityCollection[i] = SurveyRepositoryTest.GenerateTestSurveyEntity();
+      }
+
+      return surveyEntityCollection;
+    }
 
     private static void AreEqual(ISurveyEntity control, ISurveyEntity actual)
     {
@@ -96,11 +125,42 @@ namespace Survey.Infrastructure.Repositories.Test
       Assert.AreEqual(control.Description, actual.Description);
     }
 
+    private static void AreEqual(ISurveyEntity[] control, ISurveyEntity[] actual)
+    {
+      Assert.AreEqual(control.Length, actual.Length);
+
+      for (int i = 0; i < control.Length; i++)
+      {
+        SurveyRepositoryTest.AreEqual(control[i], actual[i]);
+      }
+    }
+
     private void IsDetached(SurveyEntity entity)
     {
       var entry = DbContext.Entry(entity);
 
       Assert.AreEqual(EntityState.Detached, entry.State);
+    }
+
+    private void AreDetached(SurveyEntity[] collection)
+    {
+      for (int i = 0; i < collection.Length; i++)
+      {
+        IsDetached(collection[i]);
+      }
+    }
+
+    private async Task SaveChangesAsync(
+      SurveyEntity[] controlSurveyEntityCollection, CancellationToken cancellationToken)
+    {
+      DbContext.AddRange(controlSurveyEntityCollection);
+
+      await DbContext.SaveChangesAsync(CancellationToken);
+
+      for (int i = 0; i < controlSurveyEntityCollection.Length; i++)
+      {
+        DbContext.Entry(controlSurveyEntityCollection[i]).State = EntityState.Detached;
+      }
     }
   }
 }
