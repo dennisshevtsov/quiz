@@ -65,6 +65,23 @@ namespace Survey.Infrastructure.Repositories.Test
       IsDetached(controlSurveyEntity);
     }
 
+    [TestMethod]
+    public async Task GetSurveyAsync_Should_Return_Null()
+    {
+      var controlSurveyEntity = SurveyRepositoryTest.GenerateTestSurvey();
+      var controlSurveyEntityEntry = DbContext.Add(controlSurveyEntity);
+
+      await DbContext.SaveChangesAsync(CancellationToken);
+
+      controlSurveyEntityEntry.State = EntityState.Detached;
+
+      var actualSurveyEntity =
+        await _surveyRepository.GetSurveyAsync(
+          Guid.NewGuid(), CancellationToken);
+
+      Assert.IsNull(actualSurveyEntity);
+    }
+
     private static SurveyEntity GenerateTestSurvey() => new()
     {
       SurveyId    = Guid.NewGuid(),
