@@ -15,8 +15,8 @@ export class AddSurveyViewModel {
   public get survey(): SurveyEntity {
     if (!this.surveyValue) {
       this.surveyValue = {
-        surveyId: '',
-        name: '',
+        surveyId   : '',
+        name       : '',
         description: '',
       };
     }
