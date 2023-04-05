@@ -32,7 +32,6 @@ export class UpdateSurveyViewModel {
   }
 
   public update(): Observable<void> {
-    return this.service.updateSurvey(this.survey)
-                       .pipe(map(() => {}));
+    return this.service.updateSurvey(this.survey);
   }
 }
