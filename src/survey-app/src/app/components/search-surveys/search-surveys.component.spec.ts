@@ -59,4 +59,18 @@ describe('SearchSurveysComponent', () => {
       .withContext('vm.initialize should be called')
       .toBe(1);
   })));
+
+  it('ngOnDestroy should unsubsribe', fakeAsync(inject([Subscription, SearchSurveysViewModel], (sub: jasmine.SpyObj<Subscription>, vm: jasmine.SpyObj<SearchSurveysViewModel>) => {
+    const fixture = TestBed.createComponent(SearchSurveysComponent);
+
+    fixture.detectChanges();
+
+    tick();
+
+    fixture.componentInstance.ngOnDestroy();
+
+    expect(sub.unsubscribe.calls.count())
+      .withContext('sub.unsubscribe should be called')
+      .toBe(1);
+  })));
 });
