@@ -1,4 +1,4 @@
-import { Component    } from '@angular/core';
+import { Component, OnInit    } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Input        } from '@angular/core';
 import { Output       } from '@angular/core';
@@ -19,7 +19,7 @@ type SurveyFormScheme = {
   templateUrl: './survey.component.html',
   styleUrls: ['survey.component.scss'],
 })
-export class SurveyComponent {
+export class SurveyComponent implements OnInit {
   private surveyValue: undefined | SurveyData;
   private formValue  : undefined | FormGroup<SurveyFormScheme>;
 
@@ -27,6 +27,13 @@ export class SurveyComponent {
 
   public constructor(private readonly fb: FormBuilder) {
     this.okValue = new EventEmitter<void>();
+  }
+
+  public ngOnInit(): void {
+    this.form.valueChanges.subscribe(value => {
+      this.survey.name        = value.name        ?? '';
+      this.survey.description = value.description ?? '';
+    });
   }
 
   public get survey(): SurveyData {
@@ -40,11 +47,6 @@ export class SurveyComponent {
     this.form.setValue({
       name       : value.name,
       description: value.description,
-    });
-
-    this.form.valueChanges.subscribe(value => {
-      this.survey.name        = value.name        ?? '';
-      this.survey.description = value.description ?? '';
     });
   }
 
