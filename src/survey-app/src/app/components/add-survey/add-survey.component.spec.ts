@@ -81,14 +81,14 @@ describe('AddSurveyComponent', () => {
 
     const descs = Object.getOwnPropertyDescriptors(vm)!;
 
-    const taskSpy = descs.survey.get as jasmine.Spy<() => SurveyEntity>;
+    const surveySpy = descs.survey.get as jasmine.Spy<() => SurveyEntity>;
     const survey = {
       surveyId   : 'test-id',
       name       : 'test-name',
       description: 'test-description',
     };
 
-    taskSpy.and.returnValue(survey);
+    surveySpy.and.returnValue(survey);
 
     const fixture  = TestBed.createComponent(AddSurveyComponent);
 
@@ -118,14 +118,14 @@ describe('AddSurveyComponent', () => {
 
     const descs = Object.getOwnPropertyDescriptors(vm)!;
 
-    const taskSpy = descs.survey.get as jasmine.Spy<() => SurveyEntity>;
+    const surveySpy = descs.survey.get as jasmine.Spy<() => SurveyEntity>;
     const survey = {
       surveyId   : 'test-id',
       name       : 'test-name',
       description: 'test-description',
     };
 
-    taskSpy.and.returnValue(survey);
+    surveySpy.and.returnValue(survey);
 
     const fixture  = TestBed.createComponent(AddSurveyComponent);
 

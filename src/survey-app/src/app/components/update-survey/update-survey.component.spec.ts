@@ -5,8 +5,9 @@ import { tick      } from '@angular/core/testing';
 
 import { ActivatedRoute      } from '@angular/router';
 import { ParamMap            } from '@angular/router';
-import { Router              } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+
+import { By } from '@angular/platform-browser';
 
 import { of           } from 'rxjs';
 import { Subscription } from 'rxjs';
@@ -33,23 +34,24 @@ describe('UpdateSurveyComponent', () => {
     });
 
     const paramMap = jasmine.createSpyObj('ParamMap', [ 'get', ]);
+    paramMap.get.and.returnValue('test-id');
 
     TestBed.overrideProvider('ParamMap', { useValue: paramMap });
     TestBed.overrideProvider(ActivatedRoute, { useValue: { paramMap: of(paramMap) }});
 
-    const vm: jasmine.SpyObj<UpdateSurveyViewModel> = jasmine.createSpyObj('UpdateSurveyViewModel', ['initialize'], ['survey']);
+    const vm: jasmine.SpyObj<UpdateSurveyViewModel> = jasmine.createSpyObj('UpdateSurveyViewModel', ['initialize', 'update'], ['survey']);
     vm.initialize.and.returnValue(of(void 0));
 
     const descs = Object.getOwnPropertyDescriptors(vm)!;
 
-    const taskSpy = descs.survey.get as jasmine.Spy<() => SurveyEntity>;
+    const surveySpy = descs.survey.get as jasmine.Spy<() => SurveyEntity>;
     const survey = {
       surveyId   : 'test-id',
       name       : 'test-name',
       description: 'test-description',
     };
 
-    taskSpy.and.returnValue(survey);
+    surveySpy.and.returnValue(survey);
 
     TestBed.overrideProvider(UpdateSurveyViewModel, {useValue: vm});
 
@@ -71,13 +73,9 @@ describe('UpdateSurveyComponent', () => {
   });
 
   it('should initialize in ngOnInit', fakeAsync(inject(
-    [Subscription, UpdateSurveyViewModel, 'ParamMap'],
+    [Subscription, UpdateSurveyViewModel],
     (sub     : jasmine.SpyObj<Subscription>,
-     vm      : jasmine.SpyObj<UpdateSurveyViewModel>,
-     paramMap: jasmine.SpyObj<ParamMap>) => {
-    vm.initialize.and.returnValue(of(void 0));
-    paramMap.get.and.returnValue('test-id');
-
+     vm      : jasmine.SpyObj<UpdateSurveyViewModel>) => {
     const fixture = TestBed.createComponent(UpdateSurveyComponent);
 
     fixture.detectChanges();
@@ -94,11 +92,7 @@ describe('UpdateSurveyComponent', () => {
   })));
 
   it('should unsubsribe in ngOnDestroy', fakeAsync(inject(
-    [Subscription, 'ParamMap'],
-    (sub     : jasmine.SpyObj<Subscription>,
-     paramMap: jasmine.SpyObj<ParamMap>) => {
-    paramMap.get.and.returnValue('test-id');
-
+    [Subscription], (sub: jasmine.SpyObj<Subscription>) => {
     const fixture = TestBed.createComponent(UpdateSurveyComponent);
 
     fixture.detectChanges();
@@ -109,6 +103,31 @@ describe('UpdateSurveyComponent', () => {
 
     expect(sub.unsubscribe.calls.count())
       .withContext('sub.unsubscribe should be called')
+      .toBe(1);
+  })));
+
+  it('should update survey', fakeAsync(inject(
+    [Subscription, UpdateSurveyViewModel],
+    (sub: jasmine.SpyObj<Subscription>,
+     vm : jasmine.SpyObj<UpdateSurveyViewModel>) => {
+    vm.update.and.returnValue(of(void 0));
+
+    const fixture  = TestBed.createComponent(UpdateSurveyComponent);
+    fixture.detectChanges();
+    tick();
+
+    sub.add.calls.reset();
+
+    const surveyComponent: SurveyComponentMock = fixture.debugElement.query(By.directive(SurveyComponentMock)).componentInstance;
+    surveyComponent.ok.emit();
+    tick();
+
+    expect(vm.update.calls.count())
+      .withContext('vm.update should be called once')
+      .toBe(1);
+
+    expect(sub.add.calls.count())
+      .withContext('sub.add should be called once')
       .toBe(1);
   })));
 });
