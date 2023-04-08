@@ -1,12 +1,20 @@
-import { TestBed      } from '@angular/core/testing';
+import { fakeAsync } from '@angular/core/testing';
+import { inject    } from '@angular/core/testing';
+import { TestBed   } from '@angular/core/testing';
+import { tick      } from '@angular/core/testing';
 
+import { ActivatedRoute      } from '@angular/router';
+import { ParamMap            } from '@angular/router';
+import { Router              } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { Subscription } from 'rxjs';
 import { of           } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { UpdateSurveyComponent } from './update-survey.component';
 import { UpdateSurveyViewModel } from './update-survey.view-model';
+
+import { SurveyEntity          } from '../../entities';
 import { SurveyComponentMock   } from '../survey';
 
 describe('UpdateSurveyComponent', () => {
@@ -22,10 +30,26 @@ describe('UpdateSurveyComponent', () => {
           component: UpdateSurveyComponent,
         }]),
       ],
-    })
+    });
+
+    const paramMap = jasmine.createSpyObj('ParamMap', [ 'get', ]);
+
+    TestBed.overrideProvider('ParamMap', { useValue: paramMap });
+    TestBed.overrideProvider(ActivatedRoute, { useValue: { paramMap: of(paramMap) }});
 
     const vm: jasmine.SpyObj<UpdateSurveyViewModel> = jasmine.createSpyObj('UpdateSurveyViewModel', ['initialize'], ['survey']);
     vm.initialize.and.returnValue(of(void 0));
+
+    const descs = Object.getOwnPropertyDescriptors(vm)!;
+
+    const taskSpy = descs.survey.get as jasmine.Spy<() => SurveyEntity>;
+    const survey = {
+      surveyId   : 'test-id',
+      name       : 'test-name',
+      description: 'test-description',
+    };
+
+    taskSpy.and.returnValue(survey);
 
     TestBed.overrideProvider(UpdateSurveyViewModel, {useValue: vm});
 
@@ -45,4 +69,23 @@ describe('UpdateSurveyComponent', () => {
 
     expect(component).toBeTruthy();
   });
+
+  it('should unsubsribe in ngOnDestroy', fakeAsync(inject(
+    [Subscription, 'ParamMap'],
+    (sub     : jasmine.SpyObj<Subscription>,
+     paramMap: jasmine.SpyObj<ParamMap>) => {
+    paramMap.get.and.returnValue('test-id');
+
+    const fixture = TestBed.createComponent(UpdateSurveyComponent);
+
+    fixture.detectChanges();
+
+    tick();
+
+    fixture.componentInstance.ngOnDestroy();
+
+    expect(sub.unsubscribe.calls.count())
+      .withContext('sub.unsubscribe should be called')
+      .toBe(1);
+  })));
 });
