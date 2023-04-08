@@ -1,10 +1,5 @@
 import { Location } from '@angular/common';
 
-import { Component    } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { Input        } from '@angular/core';
-import { Output       } from '@angular/core';
-
 import { fakeAsync } from '@angular/core/testing';
 import { inject    } from '@angular/core/testing';
 import { TestBed   } from '@angular/core/testing';
@@ -18,45 +13,24 @@ import { Subscription } from 'rxjs';
 import { of           } from 'rxjs';
 import { throwError   } from 'rxjs';
 
-import { SurveyData   } from '../../entities';
 import { SurveyEntity } from '../../entities';
 
-import { AddSurveyComponent } from './add-survey.component';
-import { AddSurveyViewModel } from './add-survey.view-model';
-
-@Component({
-  selector: 'app-survey',
-})
-class TestSurveyComponent {
-  private okValue: EventEmitter<void>;
-
-  public constructor() {
-    this.okValue = new EventEmitter<void>();
-  }
-
-  @Input()
-  public set survey(value: SurveyData) {}
-
-  @Output()
-  public get ok(): EventEmitter<void> {
-    return this.okValue;
-  }
-}
-
-@Component({})
-class TestUpdateSurveyComponent {}
+import { AddSurveyComponent        } from './add-survey.component';
+import { AddSurveyViewModel        } from './add-survey.view-model';
+import { SurveyComponentMock       } from '../survey'
+import { UpdateSurveyComponentMock } from '../update-survey';
 
 describe('AddSurveyComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [
-        TestSurveyComponent,
+        SurveyComponentMock,
         AddSurveyComponent,
       ],
       imports: [RouterTestingModule.withRoutes([
         {
           path     : 'survey/:surveyId',
-          component: TestUpdateSurveyComponent,
+          component: UpdateSurveyComponentMock,
         },
       ])],
     });
@@ -120,7 +94,7 @@ describe('AddSurveyComponent', () => {
 
     fixture.detectChanges();
 
-    const surveyComponent: TestSurveyComponent = fixture.debugElement.query(By.directive(TestSurveyComponent)).componentInstance;
+    const surveyComponent: SurveyComponentMock = fixture.debugElement.query(By.directive(SurveyComponentMock)).componentInstance;
 
     surveyComponent.ok.emit();
 
@@ -157,7 +131,7 @@ describe('AddSurveyComponent', () => {
 
     fixture.detectChanges();
 
-    const surveyComponent: TestSurveyComponent = fixture.debugElement.query(By.directive(TestSurveyComponent)).componentInstance;
+    const surveyComponent: SurveyComponentMock = fixture.debugElement.query(By.directive(SurveyComponentMock)).componentInstance;
 
     surveyComponent.ok.emit();
 
