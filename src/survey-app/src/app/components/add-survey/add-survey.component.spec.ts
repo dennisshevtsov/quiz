@@ -16,6 +16,7 @@ import { By } from '@angular/platform-browser';
 
 import { Subscription } from 'rxjs';
 import { of           } from 'rxjs';
+import { throwError   } from 'rxjs';
 
 import { SurveyData   } from '../../entities';
 import { SurveyEntity } from '../../entities';
@@ -97,7 +98,7 @@ describe('AddSurveyComponent', () => {
       .toBe(1);
   })));
 
-  it('should navigate to survey/:surveyId', fakeAsync(inject(
+  it('should navigate to survey/:surveyId if adding successed', fakeAsync(inject(
     [Subscription, AddSurveyViewModel, Location],
     (sub     : jasmine.SpyObj<Subscription>,
      vm      : jasmine.SpyObj<AddSurveyViewModel>,
@@ -126,7 +127,48 @@ describe('AddSurveyComponent', () => {
     tick();
 
     expect(location.path())
-      .withContext("should navigate to survey/:surveyId")
+      .withContext('should navigate to survey/:surveyId')
       .toBe(`/survey/${survey.surveyId}`);
+
+    expect(sub.add.calls.count())
+      .withContext('sub.add should be called once')
+      .toBe(1);
+  })));
+
+  it('should not navigate if adding failed', fakeAsync(inject(
+    [Subscription, AddSurveyViewModel, Location],
+    (sub     : jasmine.SpyObj<Subscription>,
+     vm      : jasmine.SpyObj<AddSurveyViewModel>,
+     location: Location) => {
+    vm.add.and.returnValue(throwError(() => 'error'));
+
+    const descs = Object.getOwnPropertyDescriptors(vm)!;
+
+    const taskSpy = descs.survey.get as jasmine.Spy<() => SurveyEntity>;
+    const survey = {
+      surveyId   : 'test-id',
+      name       : 'test-name',
+      description: 'test-description',
+    };
+
+    taskSpy.and.returnValue(survey);
+
+    const fixture  = TestBed.createComponent(AddSurveyComponent);
+
+    fixture.detectChanges();
+
+    const surveyComponent: TestSurveyComponent = fixture.debugElement.query(By.directive(TestSurveyComponent)).componentInstance;
+
+    surveyComponent.ok.emit();
+
+    tick();
+
+    expect(location.path())
+      .withContext('should stay at original path')
+      .toBe('');
+
+    expect(sub.add.calls.count())
+      .withContext('sub.add should be called once')
+      .toBe(1);
   })));
 });
