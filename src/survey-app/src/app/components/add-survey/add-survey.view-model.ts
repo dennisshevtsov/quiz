@@ -10,13 +10,13 @@ import { SurveyService } from 'src/app/services';
 export class AddSurveyViewModel {
   private surveyValue: undefined | SurveyEntity;
 
-  public constructor(public readonly service: SurveyService) {}
+  public constructor(private readonly service: SurveyService) {}
 
   public get survey(): SurveyEntity {
     if (!this.surveyValue) {
       this.surveyValue = {
-        surveyId: '',
-        name: '',
+        surveyId   : '',
+        name       : '',
         description: '',
       };
     }

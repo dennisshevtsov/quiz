@@ -31,7 +31,9 @@ export class AddSurveyComponent implements OnDestroy {
   }
 
   public ok(): void {
-    this.sub.add(this.vm.add().subscribe(() =>
-    this.router.navigate(['survey', this.vm.survey.surveyId])));
+    this.sub.add(this.vm.add().subscribe({
+      complete: () => this.router.navigate(['survey', this.vm.survey.surveyId]),
+      error   : () => {},
+    }));
   }
 }

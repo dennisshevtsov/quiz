@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { map        } from 'rxjs';
 import { Observable } from 'rxjs';
-import { of         } from 'rxjs';
 
 import { SurveyEntity  } from 'src/app/entities';
 import { SurveyService } from 'src/app/services';
@@ -33,6 +32,6 @@ export class UpdateSurveyViewModel {
   }
 
   public update(): Observable<void> {
-    return of(void 0);
+    return this.service.updateSurvey(this.survey);
   }
 }

@@ -34,4 +34,16 @@ export class SurveyService {
 
     return this.http.post<SurveyEntity>(url, body, options);
   }
+
+  public updateSurvey(survey: SurveyEntity): Observable<void> {
+    const url     = `api/survey/${survey.surveyId}`;
+    const body    = JSON.stringify(survey);
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+
+    return this.http.put<void>(url, body, options);
+  }
 }

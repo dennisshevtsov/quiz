@@ -1,44 +1,49 @@
-import { Component    } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { Input        } from '@angular/core';
-import { Output       } from '@angular/core';
-import { TestBed      } from '@angular/core/testing';
+import { Location } from '@angular/common';
 
-import { SurveyData         } from '../../entities';
-import { AddSurveyComponent } from './add-survey.component';
-import { AddSurveyViewModel } from './add-survey.view-model';
+import { fakeAsync } from '@angular/core/testing';
+import { inject    } from '@angular/core/testing';
+import { TestBed   } from '@angular/core/testing';
+import { tick      } from '@angular/core/testing';
 
-@Component({
-  selector: 'app-survey',
-})
-class TestSurveyComponent {
-  private okValue: EventEmitter<void>;
+import { RouterTestingModule } from '@angular/router/testing';
 
-  public constructor() {
-    this.okValue = new EventEmitter<void>();
-  }
+import { By } from '@angular/platform-browser';
 
-  @Input()
-  public set survey(value: SurveyData) {}
+import { Subscription } from 'rxjs';
+import { of           } from 'rxjs';
+import { throwError   } from 'rxjs';
 
-  @Output()
-  public get ok(): EventEmitter<void> {
-    return this.okValue;
-  }
-}
+import { SurveyEntity } from '../../entities';
+
+import { AddSurveyComponent        } from './add-survey.component';
+import { AddSurveyViewModel        } from './add-survey.view-model';
+import { SurveyComponentMock       } from '../survey'
+import { UpdateSurveyComponentMock } from '../update-survey';
 
 describe('AddSurveyComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [
-        TestSurveyComponent,
+        SurveyComponentMock,
         AddSurveyComponent,
+      ],
+      imports: [
+        RouterTestingModule.withRoutes([{
+          path     : 'survey/:surveyId',
+          component: UpdateSurveyComponentMock,
+        }]),
       ],
     });
 
+    const vm = jasmine.createSpyObj('AddSurveyViewModel', ['add'], ['survey']);
+    vm.add.and.returnValue(of(void 0));
+
+    TestBed.overrideProvider(AddSurveyViewModel, {useValue: vm});
+
     TestBed.overrideProvider(
-      AddSurveyViewModel,
-      {useValue: jasmine.createSpyObj(AddSurveyViewModel,['addSurvey'])});
+      Subscription,
+      { useValue: jasmine.createSpyObj(Subscription, ['add', 'unsubscribe'])},
+    );
 
     await TestBed.compileComponents();
   });
@@ -51,4 +56,93 @@ describe('AddSurveyComponent', () => {
 
     expect(component).toBeTruthy();
   });
+
+  it('should unsubsribe in ngOnDestroy', fakeAsync(inject(
+    [Subscription], (sub: jasmine.SpyObj<Subscription>) => {
+    const fixture = TestBed.createComponent(AddSurveyComponent);
+
+    fixture.detectChanges();
+
+    tick();
+
+    fixture.componentInstance.ngOnDestroy();
+
+    expect(sub.unsubscribe.calls.count())
+      .withContext('sub.unsubscribe should be called')
+      .toBe(1);
+  })));
+
+  it('should navigate to survey/:surveyId if adding successed', fakeAsync(inject(
+    [Subscription, AddSurveyViewModel, Location],
+    (sub     : jasmine.SpyObj<Subscription>,
+     vm      : jasmine.SpyObj<AddSurveyViewModel>,
+     location: Location) => {
+    vm.add.and.returnValue(of(void 0));
+
+    const descs = Object.getOwnPropertyDescriptors(vm)!;
+
+    const surveySpy = descs.survey.get as jasmine.Spy<() => SurveyEntity>;
+    const survey = {
+      surveyId   : 'test-id',
+      name       : 'test-name',
+      description: 'test-description',
+    };
+
+    surveySpy.and.returnValue(survey);
+
+    const fixture  = TestBed.createComponent(AddSurveyComponent);
+
+    fixture.detectChanges();
+
+    const surveyComponent: SurveyComponentMock = fixture.debugElement.query(By.directive(SurveyComponentMock)).componentInstance;
+
+    surveyComponent.ok.emit();
+
+    tick();
+
+    expect(location.path())
+      .withContext('should navigate to survey/:surveyId')
+      .toBe(`/survey/${survey.surveyId}`);
+
+    expect(sub.add.calls.count())
+      .withContext('sub.add should be called once')
+      .toBe(1);
+  })));
+
+  it('should not navigate if adding failed', fakeAsync(inject(
+    [Subscription, AddSurveyViewModel, Location],
+    (sub     : jasmine.SpyObj<Subscription>,
+     vm      : jasmine.SpyObj<AddSurveyViewModel>,
+     location: Location) => {
+    vm.add.and.returnValue(throwError(() => 'error'));
+
+    const descs = Object.getOwnPropertyDescriptors(vm)!;
+
+    const surveySpy = descs.survey.get as jasmine.Spy<() => SurveyEntity>;
+    const survey = {
+      surveyId   : 'test-id',
+      name       : 'test-name',
+      description: 'test-description',
+    };
+
+    surveySpy.and.returnValue(survey);
+
+    const fixture  = TestBed.createComponent(AddSurveyComponent);
+
+    fixture.detectChanges();
+
+    const surveyComponent: SurveyComponentMock = fixture.debugElement.query(By.directive(SurveyComponentMock)).componentInstance;
+
+    surveyComponent.ok.emit();
+
+    tick();
+
+    expect(location.path())
+      .withContext('should stay at original path')
+      .toBe('');
+
+    expect(sub.add.calls.count())
+      .withContext('sub.add should be called once')
+      .toBe(1);
+  })));
 });

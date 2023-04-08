@@ -1,12 +1,16 @@
 import { Component    } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Input        } from '@angular/core';
+import { OnDestroy    } from '@angular/core';
+import { OnInit       } from '@angular/core';
 import { Output       } from '@angular/core';
 
 import { FormBuilder } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { FormGroup   } from '@angular/forms';
 import { Validators  } from '@angular/forms';
+
+import { Subscription } from 'rxjs';
 
 import { SurveyData } from '../../entities';
 
@@ -18,15 +22,30 @@ type SurveyFormScheme = {
   selector: 'app-survey',
   templateUrl: './survey.component.html',
   styleUrls: ['survey.component.scss'],
+  providers: [{ provide: Subscription, useFactory: () => new Subscription() }]
 })
-export class SurveyComponent {
+export class SurveyComponent implements OnInit, OnDestroy {
   private surveyValue: undefined | SurveyData;
   private formValue  : undefined | FormGroup<SurveyFormScheme>;
 
   private okValue : EventEmitter<void>;
 
-  public constructor(private readonly fb: FormBuilder) {
+  public constructor(
+    private readonly fb : FormBuilder,
+    private readonly sub: Subscription,
+  ) {
     this.okValue = new EventEmitter<void>();
+  }
+
+  public ngOnInit(): void {
+    this.sub.add(this.form.valueChanges.subscribe(value => {
+      this.survey.name        = value.name        ?? '';
+      this.survey.description = value.description ?? '';
+    }));
+  }
+
+  public ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 
   public get survey(): SurveyData {
@@ -40,11 +59,6 @@ export class SurveyComponent {
     this.form.setValue({
       name       : value.name,
       description: value.description,
-    });
-
-    this.form.valueChanges.subscribe(value => {
-      this.survey.name        = value.name        ?? '';
-      this.survey.description = value.description ?? '';
     });
   }
 
