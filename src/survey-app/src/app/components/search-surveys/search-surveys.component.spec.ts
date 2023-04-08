@@ -50,7 +50,7 @@ describe('SearchSurveysComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('ngOnInit should initialize component', fakeAsync(inject(
+  it('should initialize component ngOnInit', fakeAsync(inject(
     [Subscription, SearchSurveysViewModel],
     (sub: jasmine.SpyObj<Subscription>,
      vm: jasmine.SpyObj<SearchSurveysViewModel>) => {
@@ -69,7 +69,7 @@ describe('SearchSurveysComponent', () => {
       .toBe(1);
   })));
 
-  it('ngOnDestroy should unsubsribe', fakeAsync(inject(
+  it('should unsubsribe in ngOnDestroy', fakeAsync(inject(
     [Subscription, SearchSurveysViewModel],
     (sub: jasmine.SpyObj<Subscription>,
      vm: jasmine.SpyObj<SearchSurveysViewModel>) => {
