@@ -27,12 +27,12 @@ describe('AddSurveyComponent', () => {
         SurveyComponentMock,
         AddSurveyComponent,
       ],
-      imports: [RouterTestingModule.withRoutes([
-        {
+      imports: [
+        RouterTestingModule.withRoutes([{
           path     : 'survey/:surveyId',
           component: UpdateSurveyComponentMock,
-        },
-      ])],
+        }]),
+      ],
     });
 
     const vm = jasmine.createSpyObj('AddSurveyViewModel', ['add'], ['survey']);

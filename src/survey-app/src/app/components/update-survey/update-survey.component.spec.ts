@@ -1,47 +1,38 @@
-import { Component    } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { Input        } from '@angular/core';
-import { Output       } from '@angular/core';
 import { TestBed      } from '@angular/core/testing';
 
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { SurveyData            } from '../../entities';
+import { Subscription } from 'rxjs';
+import { of           } from 'rxjs';
+
 import { UpdateSurveyComponent } from './update-survey.component';
 import { UpdateSurveyViewModel } from './update-survey.view-model';
-
-@Component({
-  selector: 'app-survey',
-})
-class TestSurveyComponent {
-  private okValue: EventEmitter<void>;
-
-  public constructor() {
-    this.okValue = new EventEmitter<void>();
-  }
-
-  @Input()
-  public set survey(value: SurveyData) {}
-
-  @Output()
-  public get ok(): EventEmitter<void> {
-    return this.okValue;
-  }
-}
+import { SurveyComponentMock   } from '../survey';
 
 describe('UpdateSurveyComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [
         UpdateSurveyComponent,
-        TestSurveyComponent,
+        SurveyComponentMock,
       ],
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule.withRoutes([{
+          path     : 'survey/:surveyId',
+          component: UpdateSurveyComponent,
+        }]),
+      ],
     })
 
+    const vm: jasmine.SpyObj<UpdateSurveyViewModel> = jasmine.createSpyObj('UpdateSurveyViewModel', ['initialize'], ['survey']);
+    vm.initialize.and.returnValue(of(void 0));
+
+    TestBed.overrideProvider(UpdateSurveyViewModel, {useValue: vm});
+
     TestBed.overrideProvider(
-      UpdateSurveyViewModel,
-      {useValue: jasmine.createSpyObj(UpdateSurveyViewModel,['getSurvey'])});
+      Subscription,
+      { useValue: jasmine.createSpyObj(Subscription, ['add', 'unsubscribe'])},
+    );
 
     await TestBed.compileComponents();
   });
