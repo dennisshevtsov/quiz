@@ -70,6 +70,29 @@ describe('UpdateSurveyComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should initialize in ngOnInit', fakeAsync(inject(
+    [Subscription, UpdateSurveyViewModel, 'ParamMap'],
+    (sub     : jasmine.SpyObj<Subscription>,
+     vm      : jasmine.SpyObj<UpdateSurveyViewModel>,
+     paramMap: jasmine.SpyObj<ParamMap>) => {
+    vm.initialize.and.returnValue(of(void 0));
+    paramMap.get.and.returnValue('test-id');
+
+    const fixture = TestBed.createComponent(UpdateSurveyComponent);
+
+    fixture.detectChanges();
+
+    tick();
+
+    expect(vm.initialize.calls.count())
+      .withContext('vm.initialize should be called once')
+      .toBe(1);
+
+    expect(sub.add.calls.count())
+      .withContext('sub.add should be called once')
+      .toBe(1);
+  })));
+
   it('should unsubsribe in ngOnDestroy', fakeAsync(inject(
     [Subscription, 'ParamMap'],
     (sub     : jasmine.SpyObj<Subscription>,
