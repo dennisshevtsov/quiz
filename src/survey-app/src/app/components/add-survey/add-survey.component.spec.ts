@@ -1,3 +1,5 @@
+import { Location } from '@angular/common';
+
 import { Component    } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Input        } from '@angular/core';
@@ -10,10 +12,14 @@ import { tick      } from '@angular/core/testing';
 
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { By } from '@angular/platform-browser';
+
 import { Subscription } from 'rxjs';
 import { of           } from 'rxjs';
 
-import { SurveyData         } from '../../entities';
+import { SurveyData   } from '../../entities';
+import { SurveyEntity } from '../../entities';
+
 import { AddSurveyComponent } from './add-survey.component';
 import { AddSurveyViewModel } from './add-survey.view-model';
 
@@ -36,6 +42,9 @@ class TestSurveyComponent {
   }
 }
 
+@Component({})
+class TestUpdateSurveyComponent {}
+
 describe('AddSurveyComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
@@ -43,7 +52,12 @@ describe('AddSurveyComponent', () => {
         TestSurveyComponent,
         AddSurveyComponent,
       ],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule.withRoutes([
+        {
+          path     : 'survey/:surveyId',
+          component: TestUpdateSurveyComponent,
+        },
+      ])],
     });
 
     const vm = jasmine.createSpyObj('AddSurveyViewModel', ['add'], ['survey']);
@@ -69,9 +83,7 @@ describe('AddSurveyComponent', () => {
   });
 
   it('should unsubsribe in ngOnDestroy', fakeAsync(inject(
-    [Subscription, AddSurveyViewModel],
-    (sub: jasmine.SpyObj<Subscription>,
-     vm: jasmine.SpyObj<AddSurveyViewModel>) => {
+    [Subscription], (sub: jasmine.SpyObj<Subscription>) => {
     const fixture = TestBed.createComponent(AddSurveyComponent);
 
     fixture.detectChanges();
@@ -83,5 +95,38 @@ describe('AddSurveyComponent', () => {
     expect(sub.unsubscribe.calls.count())
       .withContext('sub.unsubscribe should be called')
       .toBe(1);
+  })));
+
+  it('should navigate to survey/:surveyId', fakeAsync(inject(
+    [Subscription, AddSurveyViewModel, Location],
+    (sub     : jasmine.SpyObj<Subscription>,
+     vm      : jasmine.SpyObj<AddSurveyViewModel>,
+     location: Location) => {
+    vm.add.and.returnValue(of(void 0));
+
+    const descs = Object.getOwnPropertyDescriptors(vm)!;
+
+    const taskSpy = descs.survey.get as jasmine.Spy<() => SurveyEntity>;
+    const survey = {
+      surveyId   : 'test-id',
+      name       : 'test-name',
+      description: 'test-description',
+    };
+
+    taskSpy.and.returnValue(survey);
+
+    const fixture  = TestBed.createComponent(AddSurveyComponent);
+
+    fixture.detectChanges();
+
+    const surveyComponent: TestSurveyComponent = fixture.debugElement.query(By.directive(TestSurveyComponent)).componentInstance;
+
+    surveyComponent.ok.emit();
+
+    tick();
+
+    expect(location.path())
+      .withContext("should navigate to survey/:surveyId")
+      .toBe(`/survey/${survey.surveyId}`);
   })));
 });
