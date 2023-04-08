@@ -10,7 +10,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MatIconModule  } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 
-import { Subscription, of } from 'rxjs';
+import { Subscription} from 'rxjs';
+import { of          } from 'rxjs';
 
 import { SearchSurveysComponent } from './search-surveys.component';
 import { SearchSurveysViewModel } from './search-surveys.view-model';
@@ -49,7 +50,10 @@ describe('SearchSurveysComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('ngOnInit should initialize component', fakeAsync(inject([Subscription, SearchSurveysViewModel], (sub: jasmine.SpyObj<Subscription>, vm: jasmine.SpyObj<SearchSurveysViewModel>) => {
+  it('ngOnInit should initialize component', fakeAsync(inject(
+    [Subscription, SearchSurveysViewModel],
+    (sub: jasmine.SpyObj<Subscription>,
+     vm: jasmine.SpyObj<SearchSurveysViewModel>) => {
     const fixture = TestBed.createComponent(SearchSurveysComponent);
 
     fixture.detectChanges();
@@ -65,7 +69,10 @@ describe('SearchSurveysComponent', () => {
       .toBe(1);
   })));
 
-  it('ngOnDestroy should unsubsribe', fakeAsync(inject([Subscription, SearchSurveysViewModel], (sub: jasmine.SpyObj<Subscription>, vm: jasmine.SpyObj<SearchSurveysViewModel>) => {
+  it('ngOnDestroy should unsubsribe', fakeAsync(inject(
+    [Subscription, SearchSurveysViewModel],
+    (sub: jasmine.SpyObj<Subscription>,
+     vm: jasmine.SpyObj<SearchSurveysViewModel>) => {
     const fixture = TestBed.createComponent(SearchSurveysComponent);
 
     fixture.detectChanges();
