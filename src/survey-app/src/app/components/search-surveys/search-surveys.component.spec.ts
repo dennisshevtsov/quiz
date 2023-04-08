@@ -1,6 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { TestBed, fakeAsync, inject, tick                 } from '@angular/core/testing';
-import { RouterTestingModule     } from '@angular/router/testing';
+
+import { fakeAsync } from '@angular/core/testing';
+import { inject    } from '@angular/core/testing';
+import { TestBed   } from '@angular/core/testing';
+import { tick      } from '@angular/core/testing';
+
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MatIconModule  } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
