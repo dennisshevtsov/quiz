@@ -5,15 +5,16 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule           } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatButtonModule    } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule      } from '@angular/material/icon';
-import { MatInputModule     } from '@angular/material/input';
-import { MatListModule      } from '@angular/material/list';
-import { MatSidenavModule   } from '@angular/material/sidenav';
-import { MatSnackBarModule  } from '@angular/material/snack-bar';
-import { MatTableModule     } from '@angular/material/table';
-import { MatToolbarModule   } from '@angular/material/toolbar';
+import { MatButtonModule               } from '@angular/material/button';
+import { MatFormFieldModule            } from '@angular/material/form-field';
+import { MatIconModule                 } from '@angular/material/icon';
+import { MatInputModule                } from '@angular/material/input';
+import { MatListModule                 } from '@angular/material/list';
+import { MatSidenavModule              } from '@angular/material/sidenav';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MatSnackBarModule             } from '@angular/material/snack-bar';
+import { MatTableModule                } from '@angular/material/table';
+import { MatToolbarModule              } from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent     } from './app.component';
@@ -49,7 +50,12 @@ import { UpdateSurveyComponent  } from './components';
 
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [{
+    provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+    useValue: {
+      duration: 5000,
+    },
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
