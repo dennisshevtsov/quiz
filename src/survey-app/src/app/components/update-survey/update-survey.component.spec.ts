@@ -10,7 +10,7 @@ import { By } from '@angular/platform-browser';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { of           } from 'rxjs';
+import { of, throwError           } from 'rxjs';
 import { Subscription } from 'rxjs';
 
 import { UpdateSurveyComponent } from './update-survey.component';
@@ -142,5 +142,39 @@ describe('UpdateSurveyComponent', () => {
     expect(sb.open.calls.first().args[0])
       .withContext('sb.open should be called with success message')
       .toBe('The survey is updated.');
+  })));
+
+  it('should show error', fakeAsync(inject(
+    [Subscription, UpdateSurveyViewModel, MatSnackBar],
+    (sub: jasmine.SpyObj<Subscription>,
+     vm : jasmine.SpyObj<UpdateSurveyViewModel>,
+     sb : jasmine.SpyObj<MatSnackBar>) => {
+    vm.update.and.returnValue(throwError(() => 'error'));
+
+    const fixture  = TestBed.createComponent(UpdateSurveyComponent);
+    fixture.detectChanges();
+    tick();
+
+    sub.add.calls.reset();
+
+    const surveyComponent: SurveyComponentMock = fixture.debugElement.query(By.directive(SurveyComponentMock)).componentInstance;
+    surveyComponent.ok.emit();
+    tick();
+
+    expect(vm.update.calls.count())
+      .withContext('vm.update should be called once')
+      .toBe(1);
+
+    expect(sub.add.calls.count())
+      .withContext('sub.add should be called once')
+      .toBe(1);
+
+    expect(sb.open.calls.count())
+      .withContext('sb.open should be called once')
+      .toBe(1);
+
+    expect(sb.open.calls.first().args[0])
+      .withContext('sb.open should be called with success message')
+      .toBe('An error occured.');
   })));
 });
