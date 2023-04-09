@@ -174,7 +174,7 @@ describe('UpdateSurveyComponent', () => {
       .toBe(1);
 
     expect(sb.open.calls.first().args[0])
-      .withContext('sb.open should be called with success message')
+      .withContext('sb.open should be called with error message')
       .toBe('An error occured.');
   })));
 });

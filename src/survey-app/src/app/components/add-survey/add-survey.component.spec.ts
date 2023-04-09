@@ -9,6 +9,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { By } from '@angular/platform-browser';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Subscription } from 'rxjs';
 import { of           } from 'rxjs';
 import { throwError   } from 'rxjs';
@@ -45,6 +47,9 @@ describe('AddSurveyComponent', () => {
       { useValue: jasmine.createSpyObj(Subscription, ['add', 'unsubscribe'])},
     );
 
+    const sb: jasmine.SpyObj<MatSnackBar> = jasmine.createSpyObj(MatSnackBar, ['open']);
+    TestBed.overrideProvider(MatSnackBar, {useValue: sb});
+
     await TestBed.compileComponents();
   });
 
@@ -73,10 +78,11 @@ describe('AddSurveyComponent', () => {
   })));
 
   it('should navigate to survey/:surveyId if adding successed', fakeAsync(inject(
-    [Subscription, AddSurveyViewModel, Location],
+    [Subscription, AddSurveyViewModel, Location, MatSnackBar],
     (sub     : jasmine.SpyObj<Subscription>,
      vm      : jasmine.SpyObj<AddSurveyViewModel>,
-     location: Location) => {
+     location: Location,
+     sb      : jasmine.SpyObj<MatSnackBar>) => {
     vm.add.and.returnValue(of(void 0));
 
     const descs = Object.getOwnPropertyDescriptors(vm)!;
@@ -107,13 +113,22 @@ describe('AddSurveyComponent', () => {
     expect(sub.add.calls.count())
       .withContext('sub.add should be called once')
       .toBe(1);
+
+    expect(sb.open.calls.count())
+      .withContext('sb.open should be called once')
+      .toBe(1);
+
+    expect(sb.open.calls.first().args[0])
+      .withContext('sb.open should be called with success message')
+      .toBe('The new survey is created.');
   })));
 
   it('should not navigate if adding failed', fakeAsync(inject(
-    [Subscription, AddSurveyViewModel, Location],
+    [Subscription, AddSurveyViewModel, Location, MatSnackBar],
     (sub     : jasmine.SpyObj<Subscription>,
      vm      : jasmine.SpyObj<AddSurveyViewModel>,
-     location: Location) => {
+     location: Location,
+     sb      : jasmine.SpyObj<MatSnackBar>) => {
     vm.add.and.returnValue(throwError(() => 'error'));
 
     const descs = Object.getOwnPropertyDescriptors(vm)!;
@@ -144,5 +159,13 @@ describe('AddSurveyComponent', () => {
     expect(sub.add.calls.count())
       .withContext('sub.add should be called once')
       .toBe(1);
+
+    expect(sb.open.calls.count())
+      .withContext('sb.open should be called once')
+      .toBe(1);
+
+    expect(sb.open.calls.first().args[0])
+      .withContext('sb.open should be called with error message')
+      .toBe('An error occured.');
   })));
 });
