@@ -53,7 +53,9 @@ import { UpdateSurveyComponent  } from './components';
   providers: [{
     provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
     useValue: {
-      duration: 5000,
+      duration          : 5000,
+      horizontalPosition: 'right',
+      verticalPosition  : 'bottom',
     },
   }],
   bootstrap: [AppComponent],
