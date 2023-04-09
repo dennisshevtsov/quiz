@@ -50,8 +50,8 @@ export class UpdateSurveyComponent implements OnInit, OnDestroy {
 
   public ok(): void {
     this.sub.add(this.vm.update().subscribe({
-      complete: () => this.sb.open('The survey is updated.', 'Undo'),
-      error   : () => this.sb.open('An error occured.', 'Undo'),
+      complete: () => this.sb.open('The survey is updated.', 'Close'),
+      error   : () => this.sb.open('An error occured.', 'Close'),
     }));
   }
 }

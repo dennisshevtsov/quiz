@@ -36,10 +36,10 @@ export class AddSurveyComponent implements OnDestroy {
   public ok(): void {
     this.sub.add(this.vm.add().subscribe({
       complete: () => {
-        this.sb.open('The new survey is created.', 'Undo');
+        this.sb.open('The new survey is created.', 'Close');
         this.router.navigate(['survey', this.vm.survey.surveyId]);
       },
-      error   : () => this.sb.open('An error occured.', 'Undo'),
+      error   : () => this.sb.open('An error occured.', 'Close'),
     }));
   }
 }
