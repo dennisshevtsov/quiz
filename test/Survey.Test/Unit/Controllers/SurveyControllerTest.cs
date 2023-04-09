@@ -54,6 +54,27 @@ namespace Survey.Web.Controllers.Test
     }
 
     [TestMethod]
+    public async Task AddSurvey_Should_Return_NotFound()
+    {
+      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                        .ReturnsAsync(default(ISurveyEntity))
+                        .Verifiable();
+
+      var vm = new UpdateSurveyViewModel();
+
+      var actionResult = await _surveyController.UpdateSurvey(vm, CancellationToken.None);
+
+      Assert.IsNotNull(actionResult);
+
+      var notFoundResult = actionResult as NotFoundResult;
+
+      Assert.IsNotNull(notFoundResult);
+
+      _surveyServiceMock.Verify(service => service.GetSurveyAsync(vm.SurveyId, CancellationToken.None));
+      _surveyServiceMock.VerifyNoOtherCalls();
+    }
+
+    [TestMethod]
     public async Task AddSurvey_Should_Return_NoContent()
     {
       _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
