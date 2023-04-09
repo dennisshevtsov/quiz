@@ -20,6 +20,7 @@ namespace Survey.Web.Controllers
   {
     private const string SurveyRoute = "api/survey";
     private const string GetSurveySubRoute = "{surveyId}";
+    private const string UpdateSurveySubRoute = "{surveyId}";
 
     private readonly ISurveyService _surveyService;
 
@@ -42,6 +43,27 @@ namespace Survey.Web.Controllers
       var surveyEntity = await _surveyService.AddNewSurveyAsync(vm, cancellationToken);
 
       return CreatedAtRoute(nameof(SurveyController.GetSurvey), new { surveyId = surveyEntity.SurveyId }, new GetSurveyViewModel(surveyEntity));
+    }
+
+    /// <summary>Handles the update survey command request.</summary>
+    /// <param name="vm">An object that represents a survey view model.</param>
+    /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
+    [HttpPut(SurveyController.UpdateSurveySubRoute, Name = nameof(SurveyController.UpdateSurvey))]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [Consumes(typeof(UpdateSurveyViewModel), ContentType.Json)]
+    public async Task<IActionResult> UpdateSurvey([FromBody] UpdateSurveyViewModel vm, CancellationToken cancellationToken)
+    {
+      var surveyEntity = await _surveyService.GetSurveyAsync(vm.SurveyId, cancellationToken);
+
+      if (surveyEntity == null)
+      {
+        return NotFound();
+      }
+
+      await _surveyService.UpdateSurveyAsync(surveyEntity, cancellationToken);
+
+      return NoContent();
     }
 
     /// <summary>Handles the add survey query request.</summary>
