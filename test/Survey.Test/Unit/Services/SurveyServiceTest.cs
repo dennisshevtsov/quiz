@@ -43,6 +43,21 @@ namespace Survey.Application.Services.Test
     }
 
     [TestMethod]
+    public async Task UpdateNewSurveyAsync_Should_Save_Survey()
+    {
+      _surveyRepositoryMock.Setup(repository => repository.UpdateSurveyAsync(It.IsAny<ISurveyEntity>(), It.IsAny<CancellationToken>()))
+                           .Returns(Task.CompletedTask)
+                           .Verifiable();
+
+      var surveyEntity = new TestSurveyEntity();
+
+      await _surveyService.UpdateSurveyAsync(surveyEntity, CancellationToken.None);
+
+      _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.Is<ISurveyEntity>(entity => surveyEntity.Equals(entity)), CancellationToken.None));
+      _surveyRepositoryMock.VerifyNoOtherCalls();
+    }
+
+    [TestMethod]
     public async Task GetSurveyAsync_Should_Get_Survey()
     {
       var controlSurveyEntity = new TestSurveyEntity();
@@ -99,6 +114,11 @@ namespace Survey.Application.Services.Test
       public string Name { get; } = Guid.NewGuid().ToString();
 
       public string Description { get; } = Guid.NewGuid().ToString();
+
+      public bool Equals(TestSurveyEntity other)
+        => SurveyId    == other.SurveyId &&
+           Name        == other.Name     &&
+           Description == other.Description;
     }
   }
 }

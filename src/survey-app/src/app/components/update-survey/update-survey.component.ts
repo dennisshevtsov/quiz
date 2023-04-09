@@ -5,6 +5,8 @@ import { OnInit    } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ParamMap       } from '@angular/router';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Subscription } from 'rxjs';
 import { switchMap    } from 'rxjs';
 
@@ -23,6 +25,7 @@ export class UpdateSurveyComponent implements OnInit, OnDestroy {
     private readonly vm   : UpdateSurveyViewModel,
     private readonly sub  : Subscription,
     private readonly route: ActivatedRoute,
+    private readonly sb   : MatSnackBar,
   ) {}
 
   public ngOnInit(): void {
@@ -46,6 +49,9 @@ export class UpdateSurveyComponent implements OnInit, OnDestroy {
   }
 
   public ok(): void {
-    this.sub.add(this.vm.update().subscribe());
+    this.sub.add(this.vm.update().subscribe({
+      complete: () => this.sb.open('The survey is updated.', 'Close'),
+      error   : () => this.sb.open('An error occured.', 'Close'),
+    }));
   }
 }

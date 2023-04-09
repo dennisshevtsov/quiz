@@ -46,6 +46,32 @@ namespace Survey.Infrastructure.Repositories.Test
     }
 
     [TestMethod]
+    public async Task UpdateSurveyAsync_Should_Update_Existing_Survey()
+    {
+      var controlSurveyEntity = SurveyRepositoryTest.GenerateTestSurveyEntity();
+      var controlSurveyEntityEntry = DbContext.Add(controlSurveyEntity);
+
+      await DbContext.SaveChangesAsync(CancellationToken);
+
+      controlSurveyEntityEntry.State = EntityState.Detached;
+
+      controlSurveyEntity.Name = Guid.NewGuid().ToString();
+      controlSurveyEntity.Description = Guid.NewGuid().ToString();
+
+      await _surveyRepository.UpdateSurveyAsync(controlSurveyEntity, CancellationToken);
+
+      var actualSurveyEntity =
+        await DbContext.Set<SurveyEntity>()
+                       .AsNoTracking()
+                       .Where(entity => entity.SurveyId == controlSurveyEntity.SurveyId)
+                       .SingleOrDefaultAsync(CancellationToken);
+
+      Assert.IsNotNull(actualSurveyEntity);
+
+      SurveyRepositoryTest.AreEqual(controlSurveyEntity, actualSurveyEntity);
+    }
+
+    [TestMethod]
     public async Task GetSurveyAsync_Should_Return_Detached_Entity()
     {
       var controlSurveyEntity = SurveyRepositoryTest.GenerateTestSurveyEntity();
@@ -88,7 +114,7 @@ namespace Survey.Infrastructure.Repositories.Test
       var controlSurveyEntityCollection =
         SurveyRepositoryTest.GenerateTestSurveyEntityCollection(5);
 
-      await SaveChangesAsync(controlSurveyEntityCollection, CancellationToken);
+      await SaveChangesAsync(controlSurveyEntityCollection);
 
       var actualSurveyEntityCollection =
         await _surveyRepository.GetSurveysAsync(CancellationToken);
@@ -151,8 +177,7 @@ namespace Survey.Infrastructure.Repositories.Test
       }
     }
 
-    private async Task SaveChangesAsync(
-      SurveyEntity[] controlSurveyEntityCollection, CancellationToken cancellationToken)
+    private async Task SaveChangesAsync(SurveyEntity[] controlSurveyEntityCollection)
     {
       DbContext.AddRange(controlSurveyEntityCollection);
 
