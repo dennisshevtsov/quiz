@@ -4,10 +4,11 @@ import { TestBed   } from '@angular/core/testing';
 import { tick      } from '@angular/core/testing';
 
 import { ActivatedRoute      } from '@angular/router';
-import { ParamMap            } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { By } from '@angular/platform-browser';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { of           } from 'rxjs';
 import { Subscription } from 'rxjs';
@@ -60,6 +61,9 @@ describe('UpdateSurveyComponent', () => {
       { useValue: jasmine.createSpyObj(Subscription, ['add', 'unsubscribe'])},
     );
 
+    const sb: jasmine.SpyObj<MatSnackBar> = jasmine.createSpyObj(MatSnackBar, ['open']);
+    TestBed.overrideProvider(MatSnackBar, {useValue: sb});
+
     await TestBed.compileComponents();
   });
 
@@ -107,9 +111,10 @@ describe('UpdateSurveyComponent', () => {
   })));
 
   it('should update survey', fakeAsync(inject(
-    [Subscription, UpdateSurveyViewModel],
+    [Subscription, UpdateSurveyViewModel, MatSnackBar],
     (sub: jasmine.SpyObj<Subscription>,
-     vm : jasmine.SpyObj<UpdateSurveyViewModel>) => {
+     vm : jasmine.SpyObj<UpdateSurveyViewModel>,
+     sb : jasmine.SpyObj<MatSnackBar>) => {
     vm.update.and.returnValue(of(void 0));
 
     const fixture  = TestBed.createComponent(UpdateSurveyComponent);
@@ -129,5 +134,13 @@ describe('UpdateSurveyComponent', () => {
     expect(sub.add.calls.count())
       .withContext('sub.add should be called once')
       .toBe(1);
+
+    expect(sb.open.calls.count())
+      .withContext('sb.open should be called once')
+      .toBe(1);
+
+    expect(sb.open.calls.first().args[0])
+      .withContext('sb.open should be called with success message')
+      .toBe('The survey is updated.');
   })));
 });
