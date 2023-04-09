@@ -9,6 +9,13 @@ namespace Survey.Web.ViewModels
   public sealed class UpdateSurveyViewModel : ISurveyEntity
   {
     /// <summary>Initializes a new instance of the <see cref="Survey.Web.ViewModels.UpdateSurveyViewModel"/> class.</summary>
+    public UpdateSurveyViewModel()
+    {
+      Name = string.Empty;
+      Description = string.Empty;
+    }
+
+    /// <summary>Initializes a new instance of the <see cref="Survey.Web.ViewModels.UpdateSurveyViewModel"/> class.</summary>
     /// <param name="surveyData">An object that represents survey data.</param>
     public UpdateSurveyViewModel(ISurveyEntity surveyEntity)
     {
@@ -18,12 +25,12 @@ namespace Survey.Web.ViewModels
     }
 
     /// <summary>Gets/sets an object that represents an identity of a survey.</summary>
-    public Guid SurveyId { get; }
+    public Guid SurveyId { get; set; }
 
     /// <summary>Gets/sets an object that represents a name of a survey.</summary>
-    public string Name { get; }
+    public string Name { get; set; }
 
     /// <summary>Gets/sets an object that represents a description of survey.</summary>
-    public string Description { get; }
+    public string Description { get; set; }
   }
 }

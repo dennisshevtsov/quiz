@@ -54,6 +54,37 @@ namespace Survey.Web.Controllers.Test
     }
 
     [TestMethod]
+    public async Task AddSurvey_Should_Return_NoContent()
+    {
+      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                        .ReturnsAsync(new TestSurveyEntity())
+                        .Verifiable();
+
+      _surveyServiceMock.Setup(service => service.UpdateSurveyAsync(It.IsAny<ISurveyEntity>(), It.IsAny<CancellationToken>()))
+                        .Returns(Task.CompletedTask)
+                        .Verifiable();
+
+      var vm = new UpdateSurveyViewModel
+      {
+        SurveyId = Guid.NewGuid(),
+        Name = Guid.NewGuid().ToString(),
+        Description = Guid.NewGuid().ToString(),
+      };
+
+      var actionResult = await _surveyController.UpdateSurvey(vm, CancellationToken.None);
+
+      Assert.IsNotNull(actionResult);
+
+      var notContentResult = actionResult as NoContentResult;
+
+      Assert.IsNotNull(notContentResult);
+
+      _surveyServiceMock.Verify(service => service.GetSurveyAsync(vm.SurveyId, CancellationToken.None));
+      _surveyServiceMock.Verify(service => service.UpdateSurveyAsync(It.Is<ISurveyEntity>(data => data.SurveyId == vm.SurveyId && data.Name == vm.Name && data.Description == vm.Description), CancellationToken.None));
+      _surveyServiceMock.VerifyNoOtherCalls();
+    }
+
+    [TestMethod]
     public async Task GetSurvey_Should_Return_Not_Found()
     {
       _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
