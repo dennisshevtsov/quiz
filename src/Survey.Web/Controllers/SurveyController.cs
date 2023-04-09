@@ -61,7 +61,7 @@ namespace Survey.Web.Controllers
         return NotFound();
       }
 
-      await _surveyService.UpdateSurveyAsync(surveyEntity, cancellationToken);
+      await _surveyService.UpdateSurveyAsync(vm, cancellationToken);
 
       return NoContent();
     }
