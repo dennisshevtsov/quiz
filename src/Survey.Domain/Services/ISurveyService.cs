@@ -4,8 +4,6 @@
 
 namespace Survey.Domain.Services
 {
-  using System;
-
   using Survey.Domain.Entities;
 
   /// <summary>Provides a simple API to the survey entity.</summary>
