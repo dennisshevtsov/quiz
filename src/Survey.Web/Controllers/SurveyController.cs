@@ -21,6 +21,7 @@ namespace Survey.Web.Controllers
     private const string SurveyRoute = "api/survey";
     private const string GetSurveySubRoute = "{surveyId}";
     private const string UpdateSurveySubRoute = "{surveyId}";
+    private const string DeleteSurveySubRoute = "{surveyId}";
 
     private readonly ISurveyService _surveyService;
 
@@ -62,6 +63,26 @@ namespace Survey.Web.Controllers
       }
 
       await _surveyService.UpdateSurveyAsync(vm, cancellationToken);
+
+      return NoContent();
+    }
+
+    /// <summary>Handles the delete survey command request.</summary>
+    /// <param name="vm">An object that represents data to delete a survey.</param>
+    /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
+    [HttpPut(SurveyController.DeleteSurveySubRoute, Name = nameof(SurveyController.DeleteSurvey))]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> DeleteSurvey([FromRoute] DeleteSurveyViewModel vm, CancellationToken cancellationToken)
+    {
+      var surveyEntity = await _surveyService.GetSurveyAsync(vm.SurveyId, cancellationToken);
+
+      if (surveyEntity == null)
+      {
+        return NotFound();
+      }
+
+      await _surveyService.DeleteSurveyAsync(vm, cancellationToken);
 
       return NoContent();
     }

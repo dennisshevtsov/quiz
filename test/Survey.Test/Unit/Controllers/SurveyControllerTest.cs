@@ -54,7 +54,7 @@ namespace Survey.Web.Controllers.Test
     }
 
     [TestMethod]
-    public async Task AddSurvey_Should_Return_NotFound()
+    public async Task UpdateSurvey_Should_Return_NotFound()
     {
       _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                         .ReturnsAsync(default(ISurveyEntity))
@@ -75,7 +75,7 @@ namespace Survey.Web.Controllers.Test
     }
 
     [TestMethod]
-    public async Task AddSurvey_Should_Return_NoContent()
+    public async Task UpdateSurvey_Should_Return_NoContent()
     {
       _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                         .ReturnsAsync(new TestSurveyEntity())

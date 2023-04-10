@@ -58,7 +58,7 @@ namespace Survey.Application.Services.Test
     }
 
     [TestMethod]
-    public async Task DeleteNewSurveyAsync_Should_Save_Survey()
+    public async Task DeleteNewSurveyAsync_Should_Delete_Survey()
     {
       _surveyRepositoryMock.Setup(repository => repository.DeleteSurveyAsync(It.IsAny<ISurveyIdentity>(), It.IsAny<CancellationToken>()))
                            .Returns(Task.CompletedTask)
