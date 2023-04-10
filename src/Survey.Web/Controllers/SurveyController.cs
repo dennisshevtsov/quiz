@@ -44,7 +44,10 @@ namespace Survey.Web.Controllers
     {
       var surveyEntity = await _surveyService.AddNewSurveyAsync(requestDto, cancellationToken);
 
-      return CreatedAtRoute(nameof(SurveyController.GetSurvey), new { surveyId = surveyEntity.SurveyId }, new GetSurveyResponseDto(surveyEntity));
+      return CreatedAtRoute(
+        nameof(SurveyController.GetSurvey),
+        new GetSurveyRequestDto(surveyEntity.SurveyId),
+        new GetSurveyResponseDto(surveyEntity));
     }
 
     /// <summary>Handles the update survey command request.</summary>
