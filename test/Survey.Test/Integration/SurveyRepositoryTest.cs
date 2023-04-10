@@ -72,6 +72,34 @@ namespace Survey.Infrastructure.Repositories.Test
     }
 
     [TestMethod]
+    public async Task DeleteSurveyAsync_Should_Delete_Existing_Survey()
+    {
+      var controlSurveyEntityCollection =
+        SurveyRepositoryTest.GenerateTestSurveyEntityCollection(10);
+
+      await SaveSurveysAsync(controlSurveyEntityCollection);
+
+      var controlSurveyEntity = controlSurveyEntityCollection[2];
+
+      await _surveyRepository.DeleteSurveyAsync(controlSurveyEntity, CancellationToken);
+
+      var actualSurveyEntity =
+        await DbContext.Set<SurveyEntity>()
+                       .AsNoTracking()
+                       .Where(entity => entity.SurveyId == controlSurveyEntity.SurveyId)
+                       .SingleOrDefaultAsync(CancellationToken);
+
+      Assert.IsNull(actualSurveyEntity);
+
+      var actualSurveyEntityCount =
+        await DbContext.Set<SurveyEntity>()
+                       .AsNoTracking()
+                       .CountAsync(CancellationToken);
+
+      Assert.AreEqual(controlSurveyEntityCollection.Length - 1, actualSurveyEntityCount);
+    }
+
+    [TestMethod]
     public async Task GetSurveyAsync_Should_Return_Detached_Entity()
     {
       var controlSurveyEntity = SurveyRepositoryTest.GenerateTestSurveyEntity();
@@ -114,7 +142,7 @@ namespace Survey.Infrastructure.Repositories.Test
       var controlSurveyEntityCollection =
         SurveyRepositoryTest.GenerateTestSurveyEntityCollection(5);
 
-      await SaveChangesAsync(controlSurveyEntityCollection);
+      await SaveSurveysAsync(controlSurveyEntityCollection);
 
       var actualSurveyEntityCollection =
         await _surveyRepository.GetSurveysAsync(CancellationToken);
@@ -177,7 +205,7 @@ namespace Survey.Infrastructure.Repositories.Test
       }
     }
 
-    private async Task SaveChangesAsync(SurveyEntity[] controlSurveyEntityCollection)
+    private async Task SaveSurveysAsync(SurveyEntity[] controlSurveyEntityCollection)
     {
       DbContext.AddRange(controlSurveyEntityCollection);
 
