@@ -50,6 +50,15 @@ namespace Survey.Infrastructure.Repositories
       entry.State = EntityState.Detached;
     }
 
+    /// <summary>Deletes a survey.</summary>
+    /// <param name="surveyIdentity">An object that represents a survey identity.</param>
+    /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
+    /// <returns>An object that represents an asynchronous operation.</returns>
+    public async Task DeleteSurveyAsync(ISurveyIdentity surveyIdentity, CancellationToken cancellationToken)
+      => await _dbContext.Set<SurveyEntity>()
+                         .Where(entity => entity.SurveyId == surveyIdentity.SurveyId)
+                         .ExecuteDeleteAsync(cancellationToken);
+
     /// <summary>Gets a survey.</summary>
     /// <param name="surveyId">An object that represents an identity of a survey.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
