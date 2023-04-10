@@ -77,19 +77,19 @@ namespace Survey.Application.Services.Test
     {
       var controlSurveyEntity = new TestSurveyEntity();
 
-      _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+      _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<ISurveyIdentity>(), It.IsAny<CancellationToken>()))
                            .ReturnsAsync(controlSurveyEntity)
                            .Verifiable();
 
-      var surveyId = Guid.NewGuid();
+      var surveyIdentity = new TestSurveyIdentity();
 
       var actualSurveyEntity =
-        await _surveyService.GetSurveyAsync(surveyId, CancellationToken.None);
+        await _surveyService.GetSurveyAsync(surveyIdentity, CancellationToken.None);
 
       Assert.IsNotNull(actualSurveyEntity);
       Assert.AreEqual(controlSurveyEntity, actualSurveyEntity);
 
-      _surveyRepositoryMock.Verify(repository => repository.GetSurveyAsync(surveyId, CancellationToken.None));
+      _surveyRepositoryMock.Verify(repository => repository.GetSurveyAsync(surveyIdentity, CancellationToken.None));
       _surveyRepositoryMock.VerifyNoOtherCalls();
     }
 

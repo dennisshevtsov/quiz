@@ -2,23 +2,23 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Web.ViewModels.Test
+namespace Survey.Web.Dtos.Test
 {
   using Survey.Domain.Entities;
 
   [TestClass]
-  public sealed class GetSurveyCollectionViewModelTest
+  public sealed class GetSurveyCollectionResponseDtoTest
   {
     [TestMethod]
     public void Constructor_Should_Copy_Data()
     {
       var controlSurveyEntityCollection =
-        GetSurveyCollectionViewModelTest.GenerateTestSurveyEntityCollection(5);
+        GetSurveyCollectionResponseDtoTest.GenerateTestSurveyEntityCollection(5);
 
       var actualGetSurveyCollectionViewModel =
-        new GetSurveyCollectionViewModel(controlSurveyEntityCollection);
+        new GetSurveyCollectionResponseDto(controlSurveyEntityCollection);
 
-      GetSurveyCollectionViewModelTest.AreEqual(
+      GetSurveyCollectionResponseDtoTest.AreEqual(
         controlSurveyEntityCollection,
         actualGetSurveyCollectionViewModel);
     }
@@ -35,14 +35,14 @@ namespace Survey.Web.ViewModels.Test
       return controlSurveyEntityCollection;
     }
 
-    private static void AreEqual(ISurveyEntity controlSurveyEntity, GetSurveyViewModel actualGetSurveyViewModel)
+    private static void AreEqual(ISurveyEntity controlSurveyEntity, GetSurveyResponseDto actualGetSurveyViewModel)
     {
       Assert.AreEqual(controlSurveyEntity.SurveyId, actualGetSurveyViewModel.SurveyId);
       Assert.AreEqual(controlSurveyEntity.Name, actualGetSurveyViewModel.Name);
       Assert.AreEqual(controlSurveyEntity.Description, actualGetSurveyViewModel.Description);
     }
 
-    private static void AreEqual(ISurveyEntity[] controlSurveyEntityCollection, GetSurveyCollectionViewModel actualGetSurveyCollectionViewModel)
+    private static void AreEqual(ISurveyEntity[] controlSurveyEntityCollection, GetSurveyCollectionResponseDto actualGetSurveyCollectionViewModel)
     {
       Assert.AreEqual(
         controlSurveyEntityCollection.Length,
@@ -50,7 +50,7 @@ namespace Survey.Web.ViewModels.Test
 
       for (int i = 0; i < controlSurveyEntityCollection.Length; i++)
       {
-        GetSurveyCollectionViewModelTest.AreEqual(
+        GetSurveyCollectionResponseDtoTest.AreEqual(
           controlSurveyEntityCollection[i],
           actualGetSurveyCollectionViewModel.Surveys[i]);
       }

@@ -30,10 +30,10 @@ namespace Survey.Domain.Repositories
     public Task DeleteSurveyAsync(ISurveyIdentity surveyIdentity, CancellationToken cancellationToken);
 
     /// <summary>Gets a survey.</summary>
-    /// <param name="surveyId">An object that represents an identity of a survey.</param>
+    /// <param name="surveyIdentity">An object that represents a survey identity.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
     /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Survey.Domain.Entities.ISurveyEntity"/>.</returns>
-    public Task<ISurveyEntity?> GetSurveyAsync(Guid surveyId, CancellationToken cancellationToken);
+    public Task<ISurveyEntity?> GetSurveyAsync(ISurveyIdentity surveyIdentity, CancellationToken cancellationToken);
 
     /// <summary>Gets a collection of surveys.</summary>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>

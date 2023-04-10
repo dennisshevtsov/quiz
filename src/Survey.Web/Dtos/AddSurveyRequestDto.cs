@@ -2,17 +2,17 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Web.ViewModels
+namespace Survey.Web.Dtos
 {
   using System.ComponentModel.DataAnnotations;
 
   using Survey.Domain.Entities;
 
-  /// <summary>Represents a survey view model.</summary>
-  public sealed class AddSurveyViewModel : ISurveyData
+  /// <summary>Represents data to add a survey.</summary>
+  public sealed class AddSurveyRequestDto : ISurveyData
   {
-    /// <summary>Initializes a new instance of the <see cref="Survey.Web.ViewModels.AddSurveyViewModel"/> class.</summary>
-    public AddSurveyViewModel() {}
+    /// <summary>Initializes a new instance of the <see cref="Survey.Web.Dtos.AddSurveyRequestDto"/> class.</summary>
+    public AddSurveyRequestDto() {}
 
     /// <summary>Gets an object that represents a name of a survey.</summary>
     [Required]

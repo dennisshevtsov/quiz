@@ -60,13 +60,13 @@ namespace Survey.Infrastructure.Repositories
                          .ExecuteDeleteAsync(cancellationToken);
 
     /// <summary>Gets a survey.</summary>
-    /// <param name="surveyId">An object that represents an identity of a survey.</param>
+    /// <param name="surveyIdentity">An object that represents a survey identity.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
-    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Survey.Domain.Entities.ISurveyEntity"/> class.</returns>
-    public async Task<ISurveyEntity?> GetSurveyAsync(Guid surveyId, CancellationToken cancellationToken)
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Survey.Domain.Entities.ISurveyEntity"/>.</returns>
+    public async Task<ISurveyEntity?> GetSurveyAsync(ISurveyIdentity surveyIdentity, CancellationToken cancellationToken)
       => await _dbContext.Set<SurveyEntity>()
                          .AsNoTracking()
-                         .Where(entity => entity.SurveyId == surveyId)
+                         .Where(entity => entity.SurveyId == surveyIdentity.SurveyId)
                          .SingleOrDefaultAsync(cancellationToken);
 
     /// <summary>Gets a collection of surveys.</summary>

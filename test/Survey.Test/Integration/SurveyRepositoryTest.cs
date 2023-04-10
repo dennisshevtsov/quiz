@@ -111,7 +111,7 @@ namespace Survey.Infrastructure.Repositories.Test
 
       var actualSurveyEntity =
         await _surveyRepository.GetSurveyAsync(
-          controlSurveyEntity.SurveyId, CancellationToken);
+          controlSurveyEntity, CancellationToken);
 
       Assert.IsNotNull(actualSurveyEntity);
 
@@ -131,7 +131,7 @@ namespace Survey.Infrastructure.Repositories.Test
 
       var actualSurveyEntity =
         await _surveyRepository.GetSurveyAsync(
-          Guid.NewGuid(), CancellationToken);
+          new TestSurveyIdentity(), CancellationToken);
 
       Assert.IsNull(actualSurveyEntity);
     }
@@ -215,6 +215,11 @@ namespace Survey.Infrastructure.Repositories.Test
       {
         DbContext.Entry(controlSurveyEntityCollection[i]).State = EntityState.Detached;
       }
+    }
+
+    private sealed class TestSurveyIdentity : ISurveyIdentity
+    {
+      public Guid SurveyId { get; } = Guid.NewGuid();
     }
   }
 }
