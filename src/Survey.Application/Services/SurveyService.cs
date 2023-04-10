@@ -37,6 +37,13 @@ namespace Survey.Application.Services
     public async Task UpdateSurveyAsync(ISurveyEntity surveyEntity, CancellationToken cancellationToken)
       => await _surveyRepository.UpdateSurveyAsync(surveyEntity, cancellationToken);
 
+    /// <summary>Deletes a survey.</summary>
+    /// <param name="surveyIdentity">An object that represents a survey identity.</param>
+    /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
+    /// <returns>An object that represents an asynchronous operation.</returns>
+    public async Task DeleteSurveyAsync(ISurveyIdentity surveyIdentity, CancellationToken cancellationToken)
+      => await _surveyRepository.DeleteSurveyAsync(surveyIdentity, cancellationToken);
+
     /// <summary>Gets a survey.</summary>
     /// <param name="surveyId">An object that represents an identity of a survey.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
