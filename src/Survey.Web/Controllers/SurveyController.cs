@@ -10,7 +10,8 @@ namespace Survey.Web.Controllers
 
   using Survey.Domain.Services;
   using Survey.Web.Defaults;
-  using Survey.Web.ViewModels;
+  using Survey.Web.Dtos;
+  using Survey.Web.Dtos;
 
   /// <summary>Provides a simple API to handle HTTP request.</summary>
   [ApiController]
@@ -21,6 +22,7 @@ namespace Survey.Web.Controllers
     private const string SurveyRoute = "api/survey";
     private const string GetSurveySubRoute = "{surveyId}";
     private const string UpdateSurveySubRoute = "{surveyId}";
+    private const string DeleteSurveySubRoute = "{surveyId}";
 
     private readonly ISurveyService _surveyService;
 
@@ -32,73 +34,93 @@ namespace Survey.Web.Controllers
     }
 
     /// <summary>Handles the add survey command request.</summary>
-    /// <param name="vm">An object that represents a survey view model.</param>
+    /// <param name="requestDto">An object that represents data to add a survey.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
     /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
     [HttpPost(Name = nameof(SurveyController.AddSurvey))]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [Consumes(typeof(AddSurveyViewModel), ContentType.Json)]
-    public async Task<IActionResult> AddSurvey([FromBody] AddSurveyViewModel vm, CancellationToken cancellationToken)
+    [Consumes(typeof(AddSurveyRequestDto), ContentType.Json)]
+    public async Task<IActionResult> AddSurvey([FromBody] AddSurveyRequestDto requestDto, CancellationToken cancellationToken)
     {
-      var surveyEntity = await _surveyService.AddNewSurveyAsync(vm, cancellationToken);
+      var surveyEntity = await _surveyService.AddNewSurveyAsync(requestDto, cancellationToken);
 
-      return CreatedAtRoute(nameof(SurveyController.GetSurvey), new { surveyId = surveyEntity.SurveyId }, new GetSurveyViewModel(surveyEntity));
+      return CreatedAtRoute(
+        nameof(SurveyController.GetSurvey),
+        new GetSurveyRequestDto(surveyEntity.SurveyId),
+        new GetSurveyResponseDto(surveyEntity));
     }
 
     /// <summary>Handles the update survey command request.</summary>
-    /// <param name="vm">An object that represents a survey view model.</param>
+    /// <param name="requestDto">An object that represents data to update a survey.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
     /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
     [HttpPut(SurveyController.UpdateSurveySubRoute, Name = nameof(SurveyController.UpdateSurvey))]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [Consumes(typeof(UpdateSurveyViewModel), ContentType.Json)]
-    public async Task<IActionResult> UpdateSurvey([FromBody] UpdateSurveyViewModel vm, CancellationToken cancellationToken)
+    [Consumes(typeof(UpdateSurveyRequestDto), ContentType.Json)]
+    public async Task<IActionResult> UpdateSurvey([FromBody] UpdateSurveyRequestDto requestDto, CancellationToken cancellationToken)
     {
-      var surveyEntity = await _surveyService.GetSurveyAsync(vm.SurveyId, cancellationToken);
+      var surveyEntity = await _surveyService.GetSurveyAsync(requestDto, cancellationToken);
 
       if (surveyEntity == null)
       {
         return NotFound();
       }
 
-      await _surveyService.UpdateSurveyAsync(vm, cancellationToken);
+      await _surveyService.UpdateSurveyAsync(requestDto, cancellationToken);
+
+      return NoContent();
+    }
+
+    /// <summary>Handles the delete survey command request.</summary>
+    /// <param name="requestDto">An object that represents data to delete a survey.</param>
+    /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
+    /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
+    [HttpPut(SurveyController.DeleteSurveySubRoute, Name = nameof(SurveyController.DeleteSurvey))]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> DeleteSurvey([FromRoute] DeleteSurveyRequestDto requestDto, CancellationToken cancellationToken)
+    {
+      var surveyEntity = await _surveyService.GetSurveyAsync(requestDto, cancellationToken);
+
+      if (surveyEntity == null)
+      {
+        return NotFound();
+      }
+
+      await _surveyService.DeleteSurveyAsync(requestDto, cancellationToken);
 
       return NoContent();
     }
 
     /// <summary>Handles the add survey query request.</summary>
-    /// <param name="surveyId">An object that represents an identity of a survey.</param>
+    /// <param name="requestDto">An object that represents a codition to query a survey.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
     /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
     [HttpGet(SurveyController.GetSurveySubRoute, Name = nameof(SurveyController.GetSurvey))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(GetSurveyViewModel), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetSurvey([FromRoute] Guid surveyId, CancellationToken cancellationToken)
+    [ProducesResponseType(typeof(GetSurveyResponseDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetSurvey([FromRoute] GetSurveyRequestDto requestDto, CancellationToken cancellationToken)
     {
-      var surveyEntity = await _surveyService.GetSurveyAsync(surveyId, cancellationToken);
+      var surveyEntity = await _surveyService.GetSurveyAsync(requestDto, cancellationToken);
 
       if (surveyEntity == null)
       {
         return NotFound();
       }
 
-      return Ok(new GetSurveyViewModel(surveyEntity));
+      return Ok(new GetSurveyResponseDto(surveyEntity));
     }
 
     /// <summary>Handles the get surveys query request.</summary>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
     /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
     [HttpGet(Name = nameof(SurveyController.GetSurveys))]
-    [ProducesResponseType(typeof(GetSurveyCollectionViewModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(GetSurveyCollectionResponseDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetSurveys(CancellationToken cancellationToken)
     {
       var surveyEntityCollection =
         await _surveyService.GetSurveysAsync(cancellationToken);
 
-      var getSurveyCollectionViewModel =
-        new GetSurveyCollectionViewModel(surveyEntityCollection);
-
-      return Ok(getSurveyCollectionViewModel);
+      return Ok(new GetSurveyCollectionResponseDto(surveyEntityCollection));
     }
   }
 }

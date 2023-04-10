@@ -2,19 +2,19 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Web.ViewModels.Test
+namespace Survey.Web.Dtos.Test
 {
   using Survey.Domain.Entities;
-  using Survey.Web.ViewModels;
+  using Survey.Web.Dtos;
 
   [TestClass]
-  public sealed class UpdateSurveyViewModelTest
+  public sealed class UpdateSurveyResponseTest
   {
     [TestMethod]
     public void Constructor_Should_Copy_Data()
     {
       var controlSurveyEntity = new TestSurveyEntity();
-      var actualUpdateSurveyViewModel = new UpdateSurveyViewModel(controlSurveyEntity);
+      var actualUpdateSurveyViewModel = new UpdateSurveyRequestDto(controlSurveyEntity);
 
       Assert.AreEqual(controlSurveyEntity.SurveyId, actualUpdateSurveyViewModel.SurveyId);
       Assert.AreEqual(controlSurveyEntity.Name, actualUpdateSurveyViewModel.Name);

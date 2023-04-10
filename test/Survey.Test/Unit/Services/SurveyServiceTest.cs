@@ -58,23 +58,38 @@ namespace Survey.Application.Services.Test
     }
 
     [TestMethod]
+    public async Task DeleteNewSurveyAsync_Should_Delete_Survey()
+    {
+      _surveyRepositoryMock.Setup(repository => repository.DeleteSurveyAsync(It.IsAny<ISurveyIdentity>(), It.IsAny<CancellationToken>()))
+                           .Returns(Task.CompletedTask)
+                           .Verifiable();
+
+      var surveyIdentity = new TestSurveyIdentity();
+
+      await _surveyService.DeleteSurveyAsync(surveyIdentity, CancellationToken.None);
+
+      _surveyRepositoryMock.Verify(repository => repository.DeleteSurveyAsync(surveyIdentity, CancellationToken.None));
+      _surveyRepositoryMock.VerifyNoOtherCalls();
+    }
+
+    [TestMethod]
     public async Task GetSurveyAsync_Should_Get_Survey()
     {
       var controlSurveyEntity = new TestSurveyEntity();
 
-      _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+      _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<ISurveyIdentity>(), It.IsAny<CancellationToken>()))
                            .ReturnsAsync(controlSurveyEntity)
                            .Verifiable();
 
-      var surveyId = Guid.NewGuid();
+      var surveyIdentity = new TestSurveyIdentity();
 
       var actualSurveyEntity =
-        await _surveyService.GetSurveyAsync(surveyId, CancellationToken.None);
+        await _surveyService.GetSurveyAsync(surveyIdentity, CancellationToken.None);
 
       Assert.IsNotNull(actualSurveyEntity);
       Assert.AreEqual(controlSurveyEntity, actualSurveyEntity);
 
-      _surveyRepositoryMock.Verify(repository => repository.GetSurveyAsync(surveyId, CancellationToken.None));
+      _surveyRepositoryMock.Verify(repository => repository.GetSurveyAsync(surveyIdentity, CancellationToken.None));
       _surveyRepositoryMock.VerifyNoOtherCalls();
     }
 
@@ -95,6 +110,11 @@ namespace Survey.Application.Services.Test
 
       _surveyRepositoryMock.Verify(repository => repository.GetSurveysAsync(CancellationToken.None));
       _surveyRepositoryMock.VerifyNoOtherCalls();
+    }
+
+    private sealed class TestSurveyIdentity : ISurveyIdentity
+    {
+      public Guid SurveyId { get; } = Guid.NewGuid();
     }
 
     private sealed class TestSurveyData : ISurveyData

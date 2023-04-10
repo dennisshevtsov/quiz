@@ -8,7 +8,8 @@ namespace Survey.Web.Controllers.Test
 
   using Survey.Domain.Entities;
   using Survey.Domain.Services;
-  using Survey.Web.ViewModels;
+  using Survey.Web.Dtos;
+  using Survey.Web.Dtos;
 
   [TestClass]
   public sealed class SurveyControllerTest
@@ -34,7 +35,7 @@ namespace Survey.Web.Controllers.Test
                         .ReturnsAsync(new TestSurveyEntity())
                         .Verifiable();
 
-      var vm = new AddSurveyViewModel
+      var vm = new AddSurveyRequestDto
       {
         Name = Guid.NewGuid().ToString(),
         Description = Guid.NewGuid().ToString(),
@@ -54,13 +55,13 @@ namespace Survey.Web.Controllers.Test
     }
 
     [TestMethod]
-    public async Task AddSurvey_Should_Return_NotFound()
+    public async Task UpdateSurvey_Should_Return_NotFound()
     {
-      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<ISurveyIdentity>(), It.IsAny<CancellationToken>()))
                         .ReturnsAsync(default(ISurveyEntity))
                         .Verifiable();
 
-      var vm = new UpdateSurveyViewModel();
+      var vm = new UpdateSurveyRequestDto();
 
       var actionResult = await _surveyController.UpdateSurvey(vm, CancellationToken.None);
 
@@ -70,14 +71,14 @@ namespace Survey.Web.Controllers.Test
 
       Assert.IsNotNull(notFoundResult);
 
-      _surveyServiceMock.Verify(service => service.GetSurveyAsync(vm.SurveyId, CancellationToken.None));
+      _surveyServiceMock.Verify(service => service.GetSurveyAsync(vm, CancellationToken.None));
       _surveyServiceMock.VerifyNoOtherCalls();
     }
 
     [TestMethod]
-    public async Task AddSurvey_Should_Return_NoContent()
+    public async Task UpdateSurvey_Should_Return_NoContent()
     {
-      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<ISurveyIdentity>(), It.IsAny<CancellationToken>()))
                         .ReturnsAsync(new TestSurveyEntity())
                         .Verifiable();
 
@@ -85,7 +86,7 @@ namespace Survey.Web.Controllers.Test
                         .Returns(Task.CompletedTask)
                         .Verifiable();
 
-      var vm = new UpdateSurveyViewModel
+      var vm = new UpdateSurveyRequestDto
       {
         SurveyId = Guid.NewGuid(),
         Name = Guid.NewGuid().ToString(),
@@ -100,26 +101,73 @@ namespace Survey.Web.Controllers.Test
 
       Assert.IsNotNull(notContentResult);
 
-      _surveyServiceMock.Verify(service => service.GetSurveyAsync(vm.SurveyId, CancellationToken.None));
+      _surveyServiceMock.Verify(service => service.GetSurveyAsync(vm, CancellationToken.None));
       _surveyServiceMock.Verify(service => service.UpdateSurveyAsync(It.Is<ISurveyEntity>(data => data.SurveyId == vm.SurveyId && data.Name == vm.Name && data.Description == vm.Description), CancellationToken.None));
+      _surveyServiceMock.VerifyNoOtherCalls();
+    }
+
+    [TestMethod]
+    public async Task DeleteSurvey_Should_Return_NotFound()
+    {
+      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<ISurveyIdentity>(), It.IsAny<CancellationToken>()))
+                        .ReturnsAsync(default(ISurveyEntity))
+                        .Verifiable();
+
+      var vm = new DeleteSurveyRequestDto();
+
+      var actionResult = await _surveyController.DeleteSurvey(vm, CancellationToken.None);
+
+      Assert.IsNotNull(actionResult);
+
+      var notFoundResult = actionResult as NotFoundResult;
+
+      Assert.IsNotNull(notFoundResult);
+
+      _surveyServiceMock.Verify(service => service.GetSurveyAsync(vm, CancellationToken.None));
+      _surveyServiceMock.VerifyNoOtherCalls();
+    }
+
+    [TestMethod]
+    public async Task DeleteSurvey_Should_Return_NoContent()
+    {
+      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<ISurveyIdentity>(), It.IsAny<CancellationToken>()))
+                        .ReturnsAsync(new TestSurveyEntity())
+                        .Verifiable();
+
+      _surveyServiceMock.Setup(service => service.DeleteSurveyAsync(It.IsAny<ISurveyIdentity>(), It.IsAny<CancellationToken>()))
+                        .Returns(Task.CompletedTask)
+                        .Verifiable();
+
+      var vm = new DeleteSurveyRequestDto();
+
+      var actionResult = await _surveyController.DeleteSurvey(vm, CancellationToken.None);
+
+      Assert.IsNotNull(actionResult);
+
+      var notContentResult = actionResult as NoContentResult;
+
+      Assert.IsNotNull(notContentResult);
+
+      _surveyServiceMock.Verify(service => service.GetSurveyAsync(vm, CancellationToken.None));
+      _surveyServiceMock.Verify(service => service.DeleteSurveyAsync(vm, CancellationToken.None));
       _surveyServiceMock.VerifyNoOtherCalls();
     }
 
     [TestMethod]
     public async Task GetSurvey_Should_Return_Not_Found()
     {
-      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<ISurveyIdentity>(), It.IsAny<CancellationToken>()))
                         .ReturnsAsync(default(ISurveyEntity))
                         .Verifiable();
 
-      var surveyId = Guid.NewGuid();
+      var getSurveyRequestDto = new GetSurveyRequestDto();
 
-      var actionResult = await _surveyController.GetSurvey(surveyId, CancellationToken.None);
+      var actionResult = await _surveyController.GetSurvey(getSurveyRequestDto, CancellationToken.None);
 
       Assert.IsNotNull(actionResult);
       Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
 
-      _surveyServiceMock.Verify(service => service.GetSurveyAsync(surveyId, CancellationToken.None));
+      _surveyServiceMock.Verify(service => service.GetSurveyAsync(getSurveyRequestDto, CancellationToken.None));
       _surveyServiceMock.VerifyNoOtherCalls();
     }
 
@@ -128,13 +176,13 @@ namespace Survey.Web.Controllers.Test
     {
       var controlSurveyEntity = new TestSurveyEntity();
 
-      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+      _surveyServiceMock.Setup(service => service.GetSurveyAsync(It.IsAny<ISurveyIdentity>(), It.IsAny<CancellationToken>()))
                         .ReturnsAsync(controlSurveyEntity)
                         .Verifiable();
 
-      var surveyId = Guid.NewGuid();
+      var getSurveyRequestDto = new GetSurveyRequestDto();
 
-      var actionResult = await _surveyController.GetSurvey(surveyId, CancellationToken.None);
+      var actionResult = await _surveyController.GetSurvey(getSurveyRequestDto, CancellationToken.None);
 
       Assert.IsNotNull(actionResult);
 
@@ -143,14 +191,14 @@ namespace Survey.Web.Controllers.Test
       Assert.IsNotNull(okObjectResult);
       Assert.IsNotNull(okObjectResult.Value);
 
-      var getSurveyViewModel = okObjectResult.Value as GetSurveyViewModel;
+      var getSurveyViewModel = okObjectResult.Value as GetSurveyResponseDto;
 
       Assert.IsNotNull(getSurveyViewModel);
       Assert.AreEqual(controlSurveyEntity.SurveyId, getSurveyViewModel.SurveyId);
       Assert.AreEqual(controlSurveyEntity.Name, getSurveyViewModel.Name);
       Assert.AreEqual(controlSurveyEntity.Description, getSurveyViewModel.Description);
 
-      _surveyServiceMock.Verify(service => service.GetSurveyAsync(surveyId, CancellationToken.None));
+      _surveyServiceMock.Verify(service => service.GetSurveyAsync(getSurveyRequestDto, CancellationToken.None));
       _surveyServiceMock.VerifyNoOtherCalls();
     }
 
@@ -172,7 +220,7 @@ namespace Survey.Web.Controllers.Test
       Assert.IsNotNull(okObjectResult);
       Assert.IsNotNull(okObjectResult.Value);
 
-      var getSurveyCollectionViewModel = okObjectResult.Value as GetSurveyCollectionViewModel;
+      var getSurveyCollectionViewModel = okObjectResult.Value as GetSurveyCollectionResponseDto;
 
       Assert.IsNotNull(getSurveyCollectionViewModel);
 
