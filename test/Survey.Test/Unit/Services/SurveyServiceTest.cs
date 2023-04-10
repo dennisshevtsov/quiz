@@ -58,6 +58,21 @@ namespace Survey.Application.Services.Test
     }
 
     [TestMethod]
+    public async Task DeleteNewSurveyAsync_Should_Save_Survey()
+    {
+      _surveyRepositoryMock.Setup(repository => repository.DeleteSurveyAsync(It.IsAny<ISurveyIdentity>(), It.IsAny<CancellationToken>()))
+                           .Returns(Task.CompletedTask)
+                           .Verifiable();
+
+      var surveyIdentity = new TestSurveyIdentity();
+
+      await _surveyService.DeleteSurveyAsync(surveyIdentity, CancellationToken.None);
+
+      _surveyRepositoryMock.Verify(repository => repository.DeleteSurveyAsync(surveyIdentity, CancellationToken.None));
+      _surveyRepositoryMock.VerifyNoOtherCalls();
+    }
+
+    [TestMethod]
     public async Task GetSurveyAsync_Should_Get_Survey()
     {
       var controlSurveyEntity = new TestSurveyEntity();
@@ -95,6 +110,11 @@ namespace Survey.Application.Services.Test
 
       _surveyRepositoryMock.Verify(repository => repository.GetSurveysAsync(CancellationToken.None));
       _surveyRepositoryMock.VerifyNoOtherCalls();
+    }
+
+    private sealed class TestSurveyIdentity : ISurveyIdentity
+    {
+      public Guid SurveyId { get; } = Guid.NewGuid();
     }
 
     private sealed class TestSurveyData : ISurveyData
