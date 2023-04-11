@@ -75,7 +75,7 @@ namespace Survey.Web.Controllers
     /// <param name="requestDto">An object that represents data to delete a survey.</param>
     /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
     /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="Microsoft.AspNetCore.Mvc.IActionResult"/>.</returns>
-    [HttpPut(SurveyController.DeleteSurveySubRoute, Name = nameof(SurveyController.DeleteSurvey))]
+    [HttpDelete(SurveyController.DeleteSurveySubRoute, Name = nameof(SurveyController.DeleteSurvey))]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> DeleteSurvey([FromRoute] DeleteSurveyRequestDto requestDto, CancellationToken cancellationToken)
     {
