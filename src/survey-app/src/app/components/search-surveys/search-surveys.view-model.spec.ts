@@ -30,9 +30,7 @@ describe('SearchSurveysViewModel', () => {
       description: surveyDescription,
     }];
 
-    srv.searchSurveys.and.returnValue(of({
-      surveys: controlSurveyCollection,
-    }));
+    srv.searchSurveys.and.returnValue(of(controlSurveyCollection));
 
     vm.initialize().subscribe(() => {
       expect(srv.searchSurveys.calls.count())

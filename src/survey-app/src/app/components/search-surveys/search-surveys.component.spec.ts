@@ -8,6 +8,7 @@ import { tick      } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { MatIconModule  } from '@angular/material/icon';
+import { MatSnackBar    } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 
 import { Subscription} from 'rxjs';
@@ -37,6 +38,9 @@ describe('SearchSurveysComponent', () => {
     vm.initialize.and.returnValue(of(void 0));
 
     TestBed.overrideProvider(SearchSurveysViewModel, { useValue: vm });
+
+    const sb: jasmine.SpyObj<MatSnackBar> = jasmine.createSpyObj(MatSnackBar, ['open']);
+    TestBed.overrideProvider(MatSnackBar, {useValue: sb});
 
     await TestBed.compileComponents();
   });
