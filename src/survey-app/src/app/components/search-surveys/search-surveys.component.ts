@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { OnInit    } from '@angular/core';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Subscription } from 'rxjs';
 
 import { SurveyEntity           } from '../../entities';
@@ -18,6 +20,7 @@ export class SearchSurveysComponent implements OnInit, OnDestroy {
   public constructor(
     private readonly vm : SearchSurveysViewModel,
     private readonly sub: Subscription,
+    private readonly sb : MatSnackBar,
   ) {}
 
   public ngOnInit(): void {
@@ -30,5 +33,12 @@ export class SearchSurveysComponent implements OnInit, OnDestroy {
 
   public get surveys() : SurveyEntity[] {
     return this.vm.surveys;
+  }
+
+  public delete(survey: SurveyEntity): void {
+    this.sub.add(this.vm.delete(survey).subscribe({
+      complete: () => this.sb.open(`Survey ${survey.name}`, 'Close'),
+      error   : () => this.sb.open('An error occured.', 'Close'),
+    }));
   }
 }
