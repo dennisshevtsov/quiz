@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 
 import { map        } from 'rxjs';
 import { Observable } from 'rxjs';
+import { switchMap  } from 'rxjs';
 
-import { SurveyService } from '../../services';
-import { SurveyEntity  } from '../../entities';
+import { SurveyEntity   } from '../../entities';
+import { SurveyIdentity } from '../../entities';
+import { SurveyService  } from '../../services';
 
 @Injectable()
 export class SearchSurveysViewModel {
@@ -21,5 +23,10 @@ export class SearchSurveysViewModel {
                        .pipe(map(collection => {
                          this.surveysValue = collection.surveys;
                        }));
+  }
+
+  public delete(survey: SurveyIdentity): Observable<void> {
+    return this.service.deleteSurvey(survey)
+                       .pipe(switchMap(this.initialize));
   }
 }
