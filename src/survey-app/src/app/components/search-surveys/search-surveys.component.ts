@@ -37,7 +37,7 @@ export class SearchSurveysComponent implements OnInit, OnDestroy {
 
   public delete(survey: SurveyEntity): void {
     this.sub.add(this.vm.delete(survey).subscribe({
-      complete: () => this.sb.open(`Survey ${survey.name}`, 'Close'),
+      complete: () => this.sb.open(`Survey ${survey.name} is deleted.`, 'Close'),
       error   : () => this.sb.open('An error occured.', 'Close'),
     }));
   }
