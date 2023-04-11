@@ -3,7 +3,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { SurveyData     } from '../entities';
 import { SurveyEntity   } from '../entities';
@@ -19,8 +19,9 @@ export class SurveyService {
     return this.http.get<SurveyEntity>(`api/survey/${survey.surveyId}`);
   }
 
-  public searchSurveys(): Observable<{surveys: SurveyEntity[]}> {
-    return this.http.get<{surveys: SurveyEntity[]}>('api/survey/');
+  public searchSurveys(): Observable<SurveyEntity[]> {
+    return this.http.get<{surveys: SurveyEntity[]}>('api/survey/')
+                    .pipe(map(responseDto => responseDto.surveys));
   }
 
   public addSurvey(survey: SurveyData): Observable<SurveyEntity> {
@@ -45,5 +46,9 @@ export class SurveyService {
     };
 
     return this.http.put<void>(url, body, options);
+  }
+
+  public deleteSurvey(survey: SurveyIdentity): Observable<void> {
+    return this.http.delete<void>(`api/survey/${survey.surveyId}`);
   }
 }
