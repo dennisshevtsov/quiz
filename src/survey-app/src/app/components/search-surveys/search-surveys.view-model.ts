@@ -18,11 +18,13 @@ export class SearchSurveysViewModel {
     return this.surveysValue ?? [];
   }
 
+  private setSurveys(value: SurveyEntity[]) {
+    this.surveysValue = value;
+  }
+
   public initialize(): Observable<void> {
     return this.service.searchSurveys()
-                       .pipe(map(collection => {
-                         this.surveysValue = collection.surveys;
-                       }));
+                       .pipe(map(this.setSurveys));
   }
 
   public delete(survey: SurveyIdentity): Observable<void> {
