@@ -46,4 +46,8 @@ export class SurveyService {
 
     return this.http.put<void>(url, body, options);
   }
+
+  public deleteSurvey(survey: SurveyIdentity): Observable<void> {
+    return this.http.delete<void>(`api/survey/${survey.surveyId}`);
+  }
 }
