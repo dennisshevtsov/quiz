@@ -16,6 +16,7 @@ import { of          } from 'rxjs';
 
 import { SearchSurveysComponent } from './search-surveys.component';
 import { SearchSurveysViewModel } from './search-surveys.view-model';
+import { SurveyEntity           } from '../../entities';
 
 describe('SearchSurveysComponent', () => {
   beforeEach(async () => {
@@ -34,7 +35,7 @@ describe('SearchSurveysComponent', () => {
       { useValue: jasmine.createSpyObj(Subscription, ['add', 'unsubscribe'])},
     );
 
-    const vm = jasmine.createSpyObj('SearchSurveysViewModel', ['initialize'], ['surveys']);
+    const vm = jasmine.createSpyObj('SearchSurveysViewModel', ['initialize', 'delete'], ['surveys']);
     vm.initialize.and.returnValue(of(void 0));
 
     TestBed.overrideProvider(SearchSurveysViewModel, { useValue: vm });
@@ -74,9 +75,7 @@ describe('SearchSurveysComponent', () => {
   })));
 
   it('should unsubsribe in ngOnDestroy', fakeAsync(inject(
-    [Subscription, SearchSurveysViewModel],
-    (sub: jasmine.SpyObj<Subscription>,
-     vm: jasmine.SpyObj<SearchSurveysViewModel>) => {
+    [Subscription], (sub: jasmine.SpyObj<Subscription>) => {
     const fixture = TestBed.createComponent(SearchSurveysComponent);
 
     fixture.detectChanges();
@@ -88,5 +87,49 @@ describe('SearchSurveysComponent', () => {
     expect(sub.unsubscribe.calls.count())
       .withContext('sub.unsubscribe should be called')
       .toBe(1);
+  })));
+
+  it('should show success message', fakeAsync(inject(
+    [Subscription, SearchSurveysViewModel, MatSnackBar],
+    (sub     : jasmine.SpyObj<Subscription>,
+     vm      : jasmine.SpyObj<SearchSurveysViewModel>,
+     sb      : jasmine.SpyObj<MatSnackBar>) => {
+    vm.delete.and.returnValue(of(void 0));
+
+    const fixture  = TestBed.createComponent(SearchSurveysComponent);
+
+    fixture.detectChanges();
+    tick();
+
+    sub.add.calls.reset();
+
+    const survey: SurveyEntity = {
+      name       : 'test name',
+      description: 'test description',
+      surveyId   : 'test id',
+    };
+
+    fixture.componentInstance.delete(survey);
+    tick();
+
+    expect(vm.delete.calls.count())
+      .withContext('vm.delete should be called once')
+      .toBe(1);
+
+    expect(vm.delete.calls.first().args[0])
+      .withContext('vm.delete should be called for survey')
+      .toEqual(survey);
+
+    expect(sub.add.calls.count())
+      .withContext('sub.add should be called once')
+      .toBe(1);
+
+    expect(sb.open.calls.count())
+      .withContext('sb.open should be called once')
+      .toBe(1);
+
+    expect(sb.open.calls.first().args[0])
+      .withContext('sb.open should be called with success message')
+      .toBe('Survey test name is deleted.');
   })));
 });

@@ -53,8 +53,8 @@ describe('SearchSurveysViewModel', () => {
     const survey: SurveyEntity = {
       name       : 'test name',
       description: 'test description',
-      surveyId   : 'test id'
-    }
+      surveyId   : 'test id',
+    };
 
     vm.delete(survey).subscribe(() => {
       expect(srv.deleteSurvey.calls.count())
