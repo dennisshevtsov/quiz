@@ -1,26 +1,32 @@
-<form [formGroup]="form">
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Enter this survey name.</mat-label>
-      <input matInput
+<form class="app-form"
+      [formGroup]="form">
+  <div class="app-form__control-group">
+    <mat-form-field class="app-control-group"
+                    appearance="fill">
+      <mat-label class="app-control-group__label">Enter this survey name.</mat-label>
+      <input class="app-control-group__control"
+             matInput
              formControlName="name">
-      <mat-error *ngIf="form.controls.name.invalid">
+      <mat-error class="app-control-group__error"
+                 *ngIf="form.controls.name.invalid">
         You must enter a name.
       </mat-error>
     </mat-form-field>
   </div>
 
-  <div>
+  <div class="app-form__control-group">
     <mat-form-field appearance="fill">
-      <mat-label>Enter this survey description.</mat-label>
-      <textarea matInput
+      <mat-label class="app-control-group__label">Enter this survey description.</mat-label>
+      <textarea class="app-control-group__control"
+                matInput
                 formControlName="description">
       </textarea>
     </mat-form-field>
   </div>
 
-  <div style="text-align: right;">
-    <button mat-flat-button
+  <div class="app-form__action-bar">
+    <button class="app-form__action"
+            mat-flat-button
             color="primary"
             (click)="okPressed()">
       <span>Ok</span>
