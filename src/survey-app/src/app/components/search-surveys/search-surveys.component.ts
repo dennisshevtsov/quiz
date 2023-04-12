@@ -11,6 +11,7 @@ import { SearchSurveysViewModel } from './search-surveys.view-model';
 
 @Component({
   templateUrl: './search-surveys.component.html',
+  styleUrls: ['search-surveys.component.scss'],
   providers: [
     SearchSurveysViewModel,
     { provide: Subscription, useFactory: () => new Subscription() },
