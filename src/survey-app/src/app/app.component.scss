@@ -1,5 +1,21 @@
-mat-drawer-container {
-  height: calc(100vh - 64px);
+.app {
+  &__header {
+
+  }
+
+  &__page {
+    height: calc(100vh - 64px);
+  }
+}
+
+.app-page {
+  &__aside {
+
+  }
+
+  &__main {
+    margin: 1em;
+  }
 }
 
 .app-nav-list {
@@ -9,8 +25,4 @@ mat-drawer-container {
     margin-left: 28px !important;
     margin-right: 12px !important;
   }
-}
-
-main {
-  margin: 1em;
 }

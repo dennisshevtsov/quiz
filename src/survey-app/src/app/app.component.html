@@ -1,25 +1,33 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button>
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>Survey App</span>
-</mat-toolbar>
+<div class="app">
 
-<mat-drawer-container>
+  <mat-toolbar class="app__header"
+               color="primary">
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Survey App</span>
+  </mat-toolbar>
 
-  <mat-drawer mode="side" opened>
-    <mat-nav-list class="app-nav-list">
-      <mat-list-item [routerLink]="['survey']">
-        <mat-icon class="app-nav-list__icon" matListItemIcon>quiz</mat-icon>
-        <span matListItemTitle>Surveys</span>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-drawer>
+  <mat-drawer-container class="app__page app-page">
 
-  <mat-drawer-content>
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-  </mat-drawer-content>
+    <mat-drawer class="app-page__aside"
+                mode="side"
+                opened>
+      <mat-nav-list class="app-nav-list">
+        <mat-list-item [routerLink]="['survey']">
+          <mat-icon class="app-nav-list__icon"
+                    matListItemIcon>quiz</mat-icon>
+          <span matListItemTitle>Surveys</span>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-drawer>
 
-</mat-drawer-container>
+    <mat-drawer-content>
+      <main class="app-page__main">
+        <router-outlet></router-outlet>
+      </main>
+    </mat-drawer-content>
+
+  </mat-drawer-container>
+
+</div>
