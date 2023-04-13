@@ -20,5 +20,8 @@ namespace Survey.Web.Dtos
 
     /// <summary>Gets an object that represents a description of survey.</summary>
     public string Description { get; set; } = string.Empty;
+
+    /// <summary>Gets an object that represents a collection of questions.</summary>
+    public IQuestionEntity[] Questions { get; set; } = new IQuestionEntity[0];
   }
 }

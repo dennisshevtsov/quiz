@@ -15,6 +15,7 @@ namespace Survey.Application.Entities
     {
       Name = surveyData.Name;
       Description = surveyData.Description;
+      Questions = surveyData.Questions;
     }
 
     /// <summary>Initializes a new instance of the <see cref="Survey.Application.Entities.SurveyEntity"/> class.</summary>
@@ -32,5 +33,8 @@ namespace Survey.Application.Entities
 
     /// <summary>Gets an object that represents a description of survey.</summary>
     public string Description { get; set; }
+
+    /// <summary>Gets an object that represents a collection of questions.</summary>
+    public IQuestionEntity[] Questions { get; }
   }
 }
