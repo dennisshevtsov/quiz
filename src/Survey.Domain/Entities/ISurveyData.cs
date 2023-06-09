@@ -12,5 +12,8 @@ namespace Survey.Domain.Entities
 
     /// <summary>Gets an object that represents a description of survey.</summary>
     public string Description { get; }
+
+    /// <summary>Gets an object that represents a collection of questions.</summary>
+    public IQuestionEntity[] Questions { get; }
   }
 }

@@ -34,6 +34,8 @@ namespace Survey.Application.Entities.Test
       public string Name { get; } = Guid.NewGuid().ToString();
 
       public string Description { get; } = Guid.NewGuid().ToString();
+
+      public IQuestionEntity[] Questions { get; } = new IQuestionEntity[0];
     }
 
     private sealed class TestSurveyEntity : ISurveyEntity
@@ -43,6 +45,8 @@ namespace Survey.Application.Entities.Test
       public string Name { get; } = Guid.NewGuid().ToString();
 
       public string Description { get; } = Guid.NewGuid().ToString();
+
+      public IQuestionEntity[] Questions { get; } = new IQuestionEntity[0];
     }
   }
 }

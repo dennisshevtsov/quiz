@@ -235,6 +235,8 @@ namespace Survey.Web.Controllers.Test
       public string Name { get; } = Guid.NewGuid().ToString();
 
       public string Description { get; } = Guid.NewGuid().ToString();
+
+      public IQuestionEntity[] Questions { get; } = new IQuestionEntity[0];
     }
   }
 }

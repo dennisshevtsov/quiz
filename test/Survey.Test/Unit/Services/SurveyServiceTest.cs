@@ -123,6 +123,8 @@ namespace Survey.Application.Services.Test
 
       public string Description { get; } = Guid.NewGuid().ToString();
 
+      public IQuestionEntity[] Questions { get; } = new IQuestionEntity[0];
+
       public bool Equals(ISurveyData other)
         => Name == other.Name && Description == other.Description;
     }
@@ -134,6 +136,8 @@ namespace Survey.Application.Services.Test
       public string Name { get; } = Guid.NewGuid().ToString();
 
       public string Description { get; } = Guid.NewGuid().ToString();
+
+      public IQuestionEntity[] Questions { get; } = new IQuestionEntity[0];
 
       public bool Equals(TestSurveyEntity other)
         => SurveyId    == other.SurveyId &&

@@ -14,6 +14,7 @@ namespace Survey.Infrastructure.Entities
     {
       Name = string.Empty;
       Description = string.Empty;
+      Questions = new IQuestionEntity[0];
     }
 
     /// <summary>Initializes a new instance of the <see cref="Survey.Infrastructure.Entities.SurveyEntity"/> class.</summary>
@@ -22,6 +23,7 @@ namespace Survey.Infrastructure.Entities
     {
       Name = surveyData.Name;
       Description = surveyData.Description;
+      Questions = surveyData.Questions;
     }
 
     /// <summary>Initializes a new instance of the <see cref="Survey.Infrastructure.Entities.SurveyEntity"/> class.</summary>
@@ -31,6 +33,7 @@ namespace Survey.Infrastructure.Entities
       SurveyId = surveyEntity.SurveyId;
       Name = surveyEntity.Name;
       Description = surveyEntity.Description;
+      Questions = surveyEntity.Questions;
     }
 
     /// <summary>Gets an object that represents an identity of a survey.</summary>
@@ -41,5 +44,8 @@ namespace Survey.Infrastructure.Entities
 
     /// <summary>Gets an object that represents a description of survey.</summary>
     public string Description { get; set; }
+
+    /// <summary>Gets an object that represents a collection of questions.</summary>
+    public IQuestionEntity[] Questions { get; set; }
   }
 }

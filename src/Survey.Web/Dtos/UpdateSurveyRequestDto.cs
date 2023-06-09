@@ -14,6 +14,7 @@ namespace Survey.Web.Dtos
     {
       Name = string.Empty;
       Description = string.Empty;
+      Questions = new IQuestionEntity[0];
     }
 
     /// <summary>Initializes a new instance of the <see cref="Survey.Web.Dtos.UpdateSurveyRequestDto"/> class.</summary>
@@ -23,6 +24,7 @@ namespace Survey.Web.Dtos
       SurveyId = surveyEntity.SurveyId;
       Name = surveyEntity.Name;
       Description = surveyEntity.Description;
+      Questions = surveyEntity.Questions;
     }
 
     /// <summary>Gets/sets an object that represents an identity of a survey.</summary>
@@ -33,5 +35,8 @@ namespace Survey.Web.Dtos
 
     /// <summary>Gets/sets an object that represents a description of survey.</summary>
     public string Description { get; set; }
+
+    /// <summary>Gets an object that represents a collection of questions.</summary>
+    public IQuestionEntity[] Questions { get; set; }
   }
 }
