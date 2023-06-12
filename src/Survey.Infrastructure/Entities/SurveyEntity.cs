@@ -13,28 +13,28 @@ namespace SurveyApp.Infrastructure.Entities
     /// <summary>Initializes a new instance of the <see cref="SurveyApp.Infrastructure.Entities.SurveyEntity"/> class.</summary>
     public SurveyEntity()
     {
-      Name = string.Empty;
+      Name        = string.Empty;
       Description = string.Empty;
-      Questions = new IQuestionEntity[0];
+      Questions   = Array.Empty<IQuestionEntity>();
     }
 
     /// <summary>Initializes a new instance of the <see cref="SurveyApp.Infrastructure.Entities.SurveyEntity"/> class.</summary>
     /// <param name="surveyData">An object that represents survey data.</param>
     public SurveyEntity(ISurveyData surveyData)
     {
-      Name = surveyData.Name;
+      Name        = surveyData.Name;
       Description = surveyData.Description;
-      Questions = surveyData.Questions;
+      Questions   = surveyData.Questions;
     }
 
     /// <summary>Initializes a new instance of the <see cref="SurveyApp.Infrastructure.Entities.SurveyEntity"/> class.</summary>
     /// <param name="surveyEntity">An object that represents a survey entity.</param>
     public SurveyEntity(ISurveyEntity surveyEntity)
     {
-      SurveyId = surveyEntity.SurveyId;
-      Name = surveyEntity.Name;
+      SurveyId    = surveyEntity.SurveyId;
+      Name        = surveyEntity.Name;
       Description = surveyEntity.Description;
-      Questions = surveyEntity.Questions;
+      Questions   = surveyEntity.Questions;
     }
 
     /// <summary>Gets an object that represents an identity of a survey.</summary>

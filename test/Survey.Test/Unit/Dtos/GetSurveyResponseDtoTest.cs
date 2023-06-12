@@ -6,9 +6,9 @@ namespace SurveyApp.Web.Dtos.Test
 {
   using SurveyApp.Domain.Question;
   using SurveyApp.Domain.Survey;
-    using SurveyApp.Web.Dtos;
+  using SurveyApp.Web.Dtos;
 
-    [TestClass]
+  [TestClass]
   public sealed class GetSurveyResponseDtoTest
   {
     [TestMethod]

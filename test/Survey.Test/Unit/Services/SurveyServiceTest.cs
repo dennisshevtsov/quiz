@@ -7,7 +7,7 @@ namespace SurveyApp.Application.Services.Test
   using SurveyApp.Domain.Question;
   using SurveyApp.Domain.Survey;
 
-    [TestClass]
+  [TestClass]
   public sealed class SurveyServiceTest
   {
 #pragma warning disable CS8618
@@ -140,8 +140,8 @@ namespace SurveyApp.Application.Services.Test
       public IQuestionEntity[] Questions { get; } = new IQuestionEntity[0];
 
       public bool Equals(TestSurveyEntity other)
-        => SurveyId    == other.SurveyId &&
-           Name        == other.Name     &&
+        => SurveyId == other.SurveyId &&
+           Name == other.Name &&
            Description == other.Description;
     }
   }

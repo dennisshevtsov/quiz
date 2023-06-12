@@ -13,9 +13,9 @@ namespace SurveyApp.Web.Dtos
     /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.UpdateSurveyRequestDto"/> class.</summary>
     public UpdateSurveyRequestDto()
     {
-      Name = string.Empty;
+      Name        = string.Empty;
       Description = string.Empty;
-      Questions = new IQuestionEntity[0];
+      Questions   = Array.Empty<IQuestionEntity>();
     }
 
     /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.UpdateSurveyRequestDto"/> class.</summary>

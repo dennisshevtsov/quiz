@@ -23,6 +23,6 @@ namespace SurveyApp.Web.Dtos
     public string Description { get; set; } = string.Empty;
 
     /// <summary>Gets an object that represents a collection of questions.</summary>
-    public IQuestionEntity[] Questions { get; set; } = new IQuestionEntity[0];
+    public IQuestionEntity[] Questions { get; set; } = Array.Empty<IQuestionEntity>();
   }
 }
