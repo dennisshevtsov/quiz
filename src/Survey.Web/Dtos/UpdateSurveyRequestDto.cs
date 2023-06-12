@@ -2,22 +2,23 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Web.Dtos
+namespace SurveyApp.Web.Dtos
 {
-  using Survey.Domain.Entities;
+  using SurveyApp.Domain.Question;
+  using SurveyApp.Domain.Survey;
 
   /// <summary>Represents data to update a survey.</summary>
   public sealed class UpdateSurveyRequestDto : ISurveyEntity
   {
-    /// <summary>Initializes a new instance of the <see cref="Survey.Web.Dtos.UpdateSurveyRequestDto"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.UpdateSurveyRequestDto"/> class.</summary>
     public UpdateSurveyRequestDto()
     {
-      Name = string.Empty;
+      Name        = string.Empty;
       Description = string.Empty;
-      Questions = new IQuestionEntity[0];
+      Questions   = Array.Empty<IQuestionEntity>();
     }
 
-    /// <summary>Initializes a new instance of the <see cref="Survey.Web.Dtos.UpdateSurveyRequestDto"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.UpdateSurveyRequestDto"/> class.</summary>
     /// <param name="surveyData">An object that represents survey data.</param>
     public UpdateSurveyRequestDto(ISurveyEntity surveyEntity)
     {

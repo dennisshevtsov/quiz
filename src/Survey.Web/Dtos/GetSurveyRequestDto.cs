@@ -1,17 +1,17 @@
 ﻿// Copyright (c) Dennis Shevtsov. All rights reserved.
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
-namespace Survey.Web.Dtos
+namespace SurveyApp.Web.Dtos
 {
-  using Survey.Domain.Entities;
+  using SurveyApp.Domain.Survey;
 
   /// <summary>Represents a codition to query a survey.</summary>
   public sealed class GetSurveyRequestDto : ISurveyIdentity
   {
-    /// <summary>Initializes a new instance of the <see cref="Survey.Web.Dtos.GetSurveyRequestDto"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.GetSurveyRequestDto"/> class.</summary>
     public GetSurveyRequestDto() {}
 
-    /// <summary>Initializes a new instance of the <see cref="Survey.Web.Dtos.GetSurveyRequestDto"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.GetSurveyRequestDto"/> class.</summary>
     /// <param name="surveyId">An object that represents an ID of a survey.</param>
     public GetSurveyRequestDto(Guid surveyId)
     {

@@ -2,10 +2,10 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Application.Services.Test
+namespace SurveyApp.Application.Services.Test
 {
-  using Survey.Domain.Entities;
-  using Survey.Domain.Repositories;
+  using SurveyApp.Domain.Question;
+  using SurveyApp.Domain.Survey;
 
   [TestClass]
   public sealed class SurveyServiceTest
@@ -140,8 +140,8 @@ namespace Survey.Application.Services.Test
       public IQuestionEntity[] Questions { get; } = new IQuestionEntity[0];
 
       public bool Equals(TestSurveyEntity other)
-        => SurveyId    == other.SurveyId &&
-           Name        == other.Name     &&
+        => SurveyId == other.SurveyId &&
+           Name == other.Name &&
            Description == other.Description;
     }
   }

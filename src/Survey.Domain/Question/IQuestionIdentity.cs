@@ -2,12 +2,12 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Domain.Entities
+namespace SurveyApp.Domain.Question
 {
   /// <summary>Represents a survey identity.</summary>
-  public interface ISurveyIdentity
+  public interface IQuestionIdentity
   {
     /// <summary>Gets an object that represents an identity of a survey.</summary>
-    public Guid SurveyId { get; }
+    public Guid QuestionId { get; }
   }
 }

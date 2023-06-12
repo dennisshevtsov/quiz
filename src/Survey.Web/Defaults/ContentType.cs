@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Web.Defaults
+namespace SurveyApp.Web.Defaults
 {
   /// <summary>Provides values of a content type.</summary>
   public static class ContentType

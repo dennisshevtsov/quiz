@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Web.Dtos
+namespace SurveyApp.Web.Dtos
 {
-  using Survey.Domain.Entities;
+  using SurveyApp.Domain.Survey;
 
   /// <summary>Represents data to delete a survey.</summary>
   public sealed class DeleteSurveyRequestDto : ISurveyIdentity

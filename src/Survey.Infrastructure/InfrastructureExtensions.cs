@@ -8,12 +8,12 @@ namespace Microsoft.Extensions.DependencyInjection
   using Microsoft.Extensions.Configuration;
   using Microsoft.Extensions.Options;
 
-  using Survey.Domain.Repositories;
-  using Survey.Infrastructure;
-  using Survey.Infrastructure.Initialization;
-  using Survey.Infrastructure.Repositories;
+  using Survey.Infrastructure.Survey;
+  using SurveyApp.Domain.Survey;
+  using SurveyApp.Infrastructure;
+  using SurveyApp.Infrastructure.Initialization;
 
-  /// <summary>Extends a API of the <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection"/> class.</summary>
+  /// <summary>Extends a API of the <see cref="IServiceCollection"/> class.</summary>
   public static class InfrastructureExtensions
   {
     /// <summary>Registers the application services.</summary>
@@ -36,7 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
     public static IServiceCollection SetUpDatabase(this IServiceCollection services, IConfiguration configuration)
     {
       services.Configure<DatabaseOptions>(configuration);
-      services.AddDbContext<DbContext, SurveyDbContext>((provider, builder) =>
+      services.AddDbContext<DbContext, AppDbContext>((provider, builder) =>
       {
         var options = provider.GetRequiredService<IOptions<DatabaseOptions>>().Value;
 
