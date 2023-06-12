@@ -2,9 +2,10 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Application.Entities.Test
+namespace SurveyApp.Application.Entities.Test
 {
-  using Survey.Domain.Entities;
+  using SurveyApp.Domain.Question;
+  using SurveyApp.Domain.Survey;
 
   [TestClass]
   public sealed class SurveyEntityTest

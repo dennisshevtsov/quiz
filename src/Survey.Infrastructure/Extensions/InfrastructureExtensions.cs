@@ -4,17 +4,16 @@
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-  using Microsoft.EntityFrameworkCore;
-  using Microsoft.Extensions.Configuration;
-  using Microsoft.Extensions.Options;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Options;
+    using SurveyApp.Domain.Survey;
+    using SurveyApp.Infrastructure;
+    using SurveyApp.Infrastructure.Initialization;
+    using SurveyApp.Infrastructure.Repositories;
 
-  using Survey.Domain.Repositories;
-  using Survey.Infrastructure;
-  using Survey.Infrastructure.Initialization;
-  using Survey.Infrastructure.Repositories;
-
-  /// <summary>Extends a API of the <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection"/> class.</summary>
-  public static class InfrastructureExtensions
+    /// <summary>Extends a API of the <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection"/> class.</summary>
+    public static class InfrastructureExtensions
   {
     /// <summary>Registers the application services.</summary>
     /// <param name="services">An object that specifies the contract for a collection of service descriptors.</param>

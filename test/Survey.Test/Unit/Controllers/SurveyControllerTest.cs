@@ -2,14 +2,13 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Web.Controllers.Test
+namespace SurveyApp.Web.Controllers.Test
 {
   using Microsoft.AspNetCore.Mvc;
 
-  using Survey.Domain.Entities;
-  using Survey.Domain.Services;
-  using Survey.Web.Dtos;
-  using Survey.Web.Dtos;
+  using SurveyApp.Domain.Question;
+  using SurveyApp.Domain.Survey;
+  using SurveyApp.Web.Dtos;
 
   [TestClass]
   public sealed class SurveyControllerTest

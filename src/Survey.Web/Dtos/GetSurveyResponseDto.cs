@@ -2,14 +2,15 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Web.Dtos
+namespace SurveyApp.Web.Dtos
 {
-  using Survey.Domain.Entities;
+  using SurveyApp.Domain.Question;
+  using SurveyApp.Domain.Survey;
 
   /// <summary>Represents a survey.</summary>
   public sealed class GetSurveyResponseDto : ISurveyEntity
   {
-    /// <summary>Initializes a new instance of the <see cref="Survey.Web.Dtos.GetSurveyResponseDto"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.GetSurveyResponseDto"/> class.</summary>
     /// <param name="surveyEntity">An object that represents a survey entity.</param>
     public GetSurveyResponseDto(ISurveyEntity surveyEntity)
     {

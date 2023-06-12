@@ -4,11 +4,11 @@
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-  using Survey.Application.Services;
-  using Survey.Domain.Services;
+    using SurveyApp.Domain.Survey;
+    using SurveyApp.Application.Services;
 
-  /// <summary>Extends a API of the <see cref="IServiceCollection"/> class.</summary>
-  public static class ApplicationExtensions
+    /// <summary>Extends a API of the <see cref="IServiceCollection"/> class.</summary>
+    public static class ApplicationExtensions
   {
     /// <summary>Registers the application services.</summary>
     /// <param name="services">An object that specifies the contract for a collection of service descriptors.</param>

@@ -2,14 +2,14 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Infrastructure.Initialization.Test
+namespace SurveyApp.Infrastructure.Initialization.Test
 {
   using Microsoft.EntityFrameworkCore;
   using Microsoft.Extensions.DependencyInjection;
 
-  using Survey.Infrastructure.Entities;
-  using Survey.Infrastructure.Initialization;
-  using Survey.Test.Integration;
+  using SurveyApp.Infrastructure.Entities;
+  using SurveyApp.Infrastructure.Initialization;
+  using SurveyApp.Test.Integration;
 
   [TestClass]
   public sealed class DatabaseInitializerTest : IntegrationTestBase

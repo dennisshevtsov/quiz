@@ -2,10 +2,10 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Domain.Entities
+namespace SurveyApp.Domain.Question
 {
-  /// <summary>Represents a question entity.</summary>
-  public interface IQuestionEntity : IQuestionIdentity, IQuestionData
+  /// <summary>Represents text question data.</summary>
+  public interface ITextQuestionData
   {
   }
 }

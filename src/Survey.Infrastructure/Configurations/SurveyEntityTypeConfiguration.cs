@@ -2,18 +2,18 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Infrastructure.Configurations
+namespace SurveyApp.Infrastructure.Configurations
 {
   using Microsoft.EntityFrameworkCore;
   using Microsoft.EntityFrameworkCore.Metadata.Builders;
   using Microsoft.EntityFrameworkCore.ValueGeneration;
 
-  using Survey.Infrastructure.Entities;
+  using SurveyApp.Infrastructure.Entities;
 
   /// <summary>Allows configuration for an entity type.</summary>
   public sealed class SurveyEntityTypeConfiguration : IEntityTypeConfiguration<SurveyEntity>
   {
-    /// <summary>Configures the entity of type <see cref="Survey.Infrastructure.Entities.SurveyEntity"/>.</summary>
+    /// <summary>Configures the entity of type <see cref="SurveyApp.Infrastructure.Entities.SurveyEntity"/>.</summary>
     /// <param name="builder">The builder to be used to configure the entity type.</param>
     public void Configure(EntityTypeBuilder<SurveyEntity> builder)
     {

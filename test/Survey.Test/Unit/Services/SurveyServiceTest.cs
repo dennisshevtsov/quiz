@@ -2,12 +2,12 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Application.Services.Test
+namespace SurveyApp.Application.Services.Test
 {
-  using Survey.Domain.Entities;
-  using Survey.Domain.Repositories;
+  using SurveyApp.Domain.Question;
+  using SurveyApp.Domain.Survey;
 
-  [TestClass]
+    [TestClass]
   public sealed class SurveyServiceTest
   {
 #pragma warning disable CS8618

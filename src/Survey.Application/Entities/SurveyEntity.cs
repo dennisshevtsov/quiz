@@ -2,14 +2,15 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Application.Entities
+namespace SurveyApp.Application.Entities
 {
-  using Survey.Domain.Entities;
+  using SurveyApp.Domain.Question;
+  using SurveyApp.Domain.Survey;
 
   /// <summary>Represents a survey entity.</summary>
   public sealed class SurveyEntity : ISurveyEntity
   {
-    /// <summary>Initializes a new instance of the <see cref="Survey.Application.Entities.SurveyEntity"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SurveyApp.Application.Entities.SurveyEntity"/> class.</summary>
     /// <param name="surveyData">An object that represents survey data.</param>
     public SurveyEntity(ISurveyData surveyData)
     {
@@ -18,7 +19,7 @@ namespace Survey.Application.Entities
       Questions = surveyData.Questions;
     }
 
-    /// <summary>Initializes a new instance of the <see cref="Survey.Application.Entities.SurveyEntity"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SurveyApp.Application.Entities.SurveyEntity"/> class.</summary>
     /// <param name="surveyEntity">An object that represents a survey entity.</param>
     public SurveyEntity(ISurveyEntity surveyEntity) : this((ISurveyData)surveyEntity)
     {

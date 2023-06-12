@@ -2,16 +2,15 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Web.Controllers
+namespace SurveyApp.Web.Controllers
 {
   using System;
 
   using Microsoft.AspNetCore.Mvc;
 
-  using Survey.Domain.Services;
-  using Survey.Web.Defaults;
-  using Survey.Web.Dtos;
-  using Survey.Web.Dtos;
+  using SurveyApp.Domain.Survey;
+  using SurveyApp.Web.Defaults;
+  using SurveyApp.Web.Dtos;
 
   /// <summary>Provides a simple API to handle HTTP request.</summary>
   [ApiController]
@@ -26,7 +25,7 @@ namespace Survey.Web.Controllers
 
     private readonly ISurveyService _surveyService;
 
-    /// <summary>Initializes a new instance of the <see cref="Survey.Web.Controllers.SurveyController"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Controllers.SurveyController"/> class.</summary>
     /// <param name="surveyService">An object that provides a simple API to the survey entity.</param>
     public SurveyController(ISurveyService surveyService)
     {

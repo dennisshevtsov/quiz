@@ -2,10 +2,10 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Domain.Entities
+namespace SurveyApp.Domain.Question
 {
-  /// <summary>Represents a survey entity.</summary>
-  public interface ISurveyEntity : ISurveyIdentity, ISurveyData
+  /// <summary>Represents checkbox list question data.</summary>
+  public interface ICheckBoxListQuestionData
   {
   }
 }

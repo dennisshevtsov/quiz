@@ -4,7 +4,7 @@
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-  using Survey.Infrastructure.Initialization;
+  using SurveyApp.Infrastructure.Initialization;
 
   /// <summary>Extends a API of the <see cref="Microsoft.AspNetCore.Builder.WebApplication"/> class.</summary>
   public static class WebApplicationExtensions

@@ -2,16 +2,17 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Web.Dtos
+namespace SurveyApp.Web.Dtos
 {
   using System.ComponentModel.DataAnnotations;
 
-  using Survey.Domain.Entities;
+  using SurveyApp.Domain.Question;
+  using SurveyApp.Domain.Survey;
 
   /// <summary>Represents data to add a survey.</summary>
   public sealed class AddSurveyRequestDto : ISurveyData
   {
-    /// <summary>Initializes a new instance of the <see cref="Survey.Web.Dtos.AddSurveyRequestDto"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.AddSurveyRequestDto"/> class.</summary>
     public AddSurveyRequestDto() {}
 
     /// <summary>Gets an object that represents a name of a survey.</summary>

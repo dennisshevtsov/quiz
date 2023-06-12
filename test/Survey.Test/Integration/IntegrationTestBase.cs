@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Test.Integration
+namespace SurveyApp.Test.Integration
 {
   using Microsoft.EntityFrameworkCore;
   using Microsoft.Extensions.Configuration;

@@ -2,12 +2,13 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Web.Dtos.Test
+namespace SurveyApp.Web.Dtos.Test
 {
-  using Survey.Domain.Entities;
-  using Survey.Web.Dtos;
+  using SurveyApp.Domain.Question;
+  using SurveyApp.Domain.Survey;
+    using SurveyApp.Web.Dtos;
 
-  [TestClass]
+    [TestClass]
   public sealed class GetSurveyResponseDtoTest
   {
     [TestMethod]

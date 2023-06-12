@@ -2,17 +2,15 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Infrastructure.Repositories.Test
+namespace SurveyApp.Infrastructure.Repositories.Test
 {
   using System;
 
   using Microsoft.EntityFrameworkCore;
   using Microsoft.Extensions.DependencyInjection;
-
-  using Survey.Domain.Entities;
-  using Survey.Domain.Repositories;
-  using Survey.Infrastructure.Entities;
-  using Survey.Test.Integration;
+  using SurveyApp.Domain.Survey;
+  using SurveyApp.Infrastructure.Entities;
+  using SurveyApp.Test.Integration;
 
   [TestClass]
   public sealed class SurveyRepositoryTest : IntegrationTestBase
