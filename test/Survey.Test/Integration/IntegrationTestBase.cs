@@ -4,11 +4,12 @@
 
 namespace SurveyApp.Test.Integration
 {
-  using Microsoft.EntityFrameworkCore;
-  using Microsoft.Extensions.Configuration;
-  using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Survey.Infrastructure;
 
-  public abstract class IntegrationTestBase
+    public abstract class IntegrationTestBase
   {
     private CancellationToken _cancellationToken;
 

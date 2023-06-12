@@ -9,11 +9,11 @@ namespace SurveyApp.Infrastructure
   using Survey.Infrastructure.Survey;
 
   /// <summary>Represents a session with the database and can be used to query and save instances of your entities.</summary>
-  public sealed class SurveyDbContext : DbContext
+  public sealed class AppDbContext : DbContext
   {
-    /// <summary>Initializes a new instance of the <see cref="SurveyApp.Infrastructure.SurveyDbContext"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SurveyApp.Infrastructure.AppDbContext"/> class.</summary>
     /// <param name="options">An object that retprents options to configure the DB context.</param>
-    public SurveyDbContext(DbContextOptions options) : base(options)
+    public AppDbContext(DbContextOptions options) : base(options)
     {
     }
 
