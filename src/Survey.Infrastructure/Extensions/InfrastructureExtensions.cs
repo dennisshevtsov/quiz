@@ -7,10 +7,10 @@ namespace Microsoft.Extensions.DependencyInjection
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Options;
+    using Survey.Infrastructure.Survey;
     using SurveyApp.Domain.Survey;
     using SurveyApp.Infrastructure;
     using SurveyApp.Infrastructure.Initialization;
-    using SurveyApp.Infrastructure.Repositories;
 
     /// <summary>Extends a API of the <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection"/> class.</summary>
     public static class InfrastructureExtensions

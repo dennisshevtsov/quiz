@@ -4,15 +4,15 @@
 
 namespace SurveyApp.Infrastructure.Repositories.Test
 {
-  using System;
+    using System;
 
-  using Microsoft.EntityFrameworkCore;
-  using Microsoft.Extensions.DependencyInjection;
-  using SurveyApp.Domain.Survey;
-  using SurveyApp.Infrastructure.Entities;
-  using SurveyApp.Test.Integration;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
+    using Survey.Infrastructure.Survey;
+    using SurveyApp.Domain.Survey;
+    using SurveyApp.Test.Integration;
 
-  [TestClass]
+    [TestClass]
   public sealed class SurveyRepositoryTest : IntegrationTestBase
   {
 #pragma warning disable CS8618
