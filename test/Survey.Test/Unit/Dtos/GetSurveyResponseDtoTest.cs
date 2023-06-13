@@ -4,7 +4,6 @@
 
 namespace SurveyApp.Web.Dtos.Test
 {
-  using SurveyApp.Domain.Question;
   using SurveyApp.Domain.Survey;
   using SurveyApp.Web.Dtos;
 
@@ -29,8 +28,6 @@ namespace SurveyApp.Web.Dtos.Test
       public string Name { get; } = Guid.NewGuid().ToString();
 
       public string Description { get; } = Guid.NewGuid().ToString();
-
-      public IQuestionEntity[] Questions { get; } = new IQuestionEntity[0];
     }
   }
 }

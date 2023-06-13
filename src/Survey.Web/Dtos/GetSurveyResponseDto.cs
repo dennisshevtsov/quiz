@@ -4,7 +4,6 @@
 
 namespace SurveyApp.Web.Dtos
 {
-  using SurveyApp.Domain.Question;
   using SurveyApp.Domain.Survey;
 
   /// <summary>Represents a survey.</summary>
@@ -14,10 +13,9 @@ namespace SurveyApp.Web.Dtos
     /// <param name="surveyEntity">An object that represents a survey entity.</param>
     public GetSurveyResponseDto(ISurveyEntity surveyEntity)
     {
-      SurveyId = surveyEntity.SurveyId;
-      Name = surveyEntity.Name;
+      SurveyId    = surveyEntity.SurveyId;
+      Name        = surveyEntity.Name;
       Description = surveyEntity.Description;
-      Questions = surveyEntity.Questions;
     }
 
     /// <summary>Gets/sets an object that represents an identity of a survey.</summary>
@@ -28,8 +26,5 @@ namespace SurveyApp.Web.Dtos
 
     /// <summary>Gets/sets an object that represents a description of survey.</summary>
     public string Description { get; }
-
-    /// <summary>Gets an object that represents a collection of questions.</summary>
-    public IQuestionEntity[] Questions { get; }
   }
 }

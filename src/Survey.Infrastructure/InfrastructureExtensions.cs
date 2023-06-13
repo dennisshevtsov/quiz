@@ -24,7 +24,6 @@ namespace Microsoft.Extensions.DependencyInjection
     {
       services.SetUpDatabase(configuration);
       services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
-      services.AddScoped<ISurveyRepository, SurveyRepository>();
 
       return services;
     }

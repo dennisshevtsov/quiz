@@ -2,14 +2,11 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using Survey.Infrastructure;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
-builder.Services.SetUpApplication();
 builder.Services.SetUpInfrastructure(builder.Configuration);
 
 var app = builder.Build();

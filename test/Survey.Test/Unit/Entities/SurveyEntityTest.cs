@@ -4,7 +4,6 @@
 
 namespace SurveyApp.Application.Entities.Test
 {
-  using SurveyApp.Domain.Question;
   using SurveyApp.Domain.Survey;
 
   [TestClass]
@@ -13,11 +12,11 @@ namespace SurveyApp.Application.Entities.Test
     [TestMethod]
     public void Constructor_Should_Copy_Data()
     {
-      var controlSurveyData = new TestSurveyData();
-      var actualSurveyEntity = new SurveyEntity(controlSurveyData);
+      var controlSurveyEntity = new TestSurveyEntity();
+      var actualSurveyEntity = new SurveyEntity(controlSurveyEntity);
 
-      Assert.AreEqual(controlSurveyData.Name, actualSurveyEntity.Name);
-      Assert.AreEqual(controlSurveyData.Description, actualSurveyEntity.Description);
+      Assert.AreEqual(controlSurveyEntity.Name, actualSurveyEntity.Name);
+      Assert.AreEqual(controlSurveyEntity.Description, actualSurveyEntity.Description);
     }
 
     [TestMethod]
@@ -30,15 +29,6 @@ namespace SurveyApp.Application.Entities.Test
       Assert.AreEqual(controlSurveyEntity.Description, actualSurveyEntity.Description);
     }
 
-    private sealed class TestSurveyData : ISurveyData
-    {
-      public string Name { get; } = Guid.NewGuid().ToString();
-
-      public string Description { get; } = Guid.NewGuid().ToString();
-
-      public IQuestionEntity[] Questions { get; } = new IQuestionEntity[0];
-    }
-
     private sealed class TestSurveyEntity : ISurveyEntity
     {
       public Guid SurveyId { get; } = Guid.NewGuid();
@@ -46,8 +36,6 @@ namespace SurveyApp.Application.Entities.Test
       public string Name { get; } = Guid.NewGuid().ToString();
 
       public string Description { get; } = Guid.NewGuid().ToString();
-
-      public IQuestionEntity[] Questions { get; } = new IQuestionEntity[0];
     }
   }
 }

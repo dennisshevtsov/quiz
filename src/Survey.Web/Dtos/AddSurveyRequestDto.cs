@@ -5,15 +5,19 @@
 namespace SurveyApp.Web.Dtos
 {
   using System.ComponentModel.DataAnnotations;
+  using System.Text.Json.Serialization;
 
-  using SurveyApp.Domain.Question;
   using SurveyApp.Domain.Survey;
 
   /// <summary>Represents data to add a survey.</summary>
-  public sealed class AddSurveyRequestDto : ISurveyData
+  public sealed class AddSurveyRequestDto : ISurveyEntity
   {
     /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.AddSurveyRequestDto"/> class.</summary>
     public AddSurveyRequestDto() {}
+
+    /// <summary>Gets an object that represents an identity of a survey.</summary>
+    [JsonIgnore]
+    public Guid SurveyId { get; set; }
 
     /// <summary>Gets an object that represents a name of a survey.</summary>
     [Required]
@@ -21,8 +25,5 @@ namespace SurveyApp.Web.Dtos
 
     /// <summary>Gets an object that represents a description of survey.</summary>
     public string Description { get; set; } = string.Empty;
-
-    /// <summary>Gets an object that represents a collection of questions.</summary>
-    public IQuestionEntity[] Questions { get; set; } = Array.Empty<IQuestionEntity>();
   }
 }
