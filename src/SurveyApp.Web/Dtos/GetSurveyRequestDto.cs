@@ -3,10 +3,10 @@
 // See LICENSE in the project root for license information.
 namespace SurveyApp.Web.Dtos
 {
-  using SurveyApp.Survey;
+  using SurveyApp.SurveyTemplate;
 
   /// <summary>Represents a codition to query a survey.</summary>
-  public sealed class GetSurveyRequestDto : ISurveyIdentity
+  public sealed class GetSurveyRequestDto : ISurveyTemplateIdentity
   {
     /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.GetSurveyRequestDto"/> class.</summary>
     public GetSurveyRequestDto() {}

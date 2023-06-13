@@ -4,14 +4,14 @@
 
 namespace SurveyApp.Web.Dtos
 {
-  using SurveyApp.Survey;
+  using SurveyApp.SurveyTemplate;
 
   /// <summary>Represents a collection of surveys.</summary>
   public sealed class GetSurveyCollectionResponseDto
   {
     /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.GetSurveyCollectionResponseDto"/> class.</summary>
     /// <param name="surveyEntityCollection">An object that represents a collection of the <see cref="SurveyApp.Domain.Entities.ISurveyEntity"/> class.</param>
-    public GetSurveyCollectionResponseDto(ISurveyEntity[] surveyEntityCollection)
+    public GetSurveyCollectionResponseDto(ISurveyTemplateEntity[] surveyEntityCollection)
     {
       Surveys = GetSurveyCollectionResponseDto.ToViewModelCollection(surveyEntityCollection);
     }
@@ -19,7 +19,7 @@ namespace SurveyApp.Web.Dtos
     /// <summary>Gets an object that represents a collection of the <see cref="SurveyApp.Web.Dtos.GetSurveyResponseDto"/>.</summary>
     public GetSurveyResponseDto[] Surveys { get; }
 
-    private static GetSurveyResponseDto[] ToViewModelCollection(ISurveyEntity[] surveyEntityCollection)
+    private static GetSurveyResponseDto[] ToViewModelCollection(ISurveyTemplateEntity[] surveyEntityCollection)
     {
       var getSurveyViewModelCollection = new GetSurveyResponseDto[surveyEntityCollection.Length];
 

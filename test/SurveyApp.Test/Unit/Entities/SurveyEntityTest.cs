@@ -4,7 +4,7 @@
 
 namespace SurveyApp.Application.Entities.Test
 {
-  using SurveyApp.Survey;
+  using SurveyApp.SurveyTemplate;
 
   [TestClass]
   public sealed class SurveyEntityTest
@@ -29,7 +29,7 @@ namespace SurveyApp.Application.Entities.Test
       Assert.AreEqual(controlSurveyEntity.Description, actualSurveyEntity.Description);
     }
 
-    private sealed class TestSurveyEntity : ISurveyEntity
+    private sealed class TestSurveyEntity : ISurveyTemplateEntity
     {
       public Guid SurveyId { get; } = Guid.NewGuid();
 

@@ -2,14 +2,12 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.Web.Dtos
+namespace SurveyApp.SurveyTemplate
 {
-  using SurveyApp.SurveyTemplate;
-
-  /// <summary>Represents data to delete a survey.</summary>
-  public sealed class DeleteSurveyRequestDto : ISurveyTemplateIdentity
+  /// <summary>Represents a survey identity.</summary>
+  public interface ISurveyTemplateIdentity
   {
     /// <summary>Gets an object that represents an identity of a survey.</summary>
-    public Guid SurveyId { get; set; }
+    public Guid SurveyId { get; }
   }
 }

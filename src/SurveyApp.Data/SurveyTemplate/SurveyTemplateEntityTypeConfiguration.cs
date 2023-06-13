@@ -2,18 +2,18 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.Infrastructure.Survey
+namespace SurveyApp.SurveyTemplate.Data
 {
   using Microsoft.EntityFrameworkCore;
   using Microsoft.EntityFrameworkCore.Metadata.Builders;
   using Microsoft.EntityFrameworkCore.ValueGeneration;
 
   /// <summary>Allows configuration for an entity type.</summary>
-  public sealed class SurveyEntityTypeConfiguration : IEntityTypeConfiguration<SurveyEntity>
+  public sealed class SurveyTemplateEntityTypeConfiguration : IEntityTypeConfiguration<SurveyTemplateEntity>
   {
     /// <summary>Configures the entity of type <see cref="Survey.Infrastructure.Survey.SurveyEntity"/>.</summary>
     /// <param name="builder">The builder to be used to configure the entity type.</param>
-    public void Configure(EntityTypeBuilder<SurveyEntity> builder)
+    public void Configure(EntityTypeBuilder<SurveyTemplateEntity> builder)
     {
       builder.ToTable("surveys");
       builder.HasKey(e => e.SurveyId);

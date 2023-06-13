@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.Infrastructure
+namespace SurveyApp.Data
 {
   /// <summary>Represents database options.</summary>
   public sealed class DatabaseOptions

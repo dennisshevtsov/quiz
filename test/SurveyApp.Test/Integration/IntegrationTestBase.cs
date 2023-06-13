@@ -8,7 +8,7 @@ namespace SurveyApp.Test.Integration
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
-    using SurveyApp.Infrastructure;
+    using SurveyApp.Data;
 
     public abstract class IntegrationTestBase
   {

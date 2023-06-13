@@ -4,7 +4,7 @@
 
 namespace SurveyApp.Web.Dtos.Test
 {
-  using SurveyApp.Survey;
+  using SurveyApp.SurveyTemplate;
 
   [TestClass]
   public sealed class GetSurveyCollectionResponseDtoTest
@@ -23,9 +23,9 @@ namespace SurveyApp.Web.Dtos.Test
         actualGetSurveyCollectionViewModel);
     }
 
-    private static ISurveyEntity[] GenerateTestSurveyEntityCollection(int entities)
+    private static ISurveyTemplateEntity[] GenerateTestSurveyEntityCollection(int entities)
     {
-      var controlSurveyEntityCollection = new ISurveyEntity[entities];
+      var controlSurveyEntityCollection = new ISurveyTemplateEntity[entities];
 
       for (int i = 0; i < entities; i++)
       {
@@ -35,14 +35,14 @@ namespace SurveyApp.Web.Dtos.Test
       return controlSurveyEntityCollection;
     }
 
-    private static void AreEqual(ISurveyEntity controlSurveyEntity, GetSurveyResponseDto actualGetSurveyViewModel)
+    private static void AreEqual(ISurveyTemplateEntity controlSurveyEntity, GetSurveyResponseDto actualGetSurveyViewModel)
     {
       Assert.AreEqual(controlSurveyEntity.SurveyId, actualGetSurveyViewModel.SurveyId);
       Assert.AreEqual(controlSurveyEntity.Name, actualGetSurveyViewModel.Name);
       Assert.AreEqual(controlSurveyEntity.Description, actualGetSurveyViewModel.Description);
     }
 
-    private static void AreEqual(ISurveyEntity[] controlSurveyEntityCollection, GetSurveyCollectionResponseDto actualGetSurveyCollectionViewModel)
+    private static void AreEqual(ISurveyTemplateEntity[] controlSurveyEntityCollection, GetSurveyCollectionResponseDto actualGetSurveyCollectionViewModel)
     {
       Assert.AreEqual(
         controlSurveyEntityCollection.Length,
@@ -56,7 +56,7 @@ namespace SurveyApp.Web.Dtos.Test
       }
     }
 
-    private sealed class TestSurveyEntity : ISurveyEntity
+    private sealed class TestSurveyEntity : ISurveyTemplateEntity
     {
       public Guid SurveyId { get; set; } = Guid.NewGuid();
 

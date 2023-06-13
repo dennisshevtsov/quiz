@@ -8,10 +8,8 @@ namespace Microsoft.Extensions.DependencyInjection
   using Microsoft.Extensions.Configuration;
   using Microsoft.Extensions.Options;
 
-  using SurveyApp.Infrastructure.Survey;
-  using SurveyApp.Survey;
-  using SurveyApp.Infrastructure;
-  using SurveyApp.Infrastructure.Initialization;
+  using SurveyApp.Data;
+  using SurveyApp.Data.Initialization;
 
   /// <summary>Extends a API of the <see cref="IServiceCollection"/> class.</summary>
   public static class InfrastructureExtensions

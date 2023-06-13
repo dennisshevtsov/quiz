@@ -4,14 +4,14 @@
 
 namespace SurveyApp.Web.Dtos
 {
-  using SurveyApp.Survey;
+  using SurveyApp.SurveyTemplate;
 
   /// <summary>Represents a survey.</summary>
-  public sealed class GetSurveyResponseDto : ISurveyEntity
+  public sealed class GetSurveyResponseDto : ISurveyTemplateEntity
   {
     /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.GetSurveyResponseDto"/> class.</summary>
     /// <param name="surveyEntity">An object that represents a survey entity.</param>
-    public GetSurveyResponseDto(ISurveyEntity surveyEntity)
+    public GetSurveyResponseDto(ISurveyTemplateEntity surveyEntity)
     {
       SurveyId    = surveyEntity.SurveyId;
       Name        = surveyEntity.Name;

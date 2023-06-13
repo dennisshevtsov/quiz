@@ -4,10 +4,10 @@
 
 namespace SurveyApp.Web.Dtos
 {
-  using SurveyApp.Survey;
+  using SurveyApp.SurveyTemplate;
 
   /// <summary>Represents data to update a survey.</summary>
-  public sealed class UpdateSurveyRequestDto : ISurveyEntity
+  public sealed class UpdateSurveyRequestDto : ISurveyTemplateEntity
   {
     /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.UpdateSurveyRequestDto"/> class.</summary>
     public UpdateSurveyRequestDto()
@@ -18,7 +18,7 @@ namespace SurveyApp.Web.Dtos
 
     /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.UpdateSurveyRequestDto"/> class.</summary>
     /// <param name="surveyData">An object that represents survey data.</param>
-    public UpdateSurveyRequestDto(ISurveyEntity surveyEntity) : this()
+    public UpdateSurveyRequestDto(ISurveyTemplateEntity surveyEntity) : this()
     {
       SurveyId    = surveyEntity.SurveyId;
       Name        = surveyEntity.Name;

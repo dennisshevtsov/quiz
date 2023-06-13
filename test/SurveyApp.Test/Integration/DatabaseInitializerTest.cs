@@ -2,13 +2,13 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.Infrastructure.Initialization.Test
+namespace SurveyApp.Data.Initialization.Test
 {
   using Microsoft.EntityFrameworkCore;
   using Microsoft.Extensions.DependencyInjection;
 
-  using SurveyApp.Infrastructure.Initialization;
-  using SurveyApp.Infrastructure.Survey;
+  using SurveyApp.Data.Initialization;
+  using SurveyApp.Data.Survey;
   using SurveyApp.Test.Integration;
 
   [TestClass]
@@ -30,15 +30,15 @@ namespace SurveyApp.Infrastructure.Initialization.Test
       await DbContext.Database.EnsureDeletedAsync(CancellationToken);
       await _databaseInitializer.InitializeAsync(CancellationToken);
 
-      Assert.AreEqual(0, await DbContext.Set<SurveyEntity>().CountAsync(CancellationToken));
+      Assert.AreEqual(0, await DbContext.Set<SurveyTemplateEntity>().CountAsync(CancellationToken));
 
       DbContext.Add(DatabaseInitializerTest.GenerateTestSurvey());
       await DbContext.SaveChangesAsync(CancellationToken);
 
-      Assert.AreEqual(1, await DbContext.Set<SurveyEntity>().CountAsync(CancellationToken));
+      Assert.AreEqual(1, await DbContext.Set<SurveyTemplateEntity>().CountAsync(CancellationToken));
     }
 
-    private static SurveyEntity GenerateTestSurvey() => new()
+    private static SurveyTemplateEntity GenerateTestSurvey() => new()
     {
       Name = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
