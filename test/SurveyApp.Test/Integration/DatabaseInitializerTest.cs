@@ -4,13 +4,14 @@
 
 namespace SurveyApp.Infrastructure.Initialization.Test
 {
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.DependencyInjection;
-    using Survey.Infrastructure.Survey;
-    using SurveyApp.Infrastructure.Initialization;
-    using SurveyApp.Test.Integration;
+  using Microsoft.EntityFrameworkCore;
+  using Microsoft.Extensions.DependencyInjection;
 
-    [TestClass]
+  using SurveyApp.Infrastructure.Initialization;
+  using SurveyApp.Infrastructure.Survey;
+  using SurveyApp.Test.Integration;
+
+  [TestClass]
   public sealed class DatabaseInitializerTest : IntegrationTestBase
   {
 

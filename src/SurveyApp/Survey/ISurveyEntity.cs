@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.Domain.Survey
+namespace SurveyApp.Survey
 {
   /// <summary>Represents a survey entity.</summary>
   public interface ISurveyEntity : ISurveyIdentity

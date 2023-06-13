@@ -4,7 +4,7 @@
 
 namespace SurveyApp.Application.Entities
 {
-  using SurveyApp.Domain.Survey;
+  using SurveyApp.Survey;
 
   /// <summary>Represents a survey entity.</summary>
   public sealed class SurveyEntity : ISurveyEntity

@@ -4,7 +4,7 @@
 
 namespace SurveyApp.Web.Dtos.Test
 {
-  using SurveyApp.Domain.Survey;
+  using SurveyApp.Survey;
 
   [TestClass]
   public sealed class GetSurveyCollectionResponseDtoTest

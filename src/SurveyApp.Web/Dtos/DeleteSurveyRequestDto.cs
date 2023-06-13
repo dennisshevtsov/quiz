@@ -4,7 +4,7 @@
 
 namespace SurveyApp.Web.Dtos
 {
-  using SurveyApp.Domain.Survey;
+  using SurveyApp.Survey;
 
   /// <summary>Represents data to delete a survey.</summary>
   public sealed class DeleteSurveyRequestDto : ISurveyIdentity

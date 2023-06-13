@@ -3,7 +3,7 @@
 // See LICENSE in the project root for license information.
 namespace SurveyApp.Web.Dtos
 {
-  using SurveyApp.Domain.Survey;
+  using SurveyApp.Survey;
 
   /// <summary>Represents a codition to query a survey.</summary>
   public sealed class GetSurveyRequestDto : ISurveyIdentity

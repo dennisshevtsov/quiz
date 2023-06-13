@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Survey.Infrastructure.Survey
+namespace SurveyApp.Infrastructure.Survey
 {
-  using SurveyApp.Domain.Survey;
+  using SurveyApp.Survey;
 
   /// <summary>Represents a survey entity.</summary>
   public sealed class SurveyEntity : ISurveyEntity

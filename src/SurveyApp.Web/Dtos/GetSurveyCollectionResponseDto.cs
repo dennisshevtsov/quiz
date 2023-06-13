@@ -4,7 +4,7 @@
 
 namespace SurveyApp.Web.Dtos
 {
-  using SurveyApp.Domain.Survey;
+  using SurveyApp.Survey;
 
   /// <summary>Represents a collection of surveys.</summary>
   public sealed class GetSurveyCollectionResponseDto

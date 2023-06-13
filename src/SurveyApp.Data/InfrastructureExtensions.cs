@@ -8,8 +8,8 @@ namespace Microsoft.Extensions.DependencyInjection
   using Microsoft.Extensions.Configuration;
   using Microsoft.Extensions.Options;
 
-  using Survey.Infrastructure.Survey;
-  using SurveyApp.Domain.Survey;
+  using SurveyApp.Infrastructure.Survey;
+  using SurveyApp.Survey;
   using SurveyApp.Infrastructure;
   using SurveyApp.Infrastructure.Initialization;
 

@@ -4,7 +4,7 @@
 
 namespace SurveyApp.Web.Dtos.Test
 {
-  using SurveyApp.Domain.Survey;
+  using SurveyApp.Survey;
   using SurveyApp.Web.Dtos;
 
   [TestClass]

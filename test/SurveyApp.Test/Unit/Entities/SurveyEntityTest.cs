@@ -4,7 +4,7 @@
 
 namespace SurveyApp.Application.Entities.Test
 {
-  using SurveyApp.Domain.Survey;
+  using SurveyApp.Survey;
 
   [TestClass]
   public sealed class SurveyEntityTest
