@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Survey.Application\Survey.Application.csproj" />
-    <ProjectReference Include="..\Survey.Infrastructure\Survey.Infrastructure.csproj" />
+    <ProjectReference Include="..\SurveyApp.App\SurveyApp.App.csproj" />
+    <ProjectReference Include="..\SurveyApp.Data\SurveyApp.Data.csproj" />
   </ItemGroup>
 
 </Project>
