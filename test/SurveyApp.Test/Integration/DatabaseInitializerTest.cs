@@ -8,7 +8,7 @@ namespace SurveyApp.Data.Initialization.Test
   using Microsoft.Extensions.DependencyInjection;
 
   using SurveyApp.Data.Initialization;
-  using SurveyApp.Data.Survey;
+  using SurveyApp.SurveyTemplate.Data;
   using SurveyApp.Test.Integration;
 
   [TestClass]

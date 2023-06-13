@@ -5,6 +5,7 @@
 namespace SurveyApp.Application.Entities.Test
 {
   using SurveyApp.SurveyTemplate;
+  using SurveyApp.SurveyTemplate.Data;
 
   [TestClass]
   public sealed class SurveyEntityTest
@@ -13,7 +14,7 @@ namespace SurveyApp.Application.Entities.Test
     public void Constructor_Should_Copy_Data()
     {
       var controlSurveyEntity = new TestSurveyEntity();
-      var actualSurveyEntity = new SurveyEntity(controlSurveyEntity);
+      var actualSurveyEntity = new SurveyTemplateEntity(controlSurveyEntity);
 
       Assert.AreEqual(controlSurveyEntity.Name, actualSurveyEntity.Name);
       Assert.AreEqual(controlSurveyEntity.Description, actualSurveyEntity.Description);
@@ -23,7 +24,7 @@ namespace SurveyApp.Application.Entities.Test
     public void Constructor_Should_Copy_Entity()
     {
       var controlSurveyEntity = new TestSurveyEntity();
-      var actualSurveyEntity = new SurveyEntity(controlSurveyEntity);
+      var actualSurveyEntity = new SurveyTemplateEntity(controlSurveyEntity);
 
       Assert.AreEqual(controlSurveyEntity.Name, actualSurveyEntity.Name);
       Assert.AreEqual(controlSurveyEntity.Description, actualSurveyEntity.Description);
