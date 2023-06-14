@@ -15,7 +15,7 @@ public sealed class SurveyEntityTypeConfiguration : IEntityTypeConfiguration<Sur
   /// <param name="builder">The builder to be used to configure the entity type.</param>
   public void Configure(EntityTypeBuilder<SurveyEntity> builder)
   {
-    builder.ToTable("surveys");
+    builder.ToTable("survey");
     builder.HasKey(e => e.SurveyId);
 
     builder.Property(entity => entity.SurveyId)
