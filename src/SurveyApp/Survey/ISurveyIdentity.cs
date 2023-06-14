@@ -2,12 +2,11 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.Survey
+namespace SurveyApp.Survey;
+
+/// <summary>Represents a survey identity.</summary>
+public interface ISurveyIdentity
 {
-  /// <summary>Represents a survey identity.</summary>
-  public interface ISurveyTemplateIdentity
-  {
-    /// <summary>Gets an object that represents an identity of a survey.</summary>
-    public Guid SurveyId { get; }
-  }
+  /// <summary>Gets an object that represents an identity of a survey.</summary>
+  public Guid SurveyId { get; }
 }

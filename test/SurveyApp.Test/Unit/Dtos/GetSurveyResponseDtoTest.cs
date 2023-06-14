@@ -2,32 +2,30 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.Web.Dtos.Test
+using SurveyApp.Survey;
+
+namespace SurveyApp.Web.Dtos.Test;
+
+[TestClass]
+public sealed class GetSurveyResponseDtoTest
 {
-  using SurveyApp.Survey;
-  using SurveyApp.Web.Dtos;
-
-  [TestClass]
-  public sealed class GetSurveyResponseDtoTest
+  [TestMethod]
+  public void Constructor_Should_Copy_Data()
   {
-    [TestMethod]
-    public void Constructor_Should_Copy_Data()
-    {
-      var controlSurveyEntity = new TestSurveyEntity();
-      var actualGetSurveyViewModel = new GetSurveyResponseDto(controlSurveyEntity);
+    var controlSurveyEntity = new TestSurveyEntity();
+    var actualGetSurveyViewModel = new GetSurveyResponseDto(controlSurveyEntity);
 
-      Assert.AreEqual(controlSurveyEntity.SurveyId, actualGetSurveyViewModel.SurveyId);
-      Assert.AreEqual(controlSurveyEntity.Name, actualGetSurveyViewModel.Name);
-      Assert.AreEqual(controlSurveyEntity.Description, actualGetSurveyViewModel.Description);
-    }
+    Assert.AreEqual(controlSurveyEntity.SurveyId, actualGetSurveyViewModel.SurveyId);
+    Assert.AreEqual(controlSurveyEntity.Name, actualGetSurveyViewModel.Name);
+    Assert.AreEqual(controlSurveyEntity.Description, actualGetSurveyViewModel.Description);
+  }
 
-    private sealed class TestSurveyEntity : ISurveyEntity
-    {
-      public Guid SurveyId { get; set; } = Guid.NewGuid();
+  private sealed class TestSurveyEntity : ISurveyEntity
+  {
+    public Guid SurveyId { get; set; } = Guid.NewGuid();
 
-      public string Name { get; } = Guid.NewGuid().ToString();
+    public string Name { get; } = Guid.NewGuid().ToString();
 
-      public string Description { get; } = Guid.NewGuid().ToString();
-    }
+    public string Description { get; } = Guid.NewGuid().ToString();
   }
 }

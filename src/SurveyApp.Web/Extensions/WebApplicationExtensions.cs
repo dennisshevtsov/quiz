@@ -2,27 +2,26 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace Microsoft.Extensions.DependencyInjection
+using SurveyApp.Data.Initialization;
+
+namespace Microsoft.Extensions.DependencyInjection;
+
+/// <summary>Extends a API of the <see cref="Microsoft.AspNetCore.Builder.WebApplication"/> class.</summary>
+public static class WebApplicationExtensions
 {
-  using SurveyApp.Data.Initialization;
-
-  /// <summary>Extends a API of the <see cref="Microsoft.AspNetCore.Builder.WebApplication"/> class.</summary>
-  public static class WebApplicationExtensions
+  /// <summary>Sets up the database.</summary>
+  /// <param name="app">The web application used to configure the HTTP pipeline, and routes.</param>
+  /// <returns>The web application used to configure the HTTP pipeline, and routes.</returns>
+  public static WebApplication SetUpDatabase(this WebApplication app)
   {
-    /// <summary>Sets up the database.</summary>
-    /// <param name="app">The web application used to configure the HTTP pipeline, and routes.</param>
-    /// <returns>The web application used to configure the HTTP pipeline, and routes.</returns>
-    public static WebApplication SetUpDatabase(this WebApplication app)
+    using (var scope = app.Services.CreateScope())
     {
-      using (var scope = app.Services.CreateScope())
-      {
-        scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>()
-                             .InitializeAsync(CancellationToken.None)
-                             .GetAwaiter()
-                             .GetResult();
-      }
-
-      return app;
+      scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>()
+                           .InitializeAsync(CancellationToken.None)
+                           .GetAwaiter()
+                           .GetResult();
     }
+
+    return app;
   }
 }
