@@ -4,7 +4,7 @@
 
 namespace SurveyApp.Web.Dtos.Test
 {
-  using SurveyApp.SurveyTemplate;
+  using SurveyApp.Survey;
   using SurveyApp.Web.Dtos;
 
   [TestClass]
@@ -21,7 +21,7 @@ namespace SurveyApp.Web.Dtos.Test
       Assert.AreEqual(controlSurveyEntity.Description, actualUpdateSurveyViewModel.Description);
     }
 
-    private sealed class TestSurveyEntity : ISurveyTemplateEntity
+    private sealed class TestSurveyEntity : ISurveyEntity
     {
       public Guid SurveyId { get; set; } = Guid.NewGuid();
 

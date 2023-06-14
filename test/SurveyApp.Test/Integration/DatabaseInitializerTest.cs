@@ -8,7 +8,7 @@ namespace SurveyApp.Data.Initialization.Test
   using Microsoft.Extensions.DependencyInjection;
 
   using SurveyApp.Data.Initialization;
-  using SurveyApp.SurveyTemplate.Data;
+  using SurveyApp.Survey.Data;
   using SurveyApp.Test.Integration;
 
   [TestClass]
@@ -30,15 +30,15 @@ namespace SurveyApp.Data.Initialization.Test
       await DbContext.Database.EnsureDeletedAsync(CancellationToken);
       await _databaseInitializer.InitializeAsync(CancellationToken);
 
-      Assert.AreEqual(0, await DbContext.Set<SurveyTemplateEntity>().CountAsync(CancellationToken));
+      Assert.AreEqual(0, await DbContext.Set<SurveyEntity>().CountAsync(CancellationToken));
 
       DbContext.Add(DatabaseInitializerTest.GenerateTestSurvey());
       await DbContext.SaveChangesAsync(CancellationToken);
 
-      Assert.AreEqual(1, await DbContext.Set<SurveyTemplateEntity>().CountAsync(CancellationToken));
+      Assert.AreEqual(1, await DbContext.Set<SurveyEntity>().CountAsync(CancellationToken));
     }
 
-    private static SurveyTemplateEntity GenerateTestSurvey() => new()
+    private static SurveyEntity GenerateTestSurvey() => new()
     {
       Name = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),

@@ -2,10 +2,10 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.SurveyTemplate
+namespace SurveyApp.Survey
 {
   /// <summary>Represents a survey entity.</summary>
-  public interface ISurveyTemplateEntity : ISurveyTemplateIdentity
+  public interface ISurveyEntity : ISurveyIdentity
   {
     /// <summary>Gets an object that represents a name of a survey.</summary>
     public string Name { get; }

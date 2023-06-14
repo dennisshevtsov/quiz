@@ -6,7 +6,7 @@ namespace SurveyApp.Data
 {
   using Microsoft.EntityFrameworkCore;
 
-  using SurveyApp.SurveyTemplate.Data;
+  using SurveyApp.Survey.Data;
 
   /// <summary>Represents a session with the database and can be used to query and save instances of your entities.</summary>
   public sealed class AppDbContext : DbContext
@@ -21,7 +21,7 @@ namespace SurveyApp.Data
     /// <param name="modelBuilder">An object that provides a simple API surface for configuring the model.</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.ApplyConfiguration(new SurveyTemplateEntityTypeConfiguration());
+      modelBuilder.ApplyConfiguration(new SurveyEntityTypeConfiguration());
     }
   }
 }

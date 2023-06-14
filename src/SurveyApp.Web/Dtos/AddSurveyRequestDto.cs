@@ -7,10 +7,10 @@ namespace SurveyApp.Web.Dtos
   using System.ComponentModel.DataAnnotations;
   using System.Text.Json.Serialization;
 
-  using SurveyApp.SurveyTemplate;
+  using SurveyApp.Survey;
 
   /// <summary>Represents data to add a survey.</summary>
-  public sealed class AddSurveyRequestDto : ISurveyTemplateEntity
+  public sealed class AddSurveyRequestDto : ISurveyEntity
   {
     /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.AddSurveyRequestDto"/> class.</summary>
     public AddSurveyRequestDto() {}

@@ -2,10 +2,10 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.SurveyTemplate.Data
+namespace SurveyApp.Survey.Data
 {
   /// <summary>Represents a survey entity.</summary>
-  public sealed class SurveyTemplateEntity : ISurveyTemplateEntity
+  public sealed class SurveyTemplateEntity : ISurveyEntity
   {
     /// <summary>Initializes a new instance of the <see cref="Survey.Infrastructure.Survey.SurveyEntity"/> class.</summary>
     public SurveyTemplateEntity()
@@ -16,7 +16,7 @@ namespace SurveyApp.SurveyTemplate.Data
 
     /// <summary>Initializes a new instance of the <see cref="Survey.Infrastructure.Survey.SurveyEntity"/> class.</summary>
     /// <param name="surveyEntity">An object that represents a survey entity.</param>
-    public SurveyTemplateEntity(ISurveyTemplateEntity surveyEntity) : this()
+    public SurveyTemplateEntity(ISurveyEntity surveyEntity) : this()
     {
       SurveyId    = surveyEntity.SurveyId;
       Name        = surveyEntity.Name;
