@@ -2,12 +2,11 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.Data
+namespace SurveyApp.Data;
+
+/// <summary>Represents database options.</summary>
+public sealed class DatabaseOptions
 {
-  /// <summary>Represents database options.</summary>
-  public sealed class DatabaseOptions
-  {
-    /// <summary>Gets/sets an object that represents a connection string of the database.</summary>
-    public string? ConnectionString { get; set; }
-  }
+  /// <summary>Gets/sets an object that represents a connection string of the database.</summary>
+  public string? ConnectionString { get; set; }
 }
