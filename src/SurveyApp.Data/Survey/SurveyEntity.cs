@@ -2,10 +2,12 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using SurveyApp.Data;
+
 namespace SurveyApp.Survey.Data;
 
 /// <summary>Represents a survey entity.</summary>
-public sealed class SurveyEntity : ISurveyEntity
+public sealed class SurveyEntity : EntityBase, ISurveyEntity
 {
   /// <summary>Initializes a new instance of the <see cref="Survey.Infrastructure.Survey.SurveyEntity"/> class.</summary>
   public SurveyEntity()

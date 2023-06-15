@@ -8,6 +8,8 @@ using Microsoft.Extensions.Options;
 
 using SurveyApp.Data;
 using SurveyApp.Data.Initialization;
+using SurveyApp.Data.Survey;
+using SurveyApp.Survey;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +24,7 @@ public static class DataServicesExtensions
   {
     services.SetUpDatabase(configuration);
     services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
+    services.AddScoped<ISurveyRepository, SurveyRepository>();
 
     return services;
   }
