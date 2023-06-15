@@ -12,7 +12,7 @@ using SurveyApp.Data.Initialization;
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>Extends a API of the <see cref="IServiceCollection"/> class.</summary>
-public static class InfrastructureExtensions
+public static class DataServicesExtensions
 {
   /// <summary>Registers the application services.</summary>
   /// <param name="services">An object that specifies the contract for a collection of service descriptors.</param>
