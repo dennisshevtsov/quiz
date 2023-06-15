@@ -10,8 +10,8 @@ namespace SurveyApp.Data;
 /// <summary>Provides a simple API to persistence of an entity.</summary>
 public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IRepository<TEntity, TIdentity>
   where TEntityImpl : EntityBase, TEntity
-  where TEntity : class, TIdentity
-  where TIdentity : class
+  where TEntity     : class, TIdentity
+  where TIdentity   : class
 {
   /// <summary>Initializes a new instance of the <see cref="RepositoryBase{TEntity, TIdentity}"/> class.</summary>
   /// <param name="dbContext">An object that represents a session with the database and can be used to query and save instances of your entities.</param>
@@ -49,16 +49,16 @@ public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IReposit
   /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future.</returns>
   public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken)
   {
-    var dbEntity = EntityBase.Create<TEntity, TEntityImpl>(entity);
-    var dbEntityEntry = DbContext.Entry(dbEntity);
+    var dataEntity = EntityBase.Create<TEntity, TEntityImpl>(entity);
+    var dataEntityEntry = DbContext.Entry(dataEntity);
 
-    dbEntityEntry.State = EntityState.Added;
-    SetCollectionsAsUnchanged(dbEntityEntry);
+    dataEntityEntry.State = EntityState.Added;
+    SetCollectionsAsUnchanged(dataEntityEntry);
 
     await DbContext.SaveChangesAsync(cancellationToken);
-    dbEntityEntry.State = EntityState.Detached;
+    dataEntityEntry.State = EntityState.Detached;
 
-    return dbEntity;
+    return dataEntity;
   }
 
   /// <summary>Updates an entity.</summary>
@@ -69,14 +69,16 @@ public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IReposit
   /// <returns>An object that represents an asynchronous operation.</returns>
   public async Task UpdateAsync(TEntity originalEntity, TEntity newEntity, IEnumerable<string> properties, CancellationToken cancellationToken)
   {
-    var dbEntity = EntityBase.Create<TEntity, TEntityImpl>(originalEntity);
-    var dbEntityEntry = DbContext.Attach(dbEntity);
+    var originalDataEntity = EntityBase.Create<TEntity, TEntityImpl>(originalEntity);
+    var originalDataEntityEntry = DbContext.Attach(originalDataEntity);
 
-    dbEntity.Update(newEntity, properties);
-    SetCollectionsAsUnchanged(dbEntityEntry);
+    var newDataEntity = EntityBase.Create<TEntity, TEntityImpl>(newEntity);
+
+    originalDataEntity.Update(newDataEntity, properties);
+    SetCollectionsAsUnchanged(originalDataEntityEntry);
 
     await DbContext.SaveChangesAsync(cancellationToken);
-    dbEntityEntry.State = EntityState.Detached;
+    originalDataEntityEntry.State = EntityState.Detached;
   }
 
   /// <summary>Deletes an entity.</summary>
