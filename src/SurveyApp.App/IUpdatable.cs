@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp
+namespace SurveyApp.App
 {
   /// <summary>Provides a simple API to update an entity.</summary>
   /// <typeparam name="TEntity">A type of an entity from which this entity should be updated.</typeparam>
