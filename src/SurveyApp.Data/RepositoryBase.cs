@@ -9,7 +9,7 @@ namespace SurveyApp.Data;
 
 /// <summary>Provides a simple API to persistence of an entity.</summary>
 public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IRepository<TEntity, TIdentity>
-  where TEntityImpl : EntityBase, TEntity
+  where TEntityImpl : EntityBase, TEntity, IUpdatable<TEntity>
   where TEntity     : class, TIdentity
   where TIdentity   : class
 {
@@ -72,9 +72,7 @@ public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IReposit
     var originalDataEntity = EntityBase.Create<TEntity, TEntityImpl>(originalEntity);
     var originalDataEntityEntry = DbContext.Attach(originalDataEntity);
 
-    var newDataEntity = EntityBase.Create<TEntity, TEntityImpl>(newEntity);
-
-    originalDataEntity.Update(newDataEntity, properties);
+    originalDataEntity.Update(newEntity, properties);
     SetCollectionsAsUnchanged(originalDataEntityEntry);
 
     await DbContext.SaveChangesAsync(cancellationToken);
