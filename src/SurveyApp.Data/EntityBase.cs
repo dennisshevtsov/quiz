@@ -5,7 +5,7 @@
 namespace SurveyApp.Data;
 
 /// <summary>Represents the entity base.</summary>
-public abstract class EntityBase : IUpdatable<EntityBase>
+public abstract class EntityBase
 {
   /// <summary>Gets an object that represents an ID of an entity.</summary>
   public Guid Id { get; protected set; }
@@ -19,7 +19,7 @@ public abstract class EntityBase : IUpdatable<EntityBase>
   /// <summary>Updates this entity.</summary>
   /// <param name="newEntity">An object that represents an entity from which this entity should be updated.</param>
   /// <param name="properties">An object that represents a collection of properties to update.</param>
-  public void Update(EntityBase newEntity, IEnumerable<string> properties)
+  protected void Update(object newEntity, IEnumerable<string> properties)
   {
     foreach (var property in properties)
     {
@@ -30,7 +30,7 @@ public abstract class EntityBase : IUpdatable<EntityBase>
   /// <summary>Updates this entity.</summary>
   /// <param name="newEntity">An object that represents an entity from which this entity should be updated.</param>
   /// <param name="property">An object that represents a name of a property.</param>
-  protected virtual void Update(EntityBase newEntity, string property)
+  protected virtual void Update(object newEntity, string property)
   {
     var originalProperty = GetType().GetProperty(property)!;
     var newProperty = newEntity.GetType().GetProperty(property)!;
