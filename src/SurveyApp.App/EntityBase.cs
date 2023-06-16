@@ -5,7 +5,7 @@
 namespace SurveyApp.App;
 
 /// <summary>Represents an entity base.</summary>
-public abstract class EntityBase : IUpdatable<object>
+public abstract class EntityBase
 {
   /// <summary>Gets an object that represents a collection of related entities.</summary>
   public IEnumerable<string> Relations() =>
@@ -27,7 +27,7 @@ public abstract class EntityBase : IUpdatable<object>
   /// <summary>Updates this entity.</summary>
   /// <param name="newEntity">An object that represents an entity from which this entity should be updated.</param>
   /// <returns>An object that represents a collection of updated properties.</returns>
-  public IEnumerable<string> Update(object newEntity)
+  protected IEnumerable<string> Update(object newEntity)
   {
     var updatingProperties = GetUpdatingProperties();
     var updatedProperties = updatingProperties;
@@ -39,9 +39,14 @@ public abstract class EntityBase : IUpdatable<object>
   /// <param name="newEntity">An object that represents an entity from which this entity should be updated.</param>
   /// <param name="propertiesToUpdate">An object that represents a collection of properties to update.</param>
   /// <returns>An object that represents a collection of updated properties.</returns>
-  public IEnumerable<string> Update(object newEntity, IEnumerable<string> propertiesToUpdate) =>
+  protected IEnumerable<string> Update(object newEntity, IEnumerable<string> propertiesToUpdate) =>
     Update(newEntity, propertiesToUpdate, GetUpdatingProperties());
 
+  /// <summary>Updates this entity.</summary>
+  /// <param name="newEntity">An object that represents an entity from which this entity should be updated.</param>
+  /// <param name="propertiesToUpdate">An object that represents a collection of properties to update.</param>
+  /// <param name="updatingProperties">An object that represents a collection of properties that can be updated.</param>
+  /// <returns></returns>
   protected virtual IEnumerable<string> Update(object newEntity, IEnumerable<string> propertiesToUpdate, ISet<string> updatingProperties)
   {
     var updatedProperties = new List<string>();
