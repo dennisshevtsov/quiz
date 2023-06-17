@@ -22,8 +22,4 @@
     <ProjectReference Include="..\SurveyApp.Data\SurveyApp.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\" />
-  </ItemGroup>
-
 </Project>
