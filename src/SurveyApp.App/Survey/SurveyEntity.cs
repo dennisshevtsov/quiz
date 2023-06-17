@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using SurveyApp.Survey;
+using SurveyApp.App;
 
-namespace SurveyApp.App.Survey;
+namespace SurveyApp.Survey.App;
 
 /// <summary>Represents a survey entity.</summary>
 public sealed class SurveyEntity : EntityBase, ISurveyEntity, IUpdatable<ISurveyEntity>
