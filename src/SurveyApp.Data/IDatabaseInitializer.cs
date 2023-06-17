@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.Data.Initialization;
+namespace SurveyApp.Data;
 
 /// <summary>Provides a simple API to initialize the database.</summary>
 public interface IDatabaseInitializer

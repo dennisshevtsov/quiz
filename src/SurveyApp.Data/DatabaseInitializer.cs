@@ -4,7 +4,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
-namespace SurveyApp.Data.Initialization;
+namespace SurveyApp.Data;
 
 /// <summary>Provides a simple API to initialize the database.</summary>
 public sealed class DatabaseInitializer : IDatabaseInitializer
