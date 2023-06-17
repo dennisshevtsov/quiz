@@ -25,7 +25,7 @@ public abstract class IntegrationTestBase
     var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json")
                                                   .Build();
 
-    _scope = new ServiceCollection().SetUpInfrastructure(configuration)
+    _scope = new ServiceCollection().SetUpData(configuration)
                                     .BuildServiceProvider()
                                     .CreateScope();
 
