@@ -5,9 +5,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-using SurveyApp.Survey;
-
-namespace SurveyApp.Web.Dtos;
+namespace SurveyApp.Survey.Web;
 
 /// <summary>Represents data to add a survey.</summary>
 public sealed class AddSurveyRequestDto : ISurveyEntity
