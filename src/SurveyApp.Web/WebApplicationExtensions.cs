@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using SurveyApp.Data.Initialization;
+using SurveyApp.Data;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace Microsoft.AspNetCore.Builder;
 
 /// <summary>Extends a API of the <see cref="Microsoft.AspNetCore.Builder.WebApplication"/> class.</summary>
 public static class WebApplicationExtensions

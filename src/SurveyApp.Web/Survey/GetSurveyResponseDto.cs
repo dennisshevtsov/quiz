@@ -2,9 +2,7 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using SurveyApp.Survey;
-
-namespace SurveyApp.Web.Dtos;
+namespace SurveyApp.Survey.Web;
 
 /// <summary>Represents a survey.</summary>
 public sealed class GetSurveyResponseDto : ISurveyEntity
