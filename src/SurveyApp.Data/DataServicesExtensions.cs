@@ -16,11 +16,11 @@ namespace Microsoft.Extensions.DependencyInjection;
 /// <summary>Extends a API of the <see cref="IServiceCollection"/> class.</summary>
 public static class DataServicesExtensions
 {
-  /// <summary>Registers the application services.</summary>
+  /// <summary>Registers the data services.</summary>
   /// <param name="services">An object that specifies the contract for a collection of service descriptors.</param>
   /// <param name="configuration">An object that represents a set of key/value application configuration properties.</param>
   /// <returns>An object that specifies the contract for a collection of service descriptors.</returns>
-  public static IServiceCollection SetUpInfrastructure(this IServiceCollection services, IConfiguration configuration)
+  public static IServiceCollection SetUpData(this IServiceCollection services, IConfiguration configuration)
   {
     services.SetUpDatabase(configuration);
     services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
