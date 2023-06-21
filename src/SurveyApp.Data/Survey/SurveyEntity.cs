@@ -32,7 +32,7 @@ public sealed class SurveyEntity : EntityBase, ISurveyEntity, IUpdatable<ISurvey
   }
 
   /// <summary>Gets an object that represents an identity of a survey.</summary>
-  public Guid SurveyId { get; set; }
+  public Guid SurveyId { get => Id; set => Id = value; }
 
   /// <summary>Gets an object that represents a name of a survey.</summary>
   public string Name { get; set; }
