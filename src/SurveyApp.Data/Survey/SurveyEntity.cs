@@ -18,15 +18,21 @@ public sealed class SurveyEntity : EntityBase, ISurveyEntity, IUpdatable<ISurvey
 
   /// <summary>Initializes a new instance of the <see cref="Survey.Infrastructure.Survey.SurveyEntity"/> class.</summary>
   /// <param name="surveyEntity">An object that represents a survey entity.</param>
-  public SurveyEntity(ISurveyEntity surveyEntity) : this()
+  public SurveyEntity(ISurveyIdentity surveyIdentity) : this()
   {
-    SurveyId    = surveyEntity.SurveyId;
+    SurveyId = surveyIdentity.SurveyId;
+  }
+
+  /// <summary>Initializes a new instance of the <see cref="Survey.Infrastructure.Survey.SurveyEntity"/> class.</summary>
+  /// <param name="surveyEntity">An object that represents a survey entity.</param>
+  public SurveyEntity(ISurveyEntity surveyEntity) : this((ISurveyIdentity)surveyEntity)
+  {
     Name        = surveyEntity.Name;
     Description = surveyEntity.Description;
   }
 
   /// <summary>Gets an object that represents an identity of a survey.</summary>
-  public Guid SurveyId { get; set; }
+  public Guid SurveyId { get => Id; set => Id = value; }
 
   /// <summary>Gets an object that represents a name of a survey.</summary>
   public string Name { get; set; }
