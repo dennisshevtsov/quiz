@@ -26,13 +26,4 @@ public sealed class SurveyEntityTest
     Assert.AreEqual(controlSurveyEntity.Name, actualSurveyEntity.Name);
     Assert.AreEqual(controlSurveyEntity.Description, actualSurveyEntity.Description);
   }
-
-  private sealed class TestSurveyEntity : ISurveyEntity
-  {
-    public Guid SurveyId { get; } = Guid.NewGuid();
-
-    public string Name { get; } = Guid.NewGuid().ToString();
-
-    public string Description { get; } = Guid.NewGuid().ToString();
-  }
 }
