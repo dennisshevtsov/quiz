@@ -13,8 +13,7 @@ public sealed class SurveyEntityTest
     var controlSurveyEntity = new TestSurveyEntity();
     var actualSurveyEntity = new SurveyEntity(controlSurveyEntity);
 
-    Assert.AreEqual(controlSurveyEntity.Name, actualSurveyEntity.Name);
-    Assert.AreEqual(controlSurveyEntity.Description, actualSurveyEntity.Description);
+    TestSurveyEntity.AreEqual(controlSurveyEntity, actualSurveyEntity);
   }
 
   [TestMethod]
@@ -23,7 +22,6 @@ public sealed class SurveyEntityTest
     var controlSurveyEntity = new TestSurveyEntity();
     var actualSurveyEntity = new SurveyEntity(controlSurveyEntity);
 
-    Assert.AreEqual(controlSurveyEntity.Name, actualSurveyEntity.Name);
-    Assert.AreEqual(controlSurveyEntity.Description, actualSurveyEntity.Description);
+    TestSurveyEntity.AreEqual(controlSurveyEntity, actualSurveyEntity);
   }
 }

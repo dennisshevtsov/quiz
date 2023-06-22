@@ -11,4 +11,10 @@ public sealed class TestSurveyEntity : ISurveyEntity
   public string Name { get; } = Guid.NewGuid().ToString();
 
   public string Description { get; } = Guid.NewGuid().ToString();
+
+  public static void AreEqual(ISurveyEntity control, ISurveyEntity actual)
+  {
+    Assert.AreEqual(control.Name, actual.Name);
+    Assert.AreEqual(control.Description, actual.Description);
+  }
 }
