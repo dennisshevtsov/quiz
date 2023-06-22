@@ -14,6 +14,7 @@ public sealed class TestSurveyEntity : ISurveyEntity
 
   public static void AreEqual(ISurveyEntity control, ISurveyEntity actual)
   {
+    Assert.AreEqual(control.SurveyId, actual.SurveyId);
     Assert.AreEqual(control.Name, actual.Name);
     Assert.AreEqual(control.Description, actual.Description);
   }
