@@ -8,16 +8,7 @@ namespace SurveyApp.Survey.Data.Test;
 public sealed class SurveyEntityTest
 {
   [TestMethod]
-  public void Constructor_Should_Copy_Data()
-  {
-    var controlSurveyEntity = new TestSurveyEntity();
-    var actualSurveyEntity = new SurveyEntity(controlSurveyEntity);
-
-    TestSurveyEntity.AreEqual(controlSurveyEntity, actualSurveyEntity);
-  }
-
-  [TestMethod]
-  public void Constructor_Should_Copy_Entity()
+  public void Constructor_SurveyEntityPassed_SurveyEntityCreated()
   {
     var controlSurveyEntity = new TestSurveyEntity();
     var actualSurveyEntity = new SurveyEntity(controlSurveyEntity);
