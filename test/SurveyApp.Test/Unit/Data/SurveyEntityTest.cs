@@ -10,9 +10,18 @@ public sealed class SurveyEntityTest
   [TestMethod]
   public void Constructor_SurveyEntityPassed_SurveyEntityCreated()
   {
-    var controlSurveyEntity = new TestSurveyEntity();
-    var actualSurveyEntity = new SurveyEntity(controlSurveyEntity);
+    TestSurveyEntity controlSurveyEntity = new();
+    SurveyEntity actualSurveyEntity = new(controlSurveyEntity);
 
     TestSurveyEntity.AreEqual(controlSurveyEntity, actualSurveyEntity);
+  }
+
+  [TestMethod]
+  public void Constructor_SurveyIdentityPassed_SurveyEntityCreated()
+  {
+    TestSurveyIdentity controlSurveyIdentity = new();
+    SurveyEntity actualSurveyEntity = new(controlSurveyIdentity);
+
+    TestSurveyIdentity.AreEqual(controlSurveyIdentity, actualSurveyEntity);
   }
 }
