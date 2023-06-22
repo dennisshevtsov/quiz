@@ -8,31 +8,29 @@ namespace SurveyApp.Survey.Data.Test;
 public sealed class SurveyEntityTest
 {
   [TestMethod]
-  public void Constructor_Should_Copy_Data()
+  public void Constructor_SurveyEntityPassed_SurveyEntityCreated()
   {
-    var controlSurveyEntity = new TestSurveyEntity();
-    var actualSurveyEntity = new SurveyEntity(controlSurveyEntity);
+    TestSurveyEntity controlSurveyEntity = new();
+    SurveyEntity actualSurveyEntity = new(controlSurveyEntity);
 
-    Assert.AreEqual(controlSurveyEntity.Name, actualSurveyEntity.Name);
-    Assert.AreEqual(controlSurveyEntity.Description, actualSurveyEntity.Description);
+    TestSurveyEntity.AreEqual(controlSurveyEntity, actualSurveyEntity);
   }
 
   [TestMethod]
-  public void Constructor_Should_Copy_Entity()
+  public void Constructor_SurveyIdentityPassed_SurveyEntityCreated()
   {
-    var controlSurveyEntity = new TestSurveyEntity();
-    var actualSurveyEntity = new SurveyEntity(controlSurveyEntity);
+    TestSurveyIdentity controlSurveyIdentity = new();
+    SurveyEntity actualSurveyEntity = new(controlSurveyIdentity);
 
-    Assert.AreEqual(controlSurveyEntity.Name, actualSurveyEntity.Name);
-    Assert.AreEqual(controlSurveyEntity.Description, actualSurveyEntity.Description);
+    Assert.AreEqual(controlSurveyIdentity.SurveyId, actualSurveyEntity.SurveyId);
   }
 
-  private sealed class TestSurveyEntity : ISurveyEntity
+  [TestMethod]
+  public void Constructor_SurveyIdentityPassed_IdPopulated()
   {
-    public Guid SurveyId { get; } = Guid.NewGuid();
+    TestSurveyIdentity controlSurveyIdentity = new();
+    SurveyEntity actualSurveyEntity = new(controlSurveyIdentity);
 
-    public string Name { get; } = Guid.NewGuid().ToString();
-
-    public string Description { get; } = Guid.NewGuid().ToString();
+    Assert.AreEqual(controlSurveyIdentity.SurveyId, actualSurveyEntity.Id);
   }
 }
