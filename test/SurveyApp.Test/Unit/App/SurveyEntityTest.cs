@@ -7,4 +7,12 @@ namespace SurveyApp.Survey.App.Test;
 [TestClass]
 public sealed class SurveyEntityTest
 {
+  [TestMethod]
+  public void Constructor_SurveyEntityPassed_SurveyEntityCreated()
+  {
+    TestSurveyEntity controlSurveyEntity = new();
+    SurveyEntity actualSurveyEntity = new(controlSurveyEntity);
+
+    TestSurveyEntity.AreEqual(controlSurveyEntity, actualSurveyEntity);
+  }
 }
