@@ -15,4 +15,13 @@ public sealed class SurveyEntityTest
 
     TestSurveyEntity.AreEqual(controlSurveyEntity, actualSurveyEntity);
   }
+
+  [TestMethod]
+  public void Constructor_SurveyIdentityPassed_SurveyEntityCreated()
+  {
+    TestSurveyIdentity controlSurveyIdentity = new();
+    SurveyEntity actualSurveyEntity = new(controlSurveyIdentity);
+
+    Assert.AreEqual(controlSurveyIdentity.SurveyId, actualSurveyEntity.SurveyId);
+  }
 }
