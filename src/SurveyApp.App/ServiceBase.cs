@@ -10,7 +10,7 @@ namespace SurveyApp.App;
 /// <typeparam name="TIdentity">An identity type.</typeparam>
 public abstract class ServiceBase<TBusinessEntity, TEntity, TIdentity> : IService<TEntity, TIdentity>
   where TBusinessEntity : EntityBase, TEntity, IUpdatable<TEntity>
-  where TEntity : TIdentity
+  where TEntity         : TIdentity
 {
   private readonly IRepository<TEntity, TIdentity> _repository;
 
