@@ -27,9 +27,9 @@ public abstract class ServiceBase<TBusinessEntity, TEntity, TIdentity> : IServic
   /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="BookApi.Author.IAuthorEntity"/>. The result can be null.</returns>
   public virtual Task<TEntity?> GetAsync(TIdentity identity, CancellationToken cancellationToken)
   {
-    var entity = EntityBase.Create<TIdentity, TBusinessEntity>(identity);
+    TBusinessEntity businessEntity = EntityBase.Create<TIdentity, TBusinessEntity>(identity);
 
-    return _repository.GetAsync(identity, entity.Relations(), cancellationToken);
+    return _repository.GetAsync(identity, businessEntity.Relations(), cancellationToken);
   }
 
   /// <summary>Gets an entity.</summary>
@@ -39,9 +39,9 @@ public abstract class ServiceBase<TBusinessEntity, TEntity, TIdentity> : IServic
   /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="BookApi.Author.IAuthorEntity"/>. The result can be null.</returns>
   public Task<TEntity?> GetAsync(TIdentity identity, IEnumerable<string> relations, CancellationToken cancellationToken)
   {
-    var entity = EntityBase.Create<TIdentity, TBusinessEntity>(identity);
+    TBusinessEntity businessEntity = EntityBase.Create<TIdentity, TBusinessEntity>(identity);
 
-    return _repository.GetAsync(identity, entity.Relations(relations), cancellationToken);
+    return _repository.GetAsync(identity, businessEntity.Relations(relations), cancellationToken);
   }
 
   /// <summary>Adds an entity.</summary>
@@ -58,8 +58,8 @@ public abstract class ServiceBase<TBusinessEntity, TEntity, TIdentity> : IServic
   /// <returns>An object that represents an asynchronous operation.</returns>
   public virtual Task UpdateAsync(TEntity originalEntity, TEntity newEntity, CancellationToken cancellationToken)
   {
-    var businessEntity = EntityBase.Create<TEntity, TBusinessEntity>(originalEntity);
-    var updatedProperties = businessEntity.Update(newEntity!);
+    TBusinessEntity     businessEntity    = EntityBase.Create<TEntity, TBusinessEntity>(originalEntity);
+    IEnumerable<string> updatedProperties = businessEntity.Update(newEntity!);
 
     return _repository.UpdateAsync(originalEntity, newEntity, updatedProperties, cancellationToken);
   }
@@ -72,8 +72,8 @@ public abstract class ServiceBase<TBusinessEntity, TEntity, TIdentity> : IServic
   /// <returns>An object that represents an asynchronous operation.</returns>
   public virtual Task UpdateAsync(TEntity originalEntity, TEntity newEntity, IEnumerable<string> properties, CancellationToken cancellationToken)
   {
-    var businessEntity = EntityBase.Create<TEntity, TBusinessEntity>(originalEntity);
-    var updatedProperties = businessEntity.Update(newEntity!, properties);
+    TBusinessEntity     businessEntity    = EntityBase.Create<TEntity, TBusinessEntity>(originalEntity);
+    IEnumerable<string> updatedProperties = businessEntity.Update(newEntity!, properties);
 
     return _repository.UpdateAsync(originalEntity, newEntity, updatedProperties, cancellationToken);
   }
