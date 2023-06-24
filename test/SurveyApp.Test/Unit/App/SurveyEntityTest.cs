@@ -11,7 +11,7 @@ public sealed class SurveyEntityTest
   public void Constructor_SurveyEntityPassed_SurveyEntityCreated()
   {
     TestSurveyEntity controlSurveyEntity = new();
-    SurveyEntity actualSurveyEntity = new(controlSurveyEntity);
+    SurveyEntity     actualSurveyEntity  = new(controlSurveyEntity);
 
     TestSurveyEntity.AreEqual(controlSurveyEntity, actualSurveyEntity);
   }
@@ -20,7 +20,7 @@ public sealed class SurveyEntityTest
   public void Constructor_SurveyIdentityPassed_SurveyEntityCreated()
   {
     TestSurveyIdentity controlSurveyIdentity = new();
-    SurveyEntity actualSurveyEntity = new(controlSurveyIdentity);
+    SurveyEntity       actualSurveyEntity    = new(controlSurveyIdentity);
 
     Assert.AreEqual(controlSurveyIdentity.SurveyId, actualSurveyEntity.SurveyId);
   }
@@ -41,7 +41,7 @@ public sealed class SurveyEntityTest
   public void Update_SurveyEntityPassed_UpdatablePropertiesUpdated()
   {
     TestSurveyIdentity originalSurveyIdentity = new();
-    TestSurveyEntity newSurveyEntity = new();
+    TestSurveyEntity   newSurveyEntity        = new();
 
     SurveyEntity actualSurveyEntity = new(originalSurveyIdentity);
     actualSurveyEntity.Update(newSurveyEntity);
