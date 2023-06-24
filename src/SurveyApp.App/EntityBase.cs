@@ -22,8 +22,8 @@ public abstract class EntityBase
   {
     IEnumerable<string> avalable = Relations();
 
-    return avalable.Where(relation => avalable.Contains(relation))
-                   .ToHashSet(StringComparer.OrdinalIgnoreCase);
+    return relations.Where(relation => avalable.Contains(relation))
+                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
   }
 
   /// <summary>Updates this entity.</summary>
