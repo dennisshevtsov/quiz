@@ -18,4 +18,10 @@ public sealed class TestSurveyEntity : ISurveyEntity
     Assert.AreEqual(control.Name, actual.Name);
     Assert.AreEqual(control.Description, actual.Description);
   }
+
+  public static void ArePartiallyEqual(ISurveyEntity control, ISurveyEntity actual)
+  {
+    Assert.AreEqual(control.Name, actual.Name);
+    Assert.AreEqual(control.Description, actual.Description);
+  }
 }
