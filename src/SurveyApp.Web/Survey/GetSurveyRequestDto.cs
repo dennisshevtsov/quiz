@@ -7,10 +7,10 @@ namespace SurveyApp.Survey.Web;
 /// <summary>Represents a codition to query a survey.</summary>
 public sealed class GetSurveyRequestDto : ISurveyIdentity
 {
-  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.GetSurveyRequestDto"/> class.</summary>
+  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Survey.Web.GetSurveyRequestDto"/> class.</summary>
   public GetSurveyRequestDto() {}
 
-  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.GetSurveyRequestDto"/> class.</summary>
+  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Survey.Web.GetSurveyRequestDto"/> class.</summary>
   /// <param name="surveyId">An object that represents an ID of a survey.</param>
   public GetSurveyRequestDto(Guid surveyId)
   {

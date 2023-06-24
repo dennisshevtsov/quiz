@@ -7,14 +7,14 @@ namespace SurveyApp.Survey.Web;
 /// <summary>Represents a collection of surveys.</summary>
 public sealed class GetSurveyCollectionResponseDto
 {
-  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.GetSurveyCollectionResponseDto"/> class.</summary>
-  /// <param name="surveyEntityCollection">An object that represents a collection of the <see cref="SurveyApp.Domain.Entities.ISurveyEntity"/> class.</param>
+  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Survey.Web.GetSurveyCollectionResponseDto"/> class.</summary>
+  /// <param name="surveyEntityCollection">An object that represents a collection of the <see cref="SurveyApp.Survey.ISurveyEntity"/> class.</param>
   public GetSurveyCollectionResponseDto(ISurveyEntity[] surveyEntityCollection)
   {
     Surveys = GetSurveyCollectionResponseDto.ToViewModelCollection(surveyEntityCollection);
   }
 
-  /// <summary>Gets an object that represents a collection of the <see cref="SurveyApp.Web.Dtos.GetSurveyResponseDto"/>.</summary>
+  /// <summary>Gets an object that represents a collection of the <see cref="SurveyApp.Survey.Web.GetSurveyResponseDto"/>.</summary>
   public GetSurveyResponseDto[] Surveys { get; }
 
   private static GetSurveyResponseDto[] ToViewModelCollection(ISurveyEntity[] surveyEntityCollection)

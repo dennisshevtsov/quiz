@@ -10,7 +10,7 @@ namespace SurveyApp.Survey.Web;
 /// <summary>Represents data to add a survey.</summary>
 public sealed class AddSurveyRequestDto : ISurveyEntity
 {
-  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.AddSurveyRequestDto"/> class.</summary>
+  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Survey.Web.AddSurveyRequestDto"/> class.</summary>
   public AddSurveyRequestDto() {}
 
   /// <summary>Gets an object that represents an identity of a survey.</summary>
