@@ -21,8 +21,6 @@ public sealed class DatabaseInitializer : IDatabaseInitializer
   /// <summary>Initializes the database.</summary>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation.</returns>
-  public Task InitializeAsync(CancellationToken cancellationToken)
-  {
-    return _dbContext.Database.EnsureCreatedAsync(cancellationToken);
-  }
+  public Task InitializeAsync(CancellationToken cancellationToken) =>
+    _dbContext.Database.EnsureCreatedAsync(cancellationToken);
 }

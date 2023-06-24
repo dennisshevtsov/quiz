@@ -13,7 +13,7 @@ public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IReposit
   where TEntity     : class, TIdentity
   where TIdentity   : class
 {
-  /// <summary>Initializes a new instance of the <see cref="RepositoryBase{TEntity, TIdentity}"/> class.</summary>
+  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Data.RepositoryBase{TEntityImpl, TEntity, TIdentity}"/> class.</summary>
   /// <param name="dbContext">An object that represents a session with the database and can be used to query and save instances of your entities.</param>
   protected RepositoryBase(DbContext dbContext)
   {
@@ -30,12 +30,12 @@ public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IReposit
   /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future.</returns>
   public async Task<TEntity?> GetAsync(TIdentity identity, IEnumerable<string> relations, CancellationToken cancellationToken)
   {
-    var dataEntity = EntityBase.Create<TIdentity, TEntityImpl>(identity);
-    var query = DbContext.Set<TEntityImpl>()
-                         .AsNoTracking()
-                         .Where(entity => entity.Id == dataEntity.Id);
+    TEntityImpl dataEntity        = EntityBase.Create<TIdentity, TEntityImpl>(identity);
+    IQueryable<TEntityImpl> query = DbContext.Set<TEntityImpl>()
+                                             .AsNoTracking()
+                                             .Where(entity => entity.Id == dataEntity.Id);
 
-    foreach (var relation in dataEntity.Relations(relations))
+    foreach (string relation in dataEntity.Relations(relations))
     {
       query = query.Include(relation);
     }
@@ -49,8 +49,8 @@ public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IReposit
   /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future.</returns>
   public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken)
   {
-    var dataEntity = EntityBase.Create<TEntity, TEntityImpl>(entity);
-    var dataEntityEntry = DbContext.Entry(dataEntity);
+    TEntityImpl dataEntity = EntityBase.Create<TEntity, TEntityImpl>(entity);
+    EntityEntry<TEntityImpl> dataEntityEntry = DbContext.Entry(dataEntity);
 
     dataEntityEntry.State = EntityState.Added;
     SetCollectionsAsUnchanged(dataEntityEntry);
@@ -69,8 +69,8 @@ public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IReposit
   /// <returns>An object that represents an asynchronous operation.</returns>
   public async Task UpdateAsync(TEntity originalEntity, TEntity newEntity, IEnumerable<string> properties, CancellationToken cancellationToken)
   {
-    var originalDataEntity = EntityBase.Create<TEntity, TEntityImpl>(originalEntity);
-    var originalDataEntityEntry = DbContext.Attach(originalDataEntity);
+    TEntityImpl originalDataEntity = EntityBase.Create<TEntity, TEntityImpl>(originalEntity);
+    EntityEntry<TEntityImpl> originalDataEntityEntry = DbContext.Attach(originalDataEntity);
 
     originalDataEntity.Update(newEntity, properties);
     SetCollectionsAsUnchanged(originalDataEntityEntry);
@@ -85,7 +85,7 @@ public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IReposit
   /// <returns>An object that represents an asynchronous operation.</returns>
   public virtual Task DeleteAsync(TIdentity identity, CancellationToken cancellationToken)
   {
-    var id = EntityBase.Create<TIdentity, TEntityImpl>(identity).Id;
+    Guid id = EntityBase.Create<TIdentity, TEntityImpl>(identity).Id;
 
     return DbContext.Set<TEntityImpl>()
                     .Where(entity => entity.Id == id)

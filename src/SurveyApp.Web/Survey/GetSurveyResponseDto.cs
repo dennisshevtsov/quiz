@@ -7,7 +7,7 @@ namespace SurveyApp.Survey.Web;
 /// <summary>Represents a survey.</summary>
 public sealed class GetSurveyResponseDto : ISurveyEntity
 {
-  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.GetSurveyResponseDto"/> class.</summary>
+  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Survey.Web.GetSurveyResponseDto"/> class.</summary>
   /// <param name="surveyEntity">An object that represents a survey entity.</param>
   public GetSurveyResponseDto(ISurveyEntity surveyEntity)
   {

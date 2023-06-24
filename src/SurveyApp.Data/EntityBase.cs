@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using System.Reflection;
+
 namespace SurveyApp.Data;
 
 /// <summary>Represents the entity base.</summary>
@@ -32,11 +34,11 @@ public abstract class EntityBase
   /// <param name="property">An object that represents a name of a property.</param>
   protected virtual void Update(object newEntity, string property)
   {
-    var originalProperty = GetType().GetProperty(property)!;
-    var newProperty = newEntity.GetType().GetProperty(property)!;
+    PropertyInfo originalProperty = GetType().GetProperty(property)!;
+    PropertyInfo newProperty      = newEntity.GetType().GetProperty(property)!;
 
-    var originalValue = originalProperty.GetValue(this);
-    var newValue = newProperty.GetValue(newEntity);
+    object? originalValue = originalProperty.GetValue(this);
+    object? newValue = newProperty.GetValue(newEntity);
 
     if (!object.Equals(originalValue, newValue))
     {

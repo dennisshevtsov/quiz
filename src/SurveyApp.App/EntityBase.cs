@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using System.Reflection;
+
 namespace SurveyApp.App;
 
 /// <summary>Represents an entity base.</summary>
@@ -18,10 +20,10 @@ public abstract class EntityBase
   /// <summary>Gets an object that represents a collection of related entities.</summary>
   public IEnumerable<string> Relations(IEnumerable<string> relations)
   {
-    var avalable = Relations();
+    IEnumerable<string> avalable = Relations();
 
-    return avalable.Where(relation => avalable.Contains(relation))
-                   .ToHashSet(StringComparer.OrdinalIgnoreCase);
+    return relations.Where(relation => avalable.Contains(relation))
+                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
   }
 
   /// <summary>Updates this entity.</summary>
@@ -29,8 +31,8 @@ public abstract class EntityBase
   /// <returns>An object that represents a collection of updated properties.</returns>
   protected IEnumerable<string> Update(object newEntity)
   {
-    var updatingProperties = GetUpdatingProperties();
-    var updatedProperties = updatingProperties;
+    ISet<string> updatingProperties = GetUpdatingProperties();
+    ISet<string> updatedProperties  = updatingProperties;
 
     return Update(newEntity, updatedProperties, updatingProperties);
   }
@@ -49,17 +51,17 @@ public abstract class EntityBase
   /// <returns></returns>
   protected virtual IEnumerable<string> Update(object newEntity, IEnumerable<string> propertiesToUpdate, ISet<string> updatingProperties)
   {
-    var updatedProperties = new List<string>();
+    List<string> updatedProperties = new();
 
     foreach (var property in propertiesToUpdate)
     {
       if (updatingProperties.Contains(property))
       {
-        var originalProperty = GetType().GetProperty(property)!;
-        var newProperty = newEntity.GetType().GetProperty(property)!;
+        PropertyInfo originalProperty = GetType().GetProperty(property)!;
+        PropertyInfo newProperty      = newEntity.GetType().GetProperty(property)!;
 
-        var originalValue = originalProperty.GetValue(this);
-        var newValue = newProperty.GetValue(newEntity);
+        object? originalValue = originalProperty.GetValue(this);
+        object? newValue      = newProperty.GetValue(newEntity);
 
         if (!object.Equals(originalValue, newValue))
         {

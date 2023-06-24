@@ -7,14 +7,14 @@ namespace SurveyApp.Survey.Web;
 /// <summary>Represents data to update a survey.</summary>
 public sealed class UpdateSurveyRequestDto : ISurveyEntity
 {
-  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.UpdateSurveyRequestDto"/> class.</summary>
+  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Survey.Web.UpdateSurveyRequestDto"/> class.</summary>
   public UpdateSurveyRequestDto()
   {
     Name        = string.Empty;
     Description = string.Empty;
   }
 
-  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Web.Dtos.UpdateSurveyRequestDto"/> class.</summary>
+  /// <summary>Initializes a new instance of the <see cref="SurveyApp.Survey.Web.UpdateSurveyRequestDto"/> class.</summary>
   /// <param name="surveyData">An object that represents survey data.</param>
   public UpdateSurveyRequestDto(ISurveyEntity surveyEntity) : this()
   {
