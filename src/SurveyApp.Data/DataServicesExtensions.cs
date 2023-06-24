@@ -37,8 +37,8 @@ public static class DataServicesExtensions
     services.Configure<DatabaseOptions>(configuration);
     services.AddDbContext<DbContext, AppDbContext>((provider, builder) =>
     {
-      var options = provider.GetRequiredService<IOptions<DatabaseOptions>>().Value;
-      ArgumentNullException.ThrowIfNullOrEmpty(nameof(DatabaseOptions.ConnectionString));
+      DatabaseOptions options = provider.GetRequiredService<IOptions<DatabaseOptions>>().Value;
+      ArgumentNullException.ThrowIfNullOrEmpty(options.ConnectionString);
 
       builder.UseNpgsql(options.ConnectionString);
     });
