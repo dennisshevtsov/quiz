@@ -24,4 +24,16 @@ public sealed class SurveyEntityTest
 
     Assert.AreEqual(controlSurveyIdentity.SurveyId, actualSurveyEntity.SurveyId);
   }
+
+  [TestMethod]
+  public void Update_SurveyEntityPassed_SurveyIdNotUpdated()
+  {
+    TestSurveyIdentity originalSurveyIdentity = new();
+    TestSurveyEntity   newSurveyEntity        = new();
+
+    SurveyEntity actualSurveyEntity = new(originalSurveyIdentity);
+    actualSurveyEntity.Update(newSurveyEntity);
+
+    Assert.AreEqual(originalSurveyIdentity.SurveyId, actualSurveyEntity.SurveyId);
+  }
 }
