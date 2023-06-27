@@ -22,7 +22,6 @@ public static class DataServicesExtensions
   public static IServiceCollection SetUpData(this IServiceCollection services, IConfiguration configuration)
   {
     services.SetUpDatabase(configuration);
-    services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
     services.AddScoped<ISurveyRepository, SurveyRepository>();
 
     return services;
@@ -38,7 +37,7 @@ public static class DataServicesExtensions
     services.AddDbContext<DbContext, AppDbContext>((provider, builder) =>
     {
       DatabaseOptions options = provider.GetRequiredService<IOptions<DatabaseOptions>>().Value;
-      ArgumentNullException.ThrowIfNullOrEmpty(options.ConnectionString);
+      ArgumentException.ThrowIfNullOrEmpty(options.ConnectionString);
 
       builder.UseNpgsql(options.ConnectionString);
     });

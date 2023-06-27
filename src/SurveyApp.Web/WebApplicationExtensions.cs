@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using SurveyApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.AspNetCore.Builder;
 
@@ -16,10 +16,9 @@ public static class WebApplicationExtensions
   {
     using (var scope = app.Services.CreateScope())
     {
-      scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>()
-                           .InitializeAsync(CancellationToken.None)
-                           .GetAwaiter()
-                           .GetResult();
+      scope.ServiceProvider.GetRequiredService<DbContext>()
+                           .Database
+                           .EnsureCreated();
     }
 
     return app;
