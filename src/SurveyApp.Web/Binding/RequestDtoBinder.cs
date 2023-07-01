@@ -22,7 +22,13 @@ public sealed class RequestDtoBinder : IModelBinder
     if (bindingContext.HttpContext.Request.ContentLength != null &&
         bindingContext.HttpContext.Request.ContentLength != 0)
     {
-      model = await RequestDtoBinder.GetModelValue(bindingContext);
+      model = await JsonSerializer.DeserializeAsync(
+        bindingContext.HttpContext.Request.Body,
+        bindingContext.ModelType,
+        new JsonSerializerOptions
+        {
+          PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        });
     }
     else
     {
@@ -46,20 +52,4 @@ public sealed class RequestDtoBinder : IModelBinder
 
     bindingContext.Result = ModelBindingResult.Success(model);
   }
-
-  private static async Task<object> GetModelValue(ModelBindingContext bindingContext)
-  {
-    var document = await JsonSerializer.DeserializeAsync<JsonDocument>(
-        bindingContext.HttpContext.Request.Body);
-
-    var model = document!.Deserialize(
-      bindingContext.ModelType,
-      new JsonSerializerOptions
-      {
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-      })!;
-
-    return model;
-  }
-}
 }
