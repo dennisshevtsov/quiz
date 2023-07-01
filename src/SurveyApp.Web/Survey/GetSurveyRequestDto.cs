@@ -2,10 +2,12 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using SurveyApp.Web;
+
 namespace SurveyApp.Survey.Web;
 
 /// <summary>Represents a codition to query a survey.</summary>
-public sealed class GetSurveyRequestDto : ISurveyIdentity
+public sealed class GetSurveyRequestDto : IRequestDto, ISurveyIdentity
 {
   /// <summary>Initializes a new instance of the <see cref="SurveyApp.Survey.Web.GetSurveyRequestDto"/> class.</summary>
   public GetSurveyRequestDto() {}

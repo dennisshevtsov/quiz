@@ -5,10 +5,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
+using SurveyApp.Web;
+
 namespace SurveyApp.Survey.Web;
 
 /// <summary>Represents data to add a survey.</summary>
-public sealed class AddSurveyRequestDto : ISurveyEntity
+public sealed class AddSurveyRequestDto : IRequestDto, ISurveyEntity
 {
   /// <summary>Initializes a new instance of the <see cref="SurveyApp.Survey.Web.AddSurveyRequestDto"/> class.</summary>
   public AddSurveyRequestDto() {}
