@@ -38,7 +38,7 @@ public abstract class EntityBase
     PropertyInfo newProperty      = newEntity.GetType().GetProperty(property)!;
 
     object? originalValue = originalProperty.GetValue(this);
-    object? newValue = newProperty.GetValue(newEntity);
+    object? newValue      = newProperty.GetValue(newEntity);
 
     if (!object.Equals(originalValue, newValue))
     {

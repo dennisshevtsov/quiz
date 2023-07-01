@@ -2,10 +2,12 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using SurveyApp.Web;
+
 namespace SurveyApp.Survey.Web;
 
 /// <summary>Represents data to update a survey.</summary>
-public sealed class UpdateSurveyRequestDto : ISurveyEntity
+public sealed class UpdateSurveyRequestDto : IRequestDto, ISurveyEntity
 {
   /// <summary>Initializes a new instance of the <see cref="SurveyApp.Survey.Web.UpdateSurveyRequestDto"/> class.</summary>
   public UpdateSurveyRequestDto()
