@@ -63,16 +63,16 @@ public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IReposit
 
   /// <summary>Updates an entity.</summary>
   /// <param name="originalEntity">An object that represents an entity to update.</param>
-  /// <param name="newEntity">An object that represents an entity from which the original entity should be updated.</param>
+  /// <param name="updatedEntity">An object that represents an entity from which the original entity should be updated.</param>
   /// <param name="properties">An object that represents a collection of properties to update.</param>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation.</returns>
-  public async Task UpdateAsync(TEntity originalEntity, TEntity newEntity, IEnumerable<string> properties, CancellationToken cancellationToken)
+  public async Task UpdateAsync(TEntity originalEntity, TEntity updatedEntity, IEnumerable<string> properties, CancellationToken cancellationToken)
   {
     TEntityImpl originalDataEntity = EntityBase.Create<TEntity, TEntityImpl>(originalEntity);
     EntityEntry<TEntityImpl> originalDataEntityEntry = DbContext.Attach(originalDataEntity);
 
-    originalDataEntity.Update(newEntity, properties);
+    originalDataEntity.Update(updatedEntity, properties);
     SetCollectionsAsUnchanged(originalDataEntityEntry);
 
     await DbContext.SaveChangesAsync(cancellationToken);

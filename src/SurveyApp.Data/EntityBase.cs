@@ -19,30 +19,30 @@ public abstract class EntityBase
     Array.Empty<string>();
 
   /// <summary>Updates this entity.</summary>
-  /// <param name="newEntity">An object that represents an entity from which this entity should be updated.</param>
+  /// <param name="updatedEntity">An object that represents an entity from which this entity should be updated.</param>
   /// <param name="properties">An object that represents a collection of properties to update.</param>
-  protected void Update(object newEntity, IEnumerable<string> properties)
+  protected void Update(object updatedEntity, IEnumerable<string> properties)
   {
     foreach (var property in properties)
     {
-      Update(newEntity, property);
+      Update(updatedEntity, property);
     }
   }
 
   /// <summary>Updates this entity.</summary>
-  /// <param name="newEntity">An object that represents an entity from which this entity should be updated.</param>
+  /// <param name="updatedEntity">An object that represents an entity from which this entity should be updated.</param>
   /// <param name="property">An object that represents a name of a property.</param>
-  protected virtual void Update(object newEntity, string property)
+  protected virtual void Update(object updatedEntity, string property)
   {
     PropertyInfo originalProperty = GetType().GetProperty(property)!;
-    PropertyInfo newProperty      = newEntity.GetType().GetProperty(property)!;
+    PropertyInfo updatedProperty  = updatedEntity.GetType().GetProperty(property)!;
 
     object? originalValue = originalProperty.GetValue(this);
-    object? newValue      = newProperty.GetValue(newEntity);
+    object? updatedValue  = updatedProperty.GetValue(updatedEntity);
 
-    if (!object.Equals(originalValue, newValue))
+    if (!object.Equals(originalValue, updatedValue))
     {
-      originalProperty.SetValue(this, newValue);
+      originalProperty.SetValue(this, updatedValue);
     }
   }
 

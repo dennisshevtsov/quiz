@@ -22,11 +22,11 @@ public interface IRepository<TEntity, TIdentity>
 
   /// <summary>Updates an entity.</summary>
   /// <param name="originalEntity">An object that represents an entity to update.</param>
-  /// <param name="newEntity">An object that represents an entity from which the original entity should be updated.</param>
+  /// <param name="updatedEntity">An object that represents an entity from which the original entity should be updated.</param>
   /// <param name="properties">An object that represents a collection of properties to update.</param>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation.</returns>
-  public Task UpdateAsync(TEntity originalEntity, TEntity newEntity, IEnumerable<string> properties, CancellationToken cancellationToken);
+  public Task UpdateAsync(TEntity originalEntity, TEntity updatedEntity, IEnumerable<string> properties, CancellationToken cancellationToken);
 
   /// <summary>Deletes an entity.</summary>
   /// <param name="identity">An object that represents an identity of an entity.</param>

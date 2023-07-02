@@ -53,15 +53,15 @@ public abstract class ServiceBase<TBusinessEntity, TEntity, TIdentity> : IServic
 
   /// <summary>Updates an entity.</summary>
   /// <param name="originalEntity">An object that represents an entity to update.</param>
-  /// <param name="newEntity">An object that represents an entity from that the original one should be updated.</param>
+  /// <param name="updatedEntity">An object that represents an entity from that the original one should be updated.</param>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation.</returns>
-  public virtual Task UpdateAsync(TEntity originalEntity, TEntity newEntity, CancellationToken cancellationToken)
+  public virtual Task UpdateAsync(TEntity originalEntity, TEntity updatedEntity, CancellationToken cancellationToken)
   {
     TBusinessEntity     businessEntity    = EntityBase.Create<TEntity, TBusinessEntity>(originalEntity);
-    IEnumerable<string> updatedProperties = businessEntity.Update(newEntity!);
+    IEnumerable<string> updatedProperties = businessEntity.Update(updatedEntity!);
 
-    return _repository.UpdateAsync(originalEntity, newEntity, updatedProperties, cancellationToken);
+    return _repository.UpdateAsync(originalEntity, updatedEntity, updatedProperties, cancellationToken);
   }
 
   /// <summary>Updates an entity partially.</summary>
