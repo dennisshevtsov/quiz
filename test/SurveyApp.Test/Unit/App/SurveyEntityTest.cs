@@ -32,7 +32,7 @@ public sealed class SurveyEntityTest
     TestSurveyEntity   newSurveyEntity        = new();
 
     SurveyEntity actualSurveyEntity = new(originalSurveyIdentity);
-    actualSurveyEntity.Update(newSurveyEntity);
+    actualSurveyEntity.Compare(newSurveyEntity);
 
     Assert.AreEqual(originalSurveyIdentity.SurveyId, actualSurveyEntity.SurveyId);
   }
@@ -44,7 +44,7 @@ public sealed class SurveyEntityTest
     TestSurveyEntity   newSurveyEntity        = new();
 
     SurveyEntity actualSurveyEntity = new(originalSurveyIdentity);
-    actualSurveyEntity.Update(newSurveyEntity);
+    actualSurveyEntity.Compare(newSurveyEntity);
 
     TestSurveyEntity.ArePartiallyEqual(newSurveyEntity, actualSurveyEntity);
   }

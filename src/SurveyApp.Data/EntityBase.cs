@@ -37,13 +37,9 @@ public abstract class EntityBase
     PropertyInfo originalProperty = GetType().GetProperty(property)!;
     PropertyInfo updatedProperty  = updatedEntity.GetType().GetProperty(property)!;
 
-    object? originalValue = originalProperty.GetValue(this);
     object? updatedValue  = updatedProperty.GetValue(updatedEntity);
 
-    if (!object.Equals(originalValue, updatedValue))
-    {
-      originalProperty.SetValue(this, updatedValue);
-    }
+    originalProperty.SetValue(this, updatedValue);
   }
 
   /// <summary>Creates a copy of an entity.</summary>

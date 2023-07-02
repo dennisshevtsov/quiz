@@ -26,30 +26,30 @@ public abstract class EntityBase
                     .ToHashSet(StringComparer.OrdinalIgnoreCase);
   }
 
-  /// <summary>Updates this entity.</summary>
-  /// <param name="newEntity">An object that represents an entity from which this entity should be updated.</param>
+  /// <summary>Compares this entity.</summary>
+  /// <param name="updatedEntity">An object that represents an entity from which this entity should be compared.</param>
   /// <returns>An object that represents a collection of updated properties.</returns>
-  protected IEnumerable<string> Update(object newEntity)
+  protected IEnumerable<string> Compare(object updatedEntity)
   {
     ISet<string> updatingProperties = GetUpdatingProperties();
     ISet<string> updatedProperties  = updatingProperties;
 
-    return Update(newEntity, updatedProperties, updatingProperties);
+    return Compare(updatedEntity, updatedProperties, updatingProperties);
   }
 
-  /// <summary>Updates this entity.</summary>
-  /// <param name="newEntity">An object that represents an entity from which this entity should be updated.</param>
+  /// <summary>Compare this entity.</summary>
+  /// <param name="newEntity">An object that represents an entity from which this entity should be compared.</param>
   /// <param name="propertiesToUpdate">An object that represents a collection of properties to update.</param>
   /// <returns>An object that represents a collection of updated properties.</returns>
-  protected IEnumerable<string> Update(object newEntity, IEnumerable<string> propertiesToUpdate) =>
-    Update(newEntity, propertiesToUpdate, GetUpdatingProperties());
+  protected IEnumerable<string> Compare(object newEntity, IEnumerable<string> propertiesToUpdate) =>
+    Compare(newEntity, propertiesToUpdate, GetUpdatingProperties());
 
   /// <summary>Updates this entity.</summary>
   /// <param name="newEntity">An object that represents an entity from which this entity should be updated.</param>
   /// <param name="propertiesToUpdate">An object that represents a collection of properties to update.</param>
   /// <param name="updatingProperties">An object that represents a collection of properties that can be updated.</param>
   /// <returns></returns>
-  protected virtual IEnumerable<string> Update(object newEntity, IEnumerable<string> propertiesToUpdate, ISet<string> updatingProperties)
+  protected virtual IEnumerable<string> Compare(object newEntity, IEnumerable<string> propertiesToUpdate, ISet<string> updatingProperties)
   {
     List<string> updatedProperties = new();
 
@@ -58,17 +58,15 @@ public abstract class EntityBase
       if (updatingProperties.Contains(property))
       {
         PropertyInfo originalProperty = GetType().GetProperty(property)!;
-        PropertyInfo newProperty      = newEntity.GetType().GetProperty(property)!;
+        PropertyInfo updatedProperty  = newEntity.GetType().GetProperty(property)!;
 
         object? originalValue = originalProperty.GetValue(this);
-        object? newValue      = newProperty.GetValue(newEntity);
+        object? updatedValue  = updatedProperty.GetValue(newEntity);
 
-        if (!object.Equals(originalValue, newValue))
+        if (!object.Equals(originalValue, updatedValue))
         {
-          originalProperty.SetValue(this, newValue);
+          updatedProperties.Add(property);
         }
-
-        updatedProperties.Add(property);
       }
     }
 
