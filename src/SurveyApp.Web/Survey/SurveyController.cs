@@ -62,7 +62,7 @@ public sealed class SurveyController : ControllerBase
       return NotFound();
     }
 
-    await _surveyService.UpdateAsync(requestDto, surveyEntity, cancellationToken);
+    await _surveyService.UpdateAsync(surveyEntity, requestDto, cancellationToken);
 
     return NoContent();
   }

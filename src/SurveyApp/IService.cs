@@ -30,10 +30,10 @@ public interface IService<TEntity, TIdentity>
 
   /// <summary>Updates an entity.</summary>
   /// <param name="originalEntity">An object that represents an entity to update.</param>
-  /// <param name="newEntity">An object that represents an entity from that the original one should be updated.</param>
+  /// <param name="updatedEntity">An object that represents an entity from that the original one should be updated.</param>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation.</returns>
-  public Task UpdateAsync(TEntity originalEntity, TEntity newEntity, CancellationToken cancellationToken);
+  public Task UpdateAsync(TEntity originalEntity, TEntity updatedEntity, CancellationToken cancellationToken);
 
   /// <summary>Updates an entity partially.</summary>
   /// <param name="originalEntity">An object that represents an entity to update.</param>
