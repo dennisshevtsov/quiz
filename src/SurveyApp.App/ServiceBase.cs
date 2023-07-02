@@ -9,7 +9,7 @@ namespace SurveyApp.App;
 /// <typeparam name="TEntity">An entity type.</typeparam>
 /// <typeparam name="TIdentity">An identity type.</typeparam>
 public abstract class ServiceBase<TBusinessEntity, TEntity, TIdentity> : IService<TEntity, TIdentity>
-  where TBusinessEntity : EntityBase, TEntity, IUpdatable<TEntity>
+  where TBusinessEntity : EntityBase, TEntity, IComparable<TEntity>
   where TEntity         : TIdentity
 {
   private readonly IRepository<TEntity, TIdentity> _repository;
@@ -59,23 +59,23 @@ public abstract class ServiceBase<TBusinessEntity, TEntity, TIdentity> : IServic
   public virtual Task UpdateAsync(TEntity originalEntity, TEntity updatedEntity, CancellationToken cancellationToken)
   {
     TBusinessEntity     businessEntity    = EntityBase.Create<TEntity, TBusinessEntity>(originalEntity);
-    IEnumerable<string> updatedProperties = businessEntity.Update(updatedEntity!);
+    IEnumerable<string> updatedProperties = businessEntity.Compare(updatedEntity!);
 
     return _repository.UpdateAsync(originalEntity, updatedEntity, updatedProperties, cancellationToken);
   }
 
   /// <summary>Updates an entity partially.</summary>
   /// <param name="originalEntity">An object that represents an entity to update.</param>
-  /// <param name="newEntity">An object that represents an entity from that the original one should be updated.</param>
+  /// <param name="updatedEntity">An object that represents an entity from that the original one should be updated.</param>
   /// <param name="properties">An object that represents a collection of properties to update.</param>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation.</returns>
-  public virtual Task UpdateAsync(TEntity originalEntity, TEntity newEntity, IEnumerable<string> properties, CancellationToken cancellationToken)
+  public virtual Task UpdateAsync(TEntity originalEntity, TEntity updatedEntity, IEnumerable<string> properties, CancellationToken cancellationToken)
   {
     TBusinessEntity     businessEntity    = EntityBase.Create<TEntity, TBusinessEntity>(originalEntity);
-    IEnumerable<string> updatedProperties = businessEntity.Update(newEntity!, properties);
+    IEnumerable<string> updatedProperties = businessEntity.Compare(updatedEntity!, properties);
 
-    return _repository.UpdateAsync(originalEntity, newEntity, updatedProperties, cancellationToken);
+    return _repository.UpdateAsync(originalEntity, updatedEntity, updatedProperties, cancellationToken);
   }
 
   /// <summary>Deletes an entity.</summary>
