@@ -26,26 +26,41 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
-  public void Update_SurveyEntityPassed_SurveyIdNotUpdated()
+  public void Compare_SurveyEntityPassed_SurveyIdNotReturned()
   {
     TestSurveyIdentity originalSurveyIdentity = new();
     TestSurveyEntity   newSurveyEntity        = new();
 
     SurveyEntity actualSurveyEntity = new(originalSurveyIdentity);
-    actualSurveyEntity.Compare(newSurveyEntity);
 
-    Assert.AreEqual(originalSurveyIdentity.SurveyId, actualSurveyEntity.SurveyId);
+    IEnumerable<string> differentProperties = actualSurveyEntity.Compare(newSurveyEntity);
+
+    Assert.IsFalse(differentProperties.Contains(nameof(ISurveyEntity.SurveyId)));
   }
 
   [TestMethod]
-  public void Update_SurveyEntityPassed_UpdatablePropertiesUpdated()
+  public void Update_SurveyEntityPassed_NameReturned()
   {
     TestSurveyIdentity originalSurveyIdentity = new();
     TestSurveyEntity   newSurveyEntity        = new();
 
     SurveyEntity actualSurveyEntity = new(originalSurveyIdentity);
-    actualSurveyEntity.Compare(newSurveyEntity);
 
-    TestSurveyEntity.ArePartiallyEqual(newSurveyEntity, actualSurveyEntity);
+    IEnumerable<string> differentProperties = actualSurveyEntity.Compare(newSurveyEntity);
+
+    Assert.IsTrue(differentProperties.Contains(nameof(ISurveyEntity.Name)));
+  }
+
+  [TestMethod]
+  public void Update_SurveyEntityPassed_DescriptionReturned()
+  {
+    TestSurveyIdentity originalSurveyIdentity = new();
+    TestSurveyEntity newSurveyEntity = new();
+
+    SurveyEntity actualSurveyEntity = new(originalSurveyIdentity);
+
+    IEnumerable<string> differentProperties = actualSurveyEntity.Compare(newSurveyEntity);
+
+    Assert.IsTrue(differentProperties.Contains(nameof(ISurveyEntity.Description)));
   }
 }
