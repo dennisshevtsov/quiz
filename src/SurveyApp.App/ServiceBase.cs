@@ -37,12 +37,8 @@ public abstract class ServiceBase<TBusinessEntity, TEntity, TIdentity> : IServic
   /// <param name="relations">An object that represents a collection of relations to load.</param>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="BookApi.Author.IAuthorEntity"/>. The result can be null.</returns>
-  public Task<TEntity?> GetAsync(TIdentity identity, IEnumerable<string> relations, CancellationToken cancellationToken)
-  {
-    TBusinessEntity businessEntity = EntityBase.Create<TIdentity, TBusinessEntity>(identity);
-
-    return _repository.GetAsync(identity, businessEntity.Relations(relations), cancellationToken);
-  }
+  public Task<TEntity?> GetAsync(TIdentity identity, IEnumerable<string> relations, CancellationToken cancellationToken) =>
+    _repository.GetAsync(identity, relations, cancellationToken);
 
   /// <summary>Adds an entity.</summary>
   /// <param name="entity">An object that represents data from that a new entity should be created.</param>
