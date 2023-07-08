@@ -10,7 +10,7 @@ namespace SurveyApp.App;
 public abstract class EntityBase
 {
   /// <summary>Gets an object that represents a collection of related entities.</summary>
-  public virtual IEnumerable<string> Relations() => Array.Empty<string>();
+  public virtual string[] Relations() => Array.Empty<string>();
 
   /// <summary>Compares this entity.</summary>
   /// <param name="updatedEntity">An object that represents an entity from which this entity should be compared.</param>
