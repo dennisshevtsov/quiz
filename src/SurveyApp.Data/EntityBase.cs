@@ -15,13 +15,13 @@ public abstract class EntityBase
   /// <summary>Gets a collection of relation that this entity has.</summary>
   /// <param name="relations">An object that represents a collection of relations.</param>
   /// <returns>An object that represents a collection of relation that this entity has.</returns>
-  public virtual IEnumerable<string> Relations(IEnumerable<string> relations) =>
+  public virtual string[] Relations(string[] relations) =>
     Array.Empty<string>();
 
   /// <summary>Updates this entity.</summary>
   /// <param name="updatedEntity">An object that represents an entity from which this entity should be updated.</param>
   /// <param name="properties">An object that represents a collection of properties to update.</param>
-  protected void Update(object updatedEntity, IEnumerable<string> properties)
+  protected void Update(object updatedEntity, string[] properties)
   {
     foreach (var property in properties)
     {

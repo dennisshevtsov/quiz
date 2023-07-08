@@ -43,6 +43,6 @@ public sealed class SurveyEntity : EntityBase, ISurveyEntity, IUpdatable<ISurvey
   /// <summary>Updates this entity.</summary>
   /// <param name="updatedEntity">An object that represents an entity from which this entity should be updated.</param>
   /// <param name="properties">An object that represents a collection of properties to update.</param>
-  public void Update(ISurveyEntity updatedEntity, IEnumerable<string> properties) =>
+  public void Update(ISurveyEntity updatedEntity, string[] properties) =>
     base.Update(updatedEntity, properties);
 }

@@ -28,7 +28,7 @@ public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IReposit
   /// <param name="relations">An object that represents a collection of relations to load.</param>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future.</returns>
-  public async Task<TEntity?> GetAsync(TIdentity identity, IEnumerable<string> relations, CancellationToken cancellationToken)
+  public async Task<TEntity?> GetAsync(TIdentity identity, string[] relations, CancellationToken cancellationToken)
   {
     TEntityImpl dataEntity        = EntityBase.Create<TIdentity, TEntityImpl>(identity);
     IQueryable<TEntityImpl> query = DbContext.Set<TEntityImpl>()
@@ -67,7 +67,7 @@ public abstract class RepositoryBase<TEntityImpl, TEntity, TIdentity> : IReposit
   /// <param name="properties">An object that represents a collection of properties to update.</param>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation.</returns>
-  public async Task UpdateAsync(TEntity originalEntity, TEntity updatedEntity, IEnumerable<string> properties, CancellationToken cancellationToken)
+  public async Task UpdateAsync(TEntity originalEntity, TEntity updatedEntity, string[] properties, CancellationToken cancellationToken)
   {
     TEntityImpl originalDataEntity = EntityBase.Create<TEntity, TEntityImpl>(originalEntity);
     EntityEntry<TEntityImpl> originalDataEntityEntry = DbContext.Attach(originalDataEntity);

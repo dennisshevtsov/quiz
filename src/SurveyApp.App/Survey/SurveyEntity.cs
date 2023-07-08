@@ -43,12 +43,12 @@ public sealed class SurveyEntity : EntityBase, ISurveyEntity, SurveyApp.App.ICom
   /// <summary>Updates this entity.</summary>
   /// <param name="newEntity">An object that represents an entity from which this entity should be updated.</param>
   /// <returns>An object that represents a collection of updated properties.</returns>
-  public IEnumerable<string> Compare(ISurveyEntity newEntity) => base.Compare(newEntity);
+  public string[] Compare(ISurveyEntity newEntity) => base.Compare(newEntity);
 
   /// <summary>Updates this entity.</summary>
   /// <param name="newEntity">An object that represents an entity from which this entity should be updated.</param>
   /// <param name="propertiesToUpdate">An object that represents a collection of properties to update.</param>
   /// <returns>An object that represents a collection of updated properties.</returns>
-  public IEnumerable<string> Compare(ISurveyEntity newEntity, IEnumerable<string> properties) =>
+  public string[] Compare(ISurveyEntity newEntity, string[] properties) =>
     base.Compare(newEntity, properties);
 }

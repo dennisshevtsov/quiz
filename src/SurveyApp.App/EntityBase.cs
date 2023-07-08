@@ -10,15 +10,15 @@ namespace SurveyApp.App;
 public abstract class EntityBase
 {
   /// <summary>Gets an object that represents a collection of related entities.</summary>
-  public virtual IEnumerable<string> Relations() => Array.Empty<string>();
+  public virtual string[] Relations() => Array.Empty<string>();
 
   /// <summary>Compares this entity.</summary>
   /// <param name="updatedEntity">An object that represents an entity from which this entity should be compared.</param>
   /// <returns>An object that represents a collection of updated properties.</returns>
-  protected IEnumerable<string> Compare(object updatedEntity)
+  protected string[] Compare(object updatedEntity)
   {
-    ISet<string> updatingProperties = GetUpdatingProperties();
-    ISet<string> updatedProperties  = updatingProperties;
+    string[] updatingProperties = GetUpdatingProperties();
+    string[] updatedProperties  = updatingProperties;
 
     return Compare(updatedEntity, updatedProperties, updatingProperties);
   }
@@ -27,7 +27,7 @@ public abstract class EntityBase
   /// <param name="newEntity">An object that represents an entity from which this entity should be compared.</param>
   /// <param name="propertiesToUpdate">An object that represents a collection of properties to update.</param>
   /// <returns>An object that represents a collection of updated properties.</returns>
-  protected IEnumerable<string> Compare(object newEntity, IEnumerable<string> propertiesToUpdate) =>
+  protected string[] Compare(object newEntity, string[] propertiesToUpdate) =>
     Compare(newEntity, propertiesToUpdate, GetUpdatingProperties());
 
   /// <summary>Updates this entity.</summary>
@@ -35,9 +35,9 @@ public abstract class EntityBase
   /// <param name="propertiesToUpdate">An object that represents a collection of properties to update.</param>
   /// <param name="updatingProperties">An object that represents a collection of properties that can be updated.</param>
   /// <returns></returns>
-  protected virtual IEnumerable<string> Compare(object newEntity, IEnumerable<string> propertiesToUpdate, ISet<string> updatingProperties)
+  protected virtual string[] Compare(object newEntity, string[] propertiesToUpdate, string[] updatingProperties)
   {
-    List<string> updatedProperties = new();
+    List<string> updatedProperties = new(propertiesToUpdate.Length);
 
     foreach (var property in propertiesToUpdate)
     {
@@ -56,7 +56,7 @@ public abstract class EntityBase
       }
     }
 
-    return updatedProperties;
+    return updatedProperties.ToArray();
   }
 
   /// <summary>Creates a copy of an entity.</summary>
@@ -76,9 +76,19 @@ public abstract class EntityBase
                          .Invoke(new object[] { entity! });
   }
 
-  private ISet<string> GetUpdatingProperties() =>
-    GetType().GetProperties()
-             .Where(property => property.CanWrite)
-             .Select(property => property.Name)
-             .ToHashSet(StringComparer.OrdinalIgnoreCase);
+  private string[] GetUpdatingProperties()
+  {
+    PropertyInfo[]    allProperties = GetType().GetProperties();
+    List<string> updatingProperties = new(allProperties.Length);
+
+    for (int i = 0; i < allProperties.Length; i++)
+    {
+      if (allProperties[i].CanWrite)
+      {
+        updatingProperties.Add(allProperties[i].Name);
+      }
+    }
+
+    return updatingProperties.ToArray();
+  }
 }
