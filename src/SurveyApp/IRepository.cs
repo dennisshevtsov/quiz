@@ -12,7 +12,7 @@ public interface IRepository<TEntity, TIdentity>
   /// <param name="relations">An object that represents a collection of relations to load.</param>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future.</returns>
-  public Task<TEntity?> GetAsync(TIdentity identity, IEnumerable<string> relations, CancellationToken cancellationToken);
+  public Task<TEntity?> GetAsync(TIdentity identity, string[] relations, CancellationToken cancellationToken);
 
   /// <summary>Adds an entity.</summary>
   /// <param name="entity">An object that represents an entity.</param>
@@ -26,7 +26,7 @@ public interface IRepository<TEntity, TIdentity>
   /// <param name="properties">An object that represents a collection of properties to update.</param>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation.</returns>
-  public Task UpdateAsync(TEntity originalEntity, TEntity updatedEntity, IEnumerable<string> properties, CancellationToken cancellationToken);
+  public Task UpdateAsync(TEntity originalEntity, TEntity updatedEntity, string[] properties, CancellationToken cancellationToken);
 
   /// <summary>Deletes an entity.</summary>
   /// <param name="identity">An object that represents an identity of an entity.</param>
