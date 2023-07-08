@@ -37,7 +37,7 @@ public abstract class ServiceBase<TBusinessEntity, TEntity, TIdentity> : IServic
   /// <param name="relations">An object that represents a collection of relations to load.</param>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation that produces a result at some time in the future. The result is an instance of the <see cref="BookApi.Author.IAuthorEntity"/>. The result can be null.</returns>
-  public Task<TEntity?> GetAsync(TIdentity identity, IEnumerable<string> relations, CancellationToken cancellationToken) =>
+  public Task<TEntity?> GetAsync(TIdentity identity, string[] relations, CancellationToken cancellationToken) =>
     _repository.GetAsync(identity, relations, cancellationToken);
 
   /// <summary>Adds an entity.</summary>
@@ -66,7 +66,7 @@ public abstract class ServiceBase<TBusinessEntity, TEntity, TIdentity> : IServic
   /// <param name="properties">An object that represents a collection of properties to update.</param>
   /// <param name="cancellationToken">An object that propagates notification that operations should be canceled.</param>
   /// <returns>An object that represents an asynchronous operation.</returns>
-  public virtual Task UpdateAsync(TEntity originalEntity, TEntity updatedEntity, IEnumerable<string> properties, CancellationToken cancellationToken)
+  public virtual Task UpdateAsync(TEntity originalEntity, TEntity updatedEntity, string[] properties, CancellationToken cancellationToken)
   {
     TBusinessEntity     businessEntity    = EntityBase.Create<TEntity, TBusinessEntity>(originalEntity);
     IEnumerable<string> updatedProperties = businessEntity.Compare(updatedEntity!, properties);
