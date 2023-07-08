@@ -15,7 +15,7 @@ public abstract class EntityBase
   /// <summary>Gets a collection of relation that this entity has.</summary>
   /// <param name="relations">An object that represents a collection of relations.</param>
   /// <returns>An object that represents a collection of relation that this entity has.</returns>
-  public virtual IEnumerable<string> Relations(IEnumerable<string> relations) =>
+  public virtual string[] Relations(string[] relations) =>
     Array.Empty<string>();
 
   /// <summary>Updates this entity.</summary>
