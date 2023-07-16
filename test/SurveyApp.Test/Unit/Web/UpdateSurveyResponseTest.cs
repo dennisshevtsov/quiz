@@ -10,9 +10,13 @@ public sealed class UpdateSurveyResponseTest
   [TestMethod]
   public void Constructor_Should_Copy_Data()
   {
+    // Arrange
     var controlSurveyEntity = new TestSurveyEntity();
+
+    // Act
     var actualUpdateSurveyViewModel = new UpdateSurveyRequestDto(controlSurveyEntity);
 
+    // Assert
     Assert.AreEqual(controlSurveyEntity.SurveyId, actualUpdateSurveyViewModel.SurveyId);
     Assert.AreEqual(controlSurveyEntity.Name, actualUpdateSurveyViewModel.Name);
     Assert.AreEqual(controlSurveyEntity.Description, actualUpdateSurveyViewModel.Description);
