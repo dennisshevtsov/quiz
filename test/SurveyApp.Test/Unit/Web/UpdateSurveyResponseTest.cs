@@ -11,10 +11,10 @@ public sealed class UpdateSurveyResponseTest
   public void Constructor_Should_Copy_Data()
   {
     // Arrange
-    var controlSurveyEntity = new TestSurveyEntity();
+    TestSurveyEntity controlSurveyEntity = new();
 
     // Act
-    var actualUpdateSurveyViewModel = new UpdateSurveyRequestDto(controlSurveyEntity);
+    UpdateSurveyRequestDto actualUpdateSurveyViewModel = new(controlSurveyEntity);
 
     // Assert
     Assert.AreEqual(controlSurveyEntity.SurveyId, actualUpdateSurveyViewModel.SurveyId);
