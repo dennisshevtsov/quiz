@@ -10,12 +10,15 @@ public sealed class GetSurveyCollectionResponseDtoTest
   [TestMethod]
   public void Constructor_Should_Copy_Data()
   {
+    // Arrange
     var controlSurveyEntityCollection =
       GetSurveyCollectionResponseDtoTest.GenerateTestSurveyEntityCollection(5);
 
+    // Act
     var actualGetSurveyCollectionViewModel =
       new GetSurveyCollectionResponseDto(controlSurveyEntityCollection);
 
+    // Assert
     GetSurveyCollectionResponseDtoTest.AreEqual(
       controlSurveyEntityCollection,
       actualGetSurveyCollectionViewModel);

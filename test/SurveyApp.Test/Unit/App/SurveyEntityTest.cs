@@ -10,57 +10,74 @@ public sealed class SurveyEntityTest
   [TestMethod]
   public void Constructor_SurveyEntityPassed_SurveyEntityCreated()
   {
+    // Arrange
     TestSurveyEntity controlSurveyEntity = new();
-    SurveyEntity     actualSurveyEntity  = new(controlSurveyEntity);
 
+    // Act
+    SurveyEntity actualSurveyEntity = new(controlSurveyEntity);
+
+    // Assert
     TestSurveyEntity.AreEqual(controlSurveyEntity, actualSurveyEntity);
   }
 
   [TestMethod]
   public void Constructor_SurveyIdentityPassed_SurveyEntityCreated()
   {
+    // Arrange
     TestSurveyIdentity controlSurveyIdentity = new();
-    SurveyEntity       actualSurveyEntity    = new(controlSurveyIdentity);
 
+    // Act
+    SurveyEntity actualSurveyEntity = new(controlSurveyIdentity);
+
+    // Assert
     Assert.AreEqual(controlSurveyIdentity.SurveyId, actualSurveyEntity.SurveyId);
   }
 
   [TestMethod]
   public void Compare_SurveyEntityPassed_SurveyIdNotReturned()
   {
+    // Arrange
     TestSurveyIdentity originalSurveyIdentity = new();
-    TestSurveyEntity   newSurveyEntity        = new();
+    SurveyEntity originalSurveyEntity = new(originalSurveyIdentity);
 
-    SurveyEntity actualSurveyEntity = new(originalSurveyIdentity);
+    TestSurveyEntity newSurveyEntity = new();
 
-    IEnumerable<string> differentProperties = actualSurveyEntity.Compare(newSurveyEntity);
+    // Act
+    IEnumerable<string> differentProperties = originalSurveyEntity.Compare(newSurveyEntity);
 
+    // Assert
     Assert.IsFalse(differentProperties.Contains(nameof(ISurveyEntity.SurveyId)));
   }
 
   [TestMethod]
-  public void Update_SurveyEntityPassed_NameReturned()
+  public void Compare_SurveyEntityPassed_NameReturned()
   {
+    // Arrange
     TestSurveyIdentity originalSurveyIdentity = new();
-    TestSurveyEntity   newSurveyEntity        = new();
+    SurveyEntity originalSurveyEntity = new(originalSurveyIdentity);
 
-    SurveyEntity actualSurveyEntity = new(originalSurveyIdentity);
+    TestSurveyEntity newSurveyEntity = new();
 
-    IEnumerable<string> differentProperties = actualSurveyEntity.Compare(newSurveyEntity);
+    // Act
+    IEnumerable<string> differentProperties = originalSurveyEntity.Compare(newSurveyEntity);
 
+    // Assert
     Assert.IsTrue(differentProperties.Contains(nameof(ISurveyEntity.Name)));
   }
 
   [TestMethod]
-  public void Update_SurveyEntityPassed_DescriptionReturned()
+  public void Compare_SurveyEntityPassed_DescriptionReturned()
   {
+    // Arrange
     TestSurveyIdentity originalSurveyIdentity = new();
+    SurveyEntity originalSurveyEntity = new(originalSurveyIdentity);
+
     TestSurveyEntity newSurveyEntity = new();
 
-    SurveyEntity actualSurveyEntity = new(originalSurveyIdentity);
+    // Act
+    IEnumerable<string> differentProperties = originalSurveyEntity.Compare(newSurveyEntity);
 
-    IEnumerable<string> differentProperties = actualSurveyEntity.Compare(newSurveyEntity);
-
+    // Assert
     Assert.IsTrue(differentProperties.Contains(nameof(ISurveyEntity.Description)));
   }
 }
