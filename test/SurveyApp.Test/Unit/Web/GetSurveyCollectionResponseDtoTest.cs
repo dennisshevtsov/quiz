@@ -11,12 +11,12 @@ public sealed class GetSurveyCollectionResponseDtoTest
   public void Constructor_Should_Copy_Data()
   {
     // Arrange
-    var controlSurveyEntityCollection =
+    ISurveyEntity[] controlSurveyEntityCollection =
       GetSurveyCollectionResponseDtoTest.GenerateTestSurveyEntityCollection(5);
 
     // Act
-    var actualGetSurveyCollectionViewModel =
-      new GetSurveyCollectionResponseDto(controlSurveyEntityCollection);
+    GetSurveyCollectionResponseDto actualGetSurveyCollectionViewModel =
+      new(controlSurveyEntityCollection);
 
     // Assert
     GetSurveyCollectionResponseDtoTest.AreEqual(
@@ -26,7 +26,7 @@ public sealed class GetSurveyCollectionResponseDtoTest
 
   private static ISurveyEntity[] GenerateTestSurveyEntityCollection(int entities)
   {
-    var controlSurveyEntityCollection = new ISurveyEntity[entities];
+    ISurveyEntity[] controlSurveyEntityCollection = new ISurveyEntity[entities];
 
     for (int i = 0; i < entities; i++)
     {
