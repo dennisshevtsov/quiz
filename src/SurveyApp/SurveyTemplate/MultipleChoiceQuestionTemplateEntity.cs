@@ -7,4 +7,6 @@ namespace SurveyApp.SurveyTemplate;
 public sealed class MultipleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
 {
   public override SurveyQuestionType QuestionType => SurveyQuestionType.MultipleChoice;
+
+  public string[] Choices { get; set; } = Array.Empty<string>();
 }
