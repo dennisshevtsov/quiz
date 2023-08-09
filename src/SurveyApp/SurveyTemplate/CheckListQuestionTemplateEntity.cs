@@ -2,9 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp;
+namespace SurveyApp.SurveyTemplate;
 
-public abstract class SurveyQuestionEntityBase
+public sealed class CheckListQuestionTemplateEntity : QuestionTemplateEntityBase
 {
-  public string Text { get; set; } = string.Empty;
 }
