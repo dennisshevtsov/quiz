@@ -4,6 +4,7 @@
 
 namespace SurveyApp.SurveyTemplate;
 
-public sealed class CheckListQuestionTemplateEntity : QuestionTemplateEntityBase
+public sealed class MultipleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
 {
+  public override SurveyQuestionType QuestionType => SurveyQuestionType.MultipleChoice;
 }

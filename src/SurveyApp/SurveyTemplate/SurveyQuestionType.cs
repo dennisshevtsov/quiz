@@ -4,9 +4,10 @@
 
 namespace SurveyApp.SurveyTemplate;
 
-public abstract class QuestionTemplateEntityBase
+public enum SurveyQuestionType : byte
 {
-  public string Text { get; set; } = string.Empty;
-
-  public abstract SurveyQuestionType QuestionType { get; }
+  TextArea = 0,
+  YesNo = 1,
+  MultipleChoice = 2,
+  SingleChoice = 3,
 }

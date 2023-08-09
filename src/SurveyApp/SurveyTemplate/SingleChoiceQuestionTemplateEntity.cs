@@ -4,6 +4,7 @@
 
 namespace SurveyApp.SurveyTemplate;
 
-public sealed class SelectListQuestionTemplateEntity : QuestionTemplateEntityBase
+public sealed class SingleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
 {
+  public override SurveyQuestionType QuestionType => SurveyQuestionType.SingleChoice;
 }

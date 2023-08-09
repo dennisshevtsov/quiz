@@ -6,4 +6,5 @@ namespace SurveyApp.SurveyTemplate;
 
 public sealed class YesNoQuestionTemplateEntity : QuestionTemplateEntityBase
 {
+  public override SurveyQuestionType QuestionType => SurveyQuestionType.YesNo;
 }
