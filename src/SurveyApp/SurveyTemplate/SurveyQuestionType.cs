@@ -2,9 +2,12 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.Survey.Data.Test;
+namespace SurveyApp.SurveyTemplate;
 
-public sealed class TestSurveyIdentity : ISurveyIdentity
+public enum SurveyQuestionType : byte
 {
-  public Guid SurveyId { get; } = Guid.NewGuid();
+  TextArea = 0,
+  YesNo = 1,
+  MultipleChoice = 2,
+  SingleChoice = 3,
 }
