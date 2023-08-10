@@ -20,5 +20,13 @@ public sealed class SurveyTemplateRepository : ISurveyTemplateRepository
     return Task.CompletedTask;
   }
 
-  public Task GetSurveyTemplateAsync(Guid surveyTemplateId, CancellationToken cancellationToken) => Task.CompletedTask;
+  public Task<SurveyTemplateEntity?> GetSurveyTemplateAsync(Guid surveyTemplateId, CancellationToken cancellationToken)
+  {
+    if (_surveyTemplates.ContainsKey(surveyTemplateId))
+    {
+      return Task.FromResult<SurveyTemplateEntity?>(_surveyTemplates[surveyTemplateId]);
+    }
+
+    return Task.FromResult(default(SurveyTemplateEntity));
+  }
 }

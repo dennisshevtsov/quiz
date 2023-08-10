@@ -8,5 +8,5 @@ public interface ISurveyTemplateRepository
 {
   public Task AddSurveyTemplateAsync(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken);
 
-  public Task GetSurveyTemplateAsync(Guid surveyTemplateId, CancellationToken cancellationToken);
+  public Task<SurveyTemplateEntity?> GetSurveyTemplateAsync(Guid surveyTemplateId, CancellationToken cancellationToken);
 }
