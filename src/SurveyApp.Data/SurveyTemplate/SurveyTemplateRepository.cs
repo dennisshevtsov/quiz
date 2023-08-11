@@ -8,6 +8,16 @@ public sealed class SurveyTemplateRepository : ISurveyTemplateRepository
 {
   private readonly Dictionary<Guid, SurveyTemplateEntity> _surveyTemplates = new();
 
+  public Task<SurveyTemplateEntity?> GetSurveyTemplateAsync(Guid surveyTemplateId, CancellationToken cancellationToken)
+  {
+    if (_surveyTemplates.ContainsKey(surveyTemplateId))
+    {
+      return Task.FromResult<SurveyTemplateEntity?>(_surveyTemplates[surveyTemplateId]);
+    }
+
+    return Task.FromResult(default(SurveyTemplateEntity));
+  }
+
   public Task AddSurveyTemplateAsync(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
   {
     surveyTemplateEntity.SurveyId =
@@ -20,13 +30,20 @@ public sealed class SurveyTemplateRepository : ISurveyTemplateRepository
     return Task.CompletedTask;
   }
 
-  public Task<SurveyTemplateEntity?> GetSurveyTemplateAsync(Guid surveyTemplateId, CancellationToken cancellationToken)
+  public Task UpdateSurveyTemplateAsync(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
   {
-    if (_surveyTemplates.ContainsKey(surveyTemplateId))
+    if (_surveyTemplates.ContainsKey(surveyTemplateEntity.SurveyId))
     {
-      return Task.FromResult<SurveyTemplateEntity?>(_surveyTemplates[surveyTemplateId]);
+      _surveyTemplates[surveyTemplateEntity.SurveyId] = surveyTemplateEntity;
     }
 
-    return Task.FromResult(default(SurveyTemplateEntity));
+    return Task.CompletedTask;
+  }
+
+  public Task DeleteSurveyTemplateAsync(Guid surveyTemplateId, CancellationToken cancellationToken)
+  {
+    _surveyTemplates.Remove(surveyTemplateId);
+
+    return Task.CompletedTask;
   }
 }
