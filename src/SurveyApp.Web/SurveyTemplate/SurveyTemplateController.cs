@@ -22,4 +22,15 @@ public class SurveyTemplateController : ControllerBase
   {
     return Ok(await _surveyTemplateRepository.GetSurveyTemplateAsync(surveyTemplateId, cancellationToken));
   }
+
+  [HttpPost()]
+  public async Task<IActionResult> AddSurveyTemplate(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
+  {
+    await _surveyTemplateRepository.AddSurveyTemplateAsync(surveyTemplateEntity, cancellationToken);
+
+    return CreatedAtAction(
+      nameof(SurveyTemplateController.GetSurveyTemplate),
+      new { surveyTemplateEntity },
+      surveyTemplateEntity);
+  }
 }
