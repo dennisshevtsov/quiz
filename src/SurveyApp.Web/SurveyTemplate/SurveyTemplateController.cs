@@ -17,13 +17,13 @@ public class SurveyTemplateController : ControllerBase
     _surveyTemplateRepository = surveyTemplateRepository ?? throw new ArgumentNullException(nameof(surveyTemplateRepository));
   }
 
-  [HttpGet("{surveyTemplateId}")]
+  [HttpGet("{surveyTemplateId}", Name = nameof(SurveyTemplateController.GetSurveyTemplate))]
   public async Task<IActionResult> GetSurveyTemplate(Guid surveyTemplateId, CancellationToken cancellationToken)
   {
     return Ok(await _surveyTemplateRepository.GetSurveyTemplateAsync(surveyTemplateId, cancellationToken));
   }
 
-  [HttpPost()]
+  [HttpPost(Name = nameof(SurveyTemplateController.GetSurveyTemplate))]
   public async Task<IActionResult> AddSurveyTemplate(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
   {
     await _surveyTemplateRepository.AddSurveyTemplateAsync(surveyTemplateEntity, cancellationToken);
