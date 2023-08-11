@@ -33,4 +33,32 @@ public class SurveyTemplateController : ControllerBase
       new { surveyTemplateEntity },
       surveyTemplateEntity);
   }
+
+  [HttpPut("{surveyTemplateId}", Name = nameof(SurveyTemplateController.UpdateSurveyTemplate))]
+  public async Task<IActionResult> UpdateSurveyTemplate(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
+  {
+    if (await _surveyTemplateRepository.GetSurveyTemplateAsync(surveyTemplateEntity.SurveyId, cancellationToken) == null)
+    {
+      return NotFound();
+    }
+
+    await _surveyTemplateRepository.UpdateSurveyTemplateAsync(surveyTemplateEntity, cancellationToken);
+
+    return NoContent();
+  }
+
+  [HttpDelete("{surveyTemplateId}", Name = nameof(SurveyTemplateController.DeleteSurveyTemplate))]
+  public async Task<IActionResult> DeleteSurveyTemplate(Guid surveyTemplateId, CancellationToken cancellationToken)
+  {
+    SurveyTemplateEntity? surveyTemplateEntity = await _surveyTemplateRepository.GetSurveyTemplateAsync(surveyTemplateId, cancellationToken);
+
+    if (surveyTemplateEntity == null)
+    {
+      return NotFound();
+    }
+
+    await _surveyTemplateRepository.DeleteSurveyTemplateAsync(surveyTemplateId, cancellationToken);
+
+    return NoContent();
+  }
 }
