@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.Web.SurveyTemplate;
+namespace SurveyApp.SurveyTemplate.Web;
 
 public sealed class AddSurveyTemplateRequestDto
 {

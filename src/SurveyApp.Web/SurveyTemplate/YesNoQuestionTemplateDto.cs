@@ -4,9 +4,6 @@
 
 namespace SurveyApp.SurveyTemplate.Web;
 
-public abstract class SurveyTemplateQuestionDtoBase
+public sealed class YesNoQuestionTemplateDto : QuestionTemplateEntityBase
 {
-  public string Text { get; set; } = string.Empty;
-
-  public abstract SurveyQuestionType QuestionType { get; }
 }
