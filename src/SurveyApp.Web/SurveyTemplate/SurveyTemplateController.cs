@@ -8,7 +8,7 @@ namespace SurveyApp.SurveyTemplate.Web;
 
 [ApiController]
 [Route("api/survey-template")]
-public class SurveyTemplateController : ControllerBase
+public sealed class SurveyTemplateController : ControllerBase
 {
   private readonly ISurveyTemplateRepository _surveyTemplateRepository;
 
