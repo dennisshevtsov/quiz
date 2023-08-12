@@ -10,5 +10,5 @@ public sealed class AddSurveyTemplateRequestDto
 
   public string Description { get; set; } = string.Empty;
 
-
+  public SurveyTemplateQuestionDtoBase[] Questions { get; set; } = Array.Empty<SurveyTemplateQuestionDtoBase>();
 }
