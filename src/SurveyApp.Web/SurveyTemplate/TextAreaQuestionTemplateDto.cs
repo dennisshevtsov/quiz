@@ -4,6 +4,6 @@
 
 namespace SurveyApp.SurveyTemplate.Web;
 
-public sealed class TextAreaQuestionTemplateDto : QuestionTemplateEntityBase
+public sealed class TextAreaQuestionTemplateDto : SurveyTemplateQuestionDtoBase
 {
 }
