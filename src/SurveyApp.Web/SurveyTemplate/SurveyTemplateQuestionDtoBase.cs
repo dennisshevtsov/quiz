@@ -8,7 +8,7 @@ namespace SurveyApp.SurveyTemplate.Web;
 
 [JsonDerivedType(typeof(MultipleChoiceQuestionTemplateDto))]
 [JsonDerivedType(typeof(SingleChoiceQuestionTemplateDto))]
-[JsonDerivedType(typeof(TextAreaQuestionTemplateDto))]
+[JsonDerivedType(typeof(TextQuestionTemplateDto))]
 [JsonDerivedType(typeof(YesNoQuestionTemplateDto))]
 public abstract class SurveyTemplateQuestionDtoBase
 {
