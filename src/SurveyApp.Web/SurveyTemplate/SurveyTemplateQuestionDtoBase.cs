@@ -6,10 +6,10 @@ using System.Text.Json.Serialization;
 
 namespace SurveyApp.SurveyTemplate.Web;
 
-[JsonDerivedType(typeof(MultipleChoiceQuestionTemplateDto))]
-[JsonDerivedType(typeof(SingleChoiceQuestionTemplateDto))]
-[JsonDerivedType(typeof(TextQuestionTemplateDto))]
-[JsonDerivedType(typeof(YesNoQuestionTemplateDto))]
+[JsonDerivedType(typeof(MultipleChoiceQuestionTemplateDto), (int)SurveyQuestionType.MultipleChoice)]
+[JsonDerivedType(typeof(SingleChoiceQuestionTemplateDto), (int)SurveyQuestionType.SingleChoice)]
+[JsonDerivedType(typeof(TextQuestionTemplateDto), (int)SurveyQuestionType.TextArea)]
+[JsonDerivedType(typeof(YesNoQuestionTemplateDto), (int)SurveyQuestionType.YesNo)]
 public abstract class SurveyTemplateQuestionDtoBase
 {
   public string Text { get; set; } = string.Empty;
