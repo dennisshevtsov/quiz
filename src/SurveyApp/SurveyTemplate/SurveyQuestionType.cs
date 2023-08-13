@@ -4,7 +4,7 @@
 
 namespace SurveyApp.SurveyTemplate;
 
-public enum SurveyQuestionType : byte
+public enum SurveyQuestionType : int
 {
   TextArea = 0,
   YesNo = 1,
