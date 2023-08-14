@@ -9,7 +9,7 @@ namespace SurveyApp.SurveyTemplate.Web;
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "questionType")]
 [JsonDerivedType(typeof(MultipleChoiceQuestionTemplateDto), (int)SurveyQuestionType.MultipleChoice)]
 [JsonDerivedType(typeof(SingleChoiceQuestionTemplateDto), (int)SurveyQuestionType.SingleChoice)]
-[JsonDerivedType(typeof(TextQuestionTemplateDto), (int)SurveyQuestionType.TextArea)]
+[JsonDerivedType(typeof(TextQuestionTemplateDto), (int)SurveyQuestionType.Text)]
 [JsonDerivedType(typeof(YesNoQuestionTemplateDto), (int)SurveyQuestionType.YesNo)]
 public abstract class SurveyTemplateQuestionDtoBase
 {
@@ -19,7 +19,7 @@ public abstract class SurveyTemplateQuestionDtoBase
 
   public QuestionTemplateEntityBase ToQuestionTemplateEntity() => QuestionType switch
   {
-    SurveyQuestionType.TextArea => new TextAreaQuestionTemplateEntity(),
+    SurveyQuestionType.Text => new TextQuestionTemplateEntity(),
     SurveyQuestionType.YesNo => new YesNoQuestionTemplateEntity(),
     SurveyQuestionType.MultipleChoice => new MultipleChoiceQuestionTemplateEntity(),
     SurveyQuestionType.SingleChoice => new SingleChoiceQuestionTemplateEntity(),

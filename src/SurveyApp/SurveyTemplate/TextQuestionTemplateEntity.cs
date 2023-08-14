@@ -4,7 +4,7 @@
 
 namespace SurveyApp.SurveyTemplate;
 
-public sealed class TextAreaQuestionTemplateEntity : QuestionTemplateEntityBase
+public sealed class TextQuestionTemplateEntity : QuestionTemplateEntityBase
 {
-  public override SurveyQuestionType QuestionType => SurveyQuestionType.TextArea;
+  public override SurveyQuestionType QuestionType => SurveyQuestionType.Text;
 }
