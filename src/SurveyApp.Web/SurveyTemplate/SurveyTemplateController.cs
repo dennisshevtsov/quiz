@@ -28,7 +28,10 @@ public sealed class SurveyTemplateController : ControllerBase
     AddSurveyTemplateRequestDto addSurveyTemplateRequestDto,
     CancellationToken cancellationToken)
   {
-    await _surveyTemplateRepository.AddSurveyTemplateAsync(surveyTemplateEntity, cancellationToken);
+    SurveyTemplateEntity surveyTemplateEntity =
+      await _surveyTemplateRepository.AddSurveyTemplateAsync(
+        addSurveyTemplateRequestDto.ToSurveyTemplateEntity(),
+        cancellationToken);
 
     return CreatedAtAction(
       nameof(SurveyTemplateController.GetSurveyTemplate),
