@@ -6,7 +6,7 @@ namespace SurveyApp.SurveyTemplate;
 
 public enum SurveyQuestionType : int
 {
-  TextArea = 0,
+  Text = 0,
   YesNo = 1,
   MultipleChoice = 2,
   SingleChoice = 3,
