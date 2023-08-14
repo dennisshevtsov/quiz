@@ -24,7 +24,9 @@ public sealed class SurveyTemplateController : ControllerBase
   }
 
   [HttpPost(Name = nameof(SurveyTemplateController.GetSurveyTemplate))]
-  public async Task<IActionResult> AddSurveyTemplate(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
+  public async Task<IActionResult> AddSurveyTemplate(
+    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto,
+    CancellationToken cancellationToken)
   {
     await _surveyTemplateRepository.AddSurveyTemplateAsync(surveyTemplateEntity, cancellationToken);
 
