@@ -14,13 +14,14 @@ public sealed class UpdateSurveyTemplateRequestDto
 
   public SurveyTemplateQuestionDtoBase[] Questions { get; set; } = Array.Empty<SurveyTemplateQuestionDtoBase>();
 
-  public SurveyTemplateEntity ToSurveyTemplateEntity() => new SurveyTemplateEntity
+  public SurveyTemplateEntity UpdateSurveyTemplate(SurveyTemplateEntity surveyTemplateEntity)
   {
-    SurveyTemplateId = SurveyTemplateId,
-    Title = Title,
-    Description = Description,
-    Questions = ToQuestionTemplateEntityCollection(),
-  };
+    surveyTemplateEntity.Title = Title;
+    surveyTemplateEntity.Description = Description;
+    surveyTemplateEntity.Questions = ToQuestionTemplateEntityCollection();
+
+    return surveyTemplateEntity;
+  }
 
   private List<QuestionTemplateEntityBase> ToQuestionTemplateEntityCollection()
   {

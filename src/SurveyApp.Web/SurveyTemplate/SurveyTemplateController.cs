@@ -40,14 +40,22 @@ public sealed class SurveyTemplateController : ControllerBase
   }
 
   [HttpPut("{surveyTemplateId}", Name = nameof(SurveyTemplateController.UpdateSurveyTemplate))]
-  public async Task<IActionResult> UpdateSurveyTemplate(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
+  public async Task<IActionResult> UpdateSurveyTemplate(
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto,
+    CancellationToken cancellationToken)
   {
-    if (await _surveyTemplateRepository.GetSurveyTemplateAsync(surveyTemplateEntity.SurveyId, cancellationToken) == null)
+    SurveyTemplateEntity? surveyTemplateEntity =
+      await _surveyTemplateRepository.GetSurveyTemplateAsync(
+        updateSurveyTemplateRequestDto.SurveyTemplateId, cancellationToken);
+
+    if (surveyTemplateEntity == null)
     {
       return NotFound();
     }
 
-    await _surveyTemplateRepository.UpdateSurveyTemplateAsync(surveyTemplateEntity, cancellationToken);
+    await _surveyTemplateRepository.UpdateSurveyTemplateAsync(
+      updateSurveyTemplateRequestDto.UpdateSurveyTemplate(surveyTemplateEntity),
+      cancellationToken);
 
     return NoContent();
   }
