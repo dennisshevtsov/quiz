@@ -20,21 +20,21 @@ public sealed class SurveyTemplateRepository : ISurveyTemplateRepository
 
   public Task<SurveyTemplateEntity> AddSurveyTemplateAsync(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
   {
-    surveyTemplateEntity.SurveyId =
-      surveyTemplateEntity.SurveyId != default ?
-      surveyTemplateEntity.SurveyId :
+    surveyTemplateEntity.SurveyTemplateId =
+      surveyTemplateEntity.SurveyTemplateId != default ?
+      surveyTemplateEntity.SurveyTemplateId :
       Guid.NewGuid();
 
-    _surveyTemplates[surveyTemplateEntity.SurveyId] = surveyTemplateEntity;
+    _surveyTemplates[surveyTemplateEntity.SurveyTemplateId] = surveyTemplateEntity;
 
     return Task.FromResult(surveyTemplateEntity);
   }
 
   public Task UpdateSurveyTemplateAsync(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
   {
-    if (_surveyTemplates.ContainsKey(surveyTemplateEntity.SurveyId))
+    if (_surveyTemplates.ContainsKey(surveyTemplateEntity.SurveyTemplateId))
     {
-      _surveyTemplates[surveyTemplateEntity.SurveyId] = surveyTemplateEntity;
+      _surveyTemplates[surveyTemplateEntity.SurveyTemplateId] = surveyTemplateEntity;
     }
 
     return Task.CompletedTask;

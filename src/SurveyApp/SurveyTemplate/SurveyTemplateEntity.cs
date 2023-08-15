@@ -6,7 +6,7 @@ namespace SurveyApp.SurveyTemplate;
 
 public sealed class SurveyTemplateEntity
 {
-  public Guid SurveyId { get; set; }
+  public Guid SurveyTemplateId { get; set; }
 
   public string Title { get; set; } = string.Empty;
 
