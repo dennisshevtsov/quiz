@@ -17,12 +17,5 @@ public abstract class SurveyTemplateQuestionDtoBase
 
   public SurveyQuestionType QuestionType { get; set; }
 
-  public QuestionTemplateEntityBase ToQuestionTemplateEntity() => QuestionType switch
-  {
-    SurveyQuestionType.Text => new TextQuestionTemplateEntity(),
-    SurveyQuestionType.YesNo => new YesNoQuestionTemplateEntity(),
-    SurveyQuestionType.MultipleChoice => new MultipleChoiceQuestionTemplateEntity(),
-    SurveyQuestionType.SingleChoice => new SingleChoiceQuestionTemplateEntity(),
-    _ => throw new InvalidOperationException("Unknown survey question type."),
-  };
+  public abstract QuestionTemplateEntityBase ToQuestionTemplateEntity();
 }

@@ -6,4 +6,5 @@ namespace SurveyApp.SurveyTemplate.Web;
 
 public sealed class TextQuestionTemplateDto : SurveyTemplateQuestionDtoBase
 {
+  public override QuestionTemplateEntityBase ToQuestionTemplateEntity() => new TextQuestionTemplateEntity();
 }
