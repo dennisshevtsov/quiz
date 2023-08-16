@@ -4,6 +4,10 @@
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSurveyTemplateData();
+builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
 
 WebApplication app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI();
 app.Run();
