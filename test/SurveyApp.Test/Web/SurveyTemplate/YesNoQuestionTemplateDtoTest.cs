@@ -21,4 +21,21 @@ public sealed class YesNoQuestionTemplateDtoTest
     // Assert
     Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(YesNoQuestionTemplateEntity));
   }
+
+  [TestMethod]
+  public void ToQuestionTemplateEntity_YesNoQuestionTemplateDto_PropertiesFilled()
+  {
+    // Arrange
+    YesNoQuestionTemplateDto yesNoQuestionTemplateDto = new()
+    {
+      QuestionType = SurveyQuestionType.YesNo,
+      Text = "test",
+    };
+
+    // Act
+    QuestionTemplateEntityBase questionTemplateEntityBase = yesNoQuestionTemplateDto.ToQuestionTemplateEntity();
+
+    // Assert
+    Assert.AreEqual(yesNoQuestionTemplateDto.Text, questionTemplateEntityBase.Text);
+  }
 }
