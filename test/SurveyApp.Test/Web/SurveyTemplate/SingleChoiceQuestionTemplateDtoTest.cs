@@ -10,7 +10,7 @@ namespace SurveyApp.SurveyTemplate.Web.Test;
 public sealed class SingleChoiceQuestionTemplateDtoTest
 {
   [TestMethod]
-  public void ToQuestionTemplateEntity_SingleChoiceQuestionTemplateDto_TextQuestionTemplateEntityReturned()
+  public void ToQuestionTemplateEntity_SingleChoiceQuestionTemplateDto_SingleChoiceQuestionTemplateEntityReturned()
   {
     // Arrange
     SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new();
