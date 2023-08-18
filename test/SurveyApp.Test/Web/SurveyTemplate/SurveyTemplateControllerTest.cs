@@ -3,6 +3,7 @@
 // See LICENSE in the project root for license information.
 
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
@@ -36,5 +37,23 @@ public sealed class SurveyTemplateControllerTest
 
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(OkObjectResult));
+  }
+
+  [TestMethod]
+  public async Task GetSurveyTemplate_ExistingSurveyTemplateId_GetSurveyTemplateAsyncCalled()
+  {
+    // Arrange
+    Guid surveyTemplateId = Guid.NewGuid();
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .Verifiable();
+
+    // Act
+    await _surveyTemplateController.GetSurveyTemplate(
+      surveyTemplateId, CancellationToken.None);
+
+    // Assert
+    Expression<Func<Guid, bool>> surveyTemplateIdMatch = id => id == surveyTemplateId;
+    _surveyTemplateRepositoryMock.Verify(repository => repository.GetSurveyTemplateAsync(It.Is(surveyTemplateIdMatch), It.IsAny<CancellationToken>()));
   }
 }
