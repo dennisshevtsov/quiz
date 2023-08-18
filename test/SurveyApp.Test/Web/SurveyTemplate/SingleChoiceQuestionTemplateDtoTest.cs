@@ -2,8 +2,6 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
 [TestClass]

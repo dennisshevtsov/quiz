@@ -20,7 +20,14 @@ public sealed class SurveyTemplateController : ControllerBase
   [HttpGet("{surveyTemplateId}", Name = nameof(SurveyTemplateController.GetSurveyTemplate))]
   public async Task<IActionResult> GetSurveyTemplate([FromRoute] Guid surveyTemplateId, CancellationToken cancellationToken)
   {
-    return Ok(await _surveyTemplateRepository.GetSurveyTemplateAsync(surveyTemplateId, cancellationToken));
+    SurveyTemplateEntity? surveyTemplateEntity = await _surveyTemplateRepository.GetSurveyTemplateAsync(surveyTemplateId, cancellationToken);
+
+    if (surveyTemplateEntity == null)
+    {
+      return NotFound();
+    }
+    
+    return Ok(surveyTemplateEntity);
   }
 
   [HttpPost(Name = nameof(SurveyTemplateController.AddSurveyTemplate))]
