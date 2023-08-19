@@ -6,6 +6,14 @@ namespace SurveyApp.SurveyTemplate.Web;
 
 public sealed class SingleChoiceQuestionTemplateDto : SurveyTemplateQuestionDtoBase
 {
+  public SingleChoiceQuestionTemplateDto() { }
+
+  public SingleChoiceQuestionTemplateDto(SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity)
+  {
+    Text = singleChoiceQuestionTemplateEntity.Text;
+    Choices = Choices;
+  }
+
   public string[] Choices { get; set; } = Array.Empty<string>();
 
   public override QuestionTemplateEntityBase ToQuestionTemplateEntity() => new SingleChoiceQuestionTemplateEntity
