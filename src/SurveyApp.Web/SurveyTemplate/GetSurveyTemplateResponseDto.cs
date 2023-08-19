@@ -11,9 +11,8 @@ public sealed class GetSurveyTemplateResponseDto
     SurveyTemplateId = surveyTemplateEntity.SurveyTemplateId;
     Title = surveyTemplateEntity.Title;
     Description = surveyTemplateEntity.Description;
-    Questions =
-      surveyTemplateEntity.Questions.Select(SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity)
-                                    .ToArray();
+    Questions = surveyTemplateEntity.Questions.Select(SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity)
+                                              .ToArray();
   }
 
   public Guid SurveyTemplateId { get; set; }
