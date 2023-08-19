@@ -38,6 +38,21 @@ public sealed class SurveyTemplateControllerTest
   }
 
   [TestMethod]
+  public async Task GetSurveyTemplate_ExistingSurveyTemplateId_GetSurveyTemplateResponseDtoReturned()
+  {
+    // Arrange
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(new SurveyTemplateEntity());
+
+    // Act
+    IActionResult actionResult = await _surveyTemplateController.GetSurveyTemplate(
+      Guid.NewGuid(), CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(((ObjectResult)actionResult).Value, typeof(GetSurveyTemplateResponseDto));
+  }
+
+  [TestMethod]
   public async Task GetSurveyTemplate_ExistingSurveyTemplateId_GetSurveyTemplateAsyncCalled()
   {
     // Arrange
