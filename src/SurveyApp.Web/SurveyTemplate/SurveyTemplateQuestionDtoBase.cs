@@ -18,4 +18,14 @@ public abstract class SurveyTemplateQuestionDtoBase
   public SurveyQuestionType QuestionType { get; set; }
 
   public abstract QuestionTemplateEntityBase ToQuestionTemplateEntity();
+
+  public static SurveyTemplateQuestionDtoBase FromQuestionTemplateEntity(QuestionTemplateEntityBase questionTemplateEntity) =>
+    questionTemplateEntity.QuestionType switch
+    {
+      SurveyQuestionType.Text => new TextQuestionTemplateDto((TextQuestionTemplateEntity)questionTemplateEntity),
+      SurveyQuestionType.YesNo => new YesNoQuestionTemplateDto((YesNoQuestionTemplateEntity)questionTemplateEntity),
+      SurveyQuestionType.MultipleChoice => new MultipleChoiceQuestionTemplateDto((MultipleChoiceQuestionTemplateEntity)questionTemplateEntity),
+      SurveyQuestionType.SingleChoice => new SingleChoiceQuestionTemplateDto((SingleChoiceQuestionTemplateEntity)questionTemplateEntity),
+      _ => throw new NotSupportedException("Unknown question type."),
+    };
 }
