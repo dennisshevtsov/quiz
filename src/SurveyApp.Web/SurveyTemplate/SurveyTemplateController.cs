@@ -26,8 +26,8 @@ public sealed class SurveyTemplateController : ControllerBase
     {
       return NotFound();
     }
-    
-    return Ok(surveyTemplateEntity);
+
+    return Ok(new GetSurveyTemplateResponseDto(surveyTemplateEntity));
   }
 
   [HttpPost(Name = nameof(SurveyTemplateController.AddSurveyTemplate))]
