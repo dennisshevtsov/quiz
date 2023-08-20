@@ -32,7 +32,7 @@ public sealed class SurveyTemplateController : ControllerBase
 
   [HttpPost(Name = nameof(SurveyTemplateController.AddSurveyTemplate))]
   public async Task<IActionResult> AddSurveyTemplate(
-    [FromBody] AddSurveyTemplateRequestDto addSurveyTemplateRequestDto,
+    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto,
     CancellationToken cancellationToken)
   {
     SurveyTemplateEntity surveyTemplateEntity =
