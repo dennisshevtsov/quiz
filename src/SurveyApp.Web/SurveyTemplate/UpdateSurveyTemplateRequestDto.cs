@@ -2,9 +2,11 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using Patchable;
+
 namespace SurveyApp.SurveyTemplate.Web;
 
-public sealed class UpdateSurveyTemplateRequestDto
+public sealed class UpdateSurveyTemplateRequestDto : IComposable
 {
   public Guid SurveyTemplateId { get; set; }
 
