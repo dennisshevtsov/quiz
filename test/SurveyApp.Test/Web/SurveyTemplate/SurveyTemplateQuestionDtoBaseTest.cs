@@ -200,11 +200,11 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
 
     // Assert
     Assert.AreEqual(surveyTemplateQuestionDtoBase.Text, singleChoiceQuestionTemplateEntity.Text);
-    Assert.AreEqual(((MultipleChoiceQuestionTemplateDto)surveyTemplateQuestionDtoBase).Choices.Length, singleChoiceQuestionTemplateEntity.Choices.Length);
+    Assert.AreEqual(((SingleChoiceQuestionTemplateDto)surveyTemplateQuestionDtoBase).Choices.Length, singleChoiceQuestionTemplateEntity.Choices.Length);
 
     for (int i = 0; i < singleChoiceQuestionTemplateEntity.Choices.Length; i++)
     {
-      Assert.AreEqual(((MultipleChoiceQuestionTemplateDto)surveyTemplateQuestionDtoBase).Choices[i], singleChoiceQuestionTemplateEntity.Choices[i]);
+      Assert.AreEqual(((SingleChoiceQuestionTemplateDto)surveyTemplateQuestionDtoBase).Choices[i], singleChoiceQuestionTemplateEntity.Choices[i]);
     }
   }
 }

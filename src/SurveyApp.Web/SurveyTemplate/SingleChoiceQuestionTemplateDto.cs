@@ -11,7 +11,7 @@ public sealed class SingleChoiceQuestionTemplateDto : SurveyTemplateQuestionDtoB
   public SingleChoiceQuestionTemplateDto(SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity)
   {
     Text = singleChoiceQuestionTemplateEntity.Text;
-    Choices = Choices;
+    Choices = singleChoiceQuestionTemplateEntity.Choices;
   }
 
   public string[] Choices { get; set; } = Array.Empty<string>();
