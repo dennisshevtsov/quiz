@@ -7,7 +7,7 @@ public sealed class MultipleChoiceQuestionTemplateDto : SurveyTemplateQuestionDt
   public MultipleChoiceQuestionTemplateDto(MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity)
   {
     Text = multipleChoiceQuestionTemplateEntity.Text;
-    Choices = Choices;
+    Choices = multipleChoiceQuestionTemplateEntity.Choices;
   }
 
   public string[] Choices { get; set; } = Array.Empty<string>();
