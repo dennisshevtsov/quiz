@@ -36,6 +36,22 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   }
 
   [TestMethod]
+  public void FromQuestionTemplateEntity_TextQuestionTemplateEntity_PropertiesFilled()
+  {
+    // Arrange
+    TextQuestionTemplateEntity textQuestionTemplateEntity = new()
+    {
+      Text = Guid.NewGuid().ToString(),
+    };
+
+    // Act
+    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
+      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(textQuestionTemplateEntity);
+
+    // Assert
+    Assert.AreEqual(surveyTemplateQuestionDtoBase.Text, textQuestionTemplateEntity.Text);
+  }
+  [TestMethod]
   public void FromQuestionTemplateEntity_YesNoQuestionTemplateEntity_SurveyTemplateQuestionDtoBaseCreated()
   {
     // Arrange
@@ -61,6 +77,23 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
 
     // Assert
     Assert.IsInstanceOfType(surveyTemplateQuestionDtoBase, typeof(YesNoQuestionTemplateDto));
+  }
+
+  [TestMethod]
+  public void FromQuestionTemplateEntity_YesNoQuestionTemplateEntity_PropertiesFilled()
+  {
+    // Arrange
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new()
+    {
+      Text = Guid.NewGuid().ToString(),
+    };
+
+    // Act
+    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
+      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(yesNoQuestionTemplateEntity);
+
+    // Assert
+    Assert.AreEqual(surveyTemplateQuestionDtoBase.Text, yesNoQuestionTemplateEntity.Text);
   }
 
   [TestMethod]
@@ -92,6 +125,34 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   }
 
   [TestMethod]
+  public void FromQuestionTemplateEntity_MultipleChoiceQuestionTemplateEntity_PropertiesFilled()
+  {
+    // Arrange
+    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new()
+    {
+      Text = Guid.NewGuid().ToString(),
+      Choices = new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+    };
+
+    // Act
+    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
+      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(multipleChoiceQuestionTemplateEntity);
+
+    // Assert
+    Assert.AreEqual(surveyTemplateQuestionDtoBase.Text, multipleChoiceQuestionTemplateEntity.Text);
+    Assert.AreEqual(((MultipleChoiceQuestionTemplateDto)surveyTemplateQuestionDtoBase).Choices.Length, multipleChoiceQuestionTemplateEntity.Choices.Length);
+
+    for (int i = 0; i < multipleChoiceQuestionTemplateEntity.Choices.Length; i++)
+    {
+      Assert.AreEqual(((MultipleChoiceQuestionTemplateDto)surveyTemplateQuestionDtoBase).Choices[i], multipleChoiceQuestionTemplateEntity.Choices[i]);
+    }
+  }
+
+  [TestMethod]
   public void FromQuestionTemplateEntity_SingleChoiceQuestionTemplateEntity_SurveyTemplateQuestionDtoBaseCreated()
   {
     // Arrange
@@ -117,5 +178,33 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
 
     // Assert
     Assert.IsInstanceOfType(surveyTemplateQuestionDtoBase, typeof(SingleChoiceQuestionTemplateDto));
+  }
+
+  [TestMethod]
+  public void FromQuestionTemplateEntity_SingleChoiceQuestionTemplateEntity_PropertiesFilled()
+  {
+    // Arrange
+    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new()
+    {
+      Text = Guid.NewGuid().ToString(),
+      Choices = new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+    };
+
+    // Act
+    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
+      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(singleChoiceQuestionTemplateEntity);
+
+    // Assert
+    Assert.AreEqual(surveyTemplateQuestionDtoBase.Text, singleChoiceQuestionTemplateEntity.Text);
+    Assert.AreEqual(((MultipleChoiceQuestionTemplateDto)surveyTemplateQuestionDtoBase).Choices.Length, singleChoiceQuestionTemplateEntity.Choices.Length);
+
+    for (int i = 0; i < singleChoiceQuestionTemplateEntity.Choices.Length; i++)
+    {
+      Assert.AreEqual(((MultipleChoiceQuestionTemplateDto)surveyTemplateQuestionDtoBase).Choices[i], singleChoiceQuestionTemplateEntity.Choices[i]);
+    }
   }
 }
