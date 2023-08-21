@@ -5,7 +5,7 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSurveyTemplateData();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.AddPatchable());
 
 WebApplication app = builder.Build();
 app.UseSwagger();
