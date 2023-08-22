@@ -89,7 +89,11 @@ public sealed class SurveyTemplateControllerTest
   public async Task AddSurveyTemplate_AddSurveyTemplateRequestDto_AddSurveyTemplateAsyncCalled()
   {
     // Arrange
-    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()));
+    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(new SurveyTemplateEntity
+                                 {
+                                   SurveyTemplateId = Guid.NewGuid(),
+                                 });
 
     AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
     {
@@ -127,7 +131,11 @@ public sealed class SurveyTemplateControllerTest
   public async Task AddSurveyTemplate_AddSurveyTemplateRequestDto_CreatedAtActionResultReturned()
   {
     // Arrange
-    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()));
+    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(new SurveyTemplateEntity
+                                 {
+                                   SurveyTemplateId = Guid.NewGuid(),
+                                 });
 
     AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new();
 
@@ -143,7 +151,11 @@ public sealed class SurveyTemplateControllerTest
   public async Task AddSurveyTemplate_AddSurveyTemplateRequestDto_ActionNamePopulated()
   {
     // Arrange
-    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()));
+    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(new SurveyTemplateEntity
+                                 {
+                                   SurveyTemplateId = Guid.NewGuid(),
+                                 });
 
     AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new();
 

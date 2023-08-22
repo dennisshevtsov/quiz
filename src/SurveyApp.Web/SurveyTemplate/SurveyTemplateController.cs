@@ -42,7 +42,7 @@ public sealed class SurveyTemplateController : ControllerBase
 
     return CreatedAtAction(
       nameof(SurveyTemplateController.GetSurveyTemplate),
-      new { surveyTemplateEntity },
+      new { surveyTemplateEntity.SurveyTemplateId },
       surveyTemplateEntity);
   }
 
