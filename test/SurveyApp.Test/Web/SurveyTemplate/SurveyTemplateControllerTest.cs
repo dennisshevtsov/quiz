@@ -129,24 +129,7 @@ public sealed class SurveyTemplateControllerTest
     // Arrange
     _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()));
 
-    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
-    {
-      Title = Guid.NewGuid().ToString(),
-      Description = Guid.NewGuid().ToString(),
-      Questions = new SurveyTemplateQuestionDtoBase[]
-      {
-        new TextQuestionTemplateDto
-        {
-          QuestionType = SurveyQuestionType.Text,
-          Text = Guid.NewGuid().ToString(),
-        },
-        new YesNoQuestionTemplateDto
-        {
-          QuestionType = SurveyQuestionType.YesNo,
-          Text = Guid.NewGuid().ToString(),
-        },
-      },
-    };
+    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new();
 
     // Act
     IActionResult actionResult = await _surveyTemplateController.AddSurveyTemplate(
@@ -162,24 +145,7 @@ public sealed class SurveyTemplateControllerTest
     // Arrange
     _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()));
 
-    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
-    {
-      Title = Guid.NewGuid().ToString(),
-      Description = Guid.NewGuid().ToString(),
-      Questions = new SurveyTemplateQuestionDtoBase[]
-      {
-        new TextQuestionTemplateDto
-        {
-          QuestionType = SurveyQuestionType.Text,
-          Text = Guid.NewGuid().ToString(),
-        },
-        new YesNoQuestionTemplateDto
-        {
-          QuestionType = SurveyQuestionType.YesNo,
-          Text = Guid.NewGuid().ToString(),
-        },
-      },
-    };
+    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new();
 
     // Act
     IActionResult actionResult = await _surveyTemplateController.AddSurveyTemplate(
@@ -187,5 +153,30 @@ public sealed class SurveyTemplateControllerTest
 
     // Assert
     Assert.AreEqual(nameof(SurveyTemplateController.GetSurveyTemplate), ((CreatedAtActionResult)actionResult).ActionName);
+  }
+
+  [TestMethod]
+  public async Task AddSurveyTemplate_AddSurveyTemplateRequestDto_RouteValuesPopulated()
+  {
+    // Arrange
+    Guid surveyTemplateId = Guid.NewGuid();
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(new SurveyTemplateEntity
+                                 {
+                                   SurveyTemplateId = surveyTemplateId,
+                                 });
+
+    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyTemplateController.AddSurveyTemplate(
+      addSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    CreatedAtActionResult createdAtActionResult = (CreatedAtActionResult)actionResult;
+
+    Assert.IsNotNull(createdAtActionResult.RouteValues);
+    Assert.AreEqual(surveyTemplateId, createdAtActionResult.RouteValues["surveyTemplateId"]);
   }
 }
