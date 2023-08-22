@@ -155,4 +155,37 @@ public sealed class SurveyTemplateControllerTest
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(CreatedAtActionResult));
   }
+
+  [TestMethod]
+  public async Task AddSurveyTemplate_AddSurveyTemplateRequestDto_ActionNamePopulated()
+  {
+    // Arrange
+    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()));
+
+    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
+    {
+      Title = Guid.NewGuid().ToString(),
+      Description = Guid.NewGuid().ToString(),
+      Questions = new SurveyTemplateQuestionDtoBase[]
+      {
+        new TextQuestionTemplateDto
+        {
+          QuestionType = SurveyQuestionType.Text,
+          Text = Guid.NewGuid().ToString(),
+        },
+        new YesNoQuestionTemplateDto
+        {
+          QuestionType = SurveyQuestionType.YesNo,
+          Text = Guid.NewGuid().ToString(),
+        },
+      },
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyTemplateController.AddSurveyTemplate(
+      addSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.AreEqual("GetSurveyTemplate", ((CreatedAtActionResult)actionResult).ActionName);
+  }
 }
