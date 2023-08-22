@@ -186,6 +186,6 @@ public sealed class SurveyTemplateControllerTest
       addSurveyTemplateRequestDto, CancellationToken.None);
 
     // Assert
-    Assert.AreEqual("GetSurveyTemplate", ((CreatedAtActionResult)actionResult).ActionName);
+    Assert.AreEqual(nameof(SurveyTemplateController.GetSurveyTemplate), ((CreatedAtActionResult)actionResult).ActionName);
   }
 }
