@@ -192,4 +192,25 @@ public sealed class SurveyTemplateControllerTest
     Assert.IsNotNull(createdAtActionResult.RouteValues);
     Assert.AreEqual(surveyTemplateId, createdAtActionResult.RouteValues["surveyTemplateId"]);
   }
+
+  [TestMethod]
+  public async Task UpdateSurveyTemplate_UpdateSurveyTemplateRequestDto_GetSurveyTemplateAsyncCalled()
+  {
+    // Arrange
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .Verifiable();
+
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      SurveyTemplateId = Guid.NewGuid(),
+    };
+
+    // Act
+    await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    Expression<Func<Guid, bool>> match = id => id == updateSurveyTemplateRequestDto.SurveyTemplateId;
+
+    _surveyTemplateRepositoryMock.Verify(repository => repository.GetSurveyTemplateAsync(It.Is(match), It.IsAny<CancellationToken>()));
+  }
 }
