@@ -218,8 +218,7 @@ public sealed class SurveyTemplateControllerTest
   public async Task UpdateSurveyTemplate_UnknownSurveyTemplate_NotFoundReturned()
   {
     // Arrange
-    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-                                 .Verifiable();
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()));
 
     UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
     {
@@ -231,5 +230,24 @@ public sealed class SurveyTemplateControllerTest
 
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+  }
+
+  [TestMethod]
+  public async Task UpdateSurveyTemplate_ExistingSurveyTemplate_NoContentReturned()
+  {
+    // Arrange
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(new SurveyTemplateEntity());
+
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      SurveyTemplateId = Guid.NewGuid(),
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NoContentResult));
   }
 }
