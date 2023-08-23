@@ -255,12 +255,17 @@ public sealed class SurveyTemplateControllerTest
   public async Task UpdateSurveyTemplate_ExistingSurveyTemplate_UpdateSurveyTemplateAsyncCalled()
   {
     // Arrange
+    Guid surveyTemplateId = Guid.NewGuid();
+
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-                                 .ReturnsAsync(new SurveyTemplateEntity());
+                                 .ReturnsAsync(new SurveyTemplateEntity
+                                 {
+                                   SurveyTemplateId = surveyTemplateId,
+                                 });
 
     UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
     {
-      SurveyTemplateId = Guid.NewGuid(),
+      SurveyTemplateId = surveyTemplateId,
       Title = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
       Questions = new SurveyTemplateQuestionDtoBase[]
