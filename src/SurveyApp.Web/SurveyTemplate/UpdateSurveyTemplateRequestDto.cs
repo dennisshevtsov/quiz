@@ -32,7 +32,7 @@ public sealed class UpdateSurveyTemplateRequestDto : IComposable
 
     for (int i = 0; i < Questions.Length; i++)
     {
-      surveyTemplateQuestionEntityCollection[i] = Questions[i].ToQuestionTemplateEntity();
+      surveyTemplateQuestionEntityCollection.Add(Questions[i].ToQuestionTemplateEntity());
     }
 
     return surveyTemplateQuestionEntityCollection;

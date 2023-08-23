@@ -2,8 +2,9 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
@@ -120,8 +121,8 @@ public sealed class SurveyTemplateControllerTest
 
     // Assert
     Expression<Func<SurveyTemplateEntity, bool>> match =
-      entity => entity.Title == addSurveyTemplateRequestDto.Title &&
-                entity.Description == addSurveyTemplateRequestDto.Description &&
+      entity => entity.Title           == addSurveyTemplateRequestDto.Title            &&
+                entity.Description     == addSurveyTemplateRequestDto.Description      &&
                 entity.Questions.Count == addSurveyTemplateRequestDto.Questions.Length;
 
     _surveyTemplateRepositoryMock.Verify(repository => repository.AddSurveyTemplateAsync(It.Is(match), It.IsAny<CancellationToken>()));
@@ -190,5 +191,108 @@ public sealed class SurveyTemplateControllerTest
 
     Assert.IsNotNull(createdAtActionResult.RouteValues);
     Assert.AreEqual(surveyTemplateId, createdAtActionResult.RouteValues["surveyTemplateId"]);
+  }
+
+  [TestMethod]
+  public async Task UpdateSurveyTemplate_UpdateSurveyTemplateRequestDto_GetSurveyTemplateAsyncCalled()
+  {
+    // Arrange
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .Verifiable();
+
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      SurveyTemplateId = Guid.NewGuid(),
+    };
+
+    // Act
+    await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    Expression<Func<Guid, bool>> match = id => id == updateSurveyTemplateRequestDto.SurveyTemplateId;
+
+    _surveyTemplateRepositoryMock.Verify(repository => repository.GetSurveyTemplateAsync(It.Is(match), It.IsAny<CancellationToken>()));
+  }
+
+  [TestMethod]
+  public async Task UpdateSurveyTemplate_UnknownSurveyTemplate_NotFoundReturned()
+  {
+    // Arrange
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()));
+
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      SurveyTemplateId = Guid.NewGuid(),
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+  }
+
+  [TestMethod]
+  public async Task UpdateSurveyTemplate_ExistingSurveyTemplate_NoContentReturned()
+  {
+    // Arrange
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(new SurveyTemplateEntity());
+
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      SurveyTemplateId = Guid.NewGuid(),
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NoContentResult));
+  }
+
+  [TestMethod]
+  public async Task UpdateSurveyTemplate_ExistingSurveyTemplate_UpdateSurveyTemplateAsyncCalled()
+  {
+    // Arrange
+    Guid surveyTemplateId = Guid.NewGuid();
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(new SurveyTemplateEntity
+                                 {
+                                   SurveyTemplateId = surveyTemplateId,
+                                 });
+
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      SurveyTemplateId = surveyTemplateId,
+      Title = Guid.NewGuid().ToString(),
+      Description = Guid.NewGuid().ToString(),
+      Questions = new SurveyTemplateQuestionDtoBase[]
+      {
+        new TextQuestionTemplateDto
+        {
+          QuestionType = SurveyQuestionType.Text,
+          Text = Guid.NewGuid().ToString(),
+        },
+        new YesNoQuestionTemplateDto
+        {
+          QuestionType = SurveyQuestionType.YesNo,
+          Text = Guid.NewGuid().ToString(),
+        },
+      }
+    };
+
+    // Act
+    await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    Expression<Func<SurveyTemplateEntity, bool>> match =
+      entity => entity.SurveyTemplateId == updateSurveyTemplateRequestDto.SurveyTemplateId &&
+                entity.Title            == updateSurveyTemplateRequestDto.Title            &&
+                entity.Description      == updateSurveyTemplateRequestDto.Description      &&
+                entity.Questions.Count  == updateSurveyTemplateRequestDto.Questions.Length;
+
+    _surveyTemplateRepositoryMock.Verify(repository => repository.UpdateSurveyTemplateAsync(It.Is(match), It.IsAny<CancellationToken>()));
   }
 }
