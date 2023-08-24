@@ -308,4 +308,21 @@ public sealed class SurveyTemplateControllerTest
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
   }
+
+  [TestMethod]
+  public async Task DeleteSurveyTemplate_SurveyTemplateId_GetSurveyTemplateAsyncCalled()
+  {
+    // Arrange
+    Guid surveyTemplateId = Guid.NewGuid();
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .Verifiable();
+
+    // Act
+    await _surveyTemplateController.DeleteSurveyTemplate(surveyTemplateId, CancellationToken.None);
+
+    // Assert
+    Expression<Func<Guid, bool>> match = id => id == surveyTemplateId;
+    _surveyTemplateRepositoryMock.Verify(repository => repository.GetSurveyTemplateAsync(It.Is(match), It.IsAny<CancellationToken>()));
+  }
 }
