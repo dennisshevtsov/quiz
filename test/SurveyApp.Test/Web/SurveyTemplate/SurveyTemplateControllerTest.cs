@@ -300,10 +300,10 @@ public sealed class SurveyTemplateControllerTest
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(default(SurveyTemplateEntity));
 
-    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new();
+    Guid surveyTemplateId = Guid.NewGuid();
 
     // Act
-    IActionResult actionResult = await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
+    IActionResult actionResult = await _surveyTemplateController.DeleteSurveyTemplate(surveyTemplateId, CancellationToken.None);
 
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
