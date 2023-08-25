@@ -20,21 +20,8 @@ public sealed class UpdateSurveyTemplateRequestDto : IComposable
   {
     surveyTemplateEntity.Title = Title;
     surveyTemplateEntity.Description = Description;
-    surveyTemplateEntity.Questions = ToQuestionTemplateEntityCollection();
+    surveyTemplateEntity.Questions = SurveyTemplateQuestionDtoBase.ToQuestionTemplateEntityCollection(Questions);
 
     return surveyTemplateEntity;
-  }
-
-  private List<QuestionTemplateEntityBase> ToQuestionTemplateEntityCollection()
-  {
-    List<QuestionTemplateEntityBase> surveyTemplateQuestionEntityCollection =
-      new(Questions.Length);
-
-    for (int i = 0; i < Questions.Length; i++)
-    {
-      surveyTemplateQuestionEntityCollection.Add(Questions[i].ToQuestionTemplateEntity());
-    }
-
-    return surveyTemplateQuestionEntityCollection;
   }
 }
