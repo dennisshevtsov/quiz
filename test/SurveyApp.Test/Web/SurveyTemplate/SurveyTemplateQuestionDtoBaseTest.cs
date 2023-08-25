@@ -207,4 +207,81 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
       Assert.AreEqual(((SingleChoiceQuestionTemplateDto)surveyTemplateQuestionDtoBase).Choices[i], singleChoiceQuestionTemplateEntity.Choices[i]);
     }
   }
+
+  [TestMethod]
+  public void ToQuestionTemplateEntityCollection_SurveyTemplateDtoCollection_EntityListCreated()
+  {
+    // Arrange
+    SurveyTemplateQuestionDtoBase[] surveyTemplateQuestionDtoCollection = new SurveyTemplateQuestionDtoBase[]
+    {
+      new YesNoQuestionTemplateDto
+      {
+        QuestionType = SurveyQuestionType.YesNo,
+        Text = Guid.NewGuid().ToString(),
+      },
+      new TextQuestionTemplateDto
+      {
+        QuestionType = SurveyQuestionType.Text,
+        Text = Guid.NewGuid().ToString(),
+      },
+      new MultipleChoiceQuestionTemplateDto
+      {
+        QuestionType = SurveyQuestionType.MultipleChoice,
+        Text = Guid.NewGuid().ToString(),
+        Choices = new[]
+        {
+          Guid.NewGuid().ToString(),
+          Guid.NewGuid().ToString(),
+        },
+      },
+      new SingleChoiceQuestionTemplateDto
+      {
+        QuestionType = SurveyQuestionType.SingleChoice,
+        Text = Guid.NewGuid().ToString(),
+        Choices = new[]
+        {
+          Guid.NewGuid().ToString(),
+          Guid.NewGuid().ToString(),
+        },
+      },
+    };
+
+    // Act
+    List<QuestionTemplateEntityBase> questionTemplateEntityBaseCollection =
+      SurveyTemplateQuestionDtoBase.ToQuestionTemplateEntityCollection(surveyTemplateQuestionDtoCollection);
+
+    // Assert
+    Assert.AreEqual(surveyTemplateQuestionDtoCollection.Length, questionTemplateEntityBaseCollection.Count);
+
+    for (int i = 0; i < surveyTemplateQuestionDtoCollection.Length; i++)
+    {
+      AreEqual(surveyTemplateQuestionDtoCollection[i], questionTemplateEntityBaseCollection[i]);
+    }
+  }
+
+  private void AreEqual(SurveyTemplateQuestionDtoBase expected, QuestionTemplateEntityBase actual)
+  {
+    Assert.AreEqual(expected.QuestionType, actual.QuestionType);
+    Assert.AreEqual(expected.Text, actual.Text);
+
+    if (expected.QuestionType == SurveyQuestionType.MultipleChoice)
+    {
+      AreChoicesEqual(((MultipleChoiceQuestionTemplateDto)expected).Choices, ((MultipleChoiceQuestionTemplateEntity)actual).Choices);
+    }
+
+    if (expected.QuestionType == SurveyQuestionType.SingleChoice)
+    {
+      AreChoicesEqual(((SingleChoiceQuestionTemplateDto)expected).Choices, ((SingleChoiceQuestionTemplateEntity)actual).Choices);
+    }
+  }
+
+  private void AreChoicesEqual(string[] expected, string[] actual)
+  {
+    Assert.AreEqual(expected.Length, actual.Length);
+
+    for (int i = 0; i < expected.Length; i++)
+    {
+      Assert.AreEqual(expected[i], actual[i]);
+    }
+  }
 }
