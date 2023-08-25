@@ -28,4 +28,17 @@ public abstract class SurveyTemplateQuestionDtoBase
       SurveyQuestionType.SingleChoice => new SingleChoiceQuestionTemplateDto((SingleChoiceQuestionTemplateEntity)questionTemplateEntity),
       _ => throw new NotSupportedException("Unknown question type."),
     };
+
+  public static List<QuestionTemplateEntityBase> ToQuestionTemplateEntityCollection(SurveyTemplateQuestionDtoBase[] surveyTemplateQuestionDtoCollection)
+  {
+    List<QuestionTemplateEntityBase> surveyTemplateQuestionEntityCollection =
+      new(surveyTemplateQuestionDtoCollection.Length);
+
+    for (int i = 0; i < surveyTemplateQuestionDtoCollection.Length; i++)
+    {
+      surveyTemplateQuestionEntityCollection.Add(surveyTemplateQuestionDtoCollection[i].ToQuestionTemplateEntity());
+    }
+
+    return surveyTemplateQuestionEntityCollection;
+  }
 }
