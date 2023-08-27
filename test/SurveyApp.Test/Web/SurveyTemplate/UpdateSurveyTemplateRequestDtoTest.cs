@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using SurveyApp.SurveyQuestion;
+
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
 [TestClass]
@@ -37,7 +39,7 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
       SurveyTemplateId = surveyTemplateId,
       Title = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
-      Questions = new List<QuestionTemplateEntityBase>
+      Questions = new List<SurveyQuestionTemplateEntityBase>
       {
         new MultipleChoiceQuestionTemplateEntity
         {

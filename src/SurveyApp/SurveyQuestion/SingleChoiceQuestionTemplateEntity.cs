@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.SurveyTemplate;
+namespace SurveyApp.SurveyQuestion;
 
-public sealed class SingleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
+public sealed class SingleChoiceQuestionTemplateEntity : SurveyQuestionTemplateEntityBase
 {
   public override SurveyQuestionType QuestionType => SurveyQuestionType.SingleChoice;
 

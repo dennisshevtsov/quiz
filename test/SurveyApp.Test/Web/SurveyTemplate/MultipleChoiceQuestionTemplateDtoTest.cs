@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using SurveyApp.SurveyQuestion;
+
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
 [TestClass]
@@ -14,7 +16,7 @@ public sealed class MultipleChoiceQuestionTemplateDtoTest
     MultipleChoiceQuestionTemplateDto multipleChoiceQuestionTemplateDto = new();
 
     // Act
-    QuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
+    SurveyQuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
 
     // Assert
     Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(MultipleChoiceQuestionTemplateEntity));
@@ -36,7 +38,7 @@ public sealed class MultipleChoiceQuestionTemplateDtoTest
     };
 
     // Act
-    QuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
+    SurveyQuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
 
     // Assert
     Assert.AreEqual(multipleChoiceQuestionTemplateDto.Text, questionTemplateEntityBase.Text);

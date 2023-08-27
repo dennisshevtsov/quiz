@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using SurveyApp.SurveyQuestion;
+
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
 [TestClass]
@@ -247,7 +249,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     };
 
     // Act
-    List<QuestionTemplateEntityBase> questionTemplateEntityBaseCollection =
+    List<SurveyQuestionTemplateEntityBase> questionTemplateEntityBaseCollection =
       SurveyTemplateQuestionDtoBase.ToQuestionTemplateEntityCollection(surveyTemplateQuestionDtoCollection);
 
     // Assert
@@ -259,7 +261,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     }
   }
 
-  private void AreEqual(SurveyTemplateQuestionDtoBase expected, QuestionTemplateEntityBase actual)
+  private void AreEqual(SurveyTemplateQuestionDtoBase expected, SurveyQuestionTemplateEntityBase actual)
   {
     Assert.AreEqual(expected.QuestionType, actual.QuestionType);
     Assert.AreEqual(expected.Text, actual.Text);
