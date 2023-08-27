@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using SurveyApp.SurveyQuestion;
+
 namespace SurveyApp.SurveyTemplate.Web;
 
 public sealed class YesNoQuestionTemplateDto : SurveyTemplateQuestionDtoBase
@@ -13,7 +15,7 @@ public sealed class YesNoQuestionTemplateDto : SurveyTemplateQuestionDtoBase
     Text = yesNoQuestionTemplateEntity.Text;
   }
 
-  public override QuestionTemplateEntityBase ToQuestionTemplateEntity() => new YesNoQuestionTemplateEntity
+  public override SurveyQuestionTemplateEntityBase ToQuestionTemplateEntity() => new YesNoQuestionTemplateEntity
   {
      Text = Text,
   };

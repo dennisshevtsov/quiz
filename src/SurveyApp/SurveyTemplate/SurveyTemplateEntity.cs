@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using SurveyApp.SurveyQuestion;
+
 namespace SurveyApp.SurveyTemplate;
 
 public sealed class SurveyTemplateEntity
@@ -12,5 +14,5 @@ public sealed class SurveyTemplateEntity
 
   public string Description { get; set; } = string.Empty;
 
-  public List<QuestionTemplateEntityBase> Questions { get; set; } = new();
+  public List<SurveyQuestionTemplateEntityBase> Questions { get; set; } = new();
 }

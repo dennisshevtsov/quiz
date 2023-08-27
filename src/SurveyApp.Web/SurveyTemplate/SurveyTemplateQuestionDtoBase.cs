@@ -4,6 +4,8 @@
 
 using System.Text.Json.Serialization;
 
+using SurveyApp.SurveyQuestion;
+
 namespace SurveyApp.SurveyTemplate.Web;
 
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "questionType")]
@@ -17,9 +19,9 @@ public abstract class SurveyTemplateQuestionDtoBase
 
   public SurveyQuestionType QuestionType { get; set; }
 
-  public abstract QuestionTemplateEntityBase ToQuestionTemplateEntity();
+  public abstract SurveyQuestionTemplateEntityBase ToQuestionTemplateEntity();
 
-  public static SurveyTemplateQuestionDtoBase FromQuestionTemplateEntity(QuestionTemplateEntityBase questionTemplateEntity) =>
+  public static SurveyTemplateQuestionDtoBase FromQuestionTemplateEntity(SurveyQuestionTemplateEntityBase questionTemplateEntity) =>
     questionTemplateEntity.QuestionType switch
     {
       SurveyQuestionType.Text => new TextQuestionTemplateDto((TextQuestionTemplateEntity)questionTemplateEntity),
@@ -29,9 +31,9 @@ public abstract class SurveyTemplateQuestionDtoBase
       _ => throw new NotSupportedException("Unknown question type."),
     };
 
-  public static List<QuestionTemplateEntityBase> ToQuestionTemplateEntityCollection(SurveyTemplateQuestionDtoBase[] surveyTemplateQuestionDtoCollection)
+  public static List<SurveyQuestionTemplateEntityBase> ToQuestionTemplateEntityCollection(SurveyTemplateQuestionDtoBase[] surveyTemplateQuestionDtoCollection)
   {
-    List<QuestionTemplateEntityBase> surveyTemplateQuestionEntityCollection =
+    List<SurveyQuestionTemplateEntityBase> surveyTemplateQuestionEntityCollection =
       new(surveyTemplateQuestionDtoCollection.Length);
 
     for (int i = 0; i < surveyTemplateQuestionDtoCollection.Length; i++)
