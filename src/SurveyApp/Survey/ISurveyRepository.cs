@@ -6,11 +6,11 @@ namespace SurveyApp.Survey;
 
 public interface ISurveyRepository
 {
-  public Task<SurveyEntity?> GetSurveyAsync(Guid surveyTemplateId, CancellationToken cancellationToken);
+  public Task<SurveyEntity?> GetSurveyAsync(Guid surveyId, CancellationToken cancellationToken);
 
-  public Task<SurveyEntity> AddSurveyAsync(SurveyEntity surveyTemplateEntity, CancellationToken cancellationToken);
+  public Task<SurveyEntity> AddSurveyAsync(SurveyEntity surveyEntity, CancellationToken cancellationToken);
 
-  public Task UpdateSurveyAsync(SurveyEntity surveyTemplateEntity, CancellationToken cancellationToken);
+  public Task UpdateSurveyAsync(SurveyEntity surveyEntity, CancellationToken cancellationToken);
 
-  public Task DeleteSurveyAsync(Guid surveyTemplateId, CancellationToken cancellationToken);
+  public Task DeleteSurveyAsync(Guid surveyId, CancellationToken cancellationToken);
 }
