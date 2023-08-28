@@ -3,7 +3,7 @@
 // See LICENSE in the project root for license information.
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSurveyTemplateData();
+builder.Services.AddData();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers(options => options.AddPatchable());
 
