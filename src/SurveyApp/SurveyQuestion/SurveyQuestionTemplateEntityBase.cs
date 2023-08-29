@@ -6,7 +6,7 @@ namespace SurveyApp.SurveyQuestion;
 
 public abstract class SurveyQuestionTemplateEntityBase
 {
-  public string Text { get; set; } = string.Empty;
+  public string Text { get; protected set; } = string.Empty;
 
   public abstract SurveyQuestionType QuestionType { get; }
 }
