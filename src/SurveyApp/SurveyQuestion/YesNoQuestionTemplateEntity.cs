@@ -14,4 +14,6 @@ public sealed class YesNoQuestionTemplateEntity : SurveyQuestionTemplateEntityBa
   }
 
   public override SurveyQuestionType QuestionType => SurveyQuestionType.YesNo;
+
+  public override SurveyQuestionTemplateEntityBase Clone() => new YesNoQuestionTemplateEntity(this);
 }

@@ -17,4 +17,6 @@ public sealed class SingleChoiceQuestionTemplateEntity : SurveyQuestionTemplateE
   public override SurveyQuestionType QuestionType => SurveyQuestionType.SingleChoice;
 
   public string[] Choices { get; set; } = Array.Empty<string>();
+
+  public override SurveyQuestionTemplateEntityBase Clone() => new SingleChoiceQuestionTemplateEntity(this);
 }

@@ -9,4 +9,6 @@ public abstract class SurveyQuestionTemplateEntityBase
   public string Text { get; protected set; } = string.Empty;
 
   public abstract SurveyQuestionType QuestionType { get; }
+
+  public abstract SurveyQuestionTemplateEntityBase Clone();
 }

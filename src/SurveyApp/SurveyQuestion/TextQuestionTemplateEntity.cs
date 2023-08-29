@@ -14,4 +14,6 @@ public sealed class TextQuestionTemplateEntity : SurveyQuestionTemplateEntityBas
   }
 
   public override SurveyQuestionType QuestionType => SurveyQuestionType.Text;
+
+  public override SurveyQuestionTemplateEntityBase Clone() => new TextQuestionTemplateEntity(this);
 }

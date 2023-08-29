@@ -17,4 +17,6 @@ public sealed class MultipleChoiceQuestionTemplateEntity : SurveyQuestionTemplat
   public override SurveyQuestionType QuestionType => SurveyQuestionType.MultipleChoice;
 
   public string[] Choices { get; set; } = Array.Empty<string>();
+
+  public override SurveyQuestionTemplateEntityBase Clone() => new MultipleChoiceQuestionTemplateEntity(this);
 }
