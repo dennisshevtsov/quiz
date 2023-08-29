@@ -13,14 +13,14 @@ public sealed class SurveyEntity
   {
     Title       = surveyTemplateEntity.Title;
     Description = surveyTemplateEntity.Description;
-    Questions   = surveyTemplateEntity.Questions;
+    Questions   = surveyTemplateEntity.Questions.Select(entity => entity.Clone()).ToList();
   }
 
-  public Guid SurveyId { get; set; }
+  public Guid SurveyId { get;}
 
-  public string Title { get; set; } = string.Empty;
+  public string Title { get; }
 
-  public string Description { get; set; } = string.Empty;
+  public string Description { get; }
 
-  public List<SurveyQuestionTemplateEntityBase> Questions { get; set; } = new();
+  public List<SurveyQuestionTemplateEntityBase> Questions { get; }
 }

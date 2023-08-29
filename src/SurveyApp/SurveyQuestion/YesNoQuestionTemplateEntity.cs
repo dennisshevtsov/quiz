@@ -6,5 +6,14 @@ namespace SurveyApp.SurveyQuestion;
 
 public sealed class YesNoQuestionTemplateEntity : SurveyQuestionTemplateEntityBase
 {
+  public YesNoQuestionTemplateEntity() { }
+
+  public YesNoQuestionTemplateEntity(YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity)
+  {
+    Text = yesNoQuestionTemplateEntity.Text;
+  }
+
   public override SurveyQuestionType QuestionType => SurveyQuestionType.YesNo;
+
+  public override SurveyQuestionTemplateEntityBase Clone() => new YesNoQuestionTemplateEntity(this);
 }

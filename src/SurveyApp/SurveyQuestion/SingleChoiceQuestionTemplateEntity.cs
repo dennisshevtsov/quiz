@@ -6,7 +6,17 @@ namespace SurveyApp.SurveyQuestion;
 
 public sealed class SingleChoiceQuestionTemplateEntity : SurveyQuestionTemplateEntityBase
 {
+  public SingleChoiceQuestionTemplateEntity() { }
+
+  public SingleChoiceQuestionTemplateEntity(SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity)
+  {
+    Text = singleChoiceQuestionTemplateEntity.Text;
+    Choices = singleChoiceQuestionTemplateEntity.Choices.Select(choice => choice).ToArray();
+  }
+
   public override SurveyQuestionType QuestionType => SurveyQuestionType.SingleChoice;
 
   public string[] Choices { get; set; } = Array.Empty<string>();
+
+  public override SurveyQuestionTemplateEntityBase Clone() => new SingleChoiceQuestionTemplateEntity(this);
 }

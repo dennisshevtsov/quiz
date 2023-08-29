@@ -6,5 +6,14 @@ namespace SurveyApp.SurveyQuestion;
 
 public sealed class TextQuestionTemplateEntity : SurveyQuestionTemplateEntityBase
 {
+  public TextQuestionTemplateEntity() { }
+
+  public TextQuestionTemplateEntity(TextQuestionTemplateEntity textQuestionTemplateEntity)
+  {
+    Text = textQuestionTemplateEntity.Text;
+  }
+
   public override SurveyQuestionType QuestionType => SurveyQuestionType.Text;
+
+  public override SurveyQuestionTemplateEntityBase Clone() => new TextQuestionTemplateEntity(this);
 }
