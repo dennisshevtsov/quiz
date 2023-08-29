@@ -16,11 +16,11 @@ public sealed class SurveyEntity
     Questions   = surveyTemplateEntity.Questions;
   }
 
-  public Guid SurveyId { get; set; }
+  public Guid SurveyId { get;}
 
-  public string Title { get; set; } = string.Empty;
+  public string Title { get; }
 
-  public string Description { get; set; } = string.Empty;
+  public string Description { get; }
 
-  public List<SurveyQuestionTemplateEntityBase> Questions { get; set; } = new();
+  public List<SurveyQuestionTemplateEntityBase> Questions { get; }
 }
