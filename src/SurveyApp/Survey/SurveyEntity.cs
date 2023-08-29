@@ -13,7 +13,7 @@ public sealed class SurveyEntity
   {
     Title       = surveyTemplateEntity.Title;
     Description = surveyTemplateEntity.Description;
-    Questions   = surveyTemplateEntity.Questions;
+    Questions   = surveyTemplateEntity.Questions.Select(entity => entity.Clone()).ToList();
   }
 
   public Guid SurveyId { get;}
