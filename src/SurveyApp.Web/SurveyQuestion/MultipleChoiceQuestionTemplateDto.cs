@@ -4,7 +4,7 @@
 
 namespace SurveyApp.SurveyQuestion.Web;
 
-public sealed class MultipleChoiceQuestionTemplateDto : SurveyTemplateQuestionDtoBase
+public sealed class MultipleChoiceQuestionTemplateDto : SurveyQuestionDtoBase
 {
     public MultipleChoiceQuestionTemplateDto() { }
 
