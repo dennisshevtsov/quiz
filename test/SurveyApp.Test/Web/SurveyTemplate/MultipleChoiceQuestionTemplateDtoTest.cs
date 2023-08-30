@@ -16,10 +16,10 @@ public sealed class MultipleChoiceQuestionTemplateDtoTest
     MultipleChoiceQuestionTemplateDto multipleChoiceQuestionTemplateDto = new();
 
     // Act
-    SurveyQuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
+    SurveyQuestionEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
 
     // Assert
-    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(MultipleChoiceQuestionTemplateEntity));
+    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(MultipleChoiceQuestionEntity));
   }
 
   [TestMethod]
@@ -38,13 +38,13 @@ public sealed class MultipleChoiceQuestionTemplateDtoTest
     };
 
     // Act
-    SurveyQuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
+    SurveyQuestionEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
 
     // Assert
     Assert.AreEqual(multipleChoiceQuestionTemplateDto.Text, questionTemplateEntityBase.Text);
 
-    MultipleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity =
-      (MultipleChoiceQuestionTemplateEntity)questionTemplateEntityBase;
+    MultipleChoiceQuestionEntity singleChoiceQuestionTemplateEntity =
+      (MultipleChoiceQuestionEntity)questionTemplateEntityBase;
     Assert.AreEqual(multipleChoiceQuestionTemplateDto.Choices.Length, singleChoiceQuestionTemplateEntity.Choices.Length);
 
     string[] expected = multipleChoiceQuestionTemplateDto.Choices.Order().ToArray();

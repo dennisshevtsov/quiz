@@ -10,12 +10,12 @@ public sealed class TextQuestionTemplateDto : SurveyTemplateQuestionDtoBase
 {
   public TextQuestionTemplateDto() { }
 
-  public TextQuestionTemplateDto(TextQuestionTemplateEntity textQuestionTemplateEntity)
+  public TextQuestionTemplateDto(TextQuestionEntity textQuestionTemplateEntity)
   {
     Text = textQuestionTemplateEntity.Text;
   }
 
-  public override SurveyQuestionTemplateEntityBase ToQuestionTemplateEntity() => new TextQuestionTemplateEntity
+  public override SurveyQuestionEntityBase ToQuestionTemplateEntity() => new TextQuestionEntity
   {
     Text = Text,
   };

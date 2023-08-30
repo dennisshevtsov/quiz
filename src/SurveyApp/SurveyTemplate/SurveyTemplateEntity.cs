@@ -14,5 +14,5 @@ public sealed class SurveyTemplateEntity
 
   public string Description { get; set; } = string.Empty;
 
-  public List<SurveyQuestionTemplateEntityBase> Questions { get; set; } = new();
+  public List<SurveyQuestionEntityBase> Questions { get; set; } = new();
 }

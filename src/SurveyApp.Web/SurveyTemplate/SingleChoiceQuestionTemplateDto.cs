@@ -10,7 +10,7 @@ public sealed class SingleChoiceQuestionTemplateDto : SurveyTemplateQuestionDtoB
 {
   public SingleChoiceQuestionTemplateDto() { }
 
-  public SingleChoiceQuestionTemplateDto(SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity)
+  public SingleChoiceQuestionTemplateDto(SingleChoiceQuestionEntity singleChoiceQuestionTemplateEntity)
   {
     Text = singleChoiceQuestionTemplateEntity.Text;
     Choices = singleChoiceQuestionTemplateEntity.Choices;
@@ -18,7 +18,7 @@ public sealed class SingleChoiceQuestionTemplateDto : SurveyTemplateQuestionDtoB
 
   public string[] Choices { get; set; } = Array.Empty<string>();
 
-  public override SurveyQuestionTemplateEntityBase ToQuestionTemplateEntity() => new SingleChoiceQuestionTemplateEntity
+  public override SurveyQuestionEntityBase ToQuestionTemplateEntity() => new SingleChoiceQuestionEntity
   {
     Text = Text,
     Choices = Choices,

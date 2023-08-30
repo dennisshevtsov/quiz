@@ -19,21 +19,21 @@ public abstract class SurveyTemplateQuestionDtoBase
 
   public SurveyQuestionType QuestionType { get; set; }
 
-  public abstract SurveyQuestionTemplateEntityBase ToQuestionTemplateEntity();
+  public abstract SurveyQuestionEntityBase ToQuestionTemplateEntity();
 
-  public static SurveyTemplateQuestionDtoBase FromQuestionTemplateEntity(SurveyQuestionTemplateEntityBase questionTemplateEntity) =>
+  public static SurveyTemplateQuestionDtoBase FromQuestionTemplateEntity(SurveyQuestionEntityBase questionTemplateEntity) =>
     questionTemplateEntity.QuestionType switch
     {
-      SurveyQuestionType.Text => new TextQuestionTemplateDto((TextQuestionTemplateEntity)questionTemplateEntity),
-      SurveyQuestionType.YesNo => new YesNoQuestionTemplateDto((YesNoQuestionTemplateEntity)questionTemplateEntity),
-      SurveyQuestionType.MultipleChoice => new MultipleChoiceQuestionTemplateDto((MultipleChoiceQuestionTemplateEntity)questionTemplateEntity),
-      SurveyQuestionType.SingleChoice => new SingleChoiceQuestionTemplateDto((SingleChoiceQuestionTemplateEntity)questionTemplateEntity),
+      SurveyQuestionType.Text => new TextQuestionTemplateDto((TextQuestionEntity)questionTemplateEntity),
+      SurveyQuestionType.YesNo => new YesNoQuestionTemplateDto((YesNoQuestionEntity)questionTemplateEntity),
+      SurveyQuestionType.MultipleChoice => new MultipleChoiceQuestionTemplateDto((MultipleChoiceQuestionEntity)questionTemplateEntity),
+      SurveyQuestionType.SingleChoice => new SingleChoiceQuestionTemplateDto((SingleChoiceQuestionEntity)questionTemplateEntity),
       _ => throw new NotSupportedException("Unknown question type."),
     };
 
-  public static List<SurveyQuestionTemplateEntityBase> ToQuestionTemplateEntityCollection(SurveyTemplateQuestionDtoBase[] surveyTemplateQuestionDtoCollection)
+  public static List<SurveyQuestionEntityBase> ToQuestionTemplateEntityCollection(SurveyTemplateQuestionDtoBase[] surveyTemplateQuestionDtoCollection)
   {
-    List<SurveyQuestionTemplateEntityBase> surveyTemplateQuestionEntityCollection =
+    List<SurveyQuestionEntityBase> surveyTemplateQuestionEntityCollection =
       new(surveyTemplateQuestionDtoCollection.Length);
 
     for (int i = 0; i < surveyTemplateQuestionDtoCollection.Length; i++)

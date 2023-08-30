@@ -10,7 +10,7 @@ public sealed class MultipleChoiceQuestionTemplateDto : SurveyTemplateQuestionDt
 {
   public MultipleChoiceQuestionTemplateDto() { }
 
-  public MultipleChoiceQuestionTemplateDto(MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity)
+  public MultipleChoiceQuestionTemplateDto(MultipleChoiceQuestionEntity multipleChoiceQuestionTemplateEntity)
   {
     Text = multipleChoiceQuestionTemplateEntity.Text;
     Choices = multipleChoiceQuestionTemplateEntity.Choices;
@@ -18,7 +18,7 @@ public sealed class MultipleChoiceQuestionTemplateDto : SurveyTemplateQuestionDt
 
   public string[] Choices { get; set; } = Array.Empty<string>();
 
-  public override SurveyQuestionTemplateEntityBase ToQuestionTemplateEntity() => new MultipleChoiceQuestionTemplateEntity
+  public override SurveyQuestionEntityBase ToQuestionTemplateEntity() => new MultipleChoiceQuestionEntity
   {
     Text = Text,
     Choices = Choices,

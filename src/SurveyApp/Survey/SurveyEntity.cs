@@ -22,5 +22,5 @@ public sealed class SurveyEntity
 
   public string Description { get; }
 
-  public List<SurveyQuestionTemplateEntityBase> Questions { get; }
+  public List<SurveyQuestionEntityBase> Questions { get; }
 }

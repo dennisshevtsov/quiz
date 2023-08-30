@@ -10,12 +10,12 @@ public sealed class YesNoQuestionTemplateDto : SurveyTemplateQuestionDtoBase
 {
   public YesNoQuestionTemplateDto() { }
 
-  public YesNoQuestionTemplateDto(YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity)
+  public YesNoQuestionTemplateDto(YesNoQuestionEntity yesNoQuestionTemplateEntity)
   {
     Text = yesNoQuestionTemplateEntity.Text;
   }
 
-  public override SurveyQuestionTemplateEntityBase ToQuestionTemplateEntity() => new YesNoQuestionTemplateEntity
+  public override SurveyQuestionEntityBase ToQuestionTemplateEntity() => new YesNoQuestionEntity
   {
      Text = Text,
   };

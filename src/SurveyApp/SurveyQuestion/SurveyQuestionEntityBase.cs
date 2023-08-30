@@ -4,11 +4,11 @@
 
 namespace SurveyApp.SurveyQuestion;
 
-public abstract class SurveyQuestionTemplateEntityBase
+public abstract class SurveyQuestionEntityBase
 {
   public string Text { get; protected set; } = string.Empty;
 
   public abstract SurveyQuestionType QuestionType { get; }
 
-  public abstract SurveyQuestionTemplateEntityBase Clone();
+  public abstract SurveyQuestionEntityBase Clone();
 }
