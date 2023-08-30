@@ -3,6 +3,8 @@
 // See LICENSE in the project root for license information.
 
 using Microsoft.AspNetCore.Mvc;
+using SurveyApp.SurveyTemplate.Web;
+using SurveyApp.SurveyTemplate;
 
 namespace SurveyApp.Survey.Web;
 
@@ -10,6 +12,13 @@ namespace SurveyApp.Survey.Web;
 [Route("api/survey")]
 public sealed class SurveyController : ControllerBase
 {
+  private readonly ISurveyRepository _surveyRepository;
+
+  public SurveyController(ISurveyRepository surveyRepository)
+  {
+    _surveyRepository = surveyRepository ?? throw new ArgumentNullException(nameof(surveyRepository));
+  }
+
   [HttpGet("{surveyId}", Name = nameof(SurveyController.GetSurvey))]
   public Task<IActionResult> GetSurvey(Guid surveyId, CancellationToken cancellationToken)
   {
@@ -17,9 +26,15 @@ public sealed class SurveyController : ControllerBase
   }
 
   [HttpGet(Name = nameof(SurveyController.AddSurvey))]
-  public Task<IActionResult> AddSurvey(AddSurveyRequestDto requestDto, CancellationToken cancellationToken)
+  public async Task<IActionResult> AddSurvey(AddSurveyRequestDto requestDto, CancellationToken cancellationToken)
   {
-    return Task.FromResult<IActionResult>(Ok());
+    SurveyEntity surveyEntity = await _surveyRepository.AddSurveyAsync(
+      requestDto.ToSurveyEntity(), cancellationToken);
+
+    return CreatedAtAction(
+      nameof(SurveyController.GetSurvey),
+      new { surveyEntity.SurveyId },
+      new GetSurveyResponseDto(surveyEntity));
   }
 
   [HttpGet("{surveyId}", Name = nameof(SurveyController.UpdateSurvey))]

@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using SurveyApp.SurveyQuestion.Web;
+
 namespace SurveyApp.SurveyTemplate.Web;
 
 public sealed class GetSurveyTemplateResponseDto
@@ -11,7 +13,7 @@ public sealed class GetSurveyTemplateResponseDto
     SurveyTemplateId = surveyTemplateEntity.SurveyTemplateId;
     Title = surveyTemplateEntity.Title;
     Description = surveyTemplateEntity.Description;
-    Questions = surveyTemplateEntity.Questions.Select(SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity)
+    Questions = surveyTemplateEntity.Questions.Select(SurveyQuestionDtoBase.FromQuestionTemplateEntity)
                                               .ToArray();
   }
 
@@ -21,5 +23,5 @@ public sealed class GetSurveyTemplateResponseDto
 
   public string Description { get; set; } = string.Empty;
 
-  public SurveyTemplateQuestionDtoBase[] Questions { get; set; } = Array.Empty<SurveyTemplateQuestionDtoBase>();
+  public SurveyQuestionDtoBase[] Questions { get; set; } = Array.Empty<SurveyQuestionDtoBase>();
 }

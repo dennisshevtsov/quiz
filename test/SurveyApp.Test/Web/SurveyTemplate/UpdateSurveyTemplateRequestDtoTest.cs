@@ -3,6 +3,7 @@
 // See LICENSE in the project root for license information.
 
 using SurveyApp.SurveyQuestion;
+using SurveyApp.Web.SurveyQuestion;
 
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
@@ -39,9 +40,9 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
       SurveyTemplateId = surveyTemplateId,
       Title = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
-      Questions = new List<SurveyQuestionTemplateEntityBase>
+      Questions = new List<SurveyQuestionEntityBase>
       {
-        new MultipleChoiceQuestionTemplateEntity
+        new MultipleChoiceQuestionEntity
         {
           Text = Guid.NewGuid().ToString(),
           Choices = new[]
@@ -50,7 +51,7 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
             Guid.NewGuid().ToString(),
           },
         },
-        new SingleChoiceQuestionTemplateEntity
+        new SingleChoiceQuestionEntity
         {
           Text = Guid.NewGuid().ToString(),
           Choices = new[]

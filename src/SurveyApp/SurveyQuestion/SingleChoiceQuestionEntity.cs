@@ -4,11 +4,11 @@
 
 namespace SurveyApp.SurveyQuestion;
 
-public sealed class SingleChoiceQuestionTemplateEntity : SurveyQuestionTemplateEntityBase
+public sealed class SingleChoiceQuestionEntity : SurveyQuestionEntityBase
 {
-  public SingleChoiceQuestionTemplateEntity() { }
+  public SingleChoiceQuestionEntity() { }
 
-  public SingleChoiceQuestionTemplateEntity(SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity)
+  public SingleChoiceQuestionEntity(SingleChoiceQuestionEntity singleChoiceQuestionTemplateEntity)
   {
     Text = singleChoiceQuestionTemplateEntity.Text;
     Choices = singleChoiceQuestionTemplateEntity.Choices.Select(choice => choice).ToArray();
@@ -18,5 +18,5 @@ public sealed class SingleChoiceQuestionTemplateEntity : SurveyQuestionTemplateE
 
   public string[] Choices { get; set; } = Array.Empty<string>();
 
-  public override SurveyQuestionTemplateEntityBase Clone() => new SingleChoiceQuestionTemplateEntity(this);
+  public override SurveyQuestionEntityBase Clone() => new SingleChoiceQuestionEntity(this);
 }

@@ -3,6 +3,7 @@
 // See LICENSE in the project root for license information.
 
 using SurveyApp.SurveyQuestion;
+using SurveyApp.Web.SurveyQuestion;
 
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
@@ -16,10 +17,10 @@ public sealed class SingleChoiceQuestionTemplateDtoTest
     SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new();
 
     // Act
-    SurveyQuestionTemplateEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
+    SurveyQuestionEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
 
     // Assert
-    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(SingleChoiceQuestionTemplateEntity));
+    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(SingleChoiceQuestionEntity));
   }
 
   [TestMethod]
@@ -38,13 +39,13 @@ public sealed class SingleChoiceQuestionTemplateDtoTest
     };
 
     // Act
-    SurveyQuestionTemplateEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
+    SurveyQuestionEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
 
     // Assert
     Assert.AreEqual(singleChoiceQuestionTemplateDto.Text, questionTemplateEntityBase.Text);
 
-    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity =
-      (SingleChoiceQuestionTemplateEntity)questionTemplateEntityBase;
+    SingleChoiceQuestionEntity singleChoiceQuestionTemplateEntity =
+      (SingleChoiceQuestionEntity)questionTemplateEntityBase;
     Assert.AreEqual(singleChoiceQuestionTemplateDto.Choices.Length, singleChoiceQuestionTemplateEntity.Choices.Length);
 
     string[] expected = singleChoiceQuestionTemplateDto.Choices.Order().ToArray();

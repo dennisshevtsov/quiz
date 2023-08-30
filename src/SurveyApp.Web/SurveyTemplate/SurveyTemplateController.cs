@@ -43,7 +43,7 @@ public sealed class SurveyTemplateController : ControllerBase
     return CreatedAtAction(
       nameof(SurveyTemplateController.GetSurveyTemplate),
       new { surveyTemplateEntity.SurveyTemplateId },
-      surveyTemplateEntity);
+      new GetSurveyTemplateResponseDto(surveyTemplateEntity));
   }
 
   [HttpPut("{surveyTemplateId}", Name = nameof(SurveyTemplateController.UpdateSurveyTemplate))]

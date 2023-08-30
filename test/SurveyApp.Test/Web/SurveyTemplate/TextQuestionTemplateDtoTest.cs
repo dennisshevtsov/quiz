@@ -3,6 +3,7 @@
 // See LICENSE in the project root for license information.
 
 using SurveyApp.SurveyQuestion;
+using SurveyApp.Web.SurveyQuestion;
 
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
@@ -16,10 +17,10 @@ public sealed class TextQuestionTemplateDtoTest
     TextQuestionTemplateDto textQuestionTemplateDto = new();
 
     // Act
-    SurveyQuestionTemplateEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToQuestionTemplateEntity();
+    SurveyQuestionEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToQuestionTemplateEntity();
 
     // Assert
-    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(TextQuestionTemplateEntity));
+    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(TextQuestionEntity));
   }
 
   [TestMethod]
@@ -33,7 +34,7 @@ public sealed class TextQuestionTemplateDtoTest
     };
 
     // Act
-    SurveyQuestionTemplateEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToQuestionTemplateEntity();
+    SurveyQuestionEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToQuestionTemplateEntity();
 
     // Assert
     Assert.AreEqual(textQuestionTemplateDto.Text, questionTemplateEntityBase.Text);
