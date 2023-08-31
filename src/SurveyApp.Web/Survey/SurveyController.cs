@@ -39,7 +39,7 @@ public sealed class SurveyController : ControllerBase
 
     return CreatedAtAction(
       nameof(SurveyController.GetSurvey),
-      new { surveyEntity.SurveyId },
+      new GetSurveyRequestDto(surveyEntity),
       new GetSurveyResponseDto(surveyEntity));
   }
 

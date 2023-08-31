@@ -8,5 +8,12 @@ namespace SurveyApp.Survey.Web;
 
 public sealed class GetSurveyRequestDto : IComposable
 {
+  public GetSurveyRequestDto() { }
+
+  public GetSurveyRequestDto(SurveyEntity surveyEntity)
+  {
+    SurveyId = surveyEntity.SurveyId;
+  }
+
   public Guid SurveyId { get; set; }
 }
