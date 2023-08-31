@@ -3,8 +3,6 @@
 // See LICENSE in the project root for license information.
 
 using Microsoft.AspNetCore.Mvc;
-using SurveyApp.SurveyTemplate.Web;
-using SurveyApp.SurveyTemplate;
 
 namespace SurveyApp.Survey.Web;
 
