@@ -3,8 +3,6 @@
 // See LICENSE in the project root for license information.
 
 using Microsoft.AspNetCore.Mvc;
-using SurveyApp.SurveyTemplate.Web;
-using SurveyApp.SurveyTemplate;
 
 namespace SurveyApp.Survey.Web;
 
@@ -20,9 +18,17 @@ public sealed class SurveyController : ControllerBase
   }
 
   [HttpGet("{surveyId}", Name = nameof(SurveyController.GetSurvey))]
-  public Task<IActionResult> GetSurvey(Guid surveyId, CancellationToken cancellationToken)
+  public async Task<IActionResult> GetSurvey(GetSurveyRequestDto requestDto, CancellationToken cancellationToken)
   {
-    return Task.FromResult<IActionResult>(Ok());
+    SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(
+      requestDto.SurveyId, cancellationToken);
+
+    if (surveyEntity == null)
+    {
+      return NotFound();
+    }
+
+    return Ok(new GetSurveyResponseDto(surveyEntity));
   }
 
   [HttpGet(Name = nameof(SurveyController.AddSurvey))]
@@ -33,7 +39,7 @@ public sealed class SurveyController : ControllerBase
 
     return CreatedAtAction(
       nameof(SurveyController.GetSurvey),
-      new { surveyEntity.SurveyId },
+      new GetSurveyRequestDto(surveyEntity),
       new GetSurveyResponseDto(surveyEntity));
   }
 
