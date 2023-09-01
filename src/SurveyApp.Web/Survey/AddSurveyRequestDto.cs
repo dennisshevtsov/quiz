@@ -2,11 +2,12 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using Patchable;
 using SurveyApp.SurveyQuestion.Web;
 
 namespace SurveyApp.Survey.Web;
 
-public sealed class AddSurveyRequestDto
+public sealed class AddSurveyRequestDto : IComposable
 {
   public string Title { get; set; } = string.Empty;
 
