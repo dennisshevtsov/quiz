@@ -20,8 +20,7 @@ public sealed class SurveyController : ControllerBase
   [HttpGet("{surveyId}", Name = nameof(SurveyController.GetSurvey))]
   public async Task<IActionResult> GetSurvey(GetSurveyRequestDto requestDto, CancellationToken cancellationToken)
   {
-    SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(
-      requestDto.SurveyId, cancellationToken);
+    SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(requestDto.SurveyId, cancellationToken);
 
     if (surveyEntity == null)
     {
@@ -34,19 +33,24 @@ public sealed class SurveyController : ControllerBase
   [HttpGet(Name = nameof(SurveyController.AddSurvey))]
   public async Task<IActionResult> AddSurvey(AddSurveyRequestDto requestDto, CancellationToken cancellationToken)
   {
-    SurveyEntity surveyEntity = await _surveyRepository.AddSurveyAsync(
-      requestDto.ToSurveyEntity(), cancellationToken);
+    SurveyEntity surveyEntity = await _surveyRepository.AddSurveyAsync(requestDto.ToSurveyEntity(), cancellationToken);
 
-    return CreatedAtAction(
-      nameof(SurveyController.GetSurvey),
-      new GetSurveyRequestDto(surveyEntity),
-      new GetSurveyResponseDto(surveyEntity));
+    return CreatedAtAction(nameof(SurveyController.GetSurvey), new GetSurveyRequestDto(surveyEntity), new GetSurveyResponseDto(surveyEntity));
   }
 
   [HttpGet("{surveyId}", Name = nameof(SurveyController.UpdateSurvey))]
-  public Task<IActionResult> UpdateSurvey(UpdateSurveyRequestDto requestDto, CancellationToken cancellationToken)
+  public async Task<IActionResult> UpdateSurvey(UpdateSurveyRequestDto requestDto, CancellationToken cancellationToken)
   {
-    return Task.FromResult<IActionResult>(NoContent());
+    SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(requestDto.SurveyId, cancellationToken);
+
+    if (surveyEntity == null)
+    {
+      return NotFound();
+    }
+
+    await _surveyRepository.UpdateSurveyAsync(requestDto.UpdateSurvey(surveyEntity), cancellationToken);
+
+    return NoContent();
   }
 
   [HttpGet("{surveyId}", Name = nameof(SurveyController.DeleteSurvey))]
