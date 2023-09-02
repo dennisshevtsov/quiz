@@ -54,8 +54,17 @@ public sealed class SurveyController : ControllerBase
   }
 
   [HttpGet("{surveyId}", Name = nameof(SurveyController.DeleteSurvey))]
-  public Task<IActionResult> DeleteSurvey(Guid surveyId, CancellationToken cancellationToken)
+  public async Task<IActionResult> DeleteSurvey(Guid surveyId, CancellationToken cancellationToken)
   {
-    return Task.FromResult<IActionResult>(NoContent());
+    SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(surveyId, cancellationToken);
+
+    if (surveyEntity == null)
+    {
+      return NotFound();
+    }
+
+    await _surveyRepository.DeleteSurveyAsync(surveyId, cancellationToken);
+
+    return NoContent();
   }
 }
