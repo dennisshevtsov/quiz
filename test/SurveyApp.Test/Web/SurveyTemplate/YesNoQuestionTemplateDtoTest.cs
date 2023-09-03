@@ -2,9 +2,6 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using SurveyApp.SurveyQuestion;
-using SurveyApp.Web.SurveyQuestion;
-
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
 [TestClass]
@@ -17,10 +14,10 @@ public sealed class YesNoQuestionTemplateDtoTest
     YesNoQuestionTemplateDto yesNoQuestionTemplateDto = new();
 
     // Act
-    SurveyQuestionEntityBase questionTemplateEntityBase = yesNoQuestionTemplateDto.ToQuestionTemplateEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = yesNoQuestionTemplateDto.ToTemplateQuestionEntity();
 
     // Assert
-    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(YesNoQuestionEntity));
+    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(YesNoQuestionTemplateEntity));
   }
 
   [TestMethod]
@@ -29,12 +26,12 @@ public sealed class YesNoQuestionTemplateDtoTest
     // Arrange
     YesNoQuestionTemplateDto yesNoQuestionTemplateDto = new()
     {
-      QuestionType = SurveyQuestionType.YesNo,
+      QuestionType = QuestionType.YesNo,
       Text = "test",
     };
 
     // Act
-    SurveyQuestionEntityBase questionTemplateEntityBase = yesNoQuestionTemplateDto.ToQuestionTemplateEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = yesNoQuestionTemplateDto.ToTemplateQuestionEntity();
 
     // Assert
     Assert.AreEqual(yesNoQuestionTemplateDto.Text, questionTemplateEntityBase.Text);

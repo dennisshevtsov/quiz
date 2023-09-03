@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using SurveyApp.SurveyQuestion;
 using SurveyApp.SurveyTemplate;
 
 namespace SurveyApp.Survey;
@@ -15,7 +14,7 @@ public sealed class SurveyEntity
   {
     Title = surveyTemplateEntity.Title;
     Description = surveyTemplateEntity.Description;
-    Questions = surveyTemplateEntity.Questions.Select(entity => entity.Clone()).ToList();
+    Questions = surveyTemplateEntity.Questions.Select(QuestionEntityBase.Copy).ToList();
   }
 
   public Guid SurveyId { get; set; }
@@ -26,5 +25,5 @@ public sealed class SurveyEntity
 
   public string CandidateName { get; set; } = string.Empty;
 
-  public List<SurveyQuestionEntityBase> Questions { get; set; } = new();
+  public List<QuestionEntityBase> Questions { get; set; } = new();
 }

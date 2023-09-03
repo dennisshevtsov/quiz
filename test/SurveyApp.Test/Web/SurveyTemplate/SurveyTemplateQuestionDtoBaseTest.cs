@@ -2,9 +2,6 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using SurveyApp.SurveyQuestion;
-using SurveyApp.Web.SurveyQuestion;
-
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
 [TestClass]
@@ -14,11 +11,11 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_TextQuestionTemplateEntity_SurveyTemplateQuestionDtoBaseCreated()
   {
     // Arrange
-    TextQuestionEntity textQuestionTemplateEntity = new();
+    TextQuestionTemplateEntity textQuestionTemplateEntity = new();
 
     // Act
-    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
-      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(textQuestionTemplateEntity);
+    QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
+      QuestionTemplateDtoBase.FromQuestionTemplateEntity(textQuestionTemplateEntity);
 
     // Assert
     Assert.IsNotNull(surveyTemplateQuestionDtoBase);
@@ -28,11 +25,11 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_TextQuestionTemplateEntity_TextQuestionTemplateDtoCreated()
   {
     // Arrange
-    TextQuestionEntity textQuestionTemplateEntity = new();
+    TextQuestionTemplateEntity textQuestionTemplateEntity = new();
 
     // Act
-    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
-      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(textQuestionTemplateEntity);
+    QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
+      QuestionTemplateDtoBase.FromQuestionTemplateEntity(textQuestionTemplateEntity);
 
     // Assert
     Assert.IsInstanceOfType(surveyTemplateQuestionDtoBase, typeof(TextQuestionTemplateDto));
@@ -42,14 +39,14 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_TextQuestionTemplateEntity_PropertiesFilled()
   {
     // Arrange
-    TextQuestionEntity textQuestionTemplateEntity = new()
+    TextQuestionTemplateEntity textQuestionTemplateEntity = new()
     {
       Text = Guid.NewGuid().ToString(),
     };
 
     // Act
-    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
-      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(textQuestionTemplateEntity);
+    QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
+      QuestionTemplateDtoBase.FromQuestionTemplateEntity(textQuestionTemplateEntity);
 
     // Assert
     Assert.AreEqual(surveyTemplateQuestionDtoBase.Text, textQuestionTemplateEntity.Text);
@@ -58,11 +55,11 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_YesNoQuestionTemplateEntity_SurveyTemplateQuestionDtoBaseCreated()
   {
     // Arrange
-    YesNoQuestionEntity yesNoQuestionTemplateEntity = new();
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new();
 
     // Act
-    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
-      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(yesNoQuestionTemplateEntity);
+    QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
+      QuestionTemplateDtoBase.FromQuestionTemplateEntity(yesNoQuestionTemplateEntity);
 
     // Assert
     Assert.IsNotNull(surveyTemplateQuestionDtoBase);
@@ -72,11 +69,11 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_YesNoQuestionTemplateEntity_YesNoQuestionTemplateDtoCreated()
   {
     // Arrange
-    YesNoQuestionEntity yesNoQuestionTemplateEntity = new();
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new();
 
     // Act
-    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
-      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(yesNoQuestionTemplateEntity);
+    QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
+      QuestionTemplateDtoBase.FromQuestionTemplateEntity(yesNoQuestionTemplateEntity);
 
     // Assert
     Assert.IsInstanceOfType(surveyTemplateQuestionDtoBase, typeof(YesNoQuestionTemplateDto));
@@ -86,14 +83,14 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_YesNoQuestionTemplateEntity_PropertiesFilled()
   {
     // Arrange
-    YesNoQuestionEntity yesNoQuestionTemplateEntity = new()
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new()
     {
       Text = Guid.NewGuid().ToString(),
     };
 
     // Act
-    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
-      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(yesNoQuestionTemplateEntity);
+    QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
+      QuestionTemplateDtoBase.FromQuestionTemplateEntity(yesNoQuestionTemplateEntity);
 
     // Assert
     Assert.AreEqual(surveyTemplateQuestionDtoBase.Text, yesNoQuestionTemplateEntity.Text);
@@ -103,11 +100,11 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_MultipleChoiceQuestionTemplateEntity_SurveyTemplateQuestionDtoBaseCreated()
   {
     // Arrange
-    MultipleChoiceQuestionEntity multipleChoiceQuestionTemplateEntity = new();
+    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new();
 
     // Act
-    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
-      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(multipleChoiceQuestionTemplateEntity);
+    QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
+      QuestionTemplateDtoBase.FromQuestionTemplateEntity(multipleChoiceQuestionTemplateEntity);
 
     // Assert
     Assert.IsNotNull(surveyTemplateQuestionDtoBase);
@@ -117,11 +114,11 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_MultipleChoiceQuestionTemplateEntity_MultipleChoiceQuestionTemplateDtoCreated()
   {
     // Arrange
-    MultipleChoiceQuestionEntity multipleChoiceQuestionTemplateEntity = new();
+    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new();
 
     // Act
-    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
-      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(multipleChoiceQuestionTemplateEntity);
+    QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
+      QuestionTemplateDtoBase.FromQuestionTemplateEntity(multipleChoiceQuestionTemplateEntity);
 
     // Assert
     Assert.IsInstanceOfType(surveyTemplateQuestionDtoBase, typeof(MultipleChoiceQuestionTemplateDto));
@@ -131,7 +128,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_MultipleChoiceQuestionTemplateEntity_PropertiesFilled()
   {
     // Arrange
-    MultipleChoiceQuestionEntity multipleChoiceQuestionTemplateEntity = new()
+    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new()
     {
       Text = Guid.NewGuid().ToString(),
       Choices = new[]
@@ -142,8 +139,8 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     };
 
     // Act
-    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
-      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(multipleChoiceQuestionTemplateEntity);
+    QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
+      QuestionTemplateDtoBase.FromQuestionTemplateEntity(multipleChoiceQuestionTemplateEntity);
 
     // Assert
     Assert.AreEqual(surveyTemplateQuestionDtoBase.Text, multipleChoiceQuestionTemplateEntity.Text);
@@ -159,11 +156,11 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_SingleChoiceQuestionTemplateEntity_SurveyTemplateQuestionDtoBaseCreated()
   {
     // Arrange
-    SingleChoiceQuestionEntity singleChoiceQuestionTemplateEntity = new();
+    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new();
 
     // Act
-    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
-      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(singleChoiceQuestionTemplateEntity);
+    QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
+      QuestionTemplateDtoBase.FromQuestionTemplateEntity(singleChoiceQuestionTemplateEntity);
 
     // Assert
     Assert.IsNotNull(surveyTemplateQuestionDtoBase);
@@ -173,11 +170,11 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_SingleChoiceQuestionTemplateEntity_SingleChoiceQuestionTemplateDtoCreated()
   {
     // Arrange
-    SingleChoiceQuestionEntity singleChoiceQuestionTemplateEntity = new();
+    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new();
 
     // Act
-    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
-      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(singleChoiceQuestionTemplateEntity);
+    QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
+      QuestionTemplateDtoBase.FromQuestionTemplateEntity(singleChoiceQuestionTemplateEntity);
 
     // Assert
     Assert.IsInstanceOfType(surveyTemplateQuestionDtoBase, typeof(SingleChoiceQuestionTemplateDto));
@@ -187,7 +184,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_SingleChoiceQuestionTemplateEntity_PropertiesFilled()
   {
     // Arrange
-    SingleChoiceQuestionEntity singleChoiceQuestionTemplateEntity = new()
+    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new()
     {
       Text = Guid.NewGuid().ToString(),
       Choices = new[]
@@ -198,8 +195,8 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     };
 
     // Act
-    SurveyTemplateQuestionDtoBase surveyTemplateQuestionDtoBase =
-      SurveyTemplateQuestionDtoBase.FromQuestionTemplateEntity(singleChoiceQuestionTemplateEntity);
+    QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
+      QuestionTemplateDtoBase.FromQuestionTemplateEntity(singleChoiceQuestionTemplateEntity);
 
     // Assert
     Assert.AreEqual(surveyTemplateQuestionDtoBase.Text, singleChoiceQuestionTemplateEntity.Text);
@@ -215,21 +212,21 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void ToQuestionTemplateEntityCollection_SurveyTemplateDtoCollection_EntityListCreated()
   {
     // Arrange
-    SurveyTemplateQuestionDtoBase[] surveyTemplateQuestionDtoCollection = new SurveyTemplateQuestionDtoBase[]
+    QuestionTemplateDtoBase[] surveyTemplateQuestionDtoCollection = new QuestionTemplateDtoBase[]
     {
       new YesNoQuestionTemplateDto
       {
-        QuestionType = SurveyQuestionType.YesNo,
+        QuestionType = QuestionType.YesNo,
         Text = Guid.NewGuid().ToString(),
       },
       new TextQuestionTemplateDto
       {
-        QuestionType = SurveyQuestionType.Text,
+        QuestionType = QuestionType.Text,
         Text = Guid.NewGuid().ToString(),
       },
       new MultipleChoiceQuestionTemplateDto
       {
-        QuestionType = SurveyQuestionType.MultipleChoice,
+        QuestionType = QuestionType.MultipleChoice,
         Text = Guid.NewGuid().ToString(),
         Choices = new[]
         {
@@ -239,7 +236,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
       },
       new SingleChoiceQuestionTemplateDto
       {
-        QuestionType = SurveyQuestionType.SingleChoice,
+        QuestionType = QuestionType.SingleChoice,
         Text = Guid.NewGuid().ToString(),
         Choices = new[]
         {
@@ -250,8 +247,8 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     };
 
     // Act
-    List<SurveyQuestionEntityBase> questionTemplateEntityBaseCollection =
-      SurveyTemplateQuestionDtoBase.ToQuestionTemplateEntityCollection(surveyTemplateQuestionDtoCollection);
+    List<QuestionTemplateEntityBase> questionTemplateEntityBaseCollection =
+      QuestionTemplateDtoBase.ToQuestionTemplateEntityCollection(surveyTemplateQuestionDtoCollection);
 
     // Assert
     Assert.AreEqual(surveyTemplateQuestionDtoCollection.Length, questionTemplateEntityBaseCollection.Count);
@@ -262,19 +259,19 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     }
   }
 
-  private void AreEqual(SurveyTemplateQuestionDtoBase expected, SurveyQuestionEntityBase actual)
+  private void AreEqual(QuestionTemplateDtoBase expected, QuestionTemplateEntityBase actual)
   {
     Assert.AreEqual(expected.QuestionType, actual.QuestionType);
     Assert.AreEqual(expected.Text, actual.Text);
 
-    if (expected.QuestionType == SurveyQuestionType.MultipleChoice)
+    if (expected.QuestionType == QuestionType.MultipleChoice)
     {
-      AreChoicesEqual(((MultipleChoiceQuestionTemplateDto)expected).Choices, ((MultipleChoiceQuestionEntity)actual).Choices);
+      AreChoicesEqual(((MultipleChoiceQuestionTemplateDto)expected).Choices, ((MultipleChoiceQuestionTemplateEntity)actual).Choices);
     }
 
-    if (expected.QuestionType == SurveyQuestionType.SingleChoice)
+    if (expected.QuestionType == QuestionType.SingleChoice)
     {
-      AreChoicesEqual(((SingleChoiceQuestionTemplateDto)expected).Choices, ((SingleChoiceQuestionEntity)actual).Choices);
+      AreChoicesEqual(((SingleChoiceQuestionTemplateDto)expected).Choices, ((SingleChoiceQuestionTemplateEntity)actual).Choices);
     }
   }
 

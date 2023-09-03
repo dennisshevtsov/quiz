@@ -2,9 +2,6 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using SurveyApp.SurveyQuestion;
-using SurveyApp.Web.SurveyQuestion;
-
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
 [TestClass]
@@ -18,16 +15,16 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
     {
       Title = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
-      Questions = new SurveyTemplateQuestionDtoBase[]
+      Questions = new QuestionTemplateDtoBase[]
       {
         new YesNoQuestionTemplateDto
         {
-          QuestionType = SurveyQuestionType.YesNo,
+          QuestionType = QuestionType.YesNo,
           Text = Guid.NewGuid().ToString(),
         },
         new TextQuestionTemplateDto
         {
-          QuestionType = SurveyQuestionType.Text,
+          QuestionType = QuestionType.Text,
           Text = Guid.NewGuid().ToString(),
         },
       },
@@ -40,9 +37,9 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
       SurveyTemplateId = surveyTemplateId,
       Title = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
-      Questions = new List<SurveyQuestionEntityBase>
+      Questions = new List<QuestionTemplateEntityBase>
       {
-        new MultipleChoiceQuestionEntity
+        new MultipleChoiceQuestionTemplateEntity
         {
           Text = Guid.NewGuid().ToString(),
           Choices = new[]
@@ -51,7 +48,7 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
             Guid.NewGuid().ToString(),
           },
         },
-        new SingleChoiceQuestionEntity
+        new SingleChoiceQuestionTemplateEntity
         {
           Text = Guid.NewGuid().ToString(),
           Choices = new[]

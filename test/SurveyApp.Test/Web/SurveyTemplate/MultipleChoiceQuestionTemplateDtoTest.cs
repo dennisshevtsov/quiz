@@ -2,9 +2,6 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using SurveyApp.SurveyQuestion;
-using SurveyApp.Web.SurveyQuestion;
-
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
 [TestClass]
@@ -17,10 +14,10 @@ public sealed class MultipleChoiceQuestionTemplateDtoTest
     MultipleChoiceQuestionTemplateDto multipleChoiceQuestionTemplateDto = new();
 
     // Act
-    SurveyQuestionEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToTemplateQuestionEntity();
 
     // Assert
-    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(MultipleChoiceQuestionEntity));
+    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(MultipleChoiceQuestionTemplateEntity));
   }
 
   [TestMethod]
@@ -29,7 +26,7 @@ public sealed class MultipleChoiceQuestionTemplateDtoTest
     // Arrange
     MultipleChoiceQuestionTemplateDto multipleChoiceQuestionTemplateDto = new()
     {
-      QuestionType = SurveyQuestionType.SingleChoice,
+      QuestionType = QuestionType.SingleChoice,
       Text = "test",
       Choices = new[]
       {
@@ -39,13 +36,13 @@ public sealed class MultipleChoiceQuestionTemplateDtoTest
     };
 
     // Act
-    SurveyQuestionEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToQuestionTemplateEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToTemplateQuestionEntity();
 
     // Assert
     Assert.AreEqual(multipleChoiceQuestionTemplateDto.Text, questionTemplateEntityBase.Text);
 
-    MultipleChoiceQuestionEntity singleChoiceQuestionTemplateEntity =
-      (MultipleChoiceQuestionEntity)questionTemplateEntityBase;
+    MultipleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity =
+      (MultipleChoiceQuestionTemplateEntity)questionTemplateEntityBase;
     Assert.AreEqual(multipleChoiceQuestionTemplateDto.Choices.Length, singleChoiceQuestionTemplateEntity.Choices.Length);
 
     string[] expected = multipleChoiceQuestionTemplateDto.Choices.Order().ToArray();
