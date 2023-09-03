@@ -26,7 +26,7 @@ public sealed class MultipleChoiceQuestionTemplateDtoTest
     // Arrange
     MultipleChoiceQuestionTemplateDto multipleChoiceQuestionTemplateDto = new()
     {
-      QuestionType = SurveyQuestionType.SingleChoice,
+      QuestionType = QuestionType.SingleChoice,
       Text = "test",
       Choices = new[]
       {

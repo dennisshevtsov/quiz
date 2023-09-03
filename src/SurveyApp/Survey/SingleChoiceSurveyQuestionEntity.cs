@@ -16,7 +16,7 @@ public sealed class SingleChoiceSurveyQuestionEntity : SurveyQuestionEntityBase
     Choices = singleChoiceSurveyTemplateQuestionEntity.Choices.Select(choice => choice).ToArray();
   }
 
-  public override SurveyQuestionType QuestionType => SurveyQuestionType.SingleChoice;
+  public override QuestionType QuestionType => QuestionType.SingleChoice;
 
   public string[] Choices { get; set; } = Array.Empty<string>();
 }

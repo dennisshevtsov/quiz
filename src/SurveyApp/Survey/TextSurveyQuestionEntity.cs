@@ -15,5 +15,5 @@ public sealed class TextSurveyQuestionEntity : SurveyQuestionEntityBase
     Text = textSurveyTemplateQuestionEntity.Text;
   }
 
-  public override SurveyQuestionType QuestionType => SurveyQuestionType.Text;
+  public override QuestionType QuestionType => QuestionType.Text;
 }

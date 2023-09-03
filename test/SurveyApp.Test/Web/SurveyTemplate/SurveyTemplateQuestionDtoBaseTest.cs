@@ -216,17 +216,17 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     {
       new YesNoQuestionTemplateDto
       {
-        QuestionType = SurveyQuestionType.YesNo,
+        QuestionType = QuestionType.YesNo,
         Text = Guid.NewGuid().ToString(),
       },
       new TextQuestionTemplateDto
       {
-        QuestionType = SurveyQuestionType.Text,
+        QuestionType = QuestionType.Text,
         Text = Guid.NewGuid().ToString(),
       },
       new MultipleChoiceQuestionTemplateDto
       {
-        QuestionType = SurveyQuestionType.MultipleChoice,
+        QuestionType = QuestionType.MultipleChoice,
         Text = Guid.NewGuid().ToString(),
         Choices = new[]
         {
@@ -236,7 +236,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
       },
       new SingleChoiceQuestionTemplateDto
       {
-        QuestionType = SurveyQuestionType.SingleChoice,
+        QuestionType = QuestionType.SingleChoice,
         Text = Guid.NewGuid().ToString(),
         Choices = new[]
         {
@@ -264,12 +264,12 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     Assert.AreEqual(expected.QuestionType, actual.QuestionType);
     Assert.AreEqual(expected.Text, actual.Text);
 
-    if (expected.QuestionType == SurveyQuestionType.MultipleChoice)
+    if (expected.QuestionType == QuestionType.MultipleChoice)
     {
       AreChoicesEqual(((MultipleChoiceQuestionTemplateDto)expected).Choices, ((MultipleChoiceSurveyTemplateQuestionEntity)actual).Choices);
     }
 
-    if (expected.QuestionType == SurveyQuestionType.SingleChoice)
+    if (expected.QuestionType == QuestionType.SingleChoice)
     {
       AreChoicesEqual(((SingleChoiceQuestionTemplateDto)expected).Choices, ((SingleChoiceSurveyTemplateQuestionEntity)actual).Choices);
     }

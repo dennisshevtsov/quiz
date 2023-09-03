@@ -14,7 +14,7 @@ public sealed class MultipleChoiceSurveyTemplateQuestionEntity : SurveyTemplateQ
     Choices = multipleChoiceQuestionTemplateEntity.Choices.Select(choice => choice).ToArray();
   }
 
-  public override SurveyQuestionType QuestionType => SurveyQuestionType.MultipleChoice;
+  public override QuestionType QuestionType => QuestionType.MultipleChoice;
 
   public string[] Choices { get; set; } = Array.Empty<string>();
 }

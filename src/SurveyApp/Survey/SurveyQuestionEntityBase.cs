@@ -10,15 +10,15 @@ public abstract class SurveyQuestionEntityBase
 {
   public string Text { get; set; } = string.Empty;
 
-  public abstract SurveyQuestionType QuestionType { get; }
+  public abstract QuestionType QuestionType { get; }
 
   public static SurveyQuestionEntityBase Copy(SurveyTemplateQuestionEntityBase surveyTemplateQuestionEntityBase) =>
     surveyTemplateQuestionEntityBase.QuestionType switch
     {
-      SurveyQuestionType.Text => new TextSurveyQuestionEntity((TextSurveyTemplateQuestionEntity)surveyTemplateQuestionEntityBase),
-      SurveyQuestionType.YesNo => new YesNoSurveyQuestionEntity((YesNoSurveyTemplateQuestionEntity)surveyTemplateQuestionEntityBase),
-      SurveyQuestionType.MultipleChoice => new MultipleChoiceSurveyQuestionEntity((MultipleChoiceSurveyTemplateQuestionEntity)surveyTemplateQuestionEntityBase),
-      SurveyQuestionType.SingleChoice => new SingleChoiceSurveyQuestionEntity((SingleChoiceSurveyTemplateQuestionEntity)surveyTemplateQuestionEntityBase),
+      QuestionType.Text => new TextSurveyQuestionEntity((TextSurveyTemplateQuestionEntity)surveyTemplateQuestionEntityBase),
+      QuestionType.YesNo => new YesNoSurveyQuestionEntity((YesNoSurveyTemplateQuestionEntity)surveyTemplateQuestionEntityBase),
+      QuestionType.MultipleChoice => new MultipleChoiceSurveyQuestionEntity((MultipleChoiceSurveyTemplateQuestionEntity)surveyTemplateQuestionEntityBase),
+      QuestionType.SingleChoice => new SingleChoiceSurveyQuestionEntity((SingleChoiceSurveyTemplateQuestionEntity)surveyTemplateQuestionEntityBase),
       _ => throw new NotSupportedException("Unknown question type."),
     };
 }

@@ -15,5 +15,5 @@ public sealed class YesNoSurveyQuestionEntity : SurveyQuestionEntityBase
     Text = yesNoSurveyTemplateQuestionEntity.Text;
   }
 
-  public override SurveyQuestionType QuestionType => SurveyQuestionType.YesNo;
+  public override QuestionType QuestionType => QuestionType.YesNo;
 }

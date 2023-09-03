@@ -7,25 +7,25 @@ using System.Text.Json.Serialization;
 namespace SurveyApp.Survey.Web;
 
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "questionType")]
-[JsonDerivedType(typeof(TextQuestionTemplateDto), (int)SurveyQuestionType.Text)]
-[JsonDerivedType(typeof(YesNoQuestionTemplateDto), (int)SurveyQuestionType.YesNo)]
-[JsonDerivedType(typeof(MultipleChoiceQuestionTemplateDto), (int)SurveyQuestionType.MultipleChoice)]
-[JsonDerivedType(typeof(SingleChoiceQuestionTemplateDto), (int)SurveyQuestionType.SingleChoice)]
+[JsonDerivedType(typeof(TextQuestionTemplateDto), (int)QuestionType.Text)]
+[JsonDerivedType(typeof(YesNoQuestionTemplateDto), (int)QuestionType.YesNo)]
+[JsonDerivedType(typeof(MultipleChoiceQuestionTemplateDto), (int)QuestionType.MultipleChoice)]
+[JsonDerivedType(typeof(SingleChoiceQuestionTemplateDto), (int)QuestionType.SingleChoice)]
 public abstract class SurveyQuestionDtoBase
 {
   public string Text { get; set; } = string.Empty;
 
-  public SurveyQuestionType QuestionType { get; set; }
+  public QuestionType QuestionType { get; set; }
 
   public abstract SurveyQuestionEntityBase ToSurveyQuestionEntity();
 
   public static SurveyQuestionDtoBase FromQuestionTemplateEntity(SurveyQuestionEntityBase questionTemplateEntity) =>
     questionTemplateEntity.QuestionType switch
     {
-      SurveyQuestionType.Text => new TextQuestionTemplateDto((TextSurveyQuestionEntity)questionTemplateEntity),
-      SurveyQuestionType.YesNo => new YesNoQuestionTemplateDto((YesNoSurveyQuestionEntity)questionTemplateEntity),
-      SurveyQuestionType.MultipleChoice => new MultipleChoiceQuestionTemplateDto((MultipleChoiceSurveyQuestionEntity)questionTemplateEntity),
-      SurveyQuestionType.SingleChoice => new SingleChoiceQuestionTemplateDto((SingleChoiceSurveyQuestionEntity)questionTemplateEntity),
+      QuestionType.Text => new TextQuestionTemplateDto((TextSurveyQuestionEntity)questionTemplateEntity),
+      QuestionType.YesNo => new YesNoQuestionTemplateDto((YesNoSurveyQuestionEntity)questionTemplateEntity),
+      QuestionType.MultipleChoice => new MultipleChoiceQuestionTemplateDto((MultipleChoiceSurveyQuestionEntity)questionTemplateEntity),
+      QuestionType.SingleChoice => new SingleChoiceQuestionTemplateDto((SingleChoiceSurveyQuestionEntity)questionTemplateEntity),
       _ => throw new NotSupportedException("Unknown question type."),
     };
 

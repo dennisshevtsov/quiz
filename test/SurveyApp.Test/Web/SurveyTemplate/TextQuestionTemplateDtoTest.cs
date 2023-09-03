@@ -26,7 +26,7 @@ public sealed class TextQuestionTemplateDtoTest
     // Arrange
     TextQuestionTemplateDto textQuestionTemplateDto = new()
     {
-      QuestionType = SurveyQuestionType.Text,
+      QuestionType = QuestionType.Text,
       Text = "test",
     };
 

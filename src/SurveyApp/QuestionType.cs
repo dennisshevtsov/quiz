@@ -4,10 +4,10 @@
 
 namespace SurveyApp;
 
-public enum SurveyQuestionType : int
+public enum QuestionType : int
 {
-  Text = 0,
-  YesNo = 1,
+  Text           = 0,
+  YesNo          = 1,
   MultipleChoice = 2,
-  SingleChoice = 3,
+  SingleChoice   = 3,
 }

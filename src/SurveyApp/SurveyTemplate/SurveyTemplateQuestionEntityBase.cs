@@ -8,5 +8,5 @@ public abstract class SurveyTemplateQuestionEntityBase
 {
   public string Text { get; set; } = string.Empty;
 
-  public abstract SurveyQuestionType QuestionType { get; }
+  public abstract QuestionType QuestionType { get; }
 }

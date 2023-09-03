@@ -26,7 +26,7 @@ public sealed class YesNoQuestionTemplateDtoTest
     // Arrange
     YesNoQuestionTemplateDto yesNoQuestionTemplateDto = new()
     {
-      QuestionType = SurveyQuestionType.YesNo,
+      QuestionType = QuestionType.YesNo,
       Text = "test",
     };
 

@@ -104,12 +104,12 @@ public sealed class SurveyTemplateControllerTest
       {
         new TextQuestionTemplateDto
         {
-          QuestionType = SurveyQuestionType.Text,
+          QuestionType = QuestionType.Text,
           Text = Guid.NewGuid().ToString(),
         },
         new YesNoQuestionTemplateDto
         {
-          QuestionType = SurveyQuestionType.YesNo,
+          QuestionType = QuestionType.YesNo,
           Text = Guid.NewGuid().ToString(),
         },
       },
@@ -269,12 +269,12 @@ public sealed class SurveyTemplateControllerTest
       {
         new TextQuestionTemplateDto
         {
-          QuestionType = SurveyQuestionType.Text,
+          QuestionType = QuestionType.Text,
           Text = Guid.NewGuid().ToString(),
         },
         new YesNoQuestionTemplateDto
         {
-          QuestionType = SurveyQuestionType.YesNo,
+          QuestionType = QuestionType.YesNo,
           Text = Guid.NewGuid().ToString(),
         },
       }

@@ -19,12 +19,12 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
       {
         new YesNoQuestionTemplateDto
         {
-          QuestionType = SurveyQuestionType.YesNo,
+          QuestionType = QuestionType.YesNo,
           Text = Guid.NewGuid().ToString(),
         },
         new TextQuestionTemplateDto
         {
-          QuestionType = SurveyQuestionType.Text,
+          QuestionType = QuestionType.Text,
           Text = Guid.NewGuid().ToString(),
         },
       },
