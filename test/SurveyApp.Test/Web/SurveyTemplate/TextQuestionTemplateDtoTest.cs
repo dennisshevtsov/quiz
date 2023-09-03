@@ -14,10 +14,10 @@ public sealed class TextQuestionTemplateDtoTest
     TextQuestionTemplateDto textQuestionTemplateDto = new();
 
     // Act
-    SurveyTemplateQuestionEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToSurveyTemplateQuestionEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToTemplateQuestionEntity();
 
     // Assert
-    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(TextSurveyTemplateQuestionEntity));
+    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(TextQuestionTemplateEntity));
   }
 
   [TestMethod]
@@ -31,7 +31,7 @@ public sealed class TextQuestionTemplateDtoTest
     };
 
     // Act
-    SurveyTemplateQuestionEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToSurveyTemplateQuestionEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToTemplateQuestionEntity();
 
     // Assert
     Assert.AreEqual(textQuestionTemplateDto.Text, questionTemplateEntityBase.Text);

@@ -14,13 +14,13 @@ public sealed class UpdateSurveyTemplateRequestDto : IComposable
 
   public string Description { get; set; } = string.Empty;
 
-  public SurveyTemplateQuestionDtoBase[] Questions { get; set; } = Array.Empty<SurveyTemplateQuestionDtoBase>();
+  public QuestionTemplateDtoBase[] Questions { get; set; } = Array.Empty<QuestionTemplateDtoBase>();
 
   public SurveyTemplateEntity UpdateSurveyTemplate(SurveyTemplateEntity surveyTemplateEntity)
   {
     surveyTemplateEntity.Title = Title;
     surveyTemplateEntity.Description = Description;
-    surveyTemplateEntity.Questions = SurveyTemplateQuestionDtoBase.ToQuestionTemplateEntityCollection(Questions);
+    surveyTemplateEntity.Questions = QuestionTemplateDtoBase.ToQuestionTemplateEntityCollection(Questions);
 
     return surveyTemplateEntity;
   }

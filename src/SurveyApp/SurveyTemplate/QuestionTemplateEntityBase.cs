@@ -4,7 +4,7 @@
 
 namespace SurveyApp.SurveyTemplate;
 
-public abstract class SurveyTemplateQuestionEntityBase
+public abstract class QuestionTemplateEntityBase
 {
   public string Text { get; set; } = string.Empty;
 

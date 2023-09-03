@@ -14,10 +14,10 @@ public sealed class SingleChoiceQuestionTemplateDtoTest
     SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new();
 
     // Act
-    SurveyTemplateQuestionEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToSurveyTemplateQuestionEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity();
 
     // Assert
-    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(SingleChoiceSurveyTemplateQuestionEntity));
+    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(SingleChoiceQuestionTemplateEntity));
   }
 
   [TestMethod]
@@ -36,13 +36,13 @@ public sealed class SingleChoiceQuestionTemplateDtoTest
     };
 
     // Act
-    SurveyTemplateQuestionEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToSurveyTemplateQuestionEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity();
 
     // Assert
     Assert.AreEqual(singleChoiceQuestionTemplateDto.Text, questionTemplateEntityBase.Text);
 
-    SingleChoiceSurveyTemplateQuestionEntity singleChoiceQuestionTemplateEntity =
-      (SingleChoiceSurveyTemplateQuestionEntity)questionTemplateEntityBase;
+    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity =
+      (SingleChoiceQuestionTemplateEntity)questionTemplateEntityBase;
     Assert.AreEqual(singleChoiceQuestionTemplateDto.Choices.Length, singleChoiceQuestionTemplateEntity.Choices.Length);
 
     string[] expected = singleChoiceQuestionTemplateDto.Choices.Order().ToArray();

@@ -2,13 +2,15 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.SurveyTemplate;
+using SurveyApp.SurveyTemplate;
 
-public sealed class YesNoSurveyTemplateQuestionEntity : SurveyTemplateQuestionEntityBase
+namespace SurveyApp.Survey;
+
+public sealed class YesNoQuestionEntity : QuestionEntityBase
 {
-  public YesNoSurveyTemplateQuestionEntity() { }
+  public YesNoQuestionEntity() { }
 
-  public YesNoSurveyTemplateQuestionEntity(YesNoSurveyTemplateQuestionEntity yesNoQuestionTemplateEntity)
+  public YesNoQuestionEntity(YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity)
   {
     Text = yesNoQuestionTemplateEntity.Text;
   }

@@ -14,10 +14,10 @@ public sealed class YesNoQuestionTemplateDtoTest
     YesNoQuestionTemplateDto yesNoQuestionTemplateDto = new();
 
     // Act
-    SurveyTemplateQuestionEntityBase questionTemplateEntityBase = yesNoQuestionTemplateDto.ToSurveyTemplateQuestionEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = yesNoQuestionTemplateDto.ToTemplateQuestionEntity();
 
     // Assert
-    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(YesNoSurveyTemplateQuestionEntity));
+    Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(YesNoQuestionTemplateEntity));
   }
 
   [TestMethod]
@@ -31,7 +31,7 @@ public sealed class YesNoQuestionTemplateDtoTest
     };
 
     // Act
-    SurveyTemplateQuestionEntityBase questionTemplateEntityBase = yesNoQuestionTemplateDto.ToSurveyTemplateQuestionEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = yesNoQuestionTemplateDto.ToTemplateQuestionEntity();
 
     // Assert
     Assert.AreEqual(yesNoQuestionTemplateDto.Text, questionTemplateEntityBase.Text);

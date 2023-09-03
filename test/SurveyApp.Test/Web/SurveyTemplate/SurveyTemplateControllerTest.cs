@@ -100,7 +100,7 @@ public sealed class SurveyTemplateControllerTest
     {
       Title = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
-      Questions = new SurveyTemplateQuestionDtoBase[]
+      Questions = new QuestionTemplateDtoBase[]
       {
         new TextQuestionTemplateDto
         {
@@ -265,7 +265,7 @@ public sealed class SurveyTemplateControllerTest
       SurveyTemplateId = surveyTemplateId,
       Title = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
-      Questions = new SurveyTemplateQuestionDtoBase[]
+      Questions = new QuestionTemplateDtoBase[]
       {
         new TextQuestionTemplateDto
         {

@@ -15,7 +15,7 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
     {
       Title = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
-      Questions = new SurveyTemplateQuestionDtoBase[]
+      Questions = new QuestionTemplateDtoBase[]
       {
         new YesNoQuestionTemplateDto
         {
@@ -37,9 +37,9 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
       SurveyTemplateId = surveyTemplateId,
       Title = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
-      Questions = new List<SurveyTemplateQuestionEntityBase>
+      Questions = new List<QuestionTemplateEntityBase>
       {
-        new MultipleChoiceSurveyTemplateQuestionEntity
+        new MultipleChoiceQuestionTemplateEntity
         {
           Text = Guid.NewGuid().ToString(),
           Choices = new[]
@@ -48,7 +48,7 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
             Guid.NewGuid().ToString(),
           },
         },
-        new SingleChoiceSurveyTemplateQuestionEntity
+        new SingleChoiceQuestionTemplateEntity
         {
           Text = Guid.NewGuid().ToString(),
           Choices = new[]

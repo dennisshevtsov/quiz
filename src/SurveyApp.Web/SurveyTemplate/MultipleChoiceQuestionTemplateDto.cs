@@ -4,21 +4,21 @@
 
 namespace SurveyApp.SurveyTemplate.Web;
 
-public sealed class MultipleChoiceQuestionTemplateDto : SurveyTemplateQuestionDtoBase
+public sealed class MultipleChoiceQuestionTemplateDto : QuestionTemplateDtoBase
 {
   public MultipleChoiceQuestionTemplateDto() { }
 
-  public MultipleChoiceQuestionTemplateDto(MultipleChoiceSurveyTemplateQuestionEntity multipleChoiceSurveyTemplateQuestionEntity)
+  public MultipleChoiceQuestionTemplateDto(MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity)
   {
-    Text = multipleChoiceSurveyTemplateQuestionEntity.Text;
-    Choices = multipleChoiceSurveyTemplateQuestionEntity.Choices;
+    Text    = multipleChoiceQuestionTemplateEntity.Text;
+    Choices = multipleChoiceQuestionTemplateEntity.Choices;
   }
 
   public string[] Choices { get; set; } = Array.Empty<string>();
 
-  public override SurveyTemplateQuestionEntityBase ToSurveyTemplateQuestionEntity() => new MultipleChoiceSurveyTemplateQuestionEntity
+  public override QuestionTemplateEntityBase ToTemplateQuestionEntity() => new MultipleChoiceQuestionTemplateEntity
   {
-    Text = Text,
+    Text    = Text,
     Choices = Choices,
   };
 }

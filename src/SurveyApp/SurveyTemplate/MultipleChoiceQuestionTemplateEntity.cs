@@ -4,13 +4,13 @@
 
 namespace SurveyApp.SurveyTemplate;
 
-public sealed class MultipleChoiceSurveyTemplateQuestionEntity : SurveyTemplateQuestionEntityBase
+public sealed class MultipleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
 {
-  public MultipleChoiceSurveyTemplateQuestionEntity() { }
+  public MultipleChoiceQuestionTemplateEntity() { }
 
-  public MultipleChoiceSurveyTemplateQuestionEntity(MultipleChoiceSurveyTemplateQuestionEntity multipleChoiceQuestionTemplateEntity)
+  public MultipleChoiceQuestionTemplateEntity(MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity)
   {
-    Text = multipleChoiceQuestionTemplateEntity.Text;
+    Text    = multipleChoiceQuestionTemplateEntity.Text;
     Choices = multipleChoiceQuestionTemplateEntity.Choices.Select(choice => choice).ToArray();
   }
 

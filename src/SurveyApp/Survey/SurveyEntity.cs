@@ -14,7 +14,7 @@ public sealed class SurveyEntity
   {
     Title = surveyTemplateEntity.Title;
     Description = surveyTemplateEntity.Description;
-    Questions = surveyTemplateEntity.Questions.Select(SurveyQuestionEntityBase.Copy).ToList();
+    Questions = surveyTemplateEntity.Questions.Select(QuestionEntityBase.Copy).ToList();
   }
 
   public Guid SurveyId { get; set; }
@@ -25,5 +25,5 @@ public sealed class SurveyEntity
 
   public string CandidateName { get; set; } = string.Empty;
 
-  public List<SurveyQuestionEntityBase> Questions { get; set; } = new();
+  public List<QuestionEntityBase> Questions { get; set; } = new();
 }
