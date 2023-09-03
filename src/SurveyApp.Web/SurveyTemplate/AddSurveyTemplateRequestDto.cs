@@ -3,7 +3,6 @@
 // See LICENSE in the project root for license information.
 
 using Patchable;
-using SurveyApp.SurveyQuestion.Web;
 
 namespace SurveyApp.SurveyTemplate.Web;
 
@@ -13,12 +12,12 @@ public sealed class AddSurveyTemplateRequestDto : IComposable
 
   public string Description { get; set; } = string.Empty;
 
-  public SurveyQuestionDtoBase[] Questions { get; set; } = Array.Empty<SurveyQuestionDtoBase>();
+  public SurveyTemplateQuestionDtoBase[] Questions { get; set; } = Array.Empty<SurveyTemplateQuestionDtoBase>();
 
   public SurveyTemplateEntity ToSurveyTemplateEntity() => new()
   {
     Title       = Title,
     Description = Description,
-    Questions   = SurveyQuestionDtoBase.ToQuestionTemplateEntityCollection(Questions),
+    Questions   = SurveyTemplateQuestionDtoBase.ToQuestionTemplateEntityCollection(Questions),
   };
 }

@@ -2,18 +2,16 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.SurveyQuestion;
+namespace SurveyApp.SurveyTemplate;
 
-public sealed class TextQuestionEntity : SurveyQuestionEntityBase
+public sealed class TextSurveyTemplateQuestionEntity : SurveyTemplateQuestionEntityBase
 {
-  public TextQuestionEntity() { }
+  public TextSurveyTemplateQuestionEntity() { }
 
-  public TextQuestionEntity(TextQuestionEntity textQuestionTemplateEntity)
+  public TextSurveyTemplateQuestionEntity(TextSurveyTemplateQuestionEntity textQuestionTemplateEntity)
   {
     Text = textQuestionTemplateEntity.Text;
   }
 
   public override SurveyQuestionType QuestionType => SurveyQuestionType.Text;
-
-  public override SurveyQuestionEntityBase Clone() => new TextQuestionEntity(this);
 }

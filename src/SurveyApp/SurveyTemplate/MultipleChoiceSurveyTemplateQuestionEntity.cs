@@ -2,13 +2,13 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.SurveyQuestion;
+namespace SurveyApp.SurveyTemplate;
 
-public sealed class MultipleChoiceQuestionEntity : SurveyQuestionEntityBase
+public sealed class MultipleChoiceSurveyTemplateQuestionEntity : SurveyTemplateQuestionEntityBase
 {
-  public MultipleChoiceQuestionEntity() { }
+  public MultipleChoiceSurveyTemplateQuestionEntity() { }
 
-  public MultipleChoiceQuestionEntity(MultipleChoiceQuestionEntity multipleChoiceQuestionTemplateEntity)
+  public MultipleChoiceSurveyTemplateQuestionEntity(MultipleChoiceSurveyTemplateQuestionEntity multipleChoiceQuestionTemplateEntity)
   {
     Text = multipleChoiceQuestionTemplateEntity.Text;
     Choices = multipleChoiceQuestionTemplateEntity.Choices.Select(choice => choice).ToArray();
@@ -17,6 +17,4 @@ public sealed class MultipleChoiceQuestionEntity : SurveyQuestionEntityBase
   public override SurveyQuestionType QuestionType => SurveyQuestionType.MultipleChoice;
 
   public string[] Choices { get; set; } = Array.Empty<string>();
-
-  public override SurveyQuestionEntityBase Clone() => new MultipleChoiceQuestionEntity(this);
 }

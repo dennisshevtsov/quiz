@@ -2,13 +2,13 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.SurveyQuestion;
+namespace SurveyApp.SurveyTemplate;
 
-public sealed class SingleChoiceQuestionEntity : SurveyQuestionEntityBase
+public sealed class SingleChoiceSurveyTemplateQuestionEntity : SurveyTemplateQuestionEntityBase
 {
-  public SingleChoiceQuestionEntity() { }
+  public SingleChoiceSurveyTemplateQuestionEntity() { }
 
-  public SingleChoiceQuestionEntity(SingleChoiceQuestionEntity singleChoiceQuestionTemplateEntity)
+  public SingleChoiceSurveyTemplateQuestionEntity(SingleChoiceSurveyTemplateQuestionEntity singleChoiceQuestionTemplateEntity)
   {
     Text = singleChoiceQuestionTemplateEntity.Text;
     Choices = singleChoiceQuestionTemplateEntity.Choices.Select(choice => choice).ToArray();
@@ -17,6 +17,4 @@ public sealed class SingleChoiceQuestionEntity : SurveyQuestionEntityBase
   public override SurveyQuestionType QuestionType => SurveyQuestionType.SingleChoice;
 
   public string[] Choices { get; set; } = Array.Empty<string>();
-
-  public override SurveyQuestionEntityBase Clone() => new SingleChoiceQuestionEntity(this);
 }

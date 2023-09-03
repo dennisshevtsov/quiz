@@ -5,8 +5,6 @@
 using System.Linq.Expressions;
 
 using Microsoft.AspNetCore.Mvc;
-using SurveyApp.SurveyQuestion;
-using SurveyApp.Web.SurveyQuestion;
 
 namespace SurveyApp.SurveyTemplate.Web.Test;
 
@@ -123,8 +121,8 @@ public sealed class SurveyTemplateControllerTest
 
     // Assert
     Expression<Func<SurveyTemplateEntity, bool>> match =
-      entity => entity.Title           == addSurveyTemplateRequestDto.Title            &&
-                entity.Description     == addSurveyTemplateRequestDto.Description      &&
+      entity => entity.Title == addSurveyTemplateRequestDto.Title &&
+                entity.Description == addSurveyTemplateRequestDto.Description &&
                 entity.Questions.Count == addSurveyTemplateRequestDto.Questions.Length;
 
     _surveyTemplateRepositoryMock.Verify(repository => repository.AddSurveyTemplateAsync(It.Is(match), It.IsAny<CancellationToken>()));
@@ -288,9 +286,9 @@ public sealed class SurveyTemplateControllerTest
     // Assert
     Expression<Func<SurveyTemplateEntity, bool>> match =
       entity => entity.SurveyTemplateId == updateSurveyTemplateRequestDto.SurveyTemplateId &&
-                entity.Title            == updateSurveyTemplateRequestDto.Title            &&
-                entity.Description      == updateSurveyTemplateRequestDto.Description      &&
-                entity.Questions.Count  == updateSurveyTemplateRequestDto.Questions.Length;
+                entity.Title == updateSurveyTemplateRequestDto.Title &&
+                entity.Description == updateSurveyTemplateRequestDto.Description &&
+                entity.Questions.Count == updateSurveyTemplateRequestDto.Questions.Length;
 
     _surveyTemplateRepositoryMock.Verify(repository => repository.UpdateSurveyTemplateAsync(It.Is(match), It.IsAny<CancellationToken>()));
   }

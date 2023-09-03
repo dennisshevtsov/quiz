@@ -2,13 +2,11 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-namespace SurveyApp.SurveyQuestion;
+namespace SurveyApp.SurveyTemplate;
 
-public abstract class SurveyQuestionEntityBase
+public abstract class SurveyTemplateQuestionEntityBase
 {
-  public string Text { get; protected set; } = string.Empty;
+  public string Text { get; set; } = string.Empty;
 
   public abstract SurveyQuestionType QuestionType { get; }
-
-  public abstract SurveyQuestionEntityBase Clone();
 }
