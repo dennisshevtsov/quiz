@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright (c) Dennis Shevtsov. All rights reserved.
+// Licensed under the MIT License.
+// See LICENSE in the project root for license information.
 
-namespace SurveyApp.Survey
+namespace SurveyApp.Survey;
+
+public enum SurveyState : byte
 {
-  internal class SurveyState
-  {
-  }
+  Draft    = 0,
+  Ready    = 1,
+  Done     = 2,
+  Cacelled = 3,
 }

@@ -12,12 +12,14 @@ public sealed class SurveyEntity
 
   public SurveyEntity(SurveyTemplateEntity surveyTemplateEntity)
   {
-    Title = surveyTemplateEntity.Title;
+    Title       = surveyTemplateEntity.Title;
     Description = surveyTemplateEntity.Description;
-    Questions = surveyTemplateEntity.Questions.Select(QuestionEntityBase.Copy).ToList();
+    Questions   = surveyTemplateEntity.Questions.Select(QuestionEntityBase.Copy).ToList();
   }
 
   public Guid SurveyId { get; set; }
+
+  public SurveyState State { get; set; }
 
   public string Title { get; set; } = string.Empty;
 
