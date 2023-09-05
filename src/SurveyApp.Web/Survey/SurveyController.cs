@@ -54,8 +54,22 @@ public sealed class SurveyController : ControllerBase
   }
 
   [HttpGet("{surveyId}/state/{state}", Name = nameof(SurveyController.MoveToSurveyState))]
-  public Task<IActionResult> MoveToSurveyState(Guid surveyId, SurveyState state, CancellationToken cancellationToken)
+  public async Task<IActionResult> MoveToSurveyState(Guid surveyId, SurveyState state, CancellationToken cancellationToken)
   {
-    return Task.FromResult<IActionResult>(NoContent());
+    SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(surveyId, cancellationToken);
+
+    if (surveyEntity == null)
+    {
+      return NotFound();
+    }
+
+    if (!surveyEntity.TryMoveTo(state))
+    {
+      return BadRequest();
+    }
+
+    await _surveyRepository.UpdateSurveyAsync(surveyEntity, cancellationToken);
+
+    return NoContent();
   }
 }
