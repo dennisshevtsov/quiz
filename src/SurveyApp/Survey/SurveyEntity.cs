@@ -28,4 +28,21 @@ public sealed class SurveyEntity
   public string CandidateName { get; set; } = string.Empty;
 
   public List<QuestionEntityBase> Questions { get; set; } = new();
+
+  public bool TryMoveTo(SurveyState state)
+  {
+    if (state < SurveyState.Draft || state > SurveyState.Cacelled)
+    {
+      return false;
+    }
+
+    if (state == SurveyState.Done && State != SurveyState.Ready)
+    {
+      return false;
+    }
+
+    State = state;
+
+    return true;
+  }
 }
