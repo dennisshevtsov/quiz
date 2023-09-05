@@ -29,7 +29,7 @@ public sealed class SurveyEntity
 
   public List<QuestionEntityBase> Questions { get; set; } = new();
 
-  public bool TryMoveToState(SurveyState state)
+  public bool TryMoveTo(SurveyState state)
   {
     if (state < SurveyState.Draft || state > SurveyState.Cacelled)
     {
