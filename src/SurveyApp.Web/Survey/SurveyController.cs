@@ -30,7 +30,7 @@ public sealed class SurveyController : ControllerBase
     return Ok(new GetSurveyResponseDto(surveyEntity));
   }
 
-  [HttpGet(Name = nameof(SurveyController.AddSurvey))]
+  [HttpPost(Name = nameof(SurveyController.AddSurvey))]
   public async Task<IActionResult> AddSurvey(AddSurveyRequestDto requestDto, CancellationToken cancellationToken)
   {
     SurveyEntity surveyEntity = await _surveyRepository.AddSurveyAsync(requestDto.ToSurveyEntity(), cancellationToken);
@@ -38,7 +38,7 @@ public sealed class SurveyController : ControllerBase
     return CreatedAtAction(nameof(SurveyController.GetSurvey), new GetSurveyRequestDto(surveyEntity), new GetSurveyResponseDto(surveyEntity));
   }
 
-  [HttpGet("{surveyId}", Name = nameof(SurveyController.UpdateSurvey))]
+  [HttpPut("{surveyId}", Name = nameof(SurveyController.UpdateSurvey))]
   public async Task<IActionResult> UpdateSurvey(UpdateSurveyRequestDto requestDto, CancellationToken cancellationToken)
   {
     SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(requestDto.SurveyId, cancellationToken);
@@ -71,5 +71,11 @@ public sealed class SurveyController : ControllerBase
     await _surveyRepository.UpdateSurveyAsync(surveyEntity, cancellationToken);
 
     return NoContent();
+  }
+
+  [HttpPost("{surveyId}/question", Name = nameof(SurveyController.UpdateQuestions))]
+  public Task<IActionResult> UpdateQuestions(UpdateQuestionsRequestDto requestDto, CancellationToken cancellationToken)
+  {
+    return Task.FromResult<IActionResult>(NoContent());
   }
 }
