@@ -19,4 +19,6 @@ public sealed class SingleChoiceQuestionEntity : QuestionEntityBase
   public override QuestionType QuestionType => QuestionType.SingleChoice;
 
   public string[] Choices { get; set; } = Array.Empty<string>();
+
+  public string? Answer { get; set; }
 }
