@@ -16,4 +16,6 @@ public sealed class TextQuestionEntity : QuestionEntityBase
   }
 
   public override QuestionType QuestionType => QuestionType.Text;
+
+  public string? Answer { get; set; }
 }
