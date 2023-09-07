@@ -16,4 +16,6 @@ public sealed class YesNoQuestionEntity : QuestionEntityBase
   }
 
   public override QuestionType QuestionType => QuestionType.YesNo;
+
+  public YesNo Answer { get; set; }
 }
