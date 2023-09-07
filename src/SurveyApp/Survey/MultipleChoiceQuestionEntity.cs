@@ -19,4 +19,6 @@ public sealed class MultipleChoiceQuestionEntity : QuestionEntityBase
   public override QuestionType QuestionType => QuestionType.MultipleChoice;
 
   public string[] Choices { get; set; } = Array.Empty<string>();
+
+  public string[] Answer { get; set; } = Array.Empty<string>();
 }
