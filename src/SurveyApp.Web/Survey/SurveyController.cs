@@ -74,8 +74,17 @@ public sealed class SurveyController : ControllerBase
   }
 
   [HttpPost("{surveyId}/question", Name = nameof(SurveyController.UpdateQuestions))]
-  public Task<IActionResult> UpdateQuestions(UpdateQuestionsRequestDto requestDto, CancellationToken cancellationToken)
+  public async Task<IActionResult> UpdateQuestions(UpdateQuestionsRequestDto requestDto, CancellationToken cancellationToken)
   {
-    return Task.FromResult<IActionResult>(NoContent());
+    SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(requestDto.SurveyId, cancellationToken);
+
+    if (surveyEntity == null)
+    {
+      return NotFound();
+    }
+
+    requestDto.Update(surveyEntity);
+
+    return NoContent();
   }
 }
