@@ -10,5 +10,5 @@ public sealed class UpdateQuestionsRequestDto : IComposable
 {
   public Guid SurveyId { get; set; }
 
-  public QuestionDtoBase[] Questions { get; set; } = Array.Empty<QuestionDtoBase>();
+  public AnswerDtoBase[] Answers { get; set; } = Array.Empty<AnswerDtoBase>();
 }
