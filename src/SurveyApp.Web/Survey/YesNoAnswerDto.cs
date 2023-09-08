@@ -4,7 +4,7 @@
 
 namespace SurveyApp.Survey.Web;
 
-public sealed class YesNoAnswerDtoBase : AnswerDtoBase
+public sealed class YesNoAnswerDto : AnswerDtoBase
 {
   public YesNo Answer { get; set; }
 }
