@@ -6,4 +6,5 @@ namespace SurveyApp.Survey.Web;
 
 public abstract class AnswerDtoBase
 {
+  public abstract void Update(QuestionEntityBase questionEntity);
 }

@@ -7,4 +7,9 @@ namespace SurveyApp.Survey.Web;
 public sealed class MultipleChoiceAnswerDto : AnswerDtoBase
 {
   public string[] Answer { get; set; } = Array.Empty<string>();
+
+  public override void Update(QuestionEntityBase questionEntity)
+  {
+
+  }
 }

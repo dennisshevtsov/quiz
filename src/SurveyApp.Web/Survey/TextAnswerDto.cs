@@ -7,4 +7,9 @@ namespace SurveyApp.Survey.Web;
 public sealed class TextAnswerDto : AnswerDtoBase
 {
   public string? Answer { get; set; }
+
+  public override void Update(QuestionEntityBase questionEntity)
+  {
+
+  }
 }
