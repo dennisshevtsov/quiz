@@ -10,6 +10,9 @@ public sealed class MultipleChoiceAnswerDto : AnswerDtoBase
 
   public override void Update(QuestionEntityBase questionEntity)
   {
-
+    if (questionEntity is MultipleChoiceQuestionEntity multipleChoiceQuestionEntity)
+    {
+      multipleChoiceQuestionEntity.Answer = Answer;
+    }
   }
 }
