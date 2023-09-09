@@ -10,6 +10,9 @@ public sealed class YesNoAnswerDto : AnswerDtoBase
 
   public override void Update(QuestionEntityBase questionEntity)
   {
-
+    if (questionEntity is YesNoQuestionEntity yesNoQuestionEntity)
+    {
+      Answer = yesNoQuestionEntity.Answer;
+    }
   }
 }
