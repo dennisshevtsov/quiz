@@ -41,6 +41,11 @@ public sealed class SurveyEntity
       return false;
     }
 
+    if (State == SurveyState.Done || State == SurveyState.Cacelled)
+    {
+      return false;
+    }
+
     State = state;
 
     return true;

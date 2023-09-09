@@ -10,6 +10,9 @@ public sealed class SingleChoiceAnswerDto : AnswerDtoBase
 
   public override void Update(QuestionEntityBase questionEntity)
   {
-
+    if (questionEntity is SingleChoiceQuestionEntity singleChoiceQuestionEntity)
+    {
+      singleChoiceQuestionEntity.Answer = Answer;
+    }
   }
 }

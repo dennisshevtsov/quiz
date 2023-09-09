@@ -10,6 +10,9 @@ public sealed class TextAnswerDto : AnswerDtoBase
 
   public override void Update(QuestionEntityBase questionEntity)
   {
-
+    if (questionEntity is TextQuestionEntity textQuestionEntity)
+    {
+      textQuestionEntity.Answer = Answer;
+    }
   }
 }
