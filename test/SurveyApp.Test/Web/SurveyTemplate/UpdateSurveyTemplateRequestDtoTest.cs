@@ -32,33 +32,32 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
 
     Guid surveyTemplateId = Guid.NewGuid();
 
-    SurveyTemplateEntity surveyTemplateEntity = new()
-    {
-      SurveyTemplateId = surveyTemplateId,
-      Title = Guid.NewGuid().ToString(),
-      Description = Guid.NewGuid().ToString(),
-      Questions = new List<QuestionTemplateEntityBase>
+    SurveyTemplateEntity surveyTemplateEntity = new(
+      surveyTemplateId: surveyTemplateId,
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : new QuestionTemplateEntityBase[]
       {
         new MultipleChoiceQuestionTemplateEntity
-        {
-          Text = Guid.NewGuid().ToString(),
-          Choices = new[]
+        (
+          text   : Guid.NewGuid().ToString(),
+          choices: new[]
           {
             Guid.NewGuid().ToString(),
             Guid.NewGuid().ToString(),
-          },
-        },
+          }
+        ),
         new SingleChoiceQuestionTemplateEntity
-        {
-          Text = Guid.NewGuid().ToString(),
-          Choices = new[]
+        (
+          text   : Guid.NewGuid().ToString(),
+          choices: new[]
           {
             Guid.NewGuid().ToString(),
             Guid.NewGuid().ToString(),
-          },
-        },
-      },
-    };
+          }
+        ),
+      }
+    );
 
     // Act
     updateSurveyTemplateRequestDto.UpdateSurveyTemplate(surveyTemplateEntity);
@@ -67,6 +66,6 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
     Assert.AreEqual(surveyTemplateId, surveyTemplateEntity.SurveyTemplateId);
     Assert.AreEqual(updateSurveyTemplateRequestDto.Title, surveyTemplateEntity.Title);
     Assert.AreEqual(updateSurveyTemplateRequestDto.Description, surveyTemplateEntity.Description);
-    Assert.AreEqual(updateSurveyTemplateRequestDto.Questions.Length, surveyTemplateEntity.Questions.Count);
+    Assert.AreEqual(updateSurveyTemplateRequestDto.Questions.Length, surveyTemplateEntity.Questions.Length);
   }
 }

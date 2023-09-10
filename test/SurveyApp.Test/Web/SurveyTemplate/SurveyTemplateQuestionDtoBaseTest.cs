@@ -11,7 +11,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_TextQuestionTemplateEntity_SurveyTemplateQuestionDtoBaseCreated()
   {
     // Arrange
-    TextQuestionTemplateEntity textQuestionTemplateEntity = new();
+    TextQuestionTemplateEntity textQuestionTemplateEntity = new(string.Empty);
 
     // Act
     QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
@@ -25,7 +25,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_TextQuestionTemplateEntity_TextQuestionTemplateDtoCreated()
   {
     // Arrange
-    TextQuestionTemplateEntity textQuestionTemplateEntity = new();
+    TextQuestionTemplateEntity textQuestionTemplateEntity = new(string.Empty);
 
     // Act
     QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
@@ -39,10 +39,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_TextQuestionTemplateEntity_PropertiesFilled()
   {
     // Arrange
-    TextQuestionTemplateEntity textQuestionTemplateEntity = new()
-    {
-      Text = Guid.NewGuid().ToString(),
-    };
+    TextQuestionTemplateEntity textQuestionTemplateEntity = new(Guid.NewGuid().ToString());
 
     // Act
     QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
@@ -55,7 +52,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_YesNoQuestionTemplateEntity_SurveyTemplateQuestionDtoBaseCreated()
   {
     // Arrange
-    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new();
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new(string.Empty);
 
     // Act
     QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
@@ -69,7 +66,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_YesNoQuestionTemplateEntity_YesNoQuestionTemplateDtoCreated()
   {
     // Arrange
-    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new();
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new(string.Empty);
 
     // Act
     QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
@@ -83,10 +80,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_YesNoQuestionTemplateEntity_PropertiesFilled()
   {
     // Arrange
-    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new()
-    {
-      Text = Guid.NewGuid().ToString(),
-    };
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new(Guid.NewGuid().ToString());
 
     // Act
     QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
@@ -100,7 +94,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_MultipleChoiceQuestionTemplateEntity_SurveyTemplateQuestionDtoBaseCreated()
   {
     // Arrange
-    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new();
+    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new(string.Empty, Array.Empty<string>());
 
     // Act
     QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
@@ -114,7 +108,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_MultipleChoiceQuestionTemplateEntity_MultipleChoiceQuestionTemplateDtoCreated()
   {
     // Arrange
-    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new();
+    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new(string.Empty, Array.Empty<string>());
 
     // Act
     QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
@@ -128,15 +122,15 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_MultipleChoiceQuestionTemplateEntity_PropertiesFilled()
   {
     // Arrange
-    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new()
-    {
-      Text = Guid.NewGuid().ToString(),
-      Choices = new[]
+    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new
+    (
+      text   :Guid.NewGuid().ToString(),
+      choices: new[]
       {
         Guid.NewGuid().ToString(),
         Guid.NewGuid().ToString(),
-      },
-    };
+      }
+    );
 
     // Act
     QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
@@ -156,7 +150,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_SingleChoiceQuestionTemplateEntity_SurveyTemplateQuestionDtoBaseCreated()
   {
     // Arrange
-    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new();
+    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new(string.Empty, Array.Empty<string>());
 
     // Act
     QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
@@ -170,7 +164,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_SingleChoiceQuestionTemplateEntity_SingleChoiceQuestionTemplateDtoCreated()
   {
     // Arrange
-    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new();
+    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new(string.Empty, Array.Empty<string>());
 
     // Act
     QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
@@ -184,15 +178,15 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   public void FromQuestionTemplateEntity_SingleChoiceQuestionTemplateEntity_PropertiesFilled()
   {
     // Arrange
-    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new()
-    {
-      Text = Guid.NewGuid().ToString(),
-      Choices = new[]
+    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new
+    (
+      text   :Guid.NewGuid().ToString(),
+      choices: new[]
       {
         Guid.NewGuid().ToString(),
         Guid.NewGuid().ToString(),
-      },
-    };
+      }
+    );
 
     // Act
     QuestionTemplateDtoBase surveyTemplateQuestionDtoBase =
@@ -247,11 +241,11 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     };
 
     // Act
-    List<QuestionTemplateEntityBase> questionTemplateEntityBaseCollection =
+    QuestionTemplateEntityBase[] questionTemplateEntityBaseCollection =
       QuestionTemplateDtoBase.ToQuestionTemplateEntityCollection(surveyTemplateQuestionDtoCollection);
 
     // Assert
-    Assert.AreEqual(surveyTemplateQuestionDtoCollection.Length, questionTemplateEntityBaseCollection.Count);
+    Assert.AreEqual(surveyTemplateQuestionDtoCollection.Length, questionTemplateEntityBaseCollection.Length);
 
     for (int i = 0; i < surveyTemplateQuestionDtoCollection.Length; i++)
     {

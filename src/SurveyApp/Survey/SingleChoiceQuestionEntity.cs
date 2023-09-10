@@ -8,17 +8,24 @@ namespace SurveyApp.Survey;
 
 public sealed class SingleChoiceQuestionEntity : QuestionEntityBase
 {
-  public SingleChoiceQuestionEntity() { }
+  public SingleChoiceQuestionEntity(string text, string[] choices, string? answer) : base(text)
+  {
+    Choices = choices;
+    Answer  = answer;
+  }
 
   public SingleChoiceQuestionEntity(SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity)
-  {
-    Text    = singleChoiceQuestionTemplateEntity.Text;
-    Choices = singleChoiceQuestionTemplateEntity.Choices.Select(choice => choice).ToArray();
-  }
+   : this(singleChoiceQuestionTemplateEntity.Text, singleChoiceQuestionTemplateEntity.Choices.Select(choice => choice).ToArray(), null)
+  { }
 
   public override QuestionType QuestionType => QuestionType.SingleChoice;
 
-  public string[] Choices { get; set; } = Array.Empty<string>();
+  public string[] Choices { get; private set; }
 
-  public string? Answer { get; set; }
+  public string? Answer { get; private set; }
+
+  public void SetAnswer(string? answer)
+  {
+    Answer = answer;
+  }
 }

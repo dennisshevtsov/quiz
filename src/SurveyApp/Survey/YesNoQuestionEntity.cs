@@ -8,14 +8,16 @@ namespace SurveyApp.Survey;
 
 public sealed class YesNoQuestionEntity : QuestionEntityBase
 {
-  public YesNoQuestionEntity() { }
+  public YesNoQuestionEntity(string text, YesNo answer) : base(text)
+  {
+    Answer = answer;
+  }
 
   public YesNoQuestionEntity(YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity)
-  {
-    Text = yesNoQuestionTemplateEntity.Text;
-  }
+    : this(yesNoQuestionTemplateEntity.Text, YesNo.None)
+  { }
 
   public override QuestionType QuestionType => QuestionType.YesNo;
 
-  public YesNo Answer { get; set; }
+  public YesNo Answer { get; private set; }
 }

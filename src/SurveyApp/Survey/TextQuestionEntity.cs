@@ -8,14 +8,21 @@ namespace SurveyApp.Survey;
 
 public sealed class TextQuestionEntity : QuestionEntityBase
 {
-  public TextQuestionEntity() { }
+  public TextQuestionEntity(string text, string? answer) : base(text)
+  {
+    Answer = answer;
+  }
 
   public TextQuestionEntity(TextQuestionTemplateEntity textQuestionTemplateEntity)
-  {
-    Text = textQuestionTemplateEntity.Text;
-  }
+    : this(textQuestionTemplateEntity.Text, null)
+  { }
 
   public override QuestionType QuestionType => QuestionType.Text;
 
-  public string? Answer { get; set; }
+  public string? Answer { get; private set; }
+
+  public void SetAnswer(string? answer)
+  {
+    Answer = answer;
+  }
 }

@@ -6,11 +6,32 @@ namespace SurveyApp.SurveyTemplate;
 
 public sealed class SurveyTemplateEntity
 {
-  public Guid SurveyTemplateId { get; set; }
+  public SurveyTemplateEntity(Guid surveyTemplateId, string title, string description, QuestionTemplateEntityBase[] questions)
+  {
+    SurveyTemplateId = surveyTemplateId;
+    Title            = title;
+    Description      = description;
+    Questions        = questions;
+  }
 
-  public string Title { get; set; } = string.Empty;
+  public SurveyTemplateEntity(string title, string description, QuestionTemplateEntityBase[] questions)
+    : this(Guid.NewGuid(), title, description, questions)
+  { }
 
-  public string Description { get; set; } = string.Empty;
+  public Guid SurveyTemplateId { get; private set; }
 
-  public List<QuestionTemplateEntityBase> Questions { get; set; } = new();
+  public string Title { get; private set; }
+
+  public string Description { get; private set; }
+
+  public QuestionTemplateEntityBase[] Questions { get; private set; }
+
+  public SurveyTemplateEntity Update(string title, string description, QuestionTemplateEntityBase[] questions)
+  {
+    Title = title;
+    Description = description;
+    Questions = questions;
+
+    return this;
+  }
 }

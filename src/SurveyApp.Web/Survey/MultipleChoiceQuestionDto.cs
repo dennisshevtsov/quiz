@@ -17,8 +17,9 @@ public sealed class MultipleChoiceQuestionDto : QuestionDtoBase
   public string[] Choices { get; set; } = Array.Empty<string>();
 
   public override QuestionEntityBase ToQuestionEntity() => new MultipleChoiceQuestionEntity
-  {
-    Text    = Text,
-    Choices = Choices,
-  };
+  (
+    text   : Text,
+    choices: Choices,
+    answers: Array.Empty<string>()
+  );
 }

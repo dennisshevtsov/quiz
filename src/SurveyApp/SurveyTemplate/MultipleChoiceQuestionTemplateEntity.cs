@@ -6,15 +6,16 @@ namespace SurveyApp.SurveyTemplate;
 
 public sealed class MultipleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
 {
-  public MultipleChoiceQuestionTemplateEntity() { }
+  public MultipleChoiceQuestionTemplateEntity(string text, string[] choices) : base(text)
+  {
+    Choices = choices;
+  }
 
   public MultipleChoiceQuestionTemplateEntity(MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity)
-  {
-    Text    = multipleChoiceQuestionTemplateEntity.Text;
-    Choices = multipleChoiceQuestionTemplateEntity.Choices.Select(choice => choice).ToArray();
-  }
+    : this(multipleChoiceQuestionTemplateEntity.Text, multipleChoiceQuestionTemplateEntity.Choices.Select(choice => choice).ToArray())
+  { }
 
   public override QuestionType QuestionType => QuestionType.MultipleChoice;
 
-  public string[] Choices { get; set; } = Array.Empty<string>();
+  public string[] Choices { get; private set; }
 }

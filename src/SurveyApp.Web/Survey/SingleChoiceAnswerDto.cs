@@ -12,7 +12,7 @@ public sealed class SingleChoiceAnswerDto : AnswerDtoBase
   {
     if (questionEntity is SingleChoiceQuestionEntity singleChoiceQuestionEntity)
     {
-      singleChoiceQuestionEntity.Answer = Answer;
+      singleChoiceQuestionEntity.SetAnswer(Answer);
     }
   }
 }

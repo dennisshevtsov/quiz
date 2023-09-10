@@ -14,7 +14,8 @@ public sealed class YesNoQuestionDto : QuestionDtoBase
   }
 
   public override QuestionEntityBase ToQuestionEntity() => new YesNoQuestionEntity
-  {
-    Text = Text,
-  };
+  (
+    text  : Text,
+    answer: YesNo.None
+  );
 }

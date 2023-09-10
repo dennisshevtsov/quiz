@@ -29,13 +29,13 @@ public abstract class QuestionTemplateDtoBase
       _                           => throw new NotSupportedException("Unknown question type."),
     };
 
-  public static List<QuestionTemplateEntityBase> ToQuestionTemplateEntityCollection(QuestionTemplateDtoBase[] questionTemplateDtoCollection)
+  public static QuestionTemplateEntityBase[] ToQuestionTemplateEntityCollection(QuestionTemplateDtoBase[] questionTemplateDtoCollection)
   {
-    List<QuestionTemplateEntityBase> questionTemplateEntityCollection = new(questionTemplateDtoCollection.Length);
+    QuestionTemplateEntityBase[] questionTemplateEntityCollection = new QuestionTemplateEntityBase[questionTemplateDtoCollection.Length];
 
     for (int i = 0; i < questionTemplateDtoCollection.Length; i++)
     {
-      questionTemplateEntityCollection.Add(questionTemplateDtoCollection[i].ToTemplateQuestionEntity());
+      questionTemplateEntityCollection[i] = questionTemplateDtoCollection[i].ToTemplateQuestionEntity();
     }
 
     return questionTemplateEntityCollection;

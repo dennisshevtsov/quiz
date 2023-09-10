@@ -14,7 +14,8 @@ public sealed class TextQuestionDto : QuestionDtoBase
   }
 
   public override QuestionEntityBase ToQuestionEntity() => new TextQuestionEntity
-  {
-    Text = Text,
-  };
+  (
+    text  : Text,
+    answer: null
+  );
 }

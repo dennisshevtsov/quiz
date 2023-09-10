@@ -8,7 +8,12 @@ namespace SurveyApp.Survey;
 
 public abstract class QuestionEntityBase
 {
-  public string Text { get; set; } = string.Empty;
+  protected QuestionEntityBase(string text)
+  {
+    Text = text;
+  }
+
+  public string Text { get; private set; }
 
   public abstract QuestionType QuestionType { get; }
 

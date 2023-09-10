@@ -12,7 +12,7 @@ public sealed class TextAnswerDto : AnswerDtoBase
   {
     if (questionEntity is TextQuestionEntity textQuestionEntity)
     {
-      textQuestionEntity.Answer = Answer;
+      textQuestionEntity.SetAnswer(Answer);
     }
   }
 }

@@ -8,26 +8,35 @@ namespace SurveyApp.Survey;
 
 public sealed class SurveyEntity
 {
-  public SurveyEntity() { }
-
-  public SurveyEntity(SurveyTemplateEntity surveyTemplateEntity)
+  public SurveyEntity(Guid surveyId, SurveyState state, string title, string description, string candidateName, QuestionEntityBase[] questions)
   {
-    Title       = surveyTemplateEntity.Title;
-    Description = surveyTemplateEntity.Description;
-    Questions   = surveyTemplateEntity.Questions.Select(QuestionEntityBase.Copy).ToList();
+    SurveyId      = surveyId;
+    State         = state;
+    Title         = title;
+    Description   = description;
+    CandidateName = candidateName;
+    Questions     = questions;
   }
 
-  public Guid SurveyId { get; set; }
+  public SurveyEntity(string title, string description, string candidateName, QuestionEntityBase[] questions)
+    : this(Guid.NewGuid(), SurveyState.Draft, title, description, candidateName, questions)
+  { }
 
-  public SurveyState State { get; set; }
+  public SurveyEntity(SurveyTemplateEntity surveyTemplateEntity)
+    : this(surveyTemplateEntity.Title, surveyTemplateEntity.Description, string.Empty, surveyTemplateEntity.Questions.Select(QuestionEntityBase.Copy).ToArray())
+  { }
 
-  public string Title { get; set; } = string.Empty;
+  public Guid SurveyId { get; private set; }
 
-  public string Description { get; set; } = string.Empty;
+  public SurveyState State { get; private set; }
 
-  public string CandidateName { get; set; } = string.Empty;
+  public string Title { get; private set; }
 
-  public List<QuestionEntityBase> Questions { get; set; } = new();
+  public string Description { get; private set; }
+
+  public string CandidateName { get; private set; }
+
+  public QuestionEntityBase[] Questions { get; private set; }
 
   public bool TryMoveTo(SurveyState state)
   {
@@ -49,5 +58,15 @@ public sealed class SurveyEntity
     State = state;
 
     return true;
+  }
+
+  public SurveyEntity Update(string title, string description, string candidateName, QuestionEntityBase[] questions)
+  {
+    Title         = title;
+    Description   = description;
+    CandidateName = candidateName;
+    Questions     = questions;
+
+    return this;
   }
 }

@@ -14,7 +14,7 @@ public sealed class UpdateQuestionsRequestDto : IComposable
 
   public void Update(SurveyEntity surveyEntity)
   {
-    for (int i = 0; i < surveyEntity.Questions.Count; i++)
+    for (int i = 0; i < surveyEntity.Questions.Length; i++)
     {
       Answers[i].Update(surveyEntity.Questions[i]);
     }

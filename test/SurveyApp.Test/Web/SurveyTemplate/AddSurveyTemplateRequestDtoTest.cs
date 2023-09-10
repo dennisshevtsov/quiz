@@ -19,6 +19,6 @@ public sealed class AddSurveyTemplateRequestDtoTest
     // Assert
     Assert.AreEqual(addSurveyTemplateRequestDto.Title, surveyTemplateEntity.Title);
     Assert.AreEqual(addSurveyTemplateRequestDto.Description, surveyTemplateEntity.Description);
-    Assert.AreEqual(addSurveyTemplateRequestDto.Questions.Length, surveyTemplateEntity.Questions.Count);
+    Assert.AreEqual(addSurveyTemplateRequestDto.Questions.Length, surveyTemplateEntity.Questions.Length);
   }
 }
