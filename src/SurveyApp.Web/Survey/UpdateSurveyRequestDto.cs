@@ -18,13 +18,6 @@ public sealed class UpdateSurveyRequestDto : IComposable
 
   public QuestionDtoBase[] Questions { get; set; } = Array.Empty<QuestionDtoBase>();
 
-  public SurveyEntity UpdateSurvey(SurveyEntity surveyEntity)
-  {
-    surveyEntity.Title         = Title;
-    surveyEntity.Description   = Description;
-    surveyEntity.CandidateName = CandidateName;
-    surveyEntity.Questions     = QuestionDtoBase.ToQuestionEntityCollection(Questions);
-
-    return surveyEntity;
-  }
+  public SurveyEntity UpdateSurvey(SurveyEntity surveyEntity) =>
+    surveyEntity.Update(Title, Description, CandidateName, QuestionDtoBase.ToQuestionEntityCollection(Questions));
 }

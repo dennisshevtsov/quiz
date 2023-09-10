@@ -16,11 +16,11 @@ public sealed class AddSurveyRequestDto : IComposable
 
   public QuestionDtoBase[] Questions { get; set; } = Array.Empty<QuestionDtoBase>();
 
-  public SurveyEntity ToSurveyEntity() => new()
-  {
-    Title         = Title,
-    Description   = Description,
-    CandidateName = CandidateName,
-    Questions     = QuestionDtoBase.ToQuestionEntityCollection(Questions),
-  };
+  public SurveyEntity ToSurveyEntity() => new
+  (
+    title        : Title,
+    description  : Description,
+    candidateName: CandidateName,
+    questions    : QuestionDtoBase.ToQuestionEntityCollection(Questions)
+  );
 }

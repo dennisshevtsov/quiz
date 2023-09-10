@@ -20,8 +20,6 @@ public sealed class SurveyRepository : ISurveyRepository
 
   public Task<SurveyEntity> AddSurveyAsync(SurveyEntity surveyEntity, CancellationToken cancellationToken)
   {
-    surveyEntity.SurveyId = surveyEntity.SurveyId != default ? surveyEntity.SurveyId : Guid.NewGuid();
-
     _surveys[surveyEntity.SurveyId] = surveyEntity;
 
     return Task.FromResult(surveyEntity);
