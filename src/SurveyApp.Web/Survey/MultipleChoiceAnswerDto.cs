@@ -12,7 +12,7 @@ public sealed class MultipleChoiceAnswerDto : AnswerDtoBase
   {
     if (questionEntity is MultipleChoiceQuestionEntity multipleChoiceQuestionEntity)
     {
-      multipleChoiceQuestionEntity.Answer = Answer;
+      multipleChoiceQuestionEntity.SetAnswers(Answer);
     }
   }
 }
