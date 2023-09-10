@@ -39,23 +39,23 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
       questions       : new QuestionTemplateEntityBase[]
       {
         new MultipleChoiceQuestionTemplateEntity
-        {
-          Text = Guid.NewGuid().ToString(),
-          Choices = new[]
+        (
+          text   : Guid.NewGuid().ToString(),
+          choices: new[]
           {
             Guid.NewGuid().ToString(),
             Guid.NewGuid().ToString(),
-          },
-        },
+          }
+        ),
         new SingleChoiceQuestionTemplateEntity
-        {
-          Text = Guid.NewGuid().ToString(),
-          Choices = new[]
+        (
+          text   : Guid.NewGuid().ToString(),
+          choices: new[]
           {
             Guid.NewGuid().ToString(),
             Guid.NewGuid().ToString(),
-          },
-        },
+          }
+        ),
       }
     );
 

@@ -6,12 +6,11 @@ namespace SurveyApp.SurveyTemplate;
 
 public sealed class TextQuestionTemplateEntity : QuestionTemplateEntityBase
 {
-  public TextQuestionTemplateEntity() { }
+  public TextQuestionTemplateEntity(string text) : base(text) { }
 
   public TextQuestionTemplateEntity(TextQuestionTemplateEntity textQuestionTemplateEntity)
-  {
-    Text = textQuestionTemplateEntity.Text;
-  }
+    : this(textQuestionTemplateEntity.Text)
+  { }
 
   public override QuestionType QuestionType => QuestionType.Text;
 }
