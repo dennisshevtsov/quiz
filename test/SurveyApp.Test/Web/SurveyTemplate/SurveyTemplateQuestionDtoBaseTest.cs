@@ -247,11 +247,11 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     };
 
     // Act
-    List<QuestionTemplateEntityBase> questionTemplateEntityBaseCollection =
+    QuestionTemplateEntityBase[] questionTemplateEntityBaseCollection =
       QuestionTemplateDtoBase.ToQuestionTemplateEntityCollection(surveyTemplateQuestionDtoCollection);
 
     // Assert
-    Assert.AreEqual(surveyTemplateQuestionDtoCollection.Length, questionTemplateEntityBaseCollection.Count);
+    Assert.AreEqual(surveyTemplateQuestionDtoCollection.Length, questionTemplateEntityBaseCollection.Length);
 
     for (int i = 0; i < surveyTemplateQuestionDtoCollection.Length; i++)
     {

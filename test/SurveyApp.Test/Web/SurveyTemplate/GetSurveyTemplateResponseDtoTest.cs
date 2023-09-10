@@ -11,7 +11,7 @@ public sealed class GetSurveyTemplateResponseDtoTest
   public void Constructor_SurveyTemplateEntity_PropertiesFilled()
   {
     // Arrange
-    SurveyTemplateEntity surveyTemplateEntity = new();
+    SurveyTemplateEntity surveyTemplateEntity = new(string.Empty, string.Empty, Array.Empty<QuestionTemplateEntityBase>());
 
     // Act
     GetSurveyTemplateResponseDto getSurveyTemplateResponseDto = new(surveyTemplateEntity);
@@ -19,6 +19,6 @@ public sealed class GetSurveyTemplateResponseDtoTest
     // Assert
     Assert.AreEqual(surveyTemplateEntity.SurveyTemplateId, getSurveyTemplateResponseDto.SurveyTemplateId);
     Assert.AreEqual(surveyTemplateEntity.Description, getSurveyTemplateResponseDto.Description);
-    Assert.AreEqual(surveyTemplateEntity.Questions.Count, getSurveyTemplateResponseDto.Questions.Length);
+    Assert.AreEqual(surveyTemplateEntity.Questions.Length, getSurveyTemplateResponseDto.Questions.Length);
   }
 }
