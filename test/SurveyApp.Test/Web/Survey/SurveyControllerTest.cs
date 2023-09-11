@@ -2,6 +2,10 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using System.Linq.Expressions;
+
+using Microsoft.AspNetCore.Mvc;
+
 namespace SurveyApp.Survey.Web.Test;
 
 [TestClass]
@@ -18,4 +22,46 @@ public sealed class SurveyControllerTest
     _surveyRepositoryMock = new Mock<ISurveyRepository>();
     _surveyController     = new SurveyController(_surveyRepositoryMock.Object);
   }
+
+  [TestMethod]
+  public async Task AddSurvey_AddSurveyRequestDto_AddSurveyAsyncCalled()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    AddSurveyRequestDto addSurveyRequestDto = new()
+    {
+      Title         = Guid.NewGuid().ToString(),
+      Description   = Guid.NewGuid().ToString(),
+      CandidateName = Guid.NewGuid().ToString(),
+      Questions     = new QuestionDtoBase[]
+      {
+        new TextQuestionDto
+        {
+          QuestionType = QuestionType.Text,
+          Text         = Guid.NewGuid().ToString(),
+        },
+        new YesNoQuestionDto
+        {
+          QuestionType = QuestionType.YesNo,
+          Text         = Guid.NewGuid().ToString(),
+        },
+      },
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyController.AddSurvey(
+      addSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Expression<Func<SurveyEntity, bool>> match =
+      entity => entity.Title            == addSurveyRequestDto.Title &&
+                entity.Description      == addSurveyRequestDto.Description &&
+                entity.CandidateName    == addSurveyRequestDto.CandidateName &&
+                entity.Questions.Length == addSurveyRequestDto.Questions.Length;
+
+    _surveyRepositoryMock.Verify(repository => repository.AddSurveyAsync(It.Is(match), It.IsAny<CancellationToken>()));
+  }
+
 }
