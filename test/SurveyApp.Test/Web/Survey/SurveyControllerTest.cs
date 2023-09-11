@@ -5,8 +5,8 @@
 using System.Linq.Expressions;
 
 using Microsoft.AspNetCore.Mvc;
-using SurveyApp.SurveyTemplate.Web;
-using SurveyApp.SurveyTemplate;
+using SurveyApp.Survey.Web;
+using SurveyApp.Survey;
 
 namespace SurveyApp.Survey.Web.Test;
 
@@ -81,5 +81,22 @@ public sealed class SurveyControllerTest
 
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(CreatedAtActionResult));
+  }
+
+  [TestMethod]
+  public async Task AddSurvey_AddSurveyRequestDto_ActionNamePopulated()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    AddSurveyRequestDto addSurveyRequestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyController.AddSurvey(
+      addSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.AreEqual(nameof(SurveyController.GetSurvey), ((CreatedAtActionResult)actionResult).ActionName);
   }
 }
