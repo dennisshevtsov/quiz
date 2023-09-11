@@ -7,6 +7,8 @@ using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc;
 using SurveyApp.Survey.Web;
 using SurveyApp.Survey;
+using SurveyApp.Survey.Web;
+using SurveyApp.Survey;
 
 namespace SurveyApp.Survey.Web.Test;
 
@@ -98,5 +100,27 @@ public sealed class SurveyControllerTest
 
     // Assert
     Assert.AreEqual(nameof(SurveyController.GetSurvey), ((CreatedAtActionResult)actionResult).ActionName);
+  }
+
+  [TestMethod]
+  public async Task AddSurvey_AddSurveyRequestDto_RouteValuesPopulated()
+  {
+    // Arrange
+    Guid surveyId = Guid.NewGuid();
+
+    _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(surveyId, SurveyState.Draft, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    AddSurveyRequestDto addSurveyRequestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyController.AddSurvey(
+      addSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    CreatedAtActionResult createdAtActionResult = (CreatedAtActionResult)actionResult;
+
+    Assert.IsNotNull(createdAtActionResult.RouteValues);
+    Assert.AreEqual(surveyId, createdAtActionResult.RouteValues["surveyId"]);
   }
 }
