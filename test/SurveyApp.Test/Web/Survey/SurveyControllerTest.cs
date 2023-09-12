@@ -5,10 +5,6 @@
 using System.Linq.Expressions;
 
 using Microsoft.AspNetCore.Mvc;
-using SurveyApp.Survey.Web;
-using SurveyApp.Survey;
-using SurveyApp.Survey.Web;
-using SurveyApp.Survey;
 
 namespace SurveyApp.Survey.Web.Test;
 
@@ -25,6 +21,79 @@ public sealed class SurveyControllerTest
   {
     _surveyRepositoryMock = new Mock<ISurveyRepository>();
     _surveyController     = new SurveyController(_surveyRepositoryMock.Object);
+  }
+
+  [TestMethod]
+  public async Task GetSurvey_ExistingSurveyId_OkObjectResultReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    GetSurveyRequestDto getSurveyRequestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyController.GetSurvey(
+      getSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(OkObjectResult));
+  }
+
+  [TestMethod]
+  public async Task GetSurvey_ExistingSurveyId_GetSurveyResponseDtoReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    GetSurveyRequestDto getSurveyRequestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyController.GetSurvey(
+      getSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(((ObjectResult)actionResult).Value, typeof(GetSurveyResponseDto));
+  }
+
+  [TestMethod]
+  public async Task GetSurvey_ExistingSurveyId_GetSurveyAsyncCalled()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .Verifiable();
+
+    Guid surveyId = Guid.NewGuid();
+    GetSurveyRequestDto getSurveyRequestDto = new()
+    {
+      SurveyId = surveyId,
+    };
+
+    // Act
+    await _surveyController.GetSurvey(
+      getSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Expression<Func<Guid, bool>> surveyIdMatch = id => id == surveyId;
+    _surveyRepositoryMock.Verify(repository => repository.GetSurveyAsync(It.Is(surveyIdMatch), It.IsAny<CancellationToken>()));
+  }
+
+  [TestMethod]
+  public async Task GetSurvey_UnknownSurveyId_NotFoundReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(default(SurveyEntity));
+
+    GetSurveyRequestDto getSurveyRequestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyController.GetSurvey(
+      getSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
   }
 
   [TestMethod]
