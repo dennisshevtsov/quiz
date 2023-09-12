@@ -5,6 +5,7 @@
 using System.Linq.Expressions;
 
 using Microsoft.AspNetCore.Mvc;
+using SurveyApp.Survey.Web;
 
 namespace SurveyApp.Survey.Web.Test;
 
@@ -142,7 +143,7 @@ public sealed class SurveyControllerTest
   {
     // Arrange
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-                                 .ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
 
     GetSurveyRequestDto getSurveyRequestDto = new();
 
@@ -152,5 +153,27 @@ public sealed class SurveyControllerTest
 
     // Assert
     Assert.IsInstanceOfType(((ObjectResult)actionResult).Value, typeof(GetSurveyResponseDto));
+  }
+
+  [TestMethod]
+  public async Task GetSurvey_ExistingSurveyId_GetSurveyAsyncCalled()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .Verifiable();
+
+    Guid surveyId = Guid.NewGuid();
+    GetSurveyRequestDto getSurveyRequestDto = new()
+    {
+      SurveyId = surveyId,
+    };
+
+    // Act
+    await _surveyController.GetSurvey(
+      getSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Expression<Func<Guid, bool>> surveyIdMatch = id => id == surveyId;
+    _surveyRepositoryMock.Verify(repository => repository.GetSurveyAsync(It.Is(surveyIdMatch), It.IsAny<CancellationToken>()));
   }
 }
