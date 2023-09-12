@@ -5,12 +5,6 @@
 using System.Linq.Expressions;
 
 using Microsoft.AspNetCore.Mvc;
-using SurveyApp.Survey.Web;
-using SurveyApp.Survey;
-using SurveyApp.Survey.Web;
-using SurveyApp.Survey;
-using SurveyApp.Survey.Web;
-using SurveyApp.Survey;
 
 namespace SurveyApp.Survey.Web.Test;
 
@@ -141,5 +135,22 @@ public sealed class SurveyControllerTest
 
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(OkObjectResult));
+  }
+
+  [TestMethod]
+  public async Task GetSurvey_ExistingSurveyId_GetSurveyResponseDtoReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    GetSurveyRequestDto getSurveyRequestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyController.GetSurvey(
+      getSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(((ObjectResult)actionResult).Value, typeof(GetSurveyResponseDto));
   }
 }
