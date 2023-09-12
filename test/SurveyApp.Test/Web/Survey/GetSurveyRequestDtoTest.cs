@@ -8,7 +8,7 @@ namespace SurveyApp.Survey.Web.Test;
 public sealed class GetSurveyRequestDtoTest
 {
   [TestMethod]
-  public void Constructor_SurveyEntity_SurveyIdPopulated()
+  public void Constructor_SurveyEntity_SurveyIdFilled()
   {
     // Arrange
     Guid surveyId = Guid.NewGuid();
