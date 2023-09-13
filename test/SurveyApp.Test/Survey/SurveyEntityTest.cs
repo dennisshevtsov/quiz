@@ -159,12 +159,35 @@ public sealed class SurveyEntityTest
       candidateName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
-    SurveyState state = Enum.GetValues<SurveyState>().Max() + 1;
+    SurveyState newState = Enum.GetValues<SurveyState>().Max() + 1;
 
     // Act
-    bool result = surveyEntity.TryMoveTo(state);
+    bool result = surveyEntity.TryMoveTo(newState);
 
     // Assert
     Assert.IsFalse(result);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_UnknownState_StateKept()
+  {
+    // Assert
+    SurveyState state = SurveyState.Ready;
+
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : state,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    SurveyState newState = Enum.GetValues<SurveyState>().Max() + 1;
+
+    // Act
+    surveyEntity.TryMoveTo(newState);
+
+    // Assert
+    Assert.AreEqual(state, surveyEntity.State);
   }
 }
