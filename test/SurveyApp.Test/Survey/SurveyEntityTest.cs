@@ -72,12 +72,12 @@ public sealed class SurveyEntityTest
 
     // Act
     SurveyEntity surveyEntity = new(
-      surveyId: default,
-      state: default,
-      title: string.Empty,
-      description: description,
+      surveyId     : default,
+      state        : default,
+      title        : string.Empty,
+      description  : description,
       candidateName: string.Empty,
-      questions: Array.Empty<QuestionEntityBase>());
+      questions    : Array.Empty<QuestionEntityBase>());
 
     // Assert
     Assert.AreEqual(description, surveyEntity.Description);
@@ -91,14 +91,33 @@ public sealed class SurveyEntityTest
 
     // Act
     SurveyEntity surveyEntity = new(
-      surveyId: default,
-      state: default,
-      title: string.Empty,
-      description: string.Empty,
+      surveyId     : default,
+      state        : default,
+      title        : string.Empty,
+      description  : string.Empty,
       candidateName: candidateName,
-      questions: Array.Empty<QuestionEntityBase>());
+      questions    : Array.Empty<QuestionEntityBase>());
 
     // Assert
     Assert.AreEqual(candidateName, surveyEntity.CandidateName);
+  }
+
+  [TestMethod]
+  public void Constructor_FullListOfParameters_QuestionsFilled()
+  {
+    // Arrange
+    QuestionEntityBase[] questions = new QuestionEntityBase[0];
+
+    // Act
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : default,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : questions);
+
+    // Assert
+    Assert.AreEqual(questions, surveyEntity.Questions);
   }
 }
