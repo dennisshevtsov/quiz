@@ -190,4 +190,23 @@ public sealed class SurveyEntityTest
     // Assert
     Assert.AreEqual(state, surveyEntity.State);
   }
+
+  [TestMethod]
+  public void TryMoveTo_FromDraftToDone_FalseReturned()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId: default,
+      state: SurveyState.Draft,
+      title: string.Empty,
+      description: string.Empty,
+      candidateName: string.Empty,
+      questions: Array.Empty<QuestionEntityBase>());
+
+    // Act
+    bool result = surveyEntity.TryMoveTo(SurveyState.Done);
+
+    // Assert
+    Assert.IsFalse(result);
+  }
 }
