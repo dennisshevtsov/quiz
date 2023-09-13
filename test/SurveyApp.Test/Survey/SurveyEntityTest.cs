@@ -134,4 +134,18 @@ public sealed class SurveyEntityTest
     // Assert
     Assert.AreNotEqual(default, surveyEntity.SurveyId);
   }
+
+  [TestMethod]
+  public void Constructor_ShortListOfParameters_StateIsDraft()
+  {
+    // Act
+    SurveyEntity surveyEntity = new(
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Assert
+    Assert.AreNotEqual(SurveyState.Draft, surveyEntity.State);
+  }
 }
