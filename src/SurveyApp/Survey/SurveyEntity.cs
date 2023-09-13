@@ -40,7 +40,7 @@ public sealed class SurveyEntity
 
   public bool TryMoveTo(SurveyState state)
   {
-    if (state < SurveyState.Draft || state > SurveyState.Cacelled)
+    if (state < SurveyState.Draft || state > SurveyState.Cancelled)
     {
       return false;
     }
@@ -50,7 +50,7 @@ public sealed class SurveyEntity
       return false;
     }
 
-    if (State == SurveyState.Done || State == SurveyState.Cacelled)
+    if (State == SurveyState.Done || State == SurveyState.Cancelled)
     {
       return false;
     }
