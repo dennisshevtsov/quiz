@@ -456,4 +456,104 @@ public sealed class SurveyEntityTest
     // Assert
     Assert.IsFalse(result);
   }
+
+  [TestMethod]
+  public void Update_NewTitle_TitleUpdated()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : default,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    string newTitle = Guid.NewGuid().ToString();
+
+    // Act
+    surveyEntity.Update(
+      title        : newTitle,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    :Array.Empty<QuestionEntityBase>());
+
+    // Assert
+    Assert.AreEqual(newTitle, surveyEntity.Title);
+  }
+
+  [TestMethod]
+  public void Update_NewDescription_DescriptionUpdated()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : default,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    string newDescription = Guid.NewGuid().ToString();
+
+    // Act
+    surveyEntity.Update(
+      title        : string.Empty,
+      description  : newDescription,
+      candidateName: string.Empty,
+      questions    :Array.Empty<QuestionEntityBase>());
+
+    // Assert
+    Assert.AreEqual(newDescription, surveyEntity.Description);
+  }
+
+  [TestMethod]
+  public void Update_NewCandidateName_CandidateNameUpdated()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : default,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    string newCandidateName = Guid.NewGuid().ToString();
+
+    // Act
+    surveyEntity.Update(
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: newCandidateName,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Assert
+    Assert.AreEqual(newCandidateName, surveyEntity.CandidateName);
+  }
+
+  [TestMethod]
+  public void Update_NewQuestions_QuestionsUpdated()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : default,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    QuestionEntityBase[] newQuestions = new QuestionEntityBase[0];
+
+    // Act
+    surveyEntity.Update(
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : newQuestions);
+
+    // Assert
+    Assert.AreEqual(newQuestions, surveyEntity.Questions);
+  }
 }
