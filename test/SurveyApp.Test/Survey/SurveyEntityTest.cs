@@ -146,6 +146,6 @@ public sealed class SurveyEntityTest
       questions    : Array.Empty<QuestionEntityBase>());
 
     // Assert
-    Assert.AreNotEqual(SurveyState.Draft, surveyEntity.State);
+    Assert.AreEqual(SurveyState.Draft, surveyEntity.State);
   }
 }
