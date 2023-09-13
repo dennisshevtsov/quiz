@@ -9,5 +9,5 @@ public enum SurveyState : byte
   Draft    = 0,
   Ready    = 1,
   Done     = 2,
-  Cacelled = 3,
+  Cancelled = 3,
 }

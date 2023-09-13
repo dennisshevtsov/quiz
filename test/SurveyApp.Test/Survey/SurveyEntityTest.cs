@@ -196,6 +196,25 @@ public sealed class SurveyEntityTest
   {
     // Assert
     SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Draft,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    bool result = surveyEntity.TryMoveTo(SurveyState.Done);
+
+    // Assert
+    Assert.IsFalse(result);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromDraftToDone_StateKept()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
       surveyId: default,
       state: SurveyState.Draft,
       title: string.Empty,
@@ -204,7 +223,235 @@ public sealed class SurveyEntityTest
       questions: Array.Empty<QuestionEntityBase>());
 
     // Act
+    surveyEntity.TryMoveTo(SurveyState.Done);
+
+    // Assert
+    Assert.AreEqual(SurveyState.Draft, surveyEntity.State);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromReadyToDone_TrueReturned()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Ready,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
     bool result = surveyEntity.TryMoveTo(SurveyState.Done);
+
+    // Assert
+    Assert.IsTrue(result);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromReadyToDone_StateChanged()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Ready,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    surveyEntity.TryMoveTo(SurveyState.Done);
+
+    // Assert
+    Assert.AreEqual(SurveyState.Done, surveyEntity.State);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromDoneToDone_FalseReturned()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Done,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    bool result = surveyEntity.TryMoveTo(SurveyState.Done);
+
+    // Assert
+    Assert.IsFalse(result);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromCancelledToDone_FalseReturned()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Cancelled,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    bool result = surveyEntity.TryMoveTo(SurveyState.Done);
+
+    // Assert
+    Assert.IsFalse(result);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromCancelledToDone_StateKept()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Cancelled,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    surveyEntity.TryMoveTo(SurveyState.Done);
+
+    // Assert
+    Assert.AreEqual(SurveyState.Cancelled, surveyEntity.State);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromDraftToCancelled_TrueReturned()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Draft,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    bool result = surveyEntity.TryMoveTo(SurveyState.Cancelled);
+
+    // Assert
+    Assert.IsTrue(result);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromDraftToCancelled_StateChanged()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Draft,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    surveyEntity.TryMoveTo(SurveyState.Cancelled);
+
+    // Assert
+    Assert.AreEqual(SurveyState.Cancelled, surveyEntity.State);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromReadyToCancelled_TrueReturned()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Ready,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    bool result = surveyEntity.TryMoveTo(SurveyState.Cancelled);
+
+    // Assert
+    Assert.IsTrue(result);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromReadyToCancelled_StateChanged()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Ready,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    surveyEntity.TryMoveTo(SurveyState.Cancelled);
+
+    // Assert
+    Assert.AreEqual(SurveyState.Cancelled, surveyEntity.State);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromDoneToCancelled_FalseReturned()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Done,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    bool result = surveyEntity.TryMoveTo(SurveyState.Cancelled);
+
+    // Assert
+    Assert.IsFalse(result);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromDoneToCancelled_StateKept()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Done,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    surveyEntity.TryMoveTo(SurveyState.Cancelled);
+
+    // Assert
+    Assert.AreEqual(SurveyState.Done, surveyEntity.State);
+  }
+
+  [TestMethod]
+  public void TryMoveTo_FromCancelledToCancelled_FalseReturned()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Cancelled,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    bool result = surveyEntity.TryMoveTo(SurveyState.Cancelled);
 
     // Assert
     Assert.IsFalse(result);
