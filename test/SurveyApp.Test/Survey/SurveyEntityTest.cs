@@ -25,4 +25,23 @@ public sealed class SurveyEntityTest
     // Assert
     Assert.AreEqual(surveyId, surveyEntity.SurveyId);
   }
+
+  [TestMethod]
+  public void Constructor_FullListOfParameters_StateFilled()
+  {
+    // Arrange
+    SurveyState state = SurveyState.Ready;
+
+    // Act
+    SurveyEntity surveyEntity = new(
+      surveyId: default,
+      state: state,
+      title: string.Empty,
+      description: string.Empty,
+      candidateName: string.Empty,
+      questions: Array.Empty<QuestionEntityBase>());
+
+    // Assert
+    Assert.AreEqual(state, surveyEntity.State);
+  }
 }
