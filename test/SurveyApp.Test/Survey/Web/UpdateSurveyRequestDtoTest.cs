@@ -1,0 +1,31 @@
+﻿// Copyright (c) Dennis Shevtsov. All rights reserved.
+// Licensed under the MIT License.
+// See LICENSE in the project root for license information.
+
+namespace SurveyApp.Survey.Web.Test;
+
+[TestClass]
+public sealed class UpdateSurveyRequestDtoTest
+{
+  [TestMethod]
+  public void UpdateSurvey_SurveyEntity_TitleUpdated()
+  {
+    // Arrange
+    UpdateSurveyRequestDto updateSurveyRequestDto = new()
+    {
+      Title = Guid.NewGuid().ToString(),
+    };
+
+    SurveyEntity surveyEntity = new(
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    updateSurveyRequestDto.UpdateSurvey(surveyEntity);
+
+    // Assert
+    Assert.AreEqual(updateSurveyRequestDto.Title, surveyEntity.Title);
+  }
+}
