@@ -72,4 +72,30 @@ public sealed class UpdateSurveyRequestDtoTest
     // Assert
     Assert.AreEqual(updateSurveyRequestDto.CandidateName, surveyEntity.CandidateName);
   }
+
+  [TestMethod]
+  public void UpdateSurvey_SurveyEntity_QuestionsUpdated()
+  {
+    // Arrange
+    UpdateSurveyRequestDto updateSurveyRequestDto = new()
+    {
+      Questions = new QuestionDtoBase[]
+      {
+        new YesNoQuestionDto(),
+        new TextQuestionDto(),
+      },
+    };
+
+    SurveyEntity surveyEntity = new(
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    updateSurveyRequestDto.UpdateSurvey(surveyEntity);
+
+    // Assert
+    Assert.AreEqual(updateSurveyRequestDto.Questions.Length, surveyEntity.Questions.Length);
+  }
 }
