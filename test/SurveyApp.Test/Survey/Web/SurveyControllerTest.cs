@@ -5,6 +5,8 @@
 using System.Linq.Expressions;
 
 using Microsoft.AspNetCore.Mvc;
+using SurveyApp.Survey.Web;
+using SurveyApp.Survey;
 
 namespace SurveyApp.Survey.Web.Test;
 
@@ -191,5 +193,104 @@ public sealed class SurveyControllerTest
 
     Assert.IsNotNull(createdAtActionResult.RouteValues);
     Assert.AreEqual(surveyId, createdAtActionResult.RouteValues["surveyId"]);
+  }
+
+  [TestMethod]
+  public async Task UpdateSurvey_UpdateSurveyRequestDto_GetSurveyAsyncCalled()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .Verifiable();
+
+    UpdateSurveyRequestDto updateSurveyRequestDto = new()
+    {
+      SurveyId = Guid.NewGuid(),
+    };
+
+    // Act
+    await _surveyController.UpdateSurvey(updateSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Expression<Func<Guid, bool>> match = id => id == updateSurveyRequestDto.SurveyId;
+    _surveyRepositoryMock.Verify(repository => repository.GetSurveyAsync(It.Is(match), It.IsAny<CancellationToken>()));
+  }
+
+  [TestMethod]
+  public async Task UpdateSurvey_UnknownSurvey_NotFoundReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(default(SurveyEntity));
+
+    UpdateSurveyRequestDto updateSurveyRequestDto = new()
+    {
+      SurveyId = Guid.NewGuid(),
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyController.UpdateSurvey(updateSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+  }
+
+  [TestMethod]
+  public async Task UpdateSurvey_ExistingSurvey_NoContentReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    UpdateSurveyRequestDto updateSurveyRequestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyController.UpdateSurvey(updateSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NoContentResult));
+  }
+
+  [TestMethod]
+  public async Task UpdateSurvey_ExistingSurvey_UpdateSurveyAsyncCalled()
+  {
+    // Arrange
+    Guid surveyId = Guid.NewGuid();
+
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(surveyId, SurveyState.Draft, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    UpdateSurveyRequestDto updateSurveyRequestDto = new()
+    {
+      SurveyId      = surveyId,
+      Title         = Guid.NewGuid().ToString(),
+      Description   = Guid.NewGuid().ToString(),
+      CandidateName = Guid.NewGuid().ToString(),
+      Questions     = new QuestionDtoBase[]
+      {
+        new TextQuestionDto
+        {
+          QuestionType = QuestionType.Text,
+          Text         = Guid.NewGuid().ToString(),
+        },
+        new YesNoQuestionDto
+        {
+          QuestionType = QuestionType.YesNo,
+          Text         = Guid.NewGuid().ToString(),
+        },
+      }
+    };
+
+    // Act
+    await _surveyController.UpdateSurvey(updateSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Expression<Func<SurveyEntity, bool>> match =
+      entity => entity.SurveyId         == surveyId                             &&
+                entity.Title            == updateSurveyRequestDto.Title         &&
+                entity.Description      == updateSurveyRequestDto.Description   &&
+                entity.CandidateName    == updateSurveyRequestDto.CandidateName &&
+                entity.Questions.Length == updateSurveyRequestDto.Questions.Length;
+
+    _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.Is(match), It.IsAny<CancellationToken>()));
   }
 }
