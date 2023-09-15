@@ -231,4 +231,20 @@ public sealed class SurveyControllerTest
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
   }
+
+  [TestMethod]
+  public async Task UpdateSurvey_ExistingSurvey_NoContentReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    UpdateSurveyRequestDto updateSurveyRequestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyController.UpdateSurvey(updateSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NoContentResult));
+  }
 }
