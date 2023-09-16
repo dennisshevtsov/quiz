@@ -293,4 +293,21 @@ public sealed class SurveyControllerTest
 
     _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.Is(match), It.IsAny<CancellationToken>()));
   }
+
+  [TestMethod]
+  public async Task MoveToState_UnknownSurvey_NotFoundReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(default(SurveyEntity));
+
+    Guid surveyId = Guid.NewGuid();
+    SurveyState state = SurveyState.Draft;
+
+    // Act
+    IActionResult actionResult = await _surveyController.MoveToState(surveyId, state, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+  }
 }
