@@ -344,4 +344,22 @@ public sealed class SurveyControllerTest
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(NoContentResult));
   }
+
+  [TestMethod]
+  public async Task MoveToState_AcceptableSurveyState_UpdateSurveyAsyncCalled()
+  {
+    // Arrange
+    Guid surveyId = Guid.NewGuid();
+    SurveyState state = SurveyState.Done;
+
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(surveyId, SurveyState.Ready, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    // Act
+    IActionResult actionResult = await _surveyController.MoveToState(surveyId, state, CancellationToken.None);
+
+    // Assert
+    Expression<Func<SurveyEntity, bool>> match = entity => entity.SurveyId == surveyId && entity.State == state;
+    _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.Is(match), It.IsAny<CancellationToken>()));
+  }
 }
