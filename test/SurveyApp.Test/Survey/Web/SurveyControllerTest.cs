@@ -310,4 +310,21 @@ public sealed class SurveyControllerTest
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
   }
+
+  [TestMethod]
+  public async Task MoveToState_UnacceptableSurveyState_BadRequestReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(Guid.NewGuid(), SurveyState.Done, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    Guid surveyId = Guid.NewGuid();
+    SurveyState state = SurveyState.Cancelled;
+
+    // Act
+    IActionResult actionResult = await _surveyController.MoveToState(surveyId, state, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(BadRequestResult));
+  }
 }
