@@ -293,4 +293,73 @@ public sealed class SurveyControllerTest
 
     _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.Is(match), It.IsAny<CancellationToken>()));
   }
+
+  [TestMethod]
+  public async Task MoveToState_UnknownSurvey_NotFoundReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(default(SurveyEntity));
+
+    Guid surveyId = Guid.NewGuid();
+    SurveyState state = SurveyState.Draft;
+
+    // Act
+    IActionResult actionResult = await _surveyController.MoveToState(surveyId, state, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+  }
+
+  [TestMethod]
+  public async Task MoveToState_UnacceptableSurveyState_BadRequestReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(Guid.NewGuid(), SurveyState.Done, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    Guid surveyId = Guid.NewGuid();
+    SurveyState state = SurveyState.Cancelled;
+
+    // Act
+    IActionResult actionResult = await _surveyController.MoveToState(surveyId, state, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(BadRequestResult));
+  }
+
+  [TestMethod]
+  public async Task MoveToState_AcceptableSurveyState_NoContentReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(Guid.NewGuid(), SurveyState.Ready, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    Guid surveyId = Guid.NewGuid();
+    SurveyState state = SurveyState.Done;
+
+    // Act
+    IActionResult actionResult = await _surveyController.MoveToState(surveyId, state, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NoContentResult));
+  }
+
+  [TestMethod]
+  public async Task MoveToState_AcceptableSurveyState_UpdateSurveyAsyncCalled()
+  {
+    // Arrange
+    Guid surveyId = Guid.NewGuid();
+    SurveyState state = SurveyState.Done;
+
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(new SurveyEntity(surveyId, SurveyState.Ready, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+
+    // Act
+    IActionResult actionResult = await _surveyController.MoveToState(surveyId, state, CancellationToken.None);
+
+    // Assert
+    Expression<Func<SurveyEntity, bool>> match = entity => entity.SurveyId == surveyId && entity.State == state;
+    _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.Is(match), It.IsAny<CancellationToken>()));
+  }
 }
