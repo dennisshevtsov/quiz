@@ -23,4 +23,20 @@ public sealed class TextQuestionDtoTest
     // Assert
     Assert.AreEqual(textQuestionEntity.Text, textQuestionDto.Text);
   }
+
+  [TestMethod]
+  public void ToQuestionEntity_TextQuestionDto_TextQuestionEntityReturned()
+  {
+    // Arrange
+    TextQuestionDto TextQuestionDto = new()
+    {
+      Text = Guid.NewGuid().ToString(),
+    };
+
+    // Act
+    QuestionEntityBase questionEntity = TextQuestionDto.ToQuestionEntity();
+
+    // Assert
+    Assert.IsInstanceOfType<TextQuestionEntity>(questionEntity);
+  }
 }
