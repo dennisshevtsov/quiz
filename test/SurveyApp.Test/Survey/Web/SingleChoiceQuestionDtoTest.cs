@@ -81,4 +81,25 @@ public sealed class SingleChoiceQuestionDtoTest
     // Assert
     Assert.AreEqual(singleChoiceQuestionDto.Text, questionEntity.Text);
   }
+
+  [TestMethod]
+  public void ToQuestionEntity_SingleChoiceQuestionDto_ChoicesFilled()
+  {
+    // Arrange
+    SingleChoiceQuestionDto singleChoiceQuestionDto = new()
+    {
+      Choices = new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+    };
+
+    // Act
+    QuestionEntityBase questionEntity = singleChoiceQuestionDto.ToQuestionEntity();
+
+    // Assert
+    Assert.AreEqual(singleChoiceQuestionDto.Choices, ((SingleChoiceQuestionEntity)questionEntity).Choices);
+  }
 }
