@@ -13,8 +13,14 @@ public sealed class SingleChoiceQuestionDtoTest
     // Arrange
     SingleChoiceQuestionEntity singleChoiceQuestionEntity = new
     (
-      text: Guid.NewGuid().ToString(),
-      answer: YesNo.None
+      text   : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      answer : null
     );
 
     // Act
@@ -22,5 +28,28 @@ public sealed class SingleChoiceQuestionDtoTest
 
     // Assert
     Assert.AreEqual(singleChoiceQuestionEntity.Text, singleChoiceQuestionDto.Text);
+  }
+
+  [TestMethod]
+  public void Constructor_SingleChoiceQuestionEntity_ChoicesFilled()
+  {
+    // Arrange
+    SingleChoiceQuestionEntity singleChoiceQuestionEntity = new
+    (
+      text: Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      answer: null
+    );
+
+    // Act
+    SingleChoiceQuestionDto singleChoiceQuestionDto = new(singleChoiceQuestionEntity);
+
+    // Assert
+    Assert.AreEqual(singleChoiceQuestionEntity.Choices, singleChoiceQuestionDto.Choices);
   }
 }
