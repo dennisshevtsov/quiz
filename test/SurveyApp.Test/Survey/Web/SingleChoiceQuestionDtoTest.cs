@@ -52,4 +52,17 @@ public sealed class SingleChoiceQuestionDtoTest
     // Assert
     Assert.AreEqual(singleChoiceQuestionEntity.Choices, singleChoiceQuestionDto.Choices);
   }
+
+  [TestMethod]
+  public void ToQuestionEntity_SingleChoiceQuestionDto_SingleChoiceQuestionEntityReturned()
+  {
+    // Arrange
+    SingleChoiceQuestionDto singleChoiceQuestionDto = new();
+
+    // Act
+    QuestionEntityBase questionEntity = singleChoiceQuestionDto.ToQuestionEntity();
+
+    // Assert
+    Assert.IsInstanceOfType<SingleChoiceQuestionEntity>(questionEntity);
+  }
 }
