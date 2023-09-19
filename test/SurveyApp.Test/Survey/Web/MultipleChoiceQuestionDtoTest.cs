@@ -65,4 +65,20 @@ public sealed class MultipleChoiceQuestionDtoTest
     // Assert
     Assert.IsInstanceOfType<MultipleChoiceQuestionEntity>(questionEntity);
   }
+
+  [TestMethod]
+  public void ToQuestionEntity_MultipleChoiceQuestionDto_TextFilled()
+  {
+    // Arrange
+    MultipleChoiceQuestionDto multipleChoiceQuestionDto = new()
+    {
+      Text = Guid.NewGuid().ToString(),
+    };
+
+    // Act
+    QuestionEntityBase questionEntity = multipleChoiceQuestionDto.ToQuestionEntity();
+
+    // Assert
+    Assert.AreEqual(multipleChoiceQuestionDto.Text, questionEntity.Text);
+  }
 }
