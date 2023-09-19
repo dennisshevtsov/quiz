@@ -13,7 +13,7 @@ public sealed class MultipleChoiceQuestionDtoTest
     // Arrange
     MultipleChoiceQuestionEntity multipleChoiceQuestionEntity = new
     (
-      text: Guid.NewGuid().ToString(),
+      text   : Guid.NewGuid().ToString(),
       choices: new[]
       {
         Guid.NewGuid().ToString(),
@@ -28,5 +28,28 @@ public sealed class MultipleChoiceQuestionDtoTest
 
     // Assert
     Assert.AreEqual(multipleChoiceQuestionEntity.Text, multipleChoiceQuestionDto.Text);
+  }
+
+  [TestMethod]
+  public void Constructor_MultipleChoiceQuestionEntity_ChoicesFilled()
+  {
+    // Arrange
+    MultipleChoiceQuestionEntity multipleChoiceQuestionEntity = new
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      answers: Array.Empty<string>()
+    );
+
+    // Act
+    MultipleChoiceQuestionDto multipleChoiceQuestionDto = new(multipleChoiceQuestionEntity);
+
+    // Assert
+    Assert.AreEqual(multipleChoiceQuestionEntity.Choices, multipleChoiceQuestionDto.Choices);
   }
 }
