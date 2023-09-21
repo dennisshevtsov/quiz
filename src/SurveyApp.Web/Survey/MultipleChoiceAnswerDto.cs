@@ -6,13 +6,13 @@ namespace SurveyApp.Survey.Web;
 
 public sealed class MultipleChoiceAnswerDto : AnswerDtoBase
 {
-  public string[] Answer { get; set; } = Array.Empty<string>();
+  public string[] Answers { get; set; } = Array.Empty<string>();
 
   public override void Update(QuestionEntityBase questionEntity)
   {
     if (questionEntity is MultipleChoiceQuestionEntity multipleChoiceQuestionEntity)
     {
-      multipleChoiceQuestionEntity.SetAnswers(Answer);
+      multipleChoiceQuestionEntity.SetAnswers(Answers);
     }
   }
 }

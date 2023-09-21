@@ -11,7 +11,7 @@ public sealed class SingleChoiceQuestionEntity : QuestionEntityBase
   public SingleChoiceQuestionEntity(string text, string[] choices, string? answer) : base(text)
   {
     Choices = choices;
-    Answer = answer;
+    Answer  = answer;
   }
 
   public SingleChoiceQuestionEntity(SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity)
