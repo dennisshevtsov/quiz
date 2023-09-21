@@ -11,7 +11,7 @@ public sealed class SingleChoiceQuestionEntity : QuestionEntityBase
   public SingleChoiceQuestionEntity(string text, string[] choices, string? answer) : base(text)
   {
     Choices = choices;
-    Answer  = answer;
+    Answer = answer;
   }
 
   public SingleChoiceQuestionEntity(SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity)
@@ -26,6 +26,19 @@ public sealed class SingleChoiceQuestionEntity : QuestionEntityBase
 
   public void SetAnswer(string? answer)
   {
-    Answer = answer;
+    if (string.IsNullOrEmpty(answer))
+    {
+      Answer = null;
+      return;
+    }
+
+    for (int i = 0; i < Choices.Length; i++)
+    {
+      if (string.Equals(Choices[i], answer, StringComparison.OrdinalIgnoreCase))
+      {
+        Answer = answer;
+        break;
+      }
+    }
   }
 }
