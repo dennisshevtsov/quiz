@@ -24,8 +24,8 @@ public sealed class MultipleChoiceQuestionEntity : QuestionEntityBase
 
   public string[] Answers { get; private set; }
 
-  public void SetAnswers(string[] answer)
+  public void SetAnswers(string[] answers)
   {
-    Answers = answer;
+    Answers = answers;
   }
 }

@@ -18,7 +18,7 @@ public sealed class MultipleChoiceAnswerDtoTest
 
     MultipleChoiceAnswerDto multipleChoiceAnswerDto = new()
     {
-      Answer = answers,
+      Answers = answers,
     };
 
     MultipleChoiceQuestionEntity multipleChoiceQuestionEntity = new
@@ -42,5 +42,40 @@ public sealed class MultipleChoiceAnswerDtoTest
     {
       Assert.AreEqual(answers[i], multipleChoiceQuestionEntity.Answers[i]);
     }
+  }
+
+  [TestMethod]
+  public void Update_UnknownAnswer_AnswerNotUpdated()
+  {
+    // Arrange
+    MultipleChoiceAnswerDto multipleChoiceAnswerDto = new()
+    {
+      Answers = new[]
+      {
+        Guid.NewGuid().ToString(),
+      },
+    };
+
+    string[] answers = new[]
+    {
+      Guid.NewGuid().ToString(),
+    };
+    MultipleChoiceQuestionEntity multipleChoiceQuestionEntity = new
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      answers: answers
+    );
+
+    // Act
+    multipleChoiceAnswerDto.Update(multipleChoiceQuestionEntity);
+
+    // Assert
+    Assert.AreEqual(answers, multipleChoiceQuestionEntity.Answers);
   }
 }
