@@ -11,7 +11,7 @@ public sealed class MultipleChoiceQuestionEntity : QuestionEntityBase
   public MultipleChoiceQuestionEntity(string text, string[] choices, string[] answers) : base(text)
   {
     Choices = choices;
-    Answers  = answers;
+    Answers = answers;
   }
 
   public MultipleChoiceQuestionEntity(MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity)
@@ -26,6 +26,29 @@ public sealed class MultipleChoiceQuestionEntity : QuestionEntityBase
 
   public void SetAnswers(string[] answers)
   {
-    Answers = answers;
+    if (answers.Length == 0)
+    {
+      Answers = Array.Empty<string>();
+      return;
+    }
+
+    string[] temp = new string[answers.Length];
+    int index = 0;
+
+    for (int i = 0; i < answers.Length; i++)
+    {
+      for (int j = 0; j < Choices.Length; j++)
+      {
+        if (string.Equals(Choices[j], answers[i], StringComparison.OrdinalIgnoreCase))
+        {
+          temp[index++] = Choices[j];
+        }
+      }
+    }
+
+    if (index == answers.Length)
+    {
+      Answers = temp;
+    }
   }
 }
