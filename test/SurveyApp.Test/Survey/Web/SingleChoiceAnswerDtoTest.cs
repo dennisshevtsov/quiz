@@ -36,4 +36,33 @@ public sealed class SingleChoiceAnswerDtoTest
     // Assert
     Assert.AreEqual(answer, singleChoiceQuestionEntity.Answer);
   }
+
+  [TestMethod]
+  public void Update_UnknownAnswer_AnswerNotUpdated()
+  {
+    // Arrange
+    SingleChoiceAnswerDto singleChoiceAnswerDto = new()
+    {
+      Answer = Guid.NewGuid().ToString(),
+    };
+
+    string answer = Guid.NewGuid().ToString();
+    SingleChoiceQuestionEntity singleChoiceQuestionEntity = new
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      answer : answer
+    );
+
+    // Act
+    singleChoiceAnswerDto.Update(singleChoiceQuestionEntity);
+
+    // Assert
+    Assert.AreEqual(answer, singleChoiceQuestionEntity.Answer);
+  }
 }
