@@ -12,7 +12,7 @@ public sealed class YesNoAnswerDto : AnswerDtoBase
   {
     if (questionEntity is YesNoQuestionEntity yesNoQuestionEntity)
     {
-      Answer = yesNoQuestionEntity.Answer;
+      yesNoQuestionEntity.SetAnswer(Answer);
     }
   }
 }
