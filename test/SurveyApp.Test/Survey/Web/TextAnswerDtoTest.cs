@@ -17,15 +17,16 @@ public sealed class TextAnswerDtoTest
       answer: null
     );
 
+    string answer = Guid.NewGuid().ToString();
     TextAnswerDto textAnswerDto = new()
     {
-      Answer = Guid.NewGuid().ToString(),
+      Answer = answer,
     };
 
     // Act
     textAnswerDto.Update(textQuestionEntity);
 
     // Assert
-    Assert.AreEqual(textAnswerDto.Answer, textQuestionEntity.Answer);
+    Assert.AreEqual(answer, textQuestionEntity.Answer);
   }
 }

@@ -17,15 +17,16 @@ public sealed class YesNoAnswerDtoTest
       answer: YesNo.None
     );
 
+    YesNo answer = YesNo.Yes;
     YesNoAnswerDto yesNoAnswerDto = new()
     {
-      Answer = YesNo.Yes,
+      Answer = answer,
     };
 
     // Act
     yesNoAnswerDto.Update(yesNoQuestionEntity);
 
     // Assert
-    Assert.AreEqual(yesNoAnswerDto.Answer, yesNoQuestionEntity.Answer);
+    Assert.AreEqual(answer, yesNoQuestionEntity.Answer);
   }
 }
