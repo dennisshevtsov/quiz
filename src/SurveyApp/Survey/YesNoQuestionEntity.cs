@@ -20,4 +20,12 @@ public sealed class YesNoQuestionEntity : QuestionEntityBase
   public override QuestionType QuestionType => QuestionType.YesNo;
 
   public YesNo Answer { get; private set; }
+
+  public void SetAnswer(YesNo answer)
+  {
+    if (answer <= YesNo.None && answer >= YesNo.No)
+    {
+      Answer = answer;
+    }
+  }
 }
