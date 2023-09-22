@@ -58,7 +58,7 @@ public sealed class YesNoQuestionEntityTest
   }
 
   [TestMethod]
-  public void Constructor_YesNoQuestionTemplateEntity_AnswerIsDefault()
+  public void Constructor_YesNoQuestionTemplateEntity_AnswerIsNone()
   {
     // Arrange
     YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new(text: Guid.NewGuid().ToString());
