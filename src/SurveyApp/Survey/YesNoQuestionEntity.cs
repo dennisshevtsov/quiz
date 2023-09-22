@@ -23,7 +23,7 @@ public sealed class YesNoQuestionEntity : QuestionEntityBase
 
   public void SetAnswer(YesNo answer)
   {
-    if (answer <= YesNo.None && answer >= YesNo.No)
+    if (answer >= YesNo.None && answer <= YesNo.No)
     {
       Answer = answer;
     }
