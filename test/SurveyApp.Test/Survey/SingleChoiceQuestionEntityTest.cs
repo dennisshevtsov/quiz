@@ -75,4 +75,29 @@ public sealed class SingleChoiceQuestionEntityTest
     // Assert
     Assert.AreEqual(answer, singleChoiceQuestionEntity.Answer);
   }
+
+  [TestMethod]
+  public void SetAnswer_Answer_AnwerUpdated()
+  {
+    // Arrange
+    string answer = Guid.NewGuid().ToString();
+
+    SingleChoiceQuestionEntity singleChoiceQuestionEntity = new
+    (
+      text  : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        answer,
+      },
+      answer : null
+    );
+
+    // Act
+    singleChoiceQuestionEntity.SetAnswer(answer);
+
+    // Assert
+    Assert.AreEqual(answer, singleChoiceQuestionEntity.Answer);
+  }
 }
