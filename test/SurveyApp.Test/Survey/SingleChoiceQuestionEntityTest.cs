@@ -84,7 +84,7 @@ public sealed class SingleChoiceQuestionEntityTest
 
     SingleChoiceQuestionEntity singleChoiceQuestionEntity = new
     (
-      text  : Guid.NewGuid().ToString(),
+      text   : Guid.NewGuid().ToString(),
       choices: new[]
       {
         Guid.NewGuid().ToString(),
@@ -99,5 +99,31 @@ public sealed class SingleChoiceQuestionEntityTest
 
     // Assert
     Assert.AreEqual(answer, singleChoiceQuestionEntity.Answer);
+  }
+
+  [TestMethod]
+  public void SetAnswer_UnknownAnswer_AnwerNotUpdated()
+  {
+    // Arrange
+    string orignalAnswer = Guid.NewGuid().ToString();
+    string unknownAnswer = Guid.NewGuid().ToString();
+
+    SingleChoiceQuestionEntity singleChoiceQuestionEntity = new
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      answer : orignalAnswer
+    );
+
+    // Act
+    singleChoiceQuestionEntity.SetAnswer(unknownAnswer);
+
+    // Assert
+    Assert.AreEqual(orignalAnswer, singleChoiceQuestionEntity.Answer);
   }
 }
