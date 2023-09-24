@@ -79,4 +79,37 @@ public sealed class MultipleChoiceQuestionEntityTest
     // Assert
     Assert.AreEqual(answers, multipleChoiceQuestionEntity.Answers);
   }
+
+  [TestMethod]
+  public void Constructor_SetAnswers_AnswersUpdated()
+  {
+    // Arrange
+    string[] answers = new[]
+    {
+      Guid.NewGuid().ToString(),
+      Guid.NewGuid().ToString(),
+    };
+
+    MultipleChoiceQuestionEntity multipleChoiceQuestionEntity = new
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        answers[0],
+        Guid.NewGuid().ToString(),
+        answers[1],
+      },
+      answers: Array.Empty<string>()
+    );
+
+    // Act
+    multipleChoiceQuestionEntity.SetAnswers(answers);
+
+    // Assert
+    Assert.AreEqual(answers.Length, multipleChoiceQuestionEntity.Answers.Length);
+    for (int i = 0; i < answers.Length; i++)
+    {
+      Assert.AreEqual(answers[i], multipleChoiceQuestionEntity.Answers[i]);
+    }
+  }
 }
