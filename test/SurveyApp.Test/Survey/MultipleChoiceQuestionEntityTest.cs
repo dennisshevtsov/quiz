@@ -29,4 +29,27 @@ public sealed class MultipleChoiceQuestionEntityTest
     // Assert
     Assert.AreEqual(text, multipleChoiceQuestionEntity.Text);
   }
+
+  [TestMethod]
+  public void Constructor_Choices_ChoicesFilled()
+  {
+    // Arrange
+    string[] choices = new[]
+    {
+      Guid.NewGuid().ToString(),
+      Guid.NewGuid().ToString(),
+      Guid.NewGuid().ToString(),
+    };
+
+    // Act
+    MultipleChoiceQuestionEntity multipleChoiceQuestionEntity = new
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: choices,
+      answers: Array.Empty<string>()
+    );
+
+    // Assert
+    Assert.AreEqual(choices, multipleChoiceQuestionEntity.Choices);
+  }
 }
