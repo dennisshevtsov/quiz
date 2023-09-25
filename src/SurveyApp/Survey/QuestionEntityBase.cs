@@ -20,10 +20,10 @@ public abstract class QuestionEntityBase
   public static QuestionEntityBase Copy(QuestionTemplateEntityBase surveyTemplateQuestionEntityBase) =>
     surveyTemplateQuestionEntityBase.QuestionType switch
     {
-      QuestionType.Text => new TextQuestionEntity((TextQuestionTemplateEntity)surveyTemplateQuestionEntityBase),
-      QuestionType.YesNo => new YesNoQuestionEntity((YesNoQuestionTemplateEntity)surveyTemplateQuestionEntityBase),
+      QuestionType.Text           => new TextQuestionEntity((TextQuestionTemplateEntity)surveyTemplateQuestionEntityBase),
+      QuestionType.YesNo          => new YesNoQuestionEntity((YesNoQuestionTemplateEntity)surveyTemplateQuestionEntityBase),
       QuestionType.MultipleChoice => new MultipleChoiceQuestionEntity((MultipleChoiceQuestionTemplateEntity)surveyTemplateQuestionEntityBase),
-      QuestionType.SingleChoice => new SingleChoiceQuestionEntity((SingleChoiceQuestionTemplateEntity)surveyTemplateQuestionEntityBase),
-      _ => throw new NotSupportedException("Unknown question type."),
+      QuestionType.SingleChoice   => new SingleChoiceQuestionEntity((SingleChoiceQuestionTemplateEntity)surveyTemplateQuestionEntityBase),
+      _                           => throw new NotSupportedException("Unknown question type."),
     };
 }
