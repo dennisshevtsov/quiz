@@ -26,7 +26,7 @@ public sealed class QuestionEntityBaseTest
   }
 
   [TestMethod]
-  public void Copy_TextQuestionTemplateEntity_YesNoQuestionEntityReturned()
+  public void Copy_YesNoQuestionTemplateEntity_YesNoQuestionEntityReturned()
   {
     // Arrange
     YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new
@@ -39,5 +39,27 @@ public sealed class QuestionEntityBaseTest
 
     // Assert
     Assert.IsInstanceOfType<YesNoQuestionEntity>(questionEntity);
+  }
+
+  [TestMethod]
+  public void Copy_MultipleChoiceQuestionTemplateEntity_MultipleChoiceQuestionEntityReturned()
+  {
+    // Arrange
+    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      }
+    );
+
+    // Act
+    QuestionEntityBase questionEntity = QuestionEntityBase.Copy(multipleChoiceQuestionTemplateEntity);
+
+    // Assert
+    Assert.IsInstanceOfType<MultipleChoiceQuestionEntity>(questionEntity);
   }
 }
