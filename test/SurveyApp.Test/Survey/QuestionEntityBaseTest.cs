@@ -24,4 +24,20 @@ public sealed class QuestionEntityBaseTest
     // Assert
     Assert.IsInstanceOfType<TextQuestionEntity>(questionEntity);
   }
+
+  [TestMethod]
+  public void Copy_TextQuestionTemplateEntity_YesNoQuestionEntityReturned()
+  {
+    // Arrange
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new
+    (
+      text: Guid.NewGuid().ToString()
+    );
+
+    // Act
+    QuestionEntityBase questionEntity = QuestionEntityBase.Copy(yesNoQuestionTemplateEntity);
+
+    // Assert
+    Assert.IsInstanceOfType<YesNoQuestionEntity>(questionEntity);
+  }
 }
