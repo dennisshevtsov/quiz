@@ -84,4 +84,24 @@ public sealed class QuestionEntityBaseTest
     // Assert
     Assert.IsInstanceOfType<SingleChoiceQuestionEntity>(questionEntity);
   }
+
+  [TestMethod]
+  public void Copy_UnknownQuestionTemplateEntity_NotSupportedExceptionThrown()
+  {
+    // Arrange
+    UnknownQuestionTemplateEntity unknownQuestionTemplateEntity = new();
+
+    // Act
+    Action act = () => QuestionEntityBase.Copy(unknownQuestionTemplateEntity);
+
+    // Assert
+    Assert.ThrowsException<NotSupportedException>(act);
+  }
+
+  private sealed class UnknownQuestionTemplateEntity : QuestionTemplateEntityBase
+  {
+    public UnknownQuestionTemplateEntity() : base(string.Empty) { }
+
+    public override QuestionType QuestionType => (QuestionType)100;
+  }
 }
