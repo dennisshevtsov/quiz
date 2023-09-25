@@ -62,4 +62,26 @@ public sealed class QuestionEntityBaseTest
     // Assert
     Assert.IsInstanceOfType<MultipleChoiceQuestionEntity>(questionEntity);
   }
+
+  [TestMethod]
+  public void Copy_SingleChoiceQuestionTemplateEntity_SingleChoiceQuestionEntityReturned()
+  {
+    // Arrange
+    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      }
+    );
+
+    // Act
+    QuestionEntityBase questionEntity = QuestionEntityBase.Copy(singleChoiceQuestionTemplateEntity);
+
+    // Assert
+    Assert.IsInstanceOfType<SingleChoiceQuestionEntity>(questionEntity);
+  }
 }
