@@ -44,4 +44,23 @@ public sealed class SurveyTemplateEntityTest
     // title
     Assert.AreEqual(title, surveyTemplateEntity.Title);
   }
+
+  [TestMethod]
+  public void Constructor_FullListOfParameters_DescriptionFilled()
+  {
+    // Arrange
+    string description = Guid.NewGuid().ToString();
+
+    // Act
+    SurveyTemplateEntity surveyTemplateEntity = new
+    (
+      surveyTemplateId: default,
+      title           : string.Empty,
+      description     : description,
+      questions       : Array.Empty<QuestionTemplateEntityBase>()
+    );
+
+    // title
+    Assert.AreEqual(description, surveyTemplateEntity.Description);
+  }
 }
