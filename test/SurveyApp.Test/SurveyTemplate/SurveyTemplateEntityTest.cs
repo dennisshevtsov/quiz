@@ -151,4 +151,24 @@ public sealed class SurveyTemplateEntityTest
     // title
     Assert.AreEqual(questions, surveyTemplateEntity.Questions);
   }
+
+  [TestMethod]
+  public void Update_Title_TitleFilled()
+  {
+    // Arrange
+    string title = Guid.NewGuid().ToString();
+
+    SurveyTemplateEntity surveyTemplateEntity = new
+    (
+      title      : string.Empty,
+      description: string.Empty,
+      questions  : Array.Empty<QuestionTemplateEntityBase>()
+    );
+
+    // Act
+    surveyTemplateEntity.Update(title, string.Empty, Array.Empty<QuestionTemplateEntityBase>());
+
+    // title
+    Assert.AreEqual(title, surveyTemplateEntity.Title);
+  }
 }
