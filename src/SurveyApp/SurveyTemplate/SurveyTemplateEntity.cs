@@ -28,9 +28,9 @@ public sealed class SurveyTemplateEntity
 
   public SurveyTemplateEntity Update(string title, string description, QuestionTemplateEntityBase[] questions)
   {
-    Title = title;
+    Title       = title;
     Description = description;
-    Questions = questions;
+    Questions   = questions;
 
     return this;
   }
