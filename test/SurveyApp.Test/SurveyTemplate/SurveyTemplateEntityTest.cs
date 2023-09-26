@@ -153,7 +153,7 @@ public sealed class SurveyTemplateEntityTest
   }
 
   [TestMethod]
-  public void Update_Title_TitleFilled()
+  public void Update_FullListOfParameters_TitleFilled()
   {
     // Arrange
     string title = Guid.NewGuid().ToString();
@@ -173,7 +173,7 @@ public sealed class SurveyTemplateEntityTest
   }
 
   [TestMethod]
-  public void Update_Description_DescriptionFilled()
+  public void Update_FullListOfParameters_DescriptionFilled()
   {
     // Arrange
     string description = Guid.NewGuid().ToString();
@@ -190,5 +190,25 @@ public sealed class SurveyTemplateEntityTest
 
     // title
     Assert.AreEqual(description, surveyTemplateEntity.Description);
+  }
+
+  [TestMethod]
+  public void Update_FullListOfParameters_QuestionsFilled()
+  {
+    // Arrange
+    QuestionTemplateEntityBase[] questions = new QuestionTemplateEntityBase[0];
+
+    SurveyTemplateEntity surveyTemplateEntity = new
+    (
+      title      : string.Empty,
+      description: string.Empty,
+      questions  : Array.Empty<QuestionTemplateEntityBase>()
+    );
+
+    // Act
+    surveyTemplateEntity.Update(string.Empty, string.Empty, questions);
+
+    // title
+    Assert.AreEqual(questions, surveyTemplateEntity.Questions);
   }
 }
