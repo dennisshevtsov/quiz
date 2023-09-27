@@ -51,4 +51,20 @@ public sealed class YesNoQuestionTemplateEntityTest
     // Assert
     Assert.AreEqual(originalYesNoQuestionTemplateEntity.Text, newYesNoQuestionTemplateEntity.Text);
   }
+
+  [TestMethod]
+  public void Constructor_YesNoQuestionTemplateEntity_QuestionTypeIsYesNo()
+  {
+    // Arrange
+    YesNoQuestionTemplateEntity originalYesNoQuestionTemplateEntity = new
+    (
+      text: Guid.NewGuid().ToString()
+    );
+
+    // Act
+    YesNoQuestionTemplateEntity newYesNoQuestionTemplateEntity = new(originalYesNoQuestionTemplateEntity);
+
+    // Assert
+    Assert.AreEqual(QuestionType.YesNo, newYesNoQuestionTemplateEntity.QuestionType);
+  }
 }
