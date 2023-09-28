@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using static System.Net.Mime.MediaTypeNames;
+
 namespace SurveyApp.SurveyTemplate.Test;
 
 [TestClass]
@@ -58,5 +60,22 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
 
     // Assert
     Assert.AreEqual(QuestionType.MultipleChoice, multipleChoiceQuestionTemplateEntity.QuestionType);
+  }
+
+  [TestMethod]
+  public void Constructor_MultipleChoiceQuestionTemplateEntity_TextFilled()
+  {
+    // Arrange
+    MultipleChoiceQuestionTemplateEntity originalMultipleChoiceQuestionTemplateEntity = new
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: Array.Empty<string>()
+    );
+
+    // Act
+    MultipleChoiceQuestionTemplateEntity newMultipleChoiceQuestionTemplateEntity = new(originalMultipleChoiceQuestionTemplateEntity);
+
+    // Assert
+    Assert.AreEqual(originalMultipleChoiceQuestionTemplateEntity.Text, newMultipleChoiceQuestionTemplateEntity.Text);
   }
 }
