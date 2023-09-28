@@ -45,4 +45,18 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
     // Assert
     Assert.AreEqual(choices, multipleChoiceQuestionTemplateEntity.Choices);
   }
+
+  [TestMethod]
+  public void Constructor_FullListOfParameters_QuestionTypeIsMultipleChoice()
+  {
+    // Act
+    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: Array.Empty<string>()
+    );
+
+    // Assert
+    Assert.AreEqual(QuestionType.MultipleChoice, multipleChoiceQuestionTemplateEntity.QuestionType);
+  }
 }
