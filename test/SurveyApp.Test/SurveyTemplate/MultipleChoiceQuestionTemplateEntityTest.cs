@@ -10,7 +10,7 @@ namespace SurveyApp.SurveyTemplate.Test;
 public sealed class MultipleChoiceQuestionTemplateEntityTest
 {
   [TestMethod]
-  public void Constructor_Text_TextFilled()
+  public void Constructor_FullListOfParameters_TextFilled()
   {
     // Arrange
     string text = Guid.NewGuid().ToString();
@@ -27,7 +27,7 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
   }
 
   [TestMethod]
-  public void Constructor_Choices_ChoicesFilled()
+  public void Constructor_FullListOfParameters_ChoicesFilled()
   {
     // Arrange
     string[] choices = new[]
@@ -99,5 +99,22 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
 
     // Assert
     Assert.AreEqual(originalMultipleChoiceQuestionTemplateEntity.Choices, newMultipleChoiceQuestionTemplateEntity.Choices);
+  }
+
+  [TestMethod]
+  public void Constructor_MultipleChoiceQuestionTemplateEntity_QuestionTypeIsMultipleChoice()
+  {
+    // Arrange
+    MultipleChoiceQuestionTemplateEntity originalMultipleChoiceQuestionTemplateEntity = new
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: Array.Empty<string>()
+    );
+
+    // Act
+    MultipleChoiceQuestionTemplateEntity newMultipleChoiceQuestionTemplateEntity = new(originalMultipleChoiceQuestionTemplateEntity);
+
+    // Assert
+    Assert.AreEqual(QuestionType.MultipleChoice, newMultipleChoiceQuestionTemplateEntity.QuestionType);
   }
 }
