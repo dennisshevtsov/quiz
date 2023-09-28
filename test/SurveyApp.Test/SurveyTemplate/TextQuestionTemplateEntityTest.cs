@@ -22,4 +22,17 @@ public sealed class TextQuestionTemplateEntityTest
     // Assert
     Assert.AreEqual(text, textQuestionTemplateEntity.Text);
   }
+
+  [TestMethod]
+  public void Constructor_Text_QuestionTypeIsText()
+  {
+    // Act
+    TextQuestionTemplateEntity textQuestionTemplateEntity = new
+    (
+      text: Guid.NewGuid().ToString()
+    );
+
+    // Assert
+    Assert.AreEqual(QuestionType.Text, textQuestionTemplateEntity.QuestionType);
+  }
 }
