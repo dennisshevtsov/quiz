@@ -78,4 +78,26 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
     // Assert
     Assert.AreEqual(originalMultipleChoiceQuestionTemplateEntity.Text, newMultipleChoiceQuestionTemplateEntity.Text);
   }
+
+  [TestMethod]
+  public void Constructor_MultipleChoiceQuestionTemplateEntity_ChoicesFilled()
+  {
+    // Arrange
+    MultipleChoiceQuestionTemplateEntity originalMultipleChoiceQuestionTemplateEntity = new
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      }
+    );
+
+    // Act
+    MultipleChoiceQuestionTemplateEntity newMultipleChoiceQuestionTemplateEntity = new(originalMultipleChoiceQuestionTemplateEntity);
+
+    // Assert
+    Assert.AreEqual(originalMultipleChoiceQuestionTemplateEntity.Choices, newMultipleChoiceQuestionTemplateEntity.Choices);
+  }
 }
