@@ -89,9 +89,9 @@ public sealed class SurveyTemplateEntityTest
     // Act
     SurveyTemplateEntity surveyTemplateEntity = new
     (
-      title           : string.Empty,
-      description     : string.Empty,
-      questions       : Array.Empty<QuestionTemplateEntityBase>()
+      title      : string.Empty,
+      description: string.Empty,
+      questions  : Array.Empty<QuestionTemplateEntityBase>()
     );
 
     // Assert
@@ -107,9 +107,9 @@ public sealed class SurveyTemplateEntityTest
     // Act
     SurveyTemplateEntity surveyTemplateEntity = new
     (
-      title           : title,
-      description     : string.Empty,
-      questions       : Array.Empty<QuestionTemplateEntityBase>()
+      title      : title,
+      description: string.Empty,
+      questions  : Array.Empty<QuestionTemplateEntityBase>()
     );
 
     // title
