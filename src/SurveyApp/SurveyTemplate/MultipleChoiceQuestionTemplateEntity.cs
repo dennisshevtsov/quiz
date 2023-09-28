@@ -12,7 +12,7 @@ public sealed class MultipleChoiceQuestionTemplateEntity : QuestionTemplateEntit
   }
 
   public MultipleChoiceQuestionTemplateEntity(MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity)
-    : this(multipleChoiceQuestionTemplateEntity.Text, multipleChoiceQuestionTemplateEntity.Choices.Select(choice => choice).ToArray())
+    : this(multipleChoiceQuestionTemplateEntity.Text, multipleChoiceQuestionTemplateEntity.Choices)
   { }
 
   public override QuestionType QuestionType => QuestionType.MultipleChoice;
