@@ -51,4 +51,20 @@ public sealed class TextQuestionTemplateEntityTest
     // Assert
     Assert.AreEqual(originalTextQuestionTemplateEntity.Text, newTextQuestionTemplateEntity.Text);
   }
+
+  [TestMethod]
+  public void Constructor_TextQuestionTemplateEntity_QuestionTypeIsText()
+  {
+    // Arrange
+    TextQuestionTemplateEntity originalTextQuestionTemplateEntity = new
+    (
+      text: Guid.NewGuid().ToString()
+    );
+
+    // Act
+    TextQuestionTemplateEntity newTextQuestionTemplateEntity = new(originalTextQuestionTemplateEntity);
+
+    // Assert
+    Assert.AreEqual(QuestionType.Text, newTextQuestionTemplateEntity.QuestionType);
+  }
 }
