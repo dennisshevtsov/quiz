@@ -29,4 +29,14 @@ public sealed class ExecutedContextTest
     // Assert
     Assert.AreEqual(result, context.Rusult);
   }
+
+  [TestMethod]
+  public void Fail_Null_ExceptionThrown()
+  {
+    // Act
+    Action act = () => ExecutedContext<object>.Fail(null!);
+
+    // Assert
+    Assert.ThrowsException<ArgumentNullException>(() => act());
+  }
 }
