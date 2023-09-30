@@ -14,7 +14,7 @@ public sealed class SurveyTemplateEntity
     Questions        = questions;
   }
 
-  public SurveyTemplateEntity(string title, string description, QuestionTemplateEntityBase[] questions)
+  private SurveyTemplateEntity(string title, string description, QuestionTemplateEntityBase[] questions)
     : this(Guid.NewGuid(), title, description, questions)
   { }
 
@@ -33,5 +33,42 @@ public sealed class SurveyTemplateEntity
     Questions   = questions;
 
     return this;
+  }
+
+  public static ExecutedContext<SurveyTemplateEntity> New(
+    string title, string description, QuestionTemplateEntityBase[] questions)
+  {
+    string[] errors = Validate(title, description);
+
+    if (errors.Length > 0)
+    {
+      return ExecutedContext<SurveyTemplateEntity>.Fail(errors);
+    }
+
+    SurveyTemplateEntity surveyTemplateEntity = new
+    (
+      title      : title,
+      description: description,
+      questions  : questions
+    );
+
+    return ExecutedContext<SurveyTemplateEntity>.Ok(surveyTemplateEntity);
+  }
+
+  private static string[] Validate(string title, string description)
+  {
+    List<string> errors = new(2);
+
+    if (string.IsNullOrEmpty(title))
+    {
+      errors.Add("Title is required.");
+    }
+
+    if (string.IsNullOrEmpty(description))
+    {
+      errors.Add("Description is required.");
+    }
+
+    return errors.ToArray();
   }
 }

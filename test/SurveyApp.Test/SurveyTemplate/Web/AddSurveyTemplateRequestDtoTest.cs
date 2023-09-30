@@ -11,14 +11,18 @@ public sealed class AddSurveyTemplateRequestDtoTest
   public void ToSurveyTemplateEntity_AddSurveyTemplateRequestDto_SurveyTemplateEntityCreated()
   {
     // Arrange
-    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new();
+    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
+    {
+      Title       = Guid.NewGuid().ToString(),
+      Description = Guid.NewGuid().ToString(),
+    };
 
     // Act
-    SurveyTemplateEntity surveyTemplateEntity = addSurveyTemplateRequestDto.ToSurveyTemplateEntity();
+    ExecutedContext<SurveyTemplateEntity> newSurveyTemplateEntityContext = addSurveyTemplateRequestDto.ToSurveyTemplateEntity();
 
     // Assert
-    Assert.AreEqual(addSurveyTemplateRequestDto.Title, surveyTemplateEntity.Title);
-    Assert.AreEqual(addSurveyTemplateRequestDto.Description, surveyTemplateEntity.Description);
-    Assert.AreEqual(addSurveyTemplateRequestDto.Questions.Length, surveyTemplateEntity.Questions.Length);
+    Assert.AreEqual(addSurveyTemplateRequestDto.Title, newSurveyTemplateEntityContext.Rusult!.Title);
+    Assert.AreEqual(addSurveyTemplateRequestDto.Description, newSurveyTemplateEntityContext.Rusult!.Description);
+    Assert.AreEqual(addSurveyTemplateRequestDto.Questions.Length, newSurveyTemplateEntityContext.Rusult!.Questions.Length);
   }
 }
