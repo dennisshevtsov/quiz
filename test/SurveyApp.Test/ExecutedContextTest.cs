@@ -39,4 +39,20 @@ public sealed class ExecutedContextTest
     // Assert
     Assert.ThrowsException<ArgumentNullException>(() => act());
   }
+
+  [TestMethod]
+  public void Fail_Errors_ContextContainsErrors()
+  {
+    // Arrange
+    string[] errors = new[]
+    {
+      Guid.NewGuid().ToString(),
+    };
+
+    // Act
+    ExecutedContext<object> context = ExecutedContext<object>.Fail(errors);
+
+    // Assert
+    Assert.AreEqual(errors, context.Errors);
+  }
 }
