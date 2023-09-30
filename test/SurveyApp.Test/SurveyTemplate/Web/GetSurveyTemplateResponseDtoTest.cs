@@ -11,7 +11,10 @@ public sealed class GetSurveyTemplateResponseDtoTest
   public void Constructor_SurveyTemplateEntity_PropertiesFilled()
   {
     // Arrange
-    SurveyTemplateEntity surveyTemplateEntity = new(string.Empty, string.Empty, Array.Empty<QuestionTemplateEntityBase>());
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
 
     // Act
     GetSurveyTemplateResponseDto getSurveyTemplateResponseDto = new(surveyTemplateEntity);
