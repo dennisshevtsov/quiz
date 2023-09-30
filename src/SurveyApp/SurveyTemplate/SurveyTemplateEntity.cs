@@ -34,4 +34,39 @@ public sealed class SurveyTemplateEntity
 
     return this;
   }
+
+  public static ExecutedContext<SurveyTemplateEntity> New(
+    string title, string description, QuestionTemplateEntityBase[] questions)
+  {
+    List<string> errors = new(2);
+
+    if (string.IsNullOrEmpty(title))
+    {
+      errors.Add("Title is required.");
+    }
+
+    if (string.IsNullOrEmpty(description))
+    {
+      errors.Add("Description is required.");
+    }
+
+
+  }
+
+  private static string[] Validate(string title, string description)
+  {
+    List<string> errors = new(2);
+
+    if (string.IsNullOrEmpty(title))
+    {
+      errors.Add("Title is required.");
+    }
+
+    if (string.IsNullOrEmpty(description))
+    {
+      errors.Add("Description is required.");
+    }
+
+    return errors.ToArray();
+  }
 }
