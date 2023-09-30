@@ -16,4 +16,17 @@ public sealed class ExecutedContextTest
     // Assert
     Assert.ThrowsException<ArgumentNullException>(() => act());
   }
+
+  [TestMethod]
+  public void Ok_Result_ContextContainsResult()
+  {
+    // Arrange
+    object result = new();
+
+    // Act
+    ExecutedContext<object> context = ExecutedContext<object>.Ok(result);
+
+    // Assert
+    Assert.AreEqual(result, context.Rusult);
+  }
 }
