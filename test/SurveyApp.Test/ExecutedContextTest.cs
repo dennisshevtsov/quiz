@@ -41,6 +41,16 @@ public sealed class ExecutedContextTest
   }
 
   [TestMethod]
+  public void Fail_NoErrors_ContextContainsErrors()
+  {
+    // Act
+    Action act = () => ExecutedContext<object>.Fail(Array.Empty<string>());
+
+    // Assert
+    Assert.ThrowsException<ArgumentException>(act);
+  }
+
+  [TestMethod]
   public void Fail_Errors_ContextContainsErrors()
   {
     // Arrange

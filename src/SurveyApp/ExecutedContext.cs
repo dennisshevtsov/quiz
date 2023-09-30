@@ -27,9 +27,22 @@ public sealed class ExecutedContext<TResult> where TResult : class
     errors: Array.Empty<string>()
   );
 
-  public static ExecutedContext<TResult> Fail(string[] errors) => new
-  (
-    result: null,
-    errors: errors ?? throw new ArgumentNullException(nameof(errors))
-  );
+  public static ExecutedContext<TResult> Fail(string[] errors)
+  {
+    if (errors == null)
+    {
+      throw new ArgumentNullException(nameof(errors));
+    }
+
+    if (errors.Length == 0)
+    {
+      throw new ArgumentException($"{nameof(errors)} cannot be empty.");
+    }
+
+    return new
+    (
+      result: null,
+      errors: errors
+    );
+  }
 }
