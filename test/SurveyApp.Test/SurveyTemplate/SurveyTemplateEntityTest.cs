@@ -183,6 +183,21 @@ public sealed class SurveyTemplateEntityTest
   }
 
   [TestMethod]
+  public void New_ShortListOfParameters_NoErrors()
+  {
+    // Act
+    ExecutedContext<SurveyTemplateEntity> newSurveyTemplateEntityContext = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : Array.Empty<QuestionTemplateEntityBase>()
+    );
+
+    // title
+    Assert.IsFalse(newSurveyTemplateEntityContext.HasErrors);
+  }
+
+  [TestMethod]
   public void Update_FullListOfParameters_TitleFilled()
   {
     // Arrange
