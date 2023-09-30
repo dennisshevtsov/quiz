@@ -2,13 +2,15 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace SurveyApp;
 
 public sealed class ExecutedContext<TResult> where TResult : class
 {
-  private ExecutedContext(TResult? rusult, string[] errors)
+  private ExecutedContext(TResult? result, string[] errors)
   {
-    Rusult = rusult;
+    Rusult = result;
     Errors = errors;
   }
 
@@ -16,9 +18,18 @@ public sealed class ExecutedContext<TResult> where TResult : class
 
   public string[] Errors { get; }
 
-  public bool Success => Errors.Length > 0;
+  [MemberNotNullWhen(false, nameof(ExecutedContext<TResult>.Rusult))]
+  public bool HasErrors => Errors.Length > 0;
 
-  public static ExecutedContext<TResult> Ok(TResult result) => new(result, Array.Empty<string>());
+  public static ExecutedContext<TResult> Ok(TResult result) => new
+  (
+    result: result ?? throw new ArgumentNullException(nameof(result)),
+    errors: Array.Empty<string>()
+  );
 
-  public static ExecutedContext<TResult> Fail(string[] errors) => new(null, errors);
+  public static ExecutedContext<TResult> Fail(string[] errors) => new
+  (
+    result: null,
+    errors: errors ?? throw new ArgumentNullException(nameof(errors))
+  );
 }

@@ -14,7 +14,7 @@ public sealed class AddSurveyTemplateRequestDto : IComposable
 
   public QuestionTemplateDtoBase[] Questions { get; set; } = Array.Empty<QuestionTemplateDtoBase>();
 
-  public SurveyTemplateEntity ToSurveyTemplateEntity() => new
+  public ExecutedContext<SurveyTemplateEntity> ToSurveyTemplateEntity() => SurveyTemplateEntity.New
   (
     title      : Title,
     description: Description,
