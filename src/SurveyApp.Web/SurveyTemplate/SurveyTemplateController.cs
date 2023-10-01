@@ -48,10 +48,12 @@ public sealed class SurveyTemplateController : ControllerBase
         newSurveyTemplateEntityContext.Rusult,
         cancellationToken);
 
-    return CreatedAtAction(
-      nameof(SurveyTemplateController.GetSurveyTemplate),
-      new { surveyTemplateEntity.SurveyTemplateId },
-      new GetSurveyTemplateResponseDto(surveyTemplateEntity));
+    return CreatedAtAction
+    (
+      actionName : nameof(SurveyTemplateController.GetSurveyTemplate),
+      routeValues: new { surveyTemplateEntity.SurveyTemplateId },
+      value      : new GetSurveyTemplateResponseDto(surveyTemplateEntity)
+    );
   }
 
   [HttpPut("{surveyTemplateId}", Name = nameof(SurveyTemplateController.UpdateSurveyTemplate))]

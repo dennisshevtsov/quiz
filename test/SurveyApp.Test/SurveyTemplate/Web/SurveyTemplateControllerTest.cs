@@ -110,9 +110,9 @@ public sealed class SurveyTemplateControllerTest
 
     AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
     {
-      Title = Guid.NewGuid().ToString(),
+      Title       = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
-      Questions = new QuestionTemplateDtoBase[]
+      Questions   = new QuestionTemplateDtoBase[]
       {
         new TextQuestionTemplateDto
         {
@@ -154,7 +154,7 @@ public sealed class SurveyTemplateControllerTest
 
     AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
     {
-      Title = Guid.NewGuid().ToString(),
+      Title       = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
     };
 
@@ -203,7 +203,7 @@ public sealed class SurveyTemplateControllerTest
 
     AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
     {
-      Title = Guid.NewGuid().ToString(),
+      Title       = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
     };
 
@@ -216,6 +216,32 @@ public sealed class SurveyTemplateControllerTest
 
     Assert.IsNotNull(createdAtActionResult.RouteValues);
     Assert.AreEqual(surveyTemplateId, createdAtActionResult.RouteValues["surveyTemplateId"]);
+  }
+
+   [TestMethod]
+  public async Task AddSurveyTemplate_NoTitle_BadRequestReturned()
+  {
+    // Arrange
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(surveyTemplateEntity);
+
+    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
+    {
+      Title       = string.Empty,
+      Description = Guid.NewGuid().ToString(),
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyTemplateController.AddSurveyTemplate(
+      addSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(BadRequestObjectResult));
   }
 
   [TestMethod]
