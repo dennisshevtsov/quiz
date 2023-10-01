@@ -26,13 +26,20 @@ public sealed class SurveyTemplateEntity
 
   public QuestionTemplateEntityBase[] Questions { get; private set; }
 
-  public SurveyTemplateEntity Update(string title, string description, QuestionTemplateEntityBase[] questions)
+  public ExecutedContext<SurveyTemplateEntity> Update(string title, string description, QuestionTemplateEntityBase[] questions)
   {
+    string[] errors = Validate(title, description);
+
+    if (errors.Length > 0)
+    {
+      return ExecutedContext<SurveyTemplateEntity>.Fail(errors);
+    }
+
     Title       = title;
     Description = description;
     Questions   = questions;
 
-    return this;
+    return ExecutedContext<SurveyTemplateEntity>.Ok(this);
   }
 
   public static ExecutedContext<SurveyTemplateEntity> New(

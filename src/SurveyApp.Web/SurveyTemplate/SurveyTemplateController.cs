@@ -68,8 +68,16 @@ public sealed class SurveyTemplateController : ControllerBase
       return NotFound();
     }
 
+    ExecutedContext<SurveyTemplateEntity> updatedSurveyTemplateEntityContext =
+      updateSurveyTemplateRequestDto.UpdateSurveyTemplate(surveyTemplateEntity);
+
+    if (updatedSurveyTemplateEntityContext.HasErrors)
+    {
+      return BadRequest(updatedSurveyTemplateEntityContext.Errors);
+    }
+
     await _surveyTemplateRepository.UpdateSurveyTemplateAsync(
-      updateSurveyTemplateRequestDto.UpdateSurveyTemplate(surveyTemplateEntity),
+      updatedSurveyTemplateEntityContext.Rusult,
       cancellationToken);
 
     return NoContent();
