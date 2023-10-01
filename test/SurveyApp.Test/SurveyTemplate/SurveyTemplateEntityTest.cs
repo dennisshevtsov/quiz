@@ -209,7 +209,10 @@ public sealed class SurveyTemplateEntityTest
        questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
 
     // Act
-    surveyTemplateEntity.Update(title, string.Empty, Array.Empty<QuestionTemplateEntityBase>());
+    surveyTemplateEntity.Update(
+      title      : title,
+      description: Guid.NewGuid().ToString(),
+      questions  : Array.Empty<QuestionTemplateEntityBase>());
 
     // title
     Assert.AreEqual(title, surveyTemplateEntity.Title);
@@ -227,7 +230,10 @@ public sealed class SurveyTemplateEntityTest
        questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
 
     // Act
-    surveyTemplateEntity.Update(string.Empty, description, Array.Empty<QuestionTemplateEntityBase>());
+    surveyTemplateEntity.Update(
+      title      : Guid.NewGuid().ToString(),
+      description: description,
+      questions  : Array.Empty<QuestionTemplateEntityBase>());
 
     // title
     Assert.AreEqual(description, surveyTemplateEntity.Description);
@@ -245,7 +251,10 @@ public sealed class SurveyTemplateEntityTest
        questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
 
     // Act
-    surveyTemplateEntity.Update(string.Empty, string.Empty, questions);
+    surveyTemplateEntity.Update(
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : questions);
 
     // title
     Assert.AreEqual(questions, surveyTemplateEntity.Questions);

@@ -269,7 +269,11 @@ public sealed class SurveyTemplateControllerTest
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
 
-    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new();
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      Title       = Guid.NewGuid().ToString(),
+      Description = Guid.NewGuid().ToString(),
+    };
 
     // Act
     IActionResult actionResult = await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
