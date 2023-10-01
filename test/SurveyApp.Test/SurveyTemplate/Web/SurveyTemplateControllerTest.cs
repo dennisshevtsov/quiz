@@ -350,6 +350,31 @@ public sealed class SurveyTemplateControllerTest
   }
 
   [TestMethod]
+  public async Task UpdateSurveyTemplate_NoTitle_UpdateSurveyTemplateAsyncNotCalled()
+  {
+    // Arrange
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(surveyTemplateEntity);
+
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      Title       = string.Empty,
+      Description = Guid.NewGuid().ToString(),
+    };
+
+    // Act
+    await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    _surveyTemplateRepositoryMock.Verify(repository => repository.UpdateSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()), Times.Never);
+  }
+
+  [TestMethod]
   public async Task DeleteSurveyTemplate_UnknownSurveyTemplate_NotFoundReturned()
   {
     // Arrange
