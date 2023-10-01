@@ -110,9 +110,9 @@ public sealed class SurveyTemplateControllerTest
 
     AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
     {
-      Title = Guid.NewGuid().ToString(),
+      Title       = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
-      Questions = new QuestionTemplateDtoBase[]
+      Questions   = new QuestionTemplateDtoBase[]
       {
         new TextQuestionTemplateDto
         {
@@ -154,7 +154,7 @@ public sealed class SurveyTemplateControllerTest
 
     AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
     {
-      Title = Guid.NewGuid().ToString(),
+      Title       = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
     };
 
@@ -203,7 +203,7 @@ public sealed class SurveyTemplateControllerTest
 
     AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
     {
-      Title = Guid.NewGuid().ToString(),
+      Title       = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
     };
 
@@ -216,6 +216,110 @@ public sealed class SurveyTemplateControllerTest
 
     Assert.IsNotNull(createdAtActionResult.RouteValues);
     Assert.AreEqual(surveyTemplateId, createdAtActionResult.RouteValues["surveyTemplateId"]);
+  }
+
+  [TestMethod]
+  public async Task AddSurveyTemplate_NoTitle_BadRequestReturned()
+  {
+    // Arrange
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(surveyTemplateEntity);
+
+    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
+    {
+      Title       = string.Empty,
+      Description = Guid.NewGuid().ToString(),
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyTemplateController.AddSurveyTemplate(
+      addSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(BadRequestObjectResult));
+  }
+
+  [TestMethod]
+  public async Task AddSurveyTemplate_NoTitle_AddSurveyTemplateAsyncNotCalled()
+  {
+    // Arrange
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(surveyTemplateEntity);
+
+    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
+    {
+      Title       = string.Empty,
+      Description = Guid.NewGuid().ToString(),
+    };
+
+    // Act
+    await _surveyTemplateController.AddSurveyTemplate(
+      addSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    _surveyTemplateRepositoryMock.Verify(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()), Times.Never);
+  }
+
+  [TestMethod]
+  public async Task AddSurveyTemplate_NoDescription_BadRequestReturned()
+  {
+    // Arrange
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(surveyTemplateEntity);
+
+    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
+    {
+      Title       = Guid.NewGuid().ToString(),
+      Description = string.Empty,
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyTemplateController.AddSurveyTemplate(
+      addSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(BadRequestObjectResult));
+  }
+
+  [TestMethod]
+  public async Task AddSurveyTemplate_NoDescription_AddSurveyTemplateAsyncNotCalled()
+  {
+    // Arrange
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(surveyTemplateEntity);
+
+    AddSurveyTemplateRequestDto addSurveyTemplateRequestDto = new()
+    {
+      Title       = Guid.NewGuid().ToString(),
+      Description = string.Empty,
+    };
+
+    // Act
+    await _surveyTemplateController.AddSurveyTemplate(
+      addSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    _surveyTemplateRepositoryMock.Verify(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()), Times.Never);
   }
 
   [TestMethod]
@@ -269,7 +373,11 @@ public sealed class SurveyTemplateControllerTest
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
 
-    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new();
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      Title       = Guid.NewGuid().ToString(),
+      Description = Guid.NewGuid().ToString(),
+    };
 
     // Act
     IActionResult actionResult = await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
@@ -318,6 +426,106 @@ public sealed class SurveyTemplateControllerTest
                 entity.Questions.Length == updateSurveyTemplateRequestDto.Questions.Length;
 
     _surveyTemplateRepositoryMock.Verify(repository => repository.UpdateSurveyTemplateAsync(It.Is(match), It.IsAny<CancellationToken>()));
+  }
+
+  [TestMethod]
+  public async Task UpdateSurveyTemplate_NoTitle_BadRequestReturned()
+  {
+    // Arrange
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(surveyTemplateEntity);
+
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      Title       = string.Empty,
+      Description = Guid.NewGuid().ToString(),
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(BadRequestObjectResult));
+  }
+
+  [TestMethod]
+  public async Task UpdateSurveyTemplate_NoTitle_UpdateSurveyTemplateAsyncNotCalled()
+  {
+    // Arrange
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(surveyTemplateEntity);
+
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      Title       = string.Empty,
+      Description = Guid.NewGuid().ToString(),
+    };
+
+    // Act
+    await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    _surveyTemplateRepositoryMock.Verify(repository => repository.UpdateSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()), Times.Never);
+  }
+
+  [TestMethod]
+  public async Task UpdateSurveyTemplate_NoDescription_BadRequestReturned()
+  {
+    // Arrange
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(surveyTemplateEntity);
+
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      Title       = Guid.NewGuid().ToString(),
+      Description = string.Empty,
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(BadRequestObjectResult));
+  }
+
+  [TestMethod]
+  public async Task UpdateSurveyTemplate_NoDescription_UpdateSurveyTemplateAsyncNotCalled()
+  {
+    // Arrange
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(surveyTemplateEntity);
+
+    UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
+    {
+      Title       = Guid.NewGuid().ToString(),
+      Description = string.Empty,
+    };
+
+    // Act
+    await _surveyTemplateController.UpdateSurveyTemplate(updateSurveyTemplateRequestDto, CancellationToken.None);
+
+    // Assert
+    _surveyTemplateRepositoryMock.Verify(repository => repository.UpdateSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()), Times.Never);
   }
 
   [TestMethod]
