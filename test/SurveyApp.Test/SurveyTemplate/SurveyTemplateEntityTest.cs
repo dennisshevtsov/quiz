@@ -259,4 +259,24 @@ public sealed class SurveyTemplateEntityTest
     // title
     Assert.AreEqual(questions, surveyTemplateEntity.Questions);
   }
+
+  [TestMethod]
+  public void Update_NoTitle_ErrorsReturned()
+  {
+    // Arrange
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+
+    // Act
+    ExecutedContext<SurveyTemplateEntity> updatedSurveyTemplateEntityContext =
+      surveyTemplateEntity.Update(
+        title      : string.Empty,
+        description: Guid.NewGuid().ToString(),
+        questions  : Array.Empty<QuestionTemplateEntityBase>());
+
+    // title
+    Assert.IsTrue(updatedSurveyTemplateEntityContext.HasErrors);
+  }
 }
