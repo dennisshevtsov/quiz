@@ -299,4 +299,24 @@ public sealed class SurveyTemplateEntityTest
     // title
     Assert.IsTrue(updatedSurveyTemplateEntityContext.HasErrors);
   }
+
+  [TestMethod]
+  public void Update_FullListOfParameters_NoError()
+  {
+    // Arrange
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+
+    // Act
+    ExecutedContext<SurveyTemplateEntity> updatedSurveyTemplateEntityContext =
+      surveyTemplateEntity.Update(
+        title      : Guid.NewGuid().ToString(),
+        description: Guid.NewGuid().ToString(),
+        questions  : Array.Empty<QuestionTemplateEntityBase>());
+
+    // title
+    Assert.IsFalse(updatedSurveyTemplateEntityContext.HasErrors);
+  }
 }
