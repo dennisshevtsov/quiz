@@ -30,34 +30,34 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
       },
     };
 
-    Guid surveyTemplateId = Guid.NewGuid();
+    QuestionTemplateEntityBase[] questionTemplateEntityCollection = new QuestionTemplateEntityBase[]
+    {
+      new MultipleChoiceQuestionTemplateEntity
+      (
+        text   : Guid.NewGuid().ToString(),
+        choices: new[]
+        {
+          Guid.NewGuid().ToString(),
+          Guid.NewGuid().ToString(),
+        }
+      ),
+      new SingleChoiceQuestionTemplateEntity
+      (
+        text   : Guid.NewGuid().ToString(),
+        choices: new[]
+        {
+          Guid.NewGuid().ToString(),
+          Guid.NewGuid().ToString(),
+        }
+      ),
+    };
 
-    SurveyTemplateEntity surveyTemplateEntity = new(
-      surveyTemplateId: surveyTemplateId,
-      title           : Guid.NewGuid().ToString(),
-      description     : Guid.NewGuid().ToString(),
-      questions       : new QuestionTemplateEntityBase[]
-      {
-        new MultipleChoiceQuestionTemplateEntity
-        (
-          text   : Guid.NewGuid().ToString(),
-          choices: new[]
-          {
-            Guid.NewGuid().ToString(),
-            Guid.NewGuid().ToString(),
-          }
-        ),
-        new SingleChoiceQuestionTemplateEntity
-        (
-          text   : Guid.NewGuid().ToString(),
-          choices: new[]
-          {
-            Guid.NewGuid().ToString(),
-            Guid.NewGuid().ToString(),
-          }
-        ),
-      }
-    );
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
+       title      : Guid.NewGuid().ToString(),
+       description: Guid.NewGuid().ToString(),
+       questions  : questionTemplateEntityCollection).Rusult!;
+
+    Guid surveyTemplateId = surveyTemplateEntity.SurveyTemplateId;
 
     // Act
     updateSurveyTemplateRequestDto.UpdateSurveyTemplate(surveyTemplateEntity);
