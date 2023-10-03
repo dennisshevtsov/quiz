@@ -6,7 +6,7 @@ namespace SurveyApp.SurveyTemplate;
 
 public sealed class MultipleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
 {
-  public MultipleChoiceQuestionTemplateEntity(string text, string[] choices) : base(text)
+  private MultipleChoiceQuestionTemplateEntity(string text, string[] choices) : base(text)
   {
     Choices = choices;
   }
@@ -19,8 +19,10 @@ public sealed class MultipleChoiceQuestionTemplateEntity : QuestionTemplateEntit
 
   public string[] Choices { get; private set; }
 
-  public static void Validate(string text, string[] choices, IList<string> errors)
+  public static string[] Validate(string text, string[] choices)
   {
+    List<string> errors = new();
+
     if (string.IsNullOrEmpty(text))
     {
       errors.Add("Text is required.");
@@ -40,5 +42,25 @@ public sealed class MultipleChoiceQuestionTemplateEntity : QuestionTemplateEntit
         }
       }
     }
+
+    return errors.ToArray();
+  }
+
+  public static ExecutedContext<QuestionTemplateEntityBase> New(string text, string[] choices)
+  {
+    string[] errors = Validate(text, choices);
+
+    if (errors.Length > 0)
+    {
+      return ExecutedContext<QuestionTemplateEntityBase>.Fail(errors);
+    }
+
+    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new
+    (
+      text   : text,
+      choices: choices
+    );
+
+    return ExecutedContext<QuestionTemplateEntityBase>.Ok(multipleChoiceQuestionTemplateEntity);
   }
 }

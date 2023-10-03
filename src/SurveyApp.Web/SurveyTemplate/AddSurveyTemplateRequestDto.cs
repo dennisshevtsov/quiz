@@ -14,10 +14,19 @@ public sealed class AddSurveyTemplateRequestDto : IComposable
 
   public QuestionTemplateDtoBase[] Questions { get; set; } = Array.Empty<QuestionTemplateDtoBase>();
 
-  public ExecutedContext<SurveyTemplateEntity> ToSurveyTemplateEntity() => SurveyTemplateEntity.New
-  (
-    title      : Title,
-    description: Description,
-    questions  : QuestionTemplateDtoBase.ToQuestionTemplateEntityCollection(Questions)
-  );
+  public ExecutedContext<SurveyTemplateEntity> ToSurveyTemplateEntity()
+  {
+    ExecutedContext<QuestionTemplateEntityBase[]> newQuestionTemplatesContext =
+      QuestionTemplateDtoBase.ToQuestionTemplateEntityCollection(Questions);
+
+    ExecutedContext<SurveyTemplateEntity> newSurveyTemplateEntityContext = SurveyTemplateEntity.New
+    (
+      title      : Title,
+      description: Description,
+      questions  : newQuestionTemplatesContext.HasErrors ? Array.Empty<QuestionTemplateEntityBase>() : newQuestionTemplatesContext.Rusult,
+      errors     : newQuestionTemplatesContext.Errors
+    );
+
+    return newSurveyTemplateEntityContext;
+  }
 }

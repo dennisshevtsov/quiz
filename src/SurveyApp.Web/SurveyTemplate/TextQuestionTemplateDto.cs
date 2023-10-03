@@ -13,5 +13,5 @@ public sealed class TextQuestionTemplateDto : QuestionTemplateDtoBase
     Text = textQuestionTemplateEntity.Text;
   }
 
-  public override QuestionTemplateEntityBase ToTemplateQuestionEntity() => new TextQuestionTemplateEntity(Text);
+  public override ExecutedContext<QuestionTemplateEntityBase> ToTemplateQuestionEntity() => TextQuestionTemplateEntity.New(Text);
 }

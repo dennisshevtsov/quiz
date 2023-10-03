@@ -39,13 +39,15 @@ public sealed class SurveyTemplateEntity
   }
 
   public static ExecutedContext<SurveyTemplateEntity> New(
-    string title, string description, QuestionTemplateEntityBase[] questions)
+    string title, string description, QuestionTemplateEntityBase[] questions, string[] errors)
   {
-    string[] errors = Validate(title, description);
+    List<string> allErrors = new();
+    allErrors.AddRange(errors);
+    allErrors.AddRange(Validate(title, description));
 
-    if (errors.Length > 0)
+    if (allErrors.Count > 0)
     {
-      return ExecutedContext<SurveyTemplateEntity>.Fail(errors);
+      return ExecutedContext<SurveyTemplateEntity>.Fail(allErrors.ToArray());
     }
 
     SurveyTemplateEntity surveyTemplateEntity = new

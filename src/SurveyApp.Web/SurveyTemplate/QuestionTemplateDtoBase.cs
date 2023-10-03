@@ -17,7 +17,7 @@ public abstract class QuestionTemplateDtoBase
 
   public QuestionType QuestionType { get; set; }
 
-  public abstract QuestionTemplateEntityBase ToTemplateQuestionEntity();
+  public abstract ExecutedContext<QuestionTemplateEntityBase> ToTemplateQuestionEntity();
 
   public static QuestionTemplateDtoBase FromQuestionTemplateEntity(QuestionTemplateEntityBase questionTemplateEntity) =>
     questionTemplateEntity.QuestionType switch
@@ -29,15 +29,29 @@ public abstract class QuestionTemplateDtoBase
       _                           => throw new NotSupportedException("Unknown question type."),
     };
 
-  public static QuestionTemplateEntityBase[] ToQuestionTemplateEntityCollection(QuestionTemplateDtoBase[] questionTemplateDtoCollection)
+  public static ExecutedContext<QuestionTemplateEntityBase[]> ToQuestionTemplateEntityCollection(QuestionTemplateDtoBase[] questionTemplateDtoCollection)
   {
-    QuestionTemplateEntityBase[] questionTemplateEntityCollection = new QuestionTemplateEntityBase[questionTemplateDtoCollection.Length];
+    List<string> errors = new();
+    QuestionTemplateEntityBase[] questionTemplateEntityCollection =
+      new QuestionTemplateEntityBase[questionTemplateDtoCollection.Length];
 
     for (int i = 0; i < questionTemplateDtoCollection.Length; i++)
     {
-      questionTemplateEntityCollection[i] = questionTemplateDtoCollection[i].ToTemplateQuestionEntity();
+      ExecutedContext<QuestionTemplateEntityBase> newQuestionTemplateEntity =
+        questionTemplateDtoCollection[i].ToTemplateQuestionEntity();
+
+      if (newQuestionTemplateEntity.HasErrors)
+      {
+        errors.AddRange(newQuestionTemplateEntity.Errors);
+      }
+      else
+      {
+        questionTemplateEntityCollection[i] = newQuestionTemplateEntity.Rusult;
+      }
     }
 
-    return questionTemplateEntityCollection;
+    return errors.Count == 0 ?
+           ExecutedContext<QuestionTemplateEntityBase[]>.Ok(questionTemplateEntityCollection) :
+           ExecutedContext<QuestionTemplateEntityBase[]>.Fail(errors.ToArray());
   }
 }

@@ -20,6 +20,6 @@ public sealed class UpdateSurveyTemplateRequestDto : IComposable
   (
     title      : Title,
     description: Description,
-    questions  : QuestionTemplateDtoBase.ToQuestionTemplateEntityCollection(Questions)
+    questions  : QuestionTemplateDtoBase.ToQuestionTemplateEntityCollection(Questions).Rusult!
   );
 }

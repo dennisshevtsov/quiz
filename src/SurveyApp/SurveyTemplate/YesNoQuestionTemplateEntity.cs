@@ -6,7 +6,7 @@ namespace SurveyApp.SurveyTemplate;
 
 public sealed class YesNoQuestionTemplateEntity : QuestionTemplateEntityBase
 {
-  public YesNoQuestionTemplateEntity(string text) : base(text) { }
+  private YesNoQuestionTemplateEntity(string text) : base(text) { }
 
   public YesNoQuestionTemplateEntity(YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity)
     : this(yesNoQuestionTemplateEntity.Text)
@@ -14,11 +14,32 @@ public sealed class YesNoQuestionTemplateEntity : QuestionTemplateEntityBase
 
   public override QuestionType QuestionType => QuestionType.YesNo;
 
-  public static void Validate(string text, IList<string> errors)
+  public static string[] Validate(string text)
   {
+    List<string> errors = new();
+
     if (string.IsNullOrEmpty(text))
     {
       errors.Add("Text is required.");
     }
+
+    return errors.ToArray();
+  }
+
+  public static ExecutedContext<QuestionTemplateEntityBase> New(string text)
+  {
+    string[] errors = Validate(text);
+
+    if (errors.Length > 0)
+    {
+      return ExecutedContext<QuestionTemplateEntityBase>.Fail(errors);
+    }
+
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new
+    (
+      text: text
+    );
+
+    return ExecutedContext<QuestionTemplateEntityBase>.Ok(yesNoQuestionTemplateEntity);
   }
 }

@@ -13,5 +13,5 @@ public sealed class YesNoQuestionTemplateDto : QuestionTemplateDtoBase
     Text = yesNoQuestionTemplateEntity.Text;
   }
 
-  public override QuestionTemplateEntityBase ToTemplateQuestionEntity() => new YesNoQuestionTemplateEntity(Text);
+  public override ExecutedContext<QuestionTemplateEntityBase> ToTemplateQuestionEntity() => YesNoQuestionTemplateEntity.New(Text);
 }
