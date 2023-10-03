@@ -13,4 +13,12 @@ public sealed class TextQuestionTemplateEntity : QuestionTemplateEntityBase
   { }
 
   public override QuestionType QuestionType => QuestionType.Text;
+
+  public static void Validate(string text, IList<string> errors)
+  {
+    if (string.IsNullOrEmpty(text))
+    {
+      errors.Add("Text is required.");
+    }
+  }
 }
