@@ -19,18 +19,16 @@ public sealed class SingleChoiceQuestionTemplateEntity : QuestionTemplateEntityB
 
   public string[] Choices { get; private set; }
 
-  public static string[] Validate(string text, string[] choices)
+  public static void Validate(string text, string[] choices, ExecutingContext context)
   {
-    List<string> errors = new();
-
     if (string.IsNullOrEmpty(text))
     {
-      errors.Add("Text is required.");
+      context.AddError("Text is required.");
     }
 
     if (choices == null || choices.Length == 0)
     {
-      errors.Add("Choices are required.");
+      context.AddError("Choices are required.");
     }
     else
     {
@@ -38,21 +36,19 @@ public sealed class SingleChoiceQuestionTemplateEntity : QuestionTemplateEntityB
       {
         if (string.IsNullOrEmpty(choices[i]))
         {
-          errors.Add("Choices cannot contain an empty choice.");
+          context.AddError("Choices cannot contain an empty choice.");
         }
       }
     }
-
-    return errors.ToArray();
   }
 
-  public static ExecutedContext<QuestionTemplateEntityBase> New(string text, string[] choices)
+  public static SingleChoiceQuestionTemplateEntity? New(string text, string[] choices, ExecutingContext context)
   {
-    string[] errors = Validate(text, choices);
+    Validate(text, choices, context);
 
-    if (errors.Length > 0)
+    if (context.HasErrors)
     {
-      return ExecutedContext<QuestionTemplateEntityBase>.Fail(errors);
+      return null;
     }
 
     SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new
@@ -61,6 +57,6 @@ public sealed class SingleChoiceQuestionTemplateEntity : QuestionTemplateEntityB
       choices: choices
     );
 
-    return ExecutedContext<QuestionTemplateEntityBase>.Ok(singleChoiceQuestionTemplateEntity);
+    return singleChoiceQuestionTemplateEntity;
   }
 }

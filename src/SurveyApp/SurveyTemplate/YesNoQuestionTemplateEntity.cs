@@ -14,32 +14,25 @@ public sealed class YesNoQuestionTemplateEntity : QuestionTemplateEntityBase
 
   public override QuestionType QuestionType => QuestionType.YesNo;
 
-  public static string[] Validate(string text)
+  public static void Validate(string text, ExecutingContext context)
   {
-    List<string> errors = new();
-
     if (string.IsNullOrEmpty(text))
     {
-      errors.Add("Text is required.");
+      context.AddError("Text is required.");
     }
-
-    return errors.ToArray();
   }
 
-  public static ExecutedContext<QuestionTemplateEntityBase> New(string text)
+  public static YesNoQuestionTemplateEntity? New(string text, ExecutingContext context)
   {
-    string[] errors = Validate(text);
+    Validate(text, context);
 
-    if (errors.Length > 0)
+    if (context.HasErrors)
     {
-      return ExecutedContext<QuestionTemplateEntityBase>.Fail(errors);
+      return null;
     }
 
-    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new
-    (
-      text: text
-    );
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new(text);
 
-    return ExecutedContext<QuestionTemplateEntityBase>.Ok(yesNoQuestionTemplateEntity);
+    return yesNoQuestionTemplateEntity;
   }
 }

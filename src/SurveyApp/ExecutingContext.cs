@@ -17,5 +17,5 @@ public sealed class ExecutingContext
 
   public bool HasErrors => _errors.Count > 0;
 
-  public void AddError(string error) => _errors.Add(error);
+  internal void AddError(string error) => _errors.Add(error);
 }
