@@ -13,10 +13,11 @@ public sealed class QuestionEntityBaseTest
   public void Copy_TextQuestionTemplateEntity_TextQuestionEntityReturned()
   {
     // Arrange
-    TextQuestionTemplateEntity textQuestionTemplateEntity = new
+    TextQuestionTemplateEntity textQuestionTemplateEntity = TextQuestionTemplateEntity.New
     (
-      text: Guid.NewGuid().ToString()
-    );
+      text   : Guid.NewGuid().ToString(),
+      context: new ExecutingContext()
+    )!;
 
     // Act
     QuestionEntityBase questionEntity = QuestionEntityBase.Copy(textQuestionTemplateEntity);
@@ -29,10 +30,11 @@ public sealed class QuestionEntityBaseTest
   public void Copy_YesNoQuestionTemplateEntity_YesNoQuestionEntityReturned()
   {
     // Arrange
-    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = YesNoQuestionTemplateEntity.New
     (
-      text: Guid.NewGuid().ToString()
-    );
+      text   : Guid.NewGuid().ToString(),
+      context: new ExecutingContext()
+    )!;
 
     // Act
     QuestionEntityBase questionEntity = QuestionEntityBase.Copy(yesNoQuestionTemplateEntity);
@@ -45,7 +47,7 @@ public sealed class QuestionEntityBaseTest
   public void Copy_MultipleChoiceQuestionTemplateEntity_MultipleChoiceQuestionEntityReturned()
   {
     // Arrange
-    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new
+    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
     (
       text   : Guid.NewGuid().ToString(),
       choices: new[]
@@ -53,8 +55,9 @@ public sealed class QuestionEntityBaseTest
         Guid.NewGuid().ToString(),
         Guid.NewGuid().ToString(),
         Guid.NewGuid().ToString(),
-      }
-    );
+      },
+      context: new ExecutingContext()
+    )!;
 
     // Act
     QuestionEntityBase questionEntity = QuestionEntityBase.Copy(multipleChoiceQuestionTemplateEntity);
@@ -67,7 +70,7 @@ public sealed class QuestionEntityBaseTest
   public void Copy_SingleChoiceQuestionTemplateEntity_SingleChoiceQuestionEntityReturned()
   {
     // Arrange
-    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new
+    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = SingleChoiceQuestionTemplateEntity.New
     (
       text   : Guid.NewGuid().ToString(),
       choices: new[]
@@ -75,8 +78,9 @@ public sealed class QuestionEntityBaseTest
         Guid.NewGuid().ToString(),
         Guid.NewGuid().ToString(),
         Guid.NewGuid().ToString(),
-      }
-    );
+      },
+      context: new ExecutingContext()
+    )!;
 
     // Act
     QuestionEntityBase questionEntity = QuestionEntityBase.Copy(singleChoiceQuestionTemplateEntity);

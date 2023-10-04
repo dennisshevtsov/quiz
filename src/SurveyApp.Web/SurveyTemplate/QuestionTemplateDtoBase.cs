@@ -30,15 +30,15 @@ public abstract class QuestionTemplateDtoBase
     };
 
   public static QuestionTemplateEntityBase[] ToQuestionTemplateEntityCollection(
-    QuestionTemplateDtoBase[] questionTemplateDtoCollection, ExecutingContext context)
+    QuestionTemplateDtoBase[] questions, ExecutingContext context)
   {
     QuestionTemplateEntityBase[] questionTemplateEntityCollection =
-      new QuestionTemplateEntityBase[questionTemplateDtoCollection.Length];
+      new QuestionTemplateEntityBase[questions.Length];
 
-    for (int i = 0; i < questionTemplateDtoCollection.Length; i++)
+    for (int i = 0; i < questions.Length; i++)
     {
       QuestionTemplateEntityBase? questionTemplateEntity =
-        questionTemplateDtoCollection[i].ToTemplateQuestionEntity(context);
+        questions[i].ToTemplateQuestionEntity(context);
 
       if (!context.HasErrors)
       {

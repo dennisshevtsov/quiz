@@ -42,7 +42,7 @@ public sealed class MultipleChoiceQuestionTemplateEntity : QuestionTemplateEntit
     }
   }
 
-  public static QuestionTemplateEntityBase? New(string text, string[] choices, ExecutingContext context)
+  public static MultipleChoiceQuestionTemplateEntity? New(string text, string[] choices, ExecutingContext context)
   {
     Validate(text, choices, context);
 
