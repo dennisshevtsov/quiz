@@ -32,35 +32,40 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
 
     QuestionTemplateEntityBase[] questionTemplateEntityCollection = new QuestionTemplateEntityBase[]
     {
-      new MultipleChoiceQuestionTemplateEntity
+      MultipleChoiceQuestionTemplateEntity.New
       (
         text   : Guid.NewGuid().ToString(),
         choices: new[]
         {
           Guid.NewGuid().ToString(),
           Guid.NewGuid().ToString(),
-        }
-      ),
-      new SingleChoiceQuestionTemplateEntity
+        },
+        context: new ExecutingContext()
+      )!,
+      SingleChoiceQuestionTemplateEntity.New
       (
         text   : Guid.NewGuid().ToString(),
         choices: new[]
         {
           Guid.NewGuid().ToString(),
           Guid.NewGuid().ToString(),
-        }
-      ),
+        },
+        context: new ExecutingContext()
+      )!,
     };
 
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
-       title      : Guid.NewGuid().ToString(),
-       description: Guid.NewGuid().ToString(),
-       questions  : questionTemplateEntityCollection).Rusult!;
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : questionTemplateEntityCollection,
+      context    : new ExecutingContext()
+    )!;
 
     Guid surveyTemplateId = surveyTemplateEntity.SurveyTemplateId;
 
     // Act
-    updateSurveyTemplateRequestDto.UpdateSurveyTemplate(surveyTemplateEntity);
+    updateSurveyTemplateRequestDto.UpdateSurveyTemplate(surveyTemplateEntity, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(surveyTemplateId, surveyTemplateEntity.SurveyTemplateId);

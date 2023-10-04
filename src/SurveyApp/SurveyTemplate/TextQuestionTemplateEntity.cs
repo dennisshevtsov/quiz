@@ -6,11 +6,33 @@ namespace SurveyApp.SurveyTemplate;
 
 public sealed class TextQuestionTemplateEntity : QuestionTemplateEntityBase
 {
-  public TextQuestionTemplateEntity(string text) : base(text) { }
+  private TextQuestionTemplateEntity(string text) : base(text) { }
 
   public TextQuestionTemplateEntity(TextQuestionTemplateEntity textQuestionTemplateEntity)
     : this(textQuestionTemplateEntity.Text)
   { }
 
   public override QuestionType QuestionType => QuestionType.Text;
+
+  public static void Validate(string text, ExecutingContext context)
+  {
+    if (string.IsNullOrEmpty(text))
+    {
+      context.AddError("Text is required.");
+    }
+  }
+
+  public static TextQuestionTemplateEntity? New(string text, ExecutingContext context)
+  {
+    Validate(text, context);
+
+    if (context.HasErrors)
+    {
+      return null;
+    }
+
+    TextQuestionTemplateEntity textQuestionTemplateEntity = new(text);
+
+    return textQuestionTemplateEntity;
+  }
 }

@@ -30,7 +30,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -50,7 +51,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -103,7 +105,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -147,7 +150,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -173,7 +177,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -199,7 +204,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
     Guid surveyTemplateId = surveyTemplateEntity.SurveyTemplateId;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
@@ -229,7 +235,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -255,7 +262,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -281,7 +289,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -307,7 +316,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.AddSurveyTemplateAsync(It.IsAny<SurveyTemplateEntity>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -372,7 +382,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -397,7 +408,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
     Guid surveyTemplateId = surveyTemplateEntity.SurveyTemplateId;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
@@ -443,7 +455,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -468,7 +481,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -493,7 +507,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -518,7 +533,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -576,7 +592,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
@@ -597,7 +614,8 @@ public sealed class SurveyTemplateControllerTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);

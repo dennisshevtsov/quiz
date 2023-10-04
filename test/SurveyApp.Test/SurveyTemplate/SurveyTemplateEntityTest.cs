@@ -11,15 +11,16 @@ public sealed class SurveyTemplateEntityTest
   public void New_FullListOfParameters_SurveyTemplateIdFilled()
   {
     // Act
-    ExecutedContext<SurveyTemplateEntity> newSurveyTemplateEntityContext = SurveyTemplateEntity.New
+    SurveyTemplateEntity? surveyTemplateEntity = SurveyTemplateEntity.New
     (
       title      : Guid.NewGuid().ToString(),
       description: Guid.NewGuid().ToString(),
-      questions  : Array.Empty<QuestionTemplateEntityBase>()
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
     );
 
     // Assert
-    Assert.AreNotEqual(default, newSurveyTemplateEntityContext.Rusult!.SurveyTemplateId);
+    Assert.AreNotEqual(default, surveyTemplateEntity!.SurveyTemplateId);
   }
 
   [TestMethod]
@@ -29,15 +30,16 @@ public sealed class SurveyTemplateEntityTest
     string title = Guid.NewGuid().ToString();
 
     // Act
-    ExecutedContext<SurveyTemplateEntity> newSurveyTemplateEntityContext = SurveyTemplateEntity.New
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
     (
       title      : title,
       description: Guid.NewGuid().ToString(),
-      questions  : Array.Empty<QuestionTemplateEntityBase>()
-    );
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
+    )!;
 
-    // title
-    Assert.AreEqual(title, newSurveyTemplateEntityContext.Rusult!.Title);
+    // Assert
+    Assert.AreEqual(title, surveyTemplateEntity.Title);
   }
 
   [TestMethod]
@@ -47,15 +49,16 @@ public sealed class SurveyTemplateEntityTest
     string description = Guid.NewGuid().ToString();
 
     // Act
-    ExecutedContext<SurveyTemplateEntity> newSurveyTemplateEntityContext = SurveyTemplateEntity.New
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
     (
       title      : Guid.NewGuid().ToString(),
       description: description,
-      questions  : Array.Empty<QuestionTemplateEntityBase>()
-    );
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
+    )!;
 
-    // title
-    Assert.AreEqual(description, newSurveyTemplateEntityContext.Rusult!.Description);
+    // Assert
+    Assert.AreEqual(description, surveyTemplateEntity.Description);
   }
 
   [TestMethod]
@@ -65,60 +68,73 @@ public sealed class SurveyTemplateEntityTest
     QuestionTemplateEntityBase[] questions = new QuestionTemplateEntityBase[0];
 
     // Act
-    ExecutedContext<SurveyTemplateEntity> newSurveyTemplateEntityContext = SurveyTemplateEntity.New
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
     (
       title      : Guid.NewGuid().ToString(),
       description: Guid.NewGuid().ToString(),
-      questions  : questions
-    );
+      questions  : questions,
+      context    : new ExecutingContext()
+    )!;
 
-    // title
-    Assert.AreEqual(questions, newSurveyTemplateEntityContext.Rusult!.Questions);
+    // Assert
+    Assert.AreEqual(questions, surveyTemplateEntity.Questions);
   }
 
   [TestMethod]
   public void New_NoTitle_ErrorsReturned()
   {
+    // Arrange
+    ExecutingContext context = new();
+
     // Act
-    ExecutedContext<SurveyTemplateEntity> newSurveyTemplateEntityContext = SurveyTemplateEntity.New
+    SurveyTemplateEntity.New
     (
       title      : string.Empty,
       description: Guid.NewGuid().ToString(),
-      questions  : Array.Empty<QuestionTemplateEntityBase>()
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : context
     );
 
-    // title
-    Assert.IsTrue(newSurveyTemplateEntityContext.HasErrors);
+    // Assert
+    Assert.IsTrue(context.HasErrors);
   }
 
   [TestMethod]
   public void New_NoDescription_ErrorsReturned()
   {
+    // Arrange
+    ExecutingContext context = new();
+
     // Act
-    ExecutedContext<SurveyTemplateEntity> newSurveyTemplateEntityContext = SurveyTemplateEntity.New
+    SurveyTemplateEntity.New
     (
       title      : Guid.NewGuid().ToString(),
       description: string.Empty,
-      questions  : Array.Empty<QuestionTemplateEntityBase>()
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : context
     );
 
-    // title
-    Assert.IsTrue(newSurveyTemplateEntityContext.HasErrors);
+    // Assert
+    Assert.IsTrue(context.HasErrors);
   }
 
   [TestMethod]
   public void New_ShortListOfParameters_NoErrors()
   {
+    // Arrange
+    ExecutingContext context = new();
+
     // Act
-    ExecutedContext<SurveyTemplateEntity> newSurveyTemplateEntityContext = SurveyTemplateEntity.New
+    SurveyTemplateEntity.New
     (
       title      : Guid.NewGuid().ToString(),
       description: Guid.NewGuid().ToString(),
-      questions  : Array.Empty<QuestionTemplateEntityBase>()
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : context
     );
 
-    // title
-    Assert.IsFalse(newSurveyTemplateEntityContext.HasErrors);
+    // Assert
+    Assert.IsFalse(context.HasErrors);
   }
 
   [TestMethod]
@@ -127,10 +143,13 @@ public sealed class SurveyTemplateEntityTest
     // Arrange
     string title = Guid.NewGuid().ToString();
 
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
-       title      : Guid.NewGuid().ToString(),
-       description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
+    )!;
 
     // Act
     surveyTemplateEntity.Update(
@@ -138,7 +157,7 @@ public sealed class SurveyTemplateEntityTest
       description: Guid.NewGuid().ToString(),
       questions  : Array.Empty<QuestionTemplateEntityBase>());
 
-    // title
+    // Assert
     Assert.AreEqual(title, surveyTemplateEntity.Title);
   }
 
@@ -148,10 +167,13 @@ public sealed class SurveyTemplateEntityTest
     // Arrange
     string description = Guid.NewGuid().ToString();
 
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
-       title      : Guid.NewGuid().ToString(),
-       description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
+    )!;
 
     // Act
     surveyTemplateEntity.Update(
@@ -159,7 +181,7 @@ public sealed class SurveyTemplateEntityTest
       description: description,
       questions  : Array.Empty<QuestionTemplateEntityBase>());
 
-    // title
+    // Assert
     Assert.AreEqual(description, surveyTemplateEntity.Description);
   }
 
@@ -169,10 +191,13 @@ public sealed class SurveyTemplateEntityTest
     // Arrange
     QuestionTemplateEntityBase[] questions = new QuestionTemplateEntityBase[0];
 
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
-       title      : Guid.NewGuid().ToString(),
-       description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
+    )!;
 
     // Act
     surveyTemplateEntity.Update(
@@ -180,7 +205,7 @@ public sealed class SurveyTemplateEntityTest
       description: Guid.NewGuid().ToString(),
       questions  : questions);
 
-    // title
+    // Assert
     Assert.AreEqual(questions, surveyTemplateEntity.Questions);
   }
 
@@ -188,10 +213,13 @@ public sealed class SurveyTemplateEntityTest
   public void Update_NoTitle_ErrorsReturned()
   {
     // Arrange
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
-       title      : Guid.NewGuid().ToString(),
-       description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
+    )!;
 
     // Act
     ExecutedContext<SurveyTemplateEntity> updatedSurveyTemplateEntityContext =
@@ -200,7 +228,7 @@ public sealed class SurveyTemplateEntityTest
         description: Guid.NewGuid().ToString(),
         questions  : Array.Empty<QuestionTemplateEntityBase>());
 
-    // title
+    // Assert
     Assert.IsTrue(updatedSurveyTemplateEntityContext.HasErrors);
   }
 
@@ -208,10 +236,13 @@ public sealed class SurveyTemplateEntityTest
   public void Update_NoDescription_ErrorsReturned()
   {
     // Arrange
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
-       title      : Guid.NewGuid().ToString(),
-       description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
+    )!;
 
     // Act
     ExecutedContext<SurveyTemplateEntity> updatedSurveyTemplateEntityContext =
@@ -220,7 +251,7 @@ public sealed class SurveyTemplateEntityTest
         description: string.Empty,
         questions  : Array.Empty<QuestionTemplateEntityBase>());
 
-    // title
+    // Assert
     Assert.IsTrue(updatedSurveyTemplateEntityContext.HasErrors);
   }
 
@@ -228,10 +259,13 @@ public sealed class SurveyTemplateEntityTest
   public void Update_FullListOfParameters_NoError()
   {
     // Arrange
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
-       title      : Guid.NewGuid().ToString(),
-       description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
+    )!;
 
     // Act
     ExecutedContext<SurveyTemplateEntity> updatedSurveyTemplateEntityContext =
@@ -240,7 +274,7 @@ public sealed class SurveyTemplateEntityTest
         description: Guid.NewGuid().ToString(),
         questions  : Array.Empty<QuestionTemplateEntityBase>());
 
-    // title
+    // Assert
     Assert.IsFalse(updatedSurveyTemplateEntityContext.HasErrors);
   }
 }

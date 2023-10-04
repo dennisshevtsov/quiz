@@ -17,7 +17,7 @@ public abstract class QuestionTemplateDtoBase
 
   public QuestionType QuestionType { get; set; }
 
-  public abstract QuestionTemplateEntityBase ToTemplateQuestionEntity();
+  public abstract QuestionTemplateEntityBase? ToTemplateQuestionEntity(ExecutingContext context);
 
   public static QuestionTemplateDtoBase FromQuestionTemplateEntity(QuestionTemplateEntityBase questionTemplateEntity) =>
     questionTemplateEntity.QuestionType switch
@@ -29,15 +29,23 @@ public abstract class QuestionTemplateDtoBase
       _                           => throw new NotSupportedException("Unknown question type."),
     };
 
-  public static QuestionTemplateEntityBase[] ToQuestionTemplateEntityCollection(QuestionTemplateDtoBase[] questionTemplateDtoCollection)
+  public static QuestionTemplateEntityBase[] ToQuestionTemplateEntityCollection(
+    QuestionTemplateDtoBase[] questions, ExecutingContext context)
   {
-    QuestionTemplateEntityBase[] questionTemplateEntityCollection = new QuestionTemplateEntityBase[questionTemplateDtoCollection.Length];
+    QuestionTemplateEntityBase[] questionTemplateEntityCollection =
+      new QuestionTemplateEntityBase[questions.Length];
 
-    for (int i = 0; i < questionTemplateDtoCollection.Length; i++)
+    for (int i = 0; i < questions.Length; i++)
     {
-      questionTemplateEntityCollection[i] = questionTemplateDtoCollection[i].ToTemplateQuestionEntity();
+      QuestionTemplateEntityBase? questionTemplateEntity =
+        questions[i].ToTemplateQuestionEntity(context);
+
+      if (!context.HasErrors)
+      {
+        questionTemplateEntityCollection[i] = questionTemplateEntity!;
+      }
     }
 
-    return questionTemplateEntityCollection;
+    return context.HasErrors ? Array.Empty<QuestionTemplateEntityBase>() : questionTemplateEntityCollection;
   }
 }

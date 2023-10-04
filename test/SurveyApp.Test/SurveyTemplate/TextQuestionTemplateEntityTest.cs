@@ -14,55 +14,59 @@ public sealed class TextQuestionTemplateEntityTest
     string text = Guid.NewGuid().ToString();
 
     // Act
-    TextQuestionTemplateEntity textQuestionTemplateEntity = new
+    TextQuestionTemplateEntity? textQuestionTemplateEntity = TextQuestionTemplateEntity.New
     (
-      text: text
+      text   : text,
+      context: new ExecutingContext()
     );
 
     // Assert
-    Assert.AreEqual(text, textQuestionTemplateEntity.Text);
+    Assert.AreEqual(text, textQuestionTemplateEntity!.Text);
   }
 
   [TestMethod]
   public void Constructor_Text_QuestionTypeIsText()
   {
     // Act
-    TextQuestionTemplateEntity textQuestionTemplateEntity = new
+    TextQuestionTemplateEntity? textQuestionTemplateEntity = TextQuestionTemplateEntity.New
     (
-      text: Guid.NewGuid().ToString()
+      text   : Guid.NewGuid().ToString(),
+      context: new ExecutingContext()
     );
 
     // Assert
-    Assert.AreEqual(QuestionType.Text, textQuestionTemplateEntity.QuestionType);
+    Assert.AreEqual(QuestionType.Text, textQuestionTemplateEntity!.QuestionType);
   }
 
   [TestMethod]
   public void Constructor_TextQuestionTemplateEntity_TextFilled()
   {
     // Arrange
-    TextQuestionTemplateEntity originalTextQuestionTemplateEntity = new
+    TextQuestionTemplateEntity? originalTextQuestionTemplateEntity = TextQuestionTemplateEntity.New
     (
-      text: Guid.NewGuid().ToString()
+      text   : Guid.NewGuid().ToString(),
+      context: new ExecutingContext()
     );
 
     // Act
-    TextQuestionTemplateEntity newTextQuestionTemplateEntity = new(originalTextQuestionTemplateEntity);
+    TextQuestionTemplateEntity newTextQuestionTemplateEntity = new(originalTextQuestionTemplateEntity!);
 
     // Assert
-    Assert.AreEqual(originalTextQuestionTemplateEntity.Text, newTextQuestionTemplateEntity.Text);
+    Assert.AreEqual(originalTextQuestionTemplateEntity!.Text, newTextQuestionTemplateEntity.Text);
   }
 
   [TestMethod]
   public void Constructor_TextQuestionTemplateEntity_QuestionTypeIsText()
   {
     // Arrange
-    TextQuestionTemplateEntity originalTextQuestionTemplateEntity = new
+    TextQuestionTemplateEntity? originalTextQuestionTemplateEntity = TextQuestionTemplateEntity.New
     (
-      text: Guid.NewGuid().ToString()
+      text   : Guid.NewGuid().ToString(),
+      context: new ExecutingContext()
     );
 
     // Act
-    TextQuestionTemplateEntity newTextQuestionTemplateEntity = new(originalTextQuestionTemplateEntity);
+    TextQuestionTemplateEntity newTextQuestionTemplateEntity = new(originalTextQuestionTemplateEntity!);
 
     // Assert
     Assert.AreEqual(QuestionType.Text, newTextQuestionTemplateEntity.QuestionType);

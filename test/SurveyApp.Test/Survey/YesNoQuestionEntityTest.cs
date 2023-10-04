@@ -48,7 +48,11 @@ public sealed class YesNoQuestionEntityTest
   {
     // Arrange
     string text = Guid.NewGuid().ToString();
-    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new(text);
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = YesNoQuestionTemplateEntity.New
+    (
+      text   : text,
+      context: new ExecutingContext()
+    )!;
 
     // Act
     YesNoQuestionEntity yesNoQuestionEntity = new(yesNoQuestionTemplateEntity);
@@ -61,7 +65,11 @@ public sealed class YesNoQuestionEntityTest
   public void Constructor_YesNoQuestionTemplateEntity_AnswerIsNone()
   {
     // Arrange
-    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new(text: Guid.NewGuid().ToString());
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = YesNoQuestionTemplateEntity.New
+    (
+      text   : Guid.NewGuid().ToString(),
+      context: new ExecutingContext()
+    )!;
 
     // Act
     YesNoQuestionEntity yesNoQuestionEntity = new(yesNoQuestionTemplateEntity);

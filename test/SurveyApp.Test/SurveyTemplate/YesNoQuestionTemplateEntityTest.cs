@@ -14,10 +14,11 @@ public sealed class YesNoQuestionTemplateEntityTest
     string text = Guid.NewGuid().ToString();
 
     // Act
-    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = YesNoQuestionTemplateEntity.New
     (
-      text: text
-    );
+      text   : text,
+      context: new ExecutingContext()
+    )!;
 
     // Assert
     Assert.AreEqual(text, yesNoQuestionTemplateEntity.Text);
@@ -27,10 +28,11 @@ public sealed class YesNoQuestionTemplateEntityTest
   public void Constructor_Text_QuestionTypeIsYesNo()
   {
     // Act
-    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = new
+    YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = YesNoQuestionTemplateEntity.New
     (
-      text: Guid.NewGuid().ToString()
-    );
+      text   : Guid.NewGuid().ToString(),
+      context: new ExecutingContext()
+    )!;
 
     // Assert
     Assert.AreEqual(QuestionType.YesNo, yesNoQuestionTemplateEntity.QuestionType);
@@ -40,10 +42,11 @@ public sealed class YesNoQuestionTemplateEntityTest
   public void Constructor_YesNoQuestionTemplateEntity_TextFilled()
   {
     // Arrange
-    YesNoQuestionTemplateEntity originalYesNoQuestionTemplateEntity = new
+    YesNoQuestionTemplateEntity originalYesNoQuestionTemplateEntity = YesNoQuestionTemplateEntity.New
     (
-      text: Guid.NewGuid().ToString()
-    );
+      text   : Guid.NewGuid().ToString(),
+      context: new ExecutingContext()
+    )!;
 
     // Act
     YesNoQuestionTemplateEntity newYesNoQuestionTemplateEntity = new(originalYesNoQuestionTemplateEntity);
@@ -56,10 +59,11 @@ public sealed class YesNoQuestionTemplateEntityTest
   public void Constructor_YesNoQuestionTemplateEntity_QuestionTypeIsYesNo()
   {
     // Arrange
-    YesNoQuestionTemplateEntity originalYesNoQuestionTemplateEntity = new
+    YesNoQuestionTemplateEntity originalYesNoQuestionTemplateEntity = YesNoQuestionTemplateEntity.New
     (
-      text: Guid.NewGuid().ToString()
-    );
+      text   : Guid.NewGuid().ToString(),
+      context: new ExecutingContext()
+    )!;
 
     // Act
     YesNoQuestionTemplateEntity newYesNoQuestionTemplateEntity = new(originalYesNoQuestionTemplateEntity);

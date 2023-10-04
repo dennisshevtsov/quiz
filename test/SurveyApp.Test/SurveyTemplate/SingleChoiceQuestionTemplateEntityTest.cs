@@ -14,13 +14,19 @@ public sealed class SingleChoiceQuestionTemplateEntityTest
     string text = Guid.NewGuid().ToString();
 
     // Act
-    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = new
+    SingleChoiceQuestionTemplateEntity? singleChoiceQuestionTemplateEntity = SingleChoiceQuestionTemplateEntity.New
     (
       text   : text,
-      choices: Array.Empty<string>()
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      context: new ExecutingContext()
     );
 
     // Assert
-    Assert.AreEqual(text, singleChoiceQuestionTemplateEntity.Text);
+    Assert.AreEqual(text, singleChoiceQuestionTemplateEntity!.Text);
   }
 }

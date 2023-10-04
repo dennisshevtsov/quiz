@@ -18,11 +18,11 @@ public sealed class AddSurveyTemplateRequestDtoTest
     };
 
     // Act
-    ExecutedContext<SurveyTemplateEntity> newSurveyTemplateEntityContext = addSurveyTemplateRequestDto.ToSurveyTemplateEntity();
+    SurveyTemplateEntity? surveyTemplateEntity = addSurveyTemplateRequestDto.ToSurveyTemplateEntity(new ExecutingContext());
 
     // Assert
-    Assert.AreEqual(addSurveyTemplateRequestDto.Title, newSurveyTemplateEntityContext.Rusult!.Title);
-    Assert.AreEqual(addSurveyTemplateRequestDto.Description, newSurveyTemplateEntityContext.Rusult!.Description);
-    Assert.AreEqual(addSurveyTemplateRequestDto.Questions.Length, newSurveyTemplateEntityContext.Rusult!.Questions.Length);
+    Assert.AreEqual(addSurveyTemplateRequestDto.Title, surveyTemplateEntity!.Title);
+    Assert.AreEqual(addSurveyTemplateRequestDto.Description, surveyTemplateEntity!.Description);
+    Assert.AreEqual(addSurveyTemplateRequestDto.Questions.Length, surveyTemplateEntity!.Questions.Length);
   }
 }

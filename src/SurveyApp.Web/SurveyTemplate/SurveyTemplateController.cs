@@ -35,17 +35,18 @@ public sealed class SurveyTemplateController : ControllerBase
     AddSurveyTemplateRequestDto addSurveyTemplateRequestDto,
     CancellationToken cancellationToken)
   {
-    ExecutedContext<SurveyTemplateEntity> newSurveyTemplateEntityContext =
-      addSurveyTemplateRequestDto.ToSurveyTemplateEntity();
+    ExecutingContext context = new();
+    SurveyTemplateEntity? newSurveyTemplateEntity =
+      addSurveyTemplateRequestDto.ToSurveyTemplateEntity(context);
 
-    if (newSurveyTemplateEntityContext.HasErrors)
+    if (context.HasErrors)
     {
-      return BadRequest(newSurveyTemplateEntityContext.Errors);
+      return BadRequest(context.Errors);
     }
 
     SurveyTemplateEntity surveyTemplateEntity =
       await _surveyTemplateRepository.AddSurveyTemplateAsync(
-        newSurveyTemplateEntityContext.Rusult,
+        newSurveyTemplateEntity!,
         cancellationToken);
 
     return CreatedAtAction
@@ -71,7 +72,7 @@ public sealed class SurveyTemplateController : ControllerBase
     }
 
     ExecutedContext<SurveyTemplateEntity> updatedSurveyTemplateEntityContext =
-      updateSurveyTemplateRequestDto.UpdateSurveyTemplate(surveyTemplateEntity);
+      updateSurveyTemplateRequestDto.UpdateSurveyTemplate(surveyTemplateEntity, new ExecutingContext());
 
     if (updatedSurveyTemplateEntityContext.HasErrors)
     {

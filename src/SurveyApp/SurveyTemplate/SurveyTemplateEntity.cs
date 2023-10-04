@@ -24,11 +24,12 @@ public sealed class SurveyTemplateEntity
 
   public ExecutedContext<SurveyTemplateEntity> Update(string title, string description, QuestionTemplateEntityBase[] questions)
   {
-    string[] errors = Validate(title, description);
+    ExecutingContext context = new();
+    Validate(title, description, context);
 
-    if (errors.Length > 0)
+    if (context.HasErrors)
     {
-      return ExecutedContext<SurveyTemplateEntity>.Fail(errors);
+      return ExecutedContext<SurveyTemplateEntity>.Fail(context.Errors.ToArray());
     }
 
     Title       = title;
@@ -38,14 +39,22 @@ public sealed class SurveyTemplateEntity
     return ExecutedContext<SurveyTemplateEntity>.Ok(this);
   }
 
-  public static ExecutedContext<SurveyTemplateEntity> New(
-    string title, string description, QuestionTemplateEntityBase[] questions)
+  public static SurveyTemplateEntity? New(
+    string title,
+    string description,
+    QuestionTemplateEntityBase[] questions,
+    ExecutingContext context)
   {
-    string[] errors = Validate(title, description);
+    Validate
+    (
+      title      : title,
+      description: description,
+      context    : context
+    );
 
-    if (errors.Length > 0)
+    if (context.HasErrors)
     {
-      return ExecutedContext<SurveyTemplateEntity>.Fail(errors);
+      return null;
     }
 
     SurveyTemplateEntity surveyTemplateEntity = new
@@ -56,23 +65,19 @@ public sealed class SurveyTemplateEntity
       questions       : questions
     );
 
-    return ExecutedContext<SurveyTemplateEntity>.Ok(surveyTemplateEntity);
+    return surveyTemplateEntity;
   }
 
-  private static string[] Validate(string title, string description)
+  private static void Validate(string title, string description, ExecutingContext context)
   {
-    List<string> errors = new(2);
-
     if (string.IsNullOrEmpty(title))
     {
-      errors.Add("Title is required.");
+      context.AddError("Title is required.");
     }
 
     if (string.IsNullOrEmpty(description))
     {
-      errors.Add("Description is required.");
+      context.AddError("Description is required.");
     }
-
-    return errors.ToArray();
   }
 }

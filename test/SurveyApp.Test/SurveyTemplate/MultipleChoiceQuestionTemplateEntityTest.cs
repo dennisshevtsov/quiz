@@ -14,14 +14,20 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
     string text = Guid.NewGuid().ToString();
 
     // Act
-    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new
+    MultipleChoiceQuestionTemplateEntity? multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
     (
       text   : text,
-      choices: Array.Empty<string>()
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      context: new ExecutingContext()
     );
 
     // Assert
-    Assert.AreEqual(text, multipleChoiceQuestionTemplateEntity.Text);
+    Assert.AreEqual(text, multipleChoiceQuestionTemplateEntity!.Text);
   }
 
   [TestMethod]
@@ -36,52 +42,22 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
     };
 
     // Act
-    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new
+    MultipleChoiceQuestionTemplateEntity? multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
     (
       text   : Guid.NewGuid().ToString(),
-      choices: choices
+      choices: choices,
+      context: new ExecutingContext()
     );
 
     // Assert
-    Assert.AreEqual(choices, multipleChoiceQuestionTemplateEntity.Choices);
+    Assert.AreEqual(choices, multipleChoiceQuestionTemplateEntity!.Choices);
   }
 
   [TestMethod]
   public void Constructor_FullListOfParameters_QuestionTypeIsMultipleChoice()
   {
     // Act
-    MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = new
-    (
-      text   : Guid.NewGuid().ToString(),
-      choices: Array.Empty<string>()
-    );
-
-    // Assert
-    Assert.AreEqual(QuestionType.MultipleChoice, multipleChoiceQuestionTemplateEntity.QuestionType);
-  }
-
-  [TestMethod]
-  public void Constructor_MultipleChoiceQuestionTemplateEntity_TextFilled()
-  {
-    // Arrange
-    MultipleChoiceQuestionTemplateEntity originalMultipleChoiceQuestionTemplateEntity = new
-    (
-      text   : Guid.NewGuid().ToString(),
-      choices: Array.Empty<string>()
-    );
-
-    // Act
-    MultipleChoiceQuestionTemplateEntity newMultipleChoiceQuestionTemplateEntity = new(originalMultipleChoiceQuestionTemplateEntity);
-
-    // Assert
-    Assert.AreEqual(originalMultipleChoiceQuestionTemplateEntity.Text, newMultipleChoiceQuestionTemplateEntity.Text);
-  }
-
-  [TestMethod]
-  public void Constructor_MultipleChoiceQuestionTemplateEntity_ChoicesFilled()
-  {
-    // Arrange
-    MultipleChoiceQuestionTemplateEntity originalMultipleChoiceQuestionTemplateEntity = new
+    MultipleChoiceQuestionTemplateEntity? multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
     (
       text   : Guid.NewGuid().ToString(),
       choices: new[]
@@ -89,28 +65,78 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
         Guid.NewGuid().ToString(),
         Guid.NewGuid().ToString(),
         Guid.NewGuid().ToString(),
-      }
+      },
+      context: new ExecutingContext()
+    );
+
+    // Assert
+    Assert.AreEqual(QuestionType.MultipleChoice, multipleChoiceQuestionTemplateEntity!.QuestionType);
+  }
+
+  [TestMethod]
+  public void Constructor_MultipleChoiceQuestionTemplateEntity_TextFilled()
+  {
+    // Arrange
+    MultipleChoiceQuestionTemplateEntity? originalMultipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      context: new ExecutingContext()
     );
 
     // Act
-    MultipleChoiceQuestionTemplateEntity newMultipleChoiceQuestionTemplateEntity = new(originalMultipleChoiceQuestionTemplateEntity);
+    MultipleChoiceQuestionTemplateEntity newMultipleChoiceQuestionTemplateEntity = new(originalMultipleChoiceQuestionTemplateEntity!);
 
     // Assert
-    Assert.AreEqual(originalMultipleChoiceQuestionTemplateEntity.Choices, newMultipleChoiceQuestionTemplateEntity.Choices);
+    Assert.AreEqual(originalMultipleChoiceQuestionTemplateEntity!.Text, newMultipleChoiceQuestionTemplateEntity.Text);
+  }
+
+  [TestMethod]
+  public void Constructor_MultipleChoiceQuestionTemplateEntity_ChoicesFilled()
+  {
+    // Arrange
+    MultipleChoiceQuestionTemplateEntity? originalMultipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
+    (
+      text   : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      context: new ExecutingContext()
+    );
+
+    // Act
+    MultipleChoiceQuestionTemplateEntity newMultipleChoiceQuestionTemplateEntity = new(originalMultipleChoiceQuestionTemplateEntity!);
+
+    // Assert
+    Assert.AreEqual(originalMultipleChoiceQuestionTemplateEntity!.Choices, newMultipleChoiceQuestionTemplateEntity.Choices);
   }
 
   [TestMethod]
   public void Constructor_MultipleChoiceQuestionTemplateEntity_QuestionTypeIsMultipleChoice()
   {
     // Arrange
-    MultipleChoiceQuestionTemplateEntity originalMultipleChoiceQuestionTemplateEntity = new
+    MultipleChoiceQuestionTemplateEntity? originalMultipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
     (
       text   : Guid.NewGuid().ToString(),
-      choices: Array.Empty<string>()
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      context: new ExecutingContext()
     );
 
     // Act
-    MultipleChoiceQuestionTemplateEntity newMultipleChoiceQuestionTemplateEntity = new(originalMultipleChoiceQuestionTemplateEntity);
+    MultipleChoiceQuestionTemplateEntity newMultipleChoiceQuestionTemplateEntity = new(originalMultipleChoiceQuestionTemplateEntity!);
 
     // Assert
     Assert.AreEqual(QuestionType.MultipleChoice, newMultipleChoiceQuestionTemplateEntity.QuestionType);
