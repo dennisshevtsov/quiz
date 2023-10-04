@@ -11,7 +11,16 @@ public sealed class MultipleChoiceQuestionTemplateDtoTest
   public void ToQuestionTemplateEntity_MultipleChoiceQuestionTemplateDto_MultipleChoiceQuestionTemplateEntityReturned()
   {
     // Arrange
-    MultipleChoiceQuestionTemplateDto multipleChoiceQuestionTemplateDto = new();
+    MultipleChoiceQuestionTemplateDto multipleChoiceQuestionTemplateDto = new()
+    {
+      Text = Guid.NewGuid().ToString(),
+      Choices = new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+    };
 
     // Act
     QuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext())!;

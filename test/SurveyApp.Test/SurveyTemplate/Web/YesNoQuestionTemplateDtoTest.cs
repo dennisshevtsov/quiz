@@ -11,7 +11,10 @@ public sealed class YesNoQuestionTemplateDtoTest
   public void ToQuestionTemplateEntity_YesNoQuestionTemplateDto_YesNoQuestionTemplateEntityReturned()
   {
     // Arrange
-    YesNoQuestionTemplateDto yesNoQuestionTemplateDto = new();
+    YesNoQuestionTemplateDto yesNoQuestionTemplateDto = new()
+    {
+      Text = Guid.NewGuid().ToString(),
+    };
 
     // Act
     QuestionTemplateEntityBase questionTemplateEntityBase = yesNoQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext())!;

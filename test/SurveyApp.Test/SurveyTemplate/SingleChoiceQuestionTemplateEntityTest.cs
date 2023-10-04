@@ -17,7 +17,12 @@ public sealed class SingleChoiceQuestionTemplateEntityTest
     SingleChoiceQuestionTemplateEntity? singleChoiceQuestionTemplateEntity = SingleChoiceQuestionTemplateEntity.New
     (
       text   : text,
-      choices: Array.Empty<string>(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
       context: new ExecutingContext()
     );
 

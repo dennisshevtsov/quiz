@@ -17,7 +17,12 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
     MultipleChoiceQuestionTemplateEntity? multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
     (
       text   : text,
-      choices: Array.Empty<string>(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
       context: new ExecutingContext()
     );
 
@@ -55,7 +60,12 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
     MultipleChoiceQuestionTemplateEntity? multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
     (
       text   : Guid.NewGuid().ToString(),
-      choices: Array.Empty<string>(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
       context: new ExecutingContext()
     );
 
@@ -70,7 +80,12 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
     MultipleChoiceQuestionTemplateEntity? originalMultipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
     (
       text   : Guid.NewGuid().ToString(),
-      choices: Array.Empty<string>(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
       context: new ExecutingContext()
     );
 
@@ -111,7 +126,12 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
     MultipleChoiceQuestionTemplateEntity? originalMultipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
     (
       text   : Guid.NewGuid().ToString(),
-      choices: Array.Empty<string>(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
       context: new ExecutingContext()
     );
 

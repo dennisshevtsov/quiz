@@ -11,7 +11,10 @@ public sealed class TextQuestionTemplateDtoTest
   public void ToQuestionTemplateEntity_TextQuestionTemplateDto_TextQuestionTemplateEntityReturned()
   {
     // Arrange
-    TextQuestionTemplateDto textQuestionTemplateDto = new();
+    TextQuestionTemplateDto textQuestionTemplateDto = new()
+    {
+      Text = Guid.NewGuid().ToString(),
+    };
 
     // Act
     QuestionTemplateEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext())!;

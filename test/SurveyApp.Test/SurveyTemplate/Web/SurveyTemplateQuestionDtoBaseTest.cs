@@ -13,7 +13,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     // Arrange
     TextQuestionTemplateEntity textQuestionTemplateEntity = TextQuestionTemplateEntity.New
     (
-      text   : string.Empty,
+      text: Guid.NewGuid().ToString(),
       context: new ExecutingContext()
     )!;
 
@@ -31,7 +31,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     // Arrange
     TextQuestionTemplateEntity textQuestionTemplateEntity = TextQuestionTemplateEntity.New
     (
-      text: string.Empty,
+      text   : Guid.NewGuid().ToString(),
       context: new ExecutingContext()
     )!;
 
@@ -65,7 +65,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
   {
     // Arrange
     YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = YesNoQuestionTemplateEntity.New(
-      text   : string.Empty,
+      text   : Guid.NewGuid().ToString(),
       context: new ExecutingContext()
     )!;
 
@@ -83,7 +83,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     // Arrange
     YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = YesNoQuestionTemplateEntity.New
     (
-      text   : string.Empty,
+      text   : Guid.NewGuid().ToString(),
       context: new ExecutingContext()
     )!;
 
@@ -119,8 +119,13 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     // Arrange
     MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
     (
-      text   : string.Empty,
-      choices: Array.Empty<string>(),
+      text: Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
       context: new ExecutingContext()
     )!;
 
@@ -138,8 +143,13 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     // Arrange
     MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
     (
-      text   : string.Empty,
-      choices: Array.Empty<string>(),
+      text   : Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
       context: new ExecutingContext()
     )!;
 
@@ -186,8 +196,13 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     // Arrange
     SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = SingleChoiceQuestionTemplateEntity.New
     (
-      text   : string.Empty,
-      choices: Array.Empty<string>(),
+      text: Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
       context: new ExecutingContext()
     )!;
 
@@ -205,8 +220,13 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     // Arrange
     SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity = SingleChoiceQuestionTemplateEntity.New
     (
-      text   :string.Empty,
-      choices: Array.Empty<string>(),
+      text: Guid.NewGuid().ToString(),
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
       context: new ExecutingContext()
     )!;
 

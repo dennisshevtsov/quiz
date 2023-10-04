@@ -11,7 +11,16 @@ public sealed class SingleChoiceQuestionTemplateDtoTest
   public void ToQuestionTemplateEntity_SingleChoiceQuestionTemplateDto_SingleChoiceQuestionTemplateEntityReturned()
   {
     // Arrange
-    SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new();
+    SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new()
+    {
+      Text    = Guid.NewGuid().ToString(),
+      Choices = new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+    };
 
     // Act
     QuestionTemplateEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext())!;
