@@ -48,7 +48,11 @@ public sealed class TextQuestionEntityTest
   {
     // Arrange
     string text = Guid.NewGuid().ToString();
-    TextQuestionTemplateEntity textQuestionTemplateEntity = new(text);
+    TextQuestionTemplateEntity textQuestionTemplateEntity = TextQuestionTemplateEntity.New
+    (
+      text   : text,
+      context: new ExecutingContext()
+    )!;
 
     // Act
     TextQuestionEntity textQuestionEntity = new(textQuestionTemplateEntity);
@@ -61,7 +65,11 @@ public sealed class TextQuestionEntityTest
   public void Constructor_TextQuestionTemplateEntity_AnswerIsNull()
   {
     // Arrange
-    TextQuestionTemplateEntity textQuestionTemplateEntity = new(text: Guid.NewGuid().ToString());
+    TextQuestionTemplateEntity textQuestionTemplateEntity = TextQuestionTemplateEntity.New
+    (
+      text   : Guid.NewGuid().ToString(),
+      context: new ExecutingContext()
+    )!;
 
     // Act
     TextQuestionEntity textQuestionEntity = new(textQuestionTemplateEntity);
