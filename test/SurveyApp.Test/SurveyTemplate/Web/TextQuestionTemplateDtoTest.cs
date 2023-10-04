@@ -14,7 +14,7 @@ public sealed class TextQuestionTemplateDtoTest
     TextQuestionTemplateDto textQuestionTemplateDto = new();
 
     // Act
-    QuestionTemplateEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToTemplateQuestionEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext())!;
 
     // Assert
     Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(TextQuestionTemplateEntity));
@@ -31,7 +31,7 @@ public sealed class TextQuestionTemplateDtoTest
     };
 
     // Act
-    QuestionTemplateEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToTemplateQuestionEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = textQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext())!;
 
     // Assert
     Assert.AreEqual(textQuestionTemplateDto.Text, questionTemplateEntityBase.Text);

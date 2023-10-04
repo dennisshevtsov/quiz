@@ -14,7 +14,7 @@ public sealed class SingleChoiceQuestionTemplateDtoTest
     SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new();
 
     // Act
-    QuestionTemplateEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext())!;
 
     // Assert
     Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(SingleChoiceQuestionTemplateEntity));
@@ -36,7 +36,7 @@ public sealed class SingleChoiceQuestionTemplateDtoTest
     };
 
     // Act
-    QuestionTemplateEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext())!;
 
     // Assert
     Assert.AreEqual(singleChoiceQuestionTemplateDto.Text, questionTemplateEntityBase.Text);

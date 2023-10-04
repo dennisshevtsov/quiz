@@ -14,7 +14,7 @@ public sealed class MultipleChoiceQuestionTemplateDtoTest
     MultipleChoiceQuestionTemplateDto multipleChoiceQuestionTemplateDto = new();
 
     // Act
-    QuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToTemplateQuestionEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext())!;
 
     // Assert
     Assert.IsInstanceOfType(questionTemplateEntityBase, typeof(MultipleChoiceQuestionTemplateEntity));
@@ -36,7 +36,7 @@ public sealed class MultipleChoiceQuestionTemplateDtoTest
     };
 
     // Act
-    QuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToTemplateQuestionEntity();
+    QuestionTemplateEntityBase questionTemplateEntityBase = multipleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext())!;
 
     // Assert
     Assert.AreEqual(multipleChoiceQuestionTemplateDto.Text, questionTemplateEntityBase.Text);
