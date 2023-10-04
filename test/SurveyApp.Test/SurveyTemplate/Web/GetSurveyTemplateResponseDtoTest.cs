@@ -14,7 +14,8 @@ public sealed class GetSurveyTemplateResponseDtoTest
     SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New(
        title      : Guid.NewGuid().ToString(),
        description: Guid.NewGuid().ToString(),
-       questions  : Array.Empty<QuestionTemplateEntityBase>()).Rusult!;
+       questions  : Array.Empty<QuestionTemplateEntityBase>(),
+       context    : new ExecutingContext())!;
 
     // Act
     GetSurveyTemplateResponseDto getSurveyTemplateResponseDto = new(surveyTemplateEntity);
