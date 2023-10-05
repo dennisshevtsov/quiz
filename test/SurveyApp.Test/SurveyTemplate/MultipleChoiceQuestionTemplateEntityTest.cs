@@ -8,7 +8,7 @@ namespace SurveyApp.SurveyTemplate.Test;
 public sealed class MultipleChoiceQuestionTemplateEntityTest
 {
   [TestMethod]
-  public void Constructor_FullListOfParameters_TextFilled()
+  public void New_FullListOfParameters_TextFilled()
   {
     // Arrange
     string text = Guid.NewGuid().ToString();
@@ -31,7 +31,7 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
   }
 
   [TestMethod]
-  public void Constructor_FullListOfParameters_ChoicesFilled()
+  public void New_FullListOfParameters_ChoicesFilled()
   {
     // Arrange
     string[] choices = new[]
@@ -54,7 +54,7 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
   }
 
   [TestMethod]
-  public void Constructor_FullListOfParameters_QuestionTypeIsMultipleChoice()
+  public void New_FullListOfParameters_QuestionTypeIsMultipleChoice()
   {
     // Act
     MultipleChoiceQuestionTemplateEntity? multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
@@ -71,6 +71,123 @@ public sealed class MultipleChoiceQuestionTemplateEntityTest
 
     // Assert
     Assert.AreEqual(QuestionType.MultipleChoice, multipleChoiceQuestionTemplateEntity!.QuestionType);
+  }
+
+  [TestMethod]
+  public void New_NoText_NullReturned()
+  {
+    // Act
+    MultipleChoiceQuestionTemplateEntity? multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
+    (
+      text   : string.Empty,
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      context: new ExecutingContext()
+    );
+
+    // Assert
+    Assert.IsNull(multipleChoiceQuestionTemplateEntity);
+  }
+
+  [TestMethod]
+  public void New_NoText_ContextHasError()
+  {
+    // Arrange
+    ExecutingContext context = new();
+
+    // Act
+    MultipleChoiceQuestionTemplateEntity? multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
+    (
+      text   : string.Empty,
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+      context: context
+    );
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void New_NoChoices_NullReturned()
+  {
+    // Act
+    MultipleChoiceQuestionTemplateEntity? multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
+    (
+      text   : string.Empty,
+      choices: Array.Empty<string>(),
+      context: new ExecutingContext()
+    );
+
+    // Assert
+    Assert.IsNull(multipleChoiceQuestionTemplateEntity);
+  }
+
+  [TestMethod]
+  public void New_NoChoices_ContextHasError()
+  {
+    // Arrange
+    ExecutingContext context = new();
+
+    // Act
+    MultipleChoiceQuestionTemplateEntity? multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
+    (
+      text   : string.Empty,
+      choices: Array.Empty<string>(),
+      context: context
+    );
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void New_EmptyChoice_NullReturned()
+  {
+    // Act
+    MultipleChoiceQuestionTemplateEntity? multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
+    (
+      text   : string.Empty,
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        string.Empty,
+      },
+      context: new ExecutingContext()
+    );
+
+    // Assert
+    Assert.IsNull(multipleChoiceQuestionTemplateEntity);
+  }
+
+  [TestMethod]
+  public void New_EmptyChoice_ContextHasError()
+  {
+    // Arrange
+    ExecutingContext context = new();
+
+    // Act
+    MultipleChoiceQuestionTemplateEntity? multipleChoiceQuestionTemplateEntity = MultipleChoiceQuestionTemplateEntity.New
+    (
+      text   : string.Empty,
+      choices: new[]
+      {
+        Guid.NewGuid().ToString(),
+        string.Empty,
+      },
+      context: context
+    );
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
   }
 
   [TestMethod]

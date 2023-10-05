@@ -8,7 +8,7 @@ namespace SurveyApp.SurveyTemplate.Test;
 public sealed class TextQuestionTemplateEntityTest
 {
   [TestMethod]
-  public void Constructor_Text_TextFilled()
+  public void New_Text_TextFilled()
   {
     // Arrange
     string text = Guid.NewGuid().ToString();
@@ -25,7 +25,7 @@ public sealed class TextQuestionTemplateEntityTest
   }
 
   [TestMethod]
-  public void Constructor_Text_QuestionTypeIsText()
+  public void New_Text_QuestionTypeIsText()
   {
     // Act
     TextQuestionTemplateEntity? textQuestionTemplateEntity = TextQuestionTemplateEntity.New
@@ -36,6 +36,37 @@ public sealed class TextQuestionTemplateEntityTest
 
     // Assert
     Assert.AreEqual(QuestionType.Text, textQuestionTemplateEntity!.QuestionType);
+  }
+
+  [TestMethod]
+  public void New_NoText_NullReturned()
+  {
+    // Act
+    TextQuestionTemplateEntity? textQuestionTemplateEntity = TextQuestionTemplateEntity.New
+    (
+      text   : string.Empty,
+      context: new ExecutingContext()
+    );
+
+    // Assert
+    Assert.IsNull(textQuestionTemplateEntity);
+  }
+
+  [TestMethod]
+  public void New_NoText_ContextHasErrors()
+  {
+    // Arrange
+    ExecutingContext context = new();
+
+    // Act
+    TextQuestionTemplateEntity? textQuestionTemplateEntity = TextQuestionTemplateEntity.New
+    (
+      text   : string.Empty,
+      context: context
+    );
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
   }
 
   [TestMethod]

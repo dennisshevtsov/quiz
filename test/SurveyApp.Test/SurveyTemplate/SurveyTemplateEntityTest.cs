@@ -119,7 +119,7 @@ public sealed class SurveyTemplateEntityTest
   }
 
   [TestMethod]
-  public void New_ShortListOfParameters_NoErrors()
+  public void New_FullListOfParameters_NoErrors()
   {
     // Arrange
     ExecutingContext context = new();
@@ -135,6 +135,58 @@ public sealed class SurveyTemplateEntityTest
 
     // Assert
     Assert.IsFalse(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void New_InvalidQuestion_NullReturned()
+  {
+    // Arrange
+    ExecutingContext context = new();
+
+    // Act
+    SurveyTemplateEntity? surveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : new QuestionTemplateEntityBase[]
+      {
+        YesNoQuestionTemplateEntity.New
+        (
+          text   : string.Empty,
+          context: context
+        )!,
+      },
+      context    : context
+    );
+
+    // Assert
+    Assert.IsNull(surveyTemplateEntity);
+  }
+
+  [TestMethod]
+  public void New_InvalidQuestion_ContextHasErrors()
+  {
+    // Arrange
+    ExecutingContext context = new();
+
+    // Act
+    SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : new QuestionTemplateEntityBase[]
+      {
+        YesNoQuestionTemplateEntity.New
+        (
+          text   : string.Empty,
+          context: context
+        )!,
+      },
+      context    : context
+    );
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
   }
 
   [TestMethod]
