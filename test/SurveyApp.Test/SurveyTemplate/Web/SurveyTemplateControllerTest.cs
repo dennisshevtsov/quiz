@@ -36,9 +36,11 @@ public sealed class SurveyTemplateControllerTest
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
 
+    GetSurveyTemplateRequestDto requestDto = new();
+
     // Act
     IActionResult actionResult = await _surveyTemplateController.GetSurveyTemplate(
-      Guid.NewGuid(), CancellationToken.None);
+      requestDto, CancellationToken.None);
 
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(OkObjectResult));
@@ -57,9 +59,11 @@ public sealed class SurveyTemplateControllerTest
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(surveyTemplateEntity);
 
+    GetSurveyTemplateRequestDto requestDto = new();
+
     // Act
     IActionResult actionResult = await _surveyTemplateController.GetSurveyTemplate(
-      Guid.NewGuid(), CancellationToken.None);
+      requestDto, CancellationToken.None);
 
     // Assert
     Assert.IsInstanceOfType(((ObjectResult)actionResult).Value, typeof(GetSurveyTemplateResponseDto));
@@ -74,9 +78,14 @@ public sealed class SurveyTemplateControllerTest
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .Verifiable();
 
+    GetSurveyTemplateRequestDto requestDto = new()
+    {
+      SurveyTemplateId = surveyTemplateId,
+    };
+
     // Act
     await _surveyTemplateController.GetSurveyTemplate(
-      surveyTemplateId, CancellationToken.None);
+      requestDto, CancellationToken.None);
 
     // Assert
     Expression<Func<Guid, bool>> surveyTemplateIdMatch = id => id == surveyTemplateId;
@@ -90,9 +99,11 @@ public sealed class SurveyTemplateControllerTest
     _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                                  .ReturnsAsync(default(SurveyTemplateEntity));
 
+    GetSurveyTemplateRequestDto requestDto = new();
+
     // Act
     IActionResult actionResult = await _surveyTemplateController.GetSurveyTemplate(
-      Guid.NewGuid(), CancellationToken.None);
+      requestDto, CancellationToken.None);
 
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
