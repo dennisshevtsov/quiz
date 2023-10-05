@@ -9,10 +9,10 @@ public sealed class GetSurveyTemplateResponseDto
   public GetSurveyTemplateResponseDto(SurveyTemplateEntity surveyTemplateEntity)
   {
     SurveyTemplateId = surveyTemplateEntity.SurveyTemplateId;
-    Title = surveyTemplateEntity.Title;
-    Description = surveyTemplateEntity.Description;
-    Questions = surveyTemplateEntity.Questions.Select(QuestionTemplateDtoBase.FromQuestionTemplateEntity)
-                                              .ToArray();
+    Title            = surveyTemplateEntity.Title;
+    Description      = surveyTemplateEntity.Description;
+    Questions        = surveyTemplateEntity.Questions.Select(QuestionTemplateDtoBase.FromQuestionTemplateEntity)
+                                                     .ToArray();
   }
 
   public Guid SurveyTemplateId { get; set; }

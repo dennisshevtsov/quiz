@@ -18,9 +18,10 @@ public sealed class SurveyTemplateController : ControllerBase
   }
 
   [HttpGet("{surveyTemplateId}", Name = nameof(SurveyTemplateController.GetSurveyTemplate))]
-  public async Task<IActionResult> GetSurveyTemplate([FromRoute] Guid surveyTemplateId, CancellationToken cancellationToken)
+  public async Task<IActionResult> GetSurveyTemplate(GetSurveyTemplateRequestDto requestDto, CancellationToken cancellationToken)
   {
-    SurveyTemplateEntity? surveyTemplateEntity = await _surveyTemplateRepository.GetSurveyTemplateAsync(surveyTemplateId, cancellationToken);
+    SurveyTemplateEntity? surveyTemplateEntity =
+      await _surveyTemplateRepository.GetSurveyTemplateAsync(requestDto.SurveyTemplateId, cancellationToken);
 
     if (surveyTemplateEntity == null)
     {
@@ -52,7 +53,7 @@ public sealed class SurveyTemplateController : ControllerBase
     return CreatedAtAction
     (
       actionName : nameof(SurveyTemplateController.GetSurveyTemplate),
-      routeValues: new { surveyTemplateEntity.SurveyTemplateId },
+      routeValues: new GetSurveyTemplateRequestDto(surveyTemplateEntity),
       value      : new GetSurveyTemplateResponseDto(surveyTemplateEntity)
     );
   }
