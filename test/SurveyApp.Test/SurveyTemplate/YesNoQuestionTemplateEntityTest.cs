@@ -8,7 +8,7 @@ namespace SurveyApp.SurveyTemplate.Test;
 public sealed class YesNoQuestionTemplateEntityTest
 {
   [TestMethod]
-  public void Constructor_Text_TextFilled()
+  public void New_Text_TextFilled()
   {
     // Arrange
     string text = Guid.NewGuid().ToString();
@@ -25,7 +25,7 @@ public sealed class YesNoQuestionTemplateEntityTest
   }
 
   [TestMethod]
-  public void Constructor_Text_QuestionTypeIsYesNo()
+  public void New_Text_QuestionTypeIsYesNo()
   {
     // Act
     YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity = YesNoQuestionTemplateEntity.New
@@ -36,6 +36,37 @@ public sealed class YesNoQuestionTemplateEntityTest
 
     // Assert
     Assert.AreEqual(QuestionType.YesNo, yesNoQuestionTemplateEntity.QuestionType);
+  }
+
+  [TestMethod]
+  public void New_NoText_NullReturned()
+  {
+    // Act
+    YesNoQuestionTemplateEntity? yesNoQuestionTemplateEntity = YesNoQuestionTemplateEntity.New
+    (
+      text   : string.Empty,
+      context: new ExecutingContext()
+    );
+
+    // Assert
+    Assert.IsNull(yesNoQuestionTemplateEntity);
+  }
+
+  [TestMethod]
+  public void New_NoText_ContextHasErrors()
+  {
+    // Arange
+    ExecutingContext context = new();
+
+    // Act
+    YesNoQuestionTemplateEntity? yesNoQuestionTemplateEntity = YesNoQuestionTemplateEntity.New
+    (
+      text   : string.Empty,
+      context: context
+    );
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
   }
 
   [TestMethod]
