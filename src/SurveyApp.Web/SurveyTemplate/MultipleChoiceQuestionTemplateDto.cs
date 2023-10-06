@@ -10,8 +10,9 @@ public sealed class MultipleChoiceQuestionTemplateDto : QuestionTemplateDtoBase
 
   public MultipleChoiceQuestionTemplateDto(MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity)
   {
-    Text    = multipleChoiceQuestionTemplateEntity.Text;
-    Choices = multipleChoiceQuestionTemplateEntity.Choices;
+    Text         = multipleChoiceQuestionTemplateEntity.Text;
+    Choices      = multipleChoiceQuestionTemplateEntity.Choices;
+    QuestionType = QuestionType.MultipleChoice;
   }
 
   public string[] Choices { get; set; } = Array.Empty<string>();

@@ -10,7 +10,8 @@ public sealed class YesNoQuestionTemplateDto : QuestionTemplateDtoBase
 
   public YesNoQuestionTemplateDto(YesNoQuestionTemplateEntity yesNoQuestionTemplateEntity)
   {
-    Text = yesNoQuestionTemplateEntity.Text;
+    Text         = yesNoQuestionTemplateEntity.Text;
+    QuestionType = QuestionType.YesNo;
   }
 
   public override QuestionTemplateEntityBase? ToTemplateQuestionEntity(ExecutingContext context) =>
