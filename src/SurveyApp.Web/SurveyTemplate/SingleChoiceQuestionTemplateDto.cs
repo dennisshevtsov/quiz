@@ -10,8 +10,9 @@ public sealed class SingleChoiceQuestionTemplateDto : QuestionTemplateDtoBase
 
   public SingleChoiceQuestionTemplateDto(SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity)
   {
-    Text    = singleChoiceQuestionTemplateEntity.Text;
-    Choices = singleChoiceQuestionTemplateEntity.Choices;
+    Text         = singleChoiceQuestionTemplateEntity.Text;
+    Choices      = singleChoiceQuestionTemplateEntity.Choices;
+    QuestionType = QuestionType.SingleChoice;
   }
 
   public string[] Choices { get; set; } = Array.Empty<string>();
