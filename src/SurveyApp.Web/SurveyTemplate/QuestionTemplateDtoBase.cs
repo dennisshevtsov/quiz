@@ -29,6 +29,18 @@ public abstract class QuestionTemplateDtoBase
       _                           => throw new NotSupportedException("Unknown question type."),
     };
 
+  public static QuestionTemplateDtoBase[] FromQuestionTemplateEntityCollection(QuestionTemplateEntityBase[] questionTemplateEntities)
+  {
+    QuestionTemplateDtoBase[] questionTemplateDtos = new QuestionTemplateDtoBase[questionTemplateEntities.Length];
+
+    for (int i = 0; i < questionTemplateEntities.Length; i++)
+    {
+      questionTemplateDtos[i] = QuestionTemplateDtoBase.FromQuestionTemplateEntity(questionTemplateEntities[i]);
+    }
+
+    return questionTemplateDtos;
+  }
+
   public static QuestionTemplateEntityBase[] ToQuestionTemplateEntityCollection(
     QuestionTemplateDtoBase[] questions, ExecutingContext context)
   {

@@ -13,7 +13,7 @@ public sealed class SurveyTemplateQuestionDtoBaseTest
     // Arrange
     TextQuestionTemplateEntity textQuestionTemplateEntity = TextQuestionTemplateEntity.New
     (
-      text: Guid.NewGuid().ToString(),
+      text   : Guid.NewGuid().ToString(),
       context: new ExecutingContext()
     )!;
 
