@@ -30,17 +30,17 @@ public sealed class SingleChoiceQuestionTemplateDtoTest
   }
 
   [TestMethod]
-  public void ToQuestionTemplateEntity_SingleChoiceQuestionTemplateDto_PropertiesFilled()
+  public void ToQuestionTemplateEntity_SingleChoiceQuestionTemplateDto_TextFilled()
   {
     // Arrange
     SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new()
     {
-      QuestionType = QuestionType.SingleChoice,
-      Text = "test",
+      Text    = Guid.NewGuid().ToString(),
       Choices = new[]
       {
-        "test1",
-        "test2",
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
       },
     };
 
@@ -49,17 +49,155 @@ public sealed class SingleChoiceQuestionTemplateDtoTest
 
     // Assert
     Assert.AreEqual(singleChoiceQuestionTemplateDto.Text, questionTemplateEntityBase.Text);
+  }
 
-    SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity =
-      (SingleChoiceQuestionTemplateEntity)questionTemplateEntityBase;
-    Assert.AreEqual(singleChoiceQuestionTemplateDto.Choices.Length, singleChoiceQuestionTemplateEntity.Choices.Length);
-
-    string[] expected = singleChoiceQuestionTemplateDto.Choices.Order().ToArray();
-    string[] actual = singleChoiceQuestionTemplateEntity.Choices.Order().ToArray();
-
-    for (int i = 0; i < expected.Length; i++)
+  [TestMethod]
+  public void ToQuestionTemplateEntity_SingleChoiceQuestionTemplateDto_ChoicesFilled()
+  {
+    // Arrange
+    SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new()
     {
-      Assert.AreEqual(expected[i], actual[i]);
-    }
+      Text    = Guid.NewGuid().ToString(),
+      Choices = new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+    };
+
+    // Act
+    QuestionTemplateEntityBase questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext())!;
+
+    // Assert
+    Assert.AreEqual(singleChoiceQuestionTemplateDto.Choices, ((SingleChoiceQuestionTemplateEntity)questionTemplateEntityBase).Choices);
+  }
+
+  [TestMethod]
+  public void ToQuestionTemplateEntity_NoText_NullReturned()
+  {
+    // Arrange
+    SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new()
+    {
+      Text    = string.Empty,
+      Choices = new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+    };
+
+    // Act
+    QuestionTemplateEntityBase? questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext());
+
+    // Assert
+    Assert.IsNull(questionTemplateEntityBase);
+  }
+
+  [TestMethod]
+  public void ToQuestionTemplateEntity_NoText_ContextHasErrors()
+  {
+    // Arrange
+    SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new()
+    {
+      Text    = string.Empty,
+      Choices = new[]
+      {
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+        Guid.NewGuid().ToString(),
+      },
+    };
+
+    ExecutingContext context = new();
+
+    // Act
+    singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void ToQuestionTemplateEntity_NoChoices_NullReturned()
+  {
+    // Arrange
+    SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new()
+    {
+      Text    = Guid.NewGuid().ToString(),
+      Choices = Array.Empty<string>(),
+    };
+
+    // Act
+    QuestionTemplateEntityBase? questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext());
+
+    // Assert
+    Assert.IsNull(questionTemplateEntityBase);
+  }
+
+  [TestMethod]
+  public void ToQuestionTemplateEntity_NoChoices_ContextHasErrors()
+  {
+    // Arrange
+    SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new()
+    {
+      Text    = Guid.NewGuid().ToString(),
+      Choices = Array.Empty<string>(),
+    };
+
+    ExecutingContext context = new();
+
+    // Act
+    singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void ToQuestionTemplateEntity_EmptyChoice_NullReturned()
+  {
+    // Arrange
+    SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new()
+    {
+      Text    = Guid.NewGuid().ToString(),
+      Choices = new[]
+      {
+        Guid.NewGuid().ToString(),
+        string.Empty,
+        Guid.NewGuid().ToString(),
+      },
+    };
+
+    // Act
+    QuestionTemplateEntityBase? questionTemplateEntityBase = singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext());
+
+    // Assert
+    Assert.IsNull(questionTemplateEntityBase);
+  }
+
+  [TestMethod]
+  public void ToQuestionTemplateEntity_EmptyChoice_ContextHasErrors()
+  {
+    // Arrange
+    SingleChoiceQuestionTemplateDto singleChoiceQuestionTemplateDto = new()
+    {
+      Text    = Guid.NewGuid().ToString(),
+      Choices = new[]
+      {
+        Guid.NewGuid().ToString(),
+        string.Empty,
+        Guid.NewGuid().ToString(),
+      },
+    };
+
+    ExecutingContext context = new();
+
+    // Act
+    singleChoiceQuestionTemplateDto.ToTemplateQuestionEntity(context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
   }
 }
