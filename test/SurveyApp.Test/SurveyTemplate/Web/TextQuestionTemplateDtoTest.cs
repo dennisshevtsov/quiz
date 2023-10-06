@@ -24,13 +24,12 @@ public sealed class TextQuestionTemplateDtoTest
   }
 
   [TestMethod]
-  public void ToQuestionTemplateEntity_TextQuestionTemplateDto_PropertiesFilled()
+  public void ToQuestionTemplateEntity_TextQuestionTemplateDto_TextFilled()
   {
     // Arrange
     TextQuestionTemplateDto textQuestionTemplateDto = new()
     {
-      QuestionType = QuestionType.Text,
-      Text = "test",
+      Text = Guid.NewGuid().ToString(),
     };
 
     // Act
@@ -38,5 +37,39 @@ public sealed class TextQuestionTemplateDtoTest
 
     // Assert
     Assert.AreEqual(textQuestionTemplateDto.Text, questionTemplateEntityBase.Text);
+  }
+
+  [TestMethod]
+  public void ToQuestionTemplateEntity_NoText_NullReturned()
+  {
+    // Arrange
+    TextQuestionTemplateDto textQuestionTemplateDto = new()
+    {
+      Text = string.Empty,
+    };
+
+    // Act
+    QuestionTemplateEntityBase? questionTemplateEntityBase = textQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext());
+
+    // Assert
+    Assert.IsNull(questionTemplateEntityBase);
+  }
+
+  [TestMethod]
+  public void ToQuestionTemplateEntity_NoText_ContextContainsErrors()
+  {
+    // Arrange
+    TextQuestionTemplateDto textQuestionTemplateDto = new()
+    {
+      Text = string.Empty,
+    };
+
+    ExecutingContext context = new();
+
+    // Act
+    textQuestionTemplateDto.ToTemplateQuestionEntity(context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
   }
 }
