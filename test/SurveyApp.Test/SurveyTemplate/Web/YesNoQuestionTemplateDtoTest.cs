@@ -24,13 +24,12 @@ public sealed class YesNoQuestionTemplateDtoTest
   }
 
   [TestMethod]
-  public void ToQuestionTemplateEntity_YesNoQuestionTemplateDto_PropertiesFilled()
+  public void ToQuestionTemplateEntity_YesNoQuestionTemplateDto_TextFilled()
   {
     // Arrange
     YesNoQuestionTemplateDto yesNoQuestionTemplateDto = new()
     {
-      QuestionType = QuestionType.YesNo,
-      Text = "test",
+      Text = Guid.NewGuid().ToString(),
     };
 
     // Act
@@ -38,5 +37,39 @@ public sealed class YesNoQuestionTemplateDtoTest
 
     // Assert
     Assert.AreEqual(yesNoQuestionTemplateDto.Text, questionTemplateEntityBase.Text);
+  }
+
+  [TestMethod]
+  public void ToQuestionTemplateEntity_NoText_NullReturned()
+  {
+    // Arrange
+    YesNoQuestionTemplateDto yesNoQuestionTemplateDto = new()
+    {
+      Text = string.Empty,
+    };
+
+    // Act
+    QuestionTemplateEntityBase? questionTemplateEntityBase = yesNoQuestionTemplateDto.ToTemplateQuestionEntity(new ExecutingContext());
+
+    // Assert
+    Assert.IsNull(questionTemplateEntityBase);
+  }
+
+  [TestMethod]
+  public void ToQuestionTemplateEntity_NoText_ContextContainsErrors()
+  {
+    // Arrange
+    YesNoQuestionTemplateDto yesNoQuestionTemplateDto = new()
+    {
+      Text = string.Empty,
+    };
+
+    ExecutingContext context = new();
+
+    // Act
+    yesNoQuestionTemplateDto.ToTemplateQuestionEntity(context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
   }
 }
