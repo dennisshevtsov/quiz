@@ -56,7 +56,7 @@ public sealed class TextQuestionTemplateDtoTest
   }
 
   [TestMethod]
-  public void ToQuestionTemplateEntity_NoText_ContextContainsErrors()
+  public void ToQuestionTemplateEntity_NoText_ContextHasErrors()
   {
     // Arrange
     TextQuestionTemplateDto textQuestionTemplateDto = new()
