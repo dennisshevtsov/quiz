@@ -14,6 +14,15 @@ public sealed class SurveyTemplateEntity
     Questions        = questions;
   }
 
+  public SurveyTemplateEntity(SurveyTemplateEntity surveyTemplateEntity) : this
+  (
+    surveyTemplateId: surveyTemplateEntity.SurveyTemplateId,
+    title           : surveyTemplateEntity.Title,
+    description     : surveyTemplateEntity.Description,
+    questions       : surveyTemplateEntity.Questions
+  )
+  { }
+
   public Guid SurveyTemplateId { get; private set; }
 
   public string Title { get; private set; }

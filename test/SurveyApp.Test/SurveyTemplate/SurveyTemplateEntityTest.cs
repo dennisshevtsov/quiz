@@ -292,6 +292,35 @@ public sealed class SurveyTemplateEntityTest
   }
 
   [TestMethod]
+  public void Update_NoTitle_EntityNotUpdated()
+  {
+    // Arrange
+    SurveyTemplateEntity expectedSurveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : new QuestionTemplateEntityBase[0],
+      context    : new ExecutingContext()
+    )!;
+
+    SurveyTemplateEntity surveyTemplateEntity = new(expectedSurveyTemplateEntity);
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyTemplateEntity.Update
+    (
+      title      : string.Empty,
+      description: Guid.NewGuid().ToString(),
+      questions  : new QuestionTemplateEntityBase[0],
+      context    : context
+    );
+
+    // Assert
+    AreEqual(expectedSurveyTemplateEntity, surveyTemplateEntity);
+  }
+
+  [TestMethod]
   public void Update_NoDescription_ErrorsReturned()
   {
     // Arrange
@@ -319,6 +348,35 @@ public sealed class SurveyTemplateEntityTest
   }
 
   [TestMethod]
+  public void Update_NoDescription_EntityNotUpdated()
+  {
+    // Arrange
+    SurveyTemplateEntity expectedSurveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : new QuestionTemplateEntityBase[0],
+      context    : new ExecutingContext()
+    )!;
+
+    SurveyTemplateEntity surveyTemplateEntity = new(expectedSurveyTemplateEntity);
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyTemplateEntity.Update
+    (
+      title      : Guid.NewGuid().ToString(), 
+      description: string.Empty,
+      questions  : new QuestionTemplateEntityBase[0],
+      context    : context
+    );
+
+    // Assert
+    AreEqual(expectedSurveyTemplateEntity, surveyTemplateEntity);
+  }
+
+  [TestMethod]
   public void Update_FullListOfParameters_NoError()
   {
     // Arrange
@@ -343,5 +401,12 @@ public sealed class SurveyTemplateEntityTest
 
     // Assert
     Assert.IsFalse(context.HasErrors);
+  }
+
+  private static void AreEqual(SurveyTemplateEntity expected, SurveyTemplateEntity actual)
+  {
+    Assert.AreEqual(expected.Title, actual.Title);
+    Assert.AreEqual(expected.Description, actual.Description);
+    Assert.AreEqual(expected.Questions, actual.Questions);
   }
 }
