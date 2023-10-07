@@ -22,21 +22,18 @@ public sealed class SurveyTemplateEntity
 
   public QuestionTemplateEntityBase[] Questions { get; private set; }
 
-  public ExecutedContext<SurveyTemplateEntity> Update(string title, string description, QuestionTemplateEntityBase[] questions)
+  public void Update(string title, string description, QuestionTemplateEntityBase[] questions, ExecutingContext context)
   {
-    ExecutingContext context = new();
     Validate(title, description, context);
 
     if (context.HasErrors)
     {
-      return ExecutedContext<SurveyTemplateEntity>.Fail(context.Errors.ToArray());
+      return;
     }
 
     Title       = title;
     Description = description;
     Questions   = questions;
-
-    return ExecutedContext<SurveyTemplateEntity>.Ok(this);
   }
 
   public static SurveyTemplateEntity? New(

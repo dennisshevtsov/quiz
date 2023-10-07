@@ -16,10 +16,11 @@ public sealed class UpdateSurveyTemplateRequestDto : IComposable
 
   public QuestionTemplateDtoBase[] Questions { get; set; } = Array.Empty<QuestionTemplateDtoBase>();
 
-  public ExecutedContext<SurveyTemplateEntity> UpdateSurveyTemplate(SurveyTemplateEntity surveyTemplateEntity, ExecutingContext context) => surveyTemplateEntity.Update
+  public void UpdateSurveyTemplate(SurveyTemplateEntity surveyTemplateEntity, ExecutingContext context) => surveyTemplateEntity.Update
   (
     title      : Title,
     description: Description,
-    questions  : QuestionTemplateDtoBase.ToQuestionTemplateEntityCollection(Questions, context)
+    questions  : QuestionTemplateDtoBase.ToQuestionTemplateEntityCollection(Questions, context),
+    context    : context
   );
 }
