@@ -14,6 +14,15 @@ public sealed class SurveyTemplateEntity
     Questions        = questions;
   }
 
+  public SurveyTemplateEntity(SurveyTemplateEntity surveyTemplateEntity) : this
+  (
+    surveyTemplateId: surveyTemplateEntity.SurveyTemplateId,
+    title           : surveyTemplateEntity.Title,
+    description     : surveyTemplateEntity.Description,
+    questions       : surveyTemplateEntity.Questions
+  )
+  { }
+
   public Guid SurveyTemplateId { get; private set; }
 
   public string Title { get; private set; }
@@ -22,21 +31,18 @@ public sealed class SurveyTemplateEntity
 
   public QuestionTemplateEntityBase[] Questions { get; private set; }
 
-  public ExecutedContext<SurveyTemplateEntity> Update(string title, string description, QuestionTemplateEntityBase[] questions)
+  public void Update(string title, string description, QuestionTemplateEntityBase[] questions, ExecutingContext context)
   {
-    ExecutingContext context = new();
     Validate(title, description, context);
 
     if (context.HasErrors)
     {
-      return ExecutedContext<SurveyTemplateEntity>.Fail(context.Errors.ToArray());
+      return;
     }
 
     Title       = title;
     Description = description;
     Questions   = questions;
-
-    return ExecutedContext<SurveyTemplateEntity>.Ok(this);
   }
 
   public static SurveyTemplateEntity? New(
