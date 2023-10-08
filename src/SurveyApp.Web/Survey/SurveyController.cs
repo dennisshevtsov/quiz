@@ -63,9 +63,12 @@ public sealed class SurveyController : ControllerBase
       return NotFound();
     }
 
-    if (!surveyEntity.TryMoveTo(state))
+    ExecutingContext context = new();
+    surveyEntity.MoveTo(state, context);
+
+    if (context.HasErrors)
     {
-      return BadRequest();
+      return BadRequest(context.Errors);
     }
 
     await _surveyRepository.UpdateSurveyAsync(surveyEntity, cancellationToken);
