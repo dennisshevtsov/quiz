@@ -17,13 +17,25 @@ public abstract class QuestionEntityBase
 
   public abstract QuestionType QuestionType { get; }
 
-  public static QuestionEntityBase Copy(QuestionTemplateEntityBase surveyTemplateQuestionEntityBase) =>
-    surveyTemplateQuestionEntityBase.QuestionType switch
+  public static QuestionEntityBase Copy(QuestionTemplateEntityBase questionTemplateEntity) =>
+    questionTemplateEntity.QuestionType switch
     {
-      QuestionType.Text           => new TextQuestionEntity((TextQuestionTemplateEntity)surveyTemplateQuestionEntityBase),
-      QuestionType.YesNo          => new YesNoQuestionEntity((YesNoQuestionTemplateEntity)surveyTemplateQuestionEntityBase),
-      QuestionType.MultipleChoice => new MultipleChoiceQuestionEntity((MultipleChoiceQuestionTemplateEntity)surveyTemplateQuestionEntityBase),
-      QuestionType.SingleChoice   => new SingleChoiceQuestionEntity((SingleChoiceQuestionTemplateEntity)surveyTemplateQuestionEntityBase),
+      QuestionType.Text           => new TextQuestionEntity((TextQuestionTemplateEntity)questionTemplateEntity),
+      QuestionType.YesNo          => new YesNoQuestionEntity((YesNoQuestionTemplateEntity)questionTemplateEntity),
+      QuestionType.MultipleChoice => new MultipleChoiceQuestionEntity((MultipleChoiceQuestionTemplateEntity)questionTemplateEntity),
+      QuestionType.SingleChoice   => new SingleChoiceQuestionEntity((SingleChoiceQuestionTemplateEntity)questionTemplateEntity),
       _                           => throw new NotSupportedException("Unknown question type."),
     };
+
+  public static QuestionEntityBase[] Copy(QuestionTemplateEntityBase[] questionTemplateEntities)
+  {
+    QuestionEntityBase[] questionEntities = new QuestionEntityBase[questionTemplateEntities.Length];
+
+    for (int i = 0; i < questionTemplateEntities.Length; i++)
+    {
+      questionEntities[i] = QuestionEntityBase.Copy(questionTemplateEntities[i]);
+    }
+
+    return questionEntities;
+  }
 }

@@ -36,7 +36,7 @@ public sealed class SurveyEntity
     title        : surveyTemplateEntity.Title,
     description  : surveyTemplateEntity.Description,
     candidateName: string.Empty,
-    questions    : surveyTemplateEntity.Questions.Select(QuestionEntityBase.Copy).ToArray()
+    questions    : QuestionEntityBase.Copy(surveyTemplateEntity.Questions)
   )
   { }
 
