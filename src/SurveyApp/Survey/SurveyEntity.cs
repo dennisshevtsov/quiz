@@ -19,11 +19,25 @@ public sealed class SurveyEntity
   }
 
   public SurveyEntity(string title, string description, string candidateName, QuestionEntityBase[] questions)
-    : this(Guid.NewGuid(), SurveyState.Draft, title, description, candidateName, questions)
+  : this
+  (
+    surveyId     : Guid.NewGuid(),
+    state        : SurveyState.Draft,
+    title        : title,
+    description  : description,
+    candidateName: candidateName,
+    questions    : questions
+  )
   { }
 
   public SurveyEntity(SurveyTemplateEntity surveyTemplateEntity)
-    : this(surveyTemplateEntity.Title, surveyTemplateEntity.Description, string.Empty, surveyTemplateEntity.Questions.Select(QuestionEntityBase.Copy).ToArray())
+  : this
+  (
+    title        : surveyTemplateEntity.Title,
+    description  : surveyTemplateEntity.Description,
+    candidateName: string.Empty,
+    questions    : surveyTemplateEntity.Questions.Select(QuestionEntityBase.Copy).ToArray()
+  )
   { }
 
   public Guid SurveyId { get; private set; }
