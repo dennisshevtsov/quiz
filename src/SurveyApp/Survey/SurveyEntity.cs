@@ -81,7 +81,7 @@ public sealed class SurveyEntity
       context.AddError("Unknown state.");
     }
 
-    if (state == SurveyState.Done && State != SurveyState.Ready)
+    if (State != SurveyState.Ready && state == SurveyState.Done)
     {
       context.AddError("You can move a survey to the done state only if this survey is in the ready state.");
     }

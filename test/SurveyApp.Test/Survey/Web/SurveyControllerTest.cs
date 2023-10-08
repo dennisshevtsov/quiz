@@ -325,7 +325,7 @@ public sealed class SurveyControllerTest
     IActionResult actionResult = await _surveyController.MoveToState(surveyId, state, CancellationToken.None);
 
     // Assert
-    Assert.IsInstanceOfType(actionResult, typeof(BadRequestResult));
+    Assert.IsInstanceOfType(actionResult, typeof(BadRequestObjectResult));
   }
 
   [TestMethod]

@@ -150,7 +150,7 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
-  public void TryMoveTo_UnknownState_FalseReturned()
+  public void MoveTo_UnknownState_ContextHasErrors()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -161,15 +161,17 @@ public sealed class SurveyEntityTest
 
     SurveyState newState = Enum.GetValues<SurveyState>().Max() + 1;
 
+    ExecutingContext context = new();
+
     // Act
-    surveyEntity.MoveTo(newState, new ExecutingContext());
+    surveyEntity.MoveTo(newState, context);
 
     // Assert
-    //Assert.IsFalse(result);
+    Assert.IsTrue(context.HasErrors);
   }
 
   [TestMethod]
-  public void TryMoveTo_UnknownState_StateKept()
+  public void MoveTo_UnknownState_StateNotChanged()
   {
     // Assert
     SurveyState state = SurveyState.Ready;
@@ -192,7 +194,7 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
-  public void TryMoveTo_FromDraftToDone_FalseReturned()
+  public void MoveTo_FromDraftToDone_ContextHasErrors()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -203,24 +205,26 @@ public sealed class SurveyEntityTest
       candidateName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
+    ExecutingContext context = new();
+
     // Act
-    surveyEntity.MoveTo(SurveyState.Done, new ExecutingContext());
+    surveyEntity.MoveTo(SurveyState.Done, context);
 
     // Assert
-    //Assert.IsFalse(result);
+    Assert.IsTrue(context.HasErrors);
   }
 
   [TestMethod]
-  public void TryMoveTo_FromDraftToDone_StateKept()
+  public void MoveTo_FromDraftToDone_StateNotChanged()
   {
     // Assert
     SurveyEntity surveyEntity = new(
-      surveyId: default,
-      state: SurveyState.Draft,
-      title: string.Empty,
-      description: string.Empty,
+      surveyId     : default,
+      state        : SurveyState.Draft,
+      title        : string.Empty,
+      description  : string.Empty,
       candidateName: string.Empty,
-      questions: Array.Empty<QuestionEntityBase>());
+      questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
     surveyEntity.MoveTo(SurveyState.Done, new ExecutingContext());
@@ -230,7 +234,7 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
-  public void TryMoveTo_FromReadyToDone_TrueReturned()
+  public void MoveTo_FromReadyToDone_ContextHasNoErrors()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -241,15 +245,17 @@ public sealed class SurveyEntityTest
       candidateName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
+    ExecutingContext context = new();
+
     // Act
-    surveyEntity.MoveTo(SurveyState.Done, new ExecutingContext());
+    surveyEntity.MoveTo(SurveyState.Done, context);
 
     // Assert
-    //Assert.IsTrue(result);
+    Assert.IsFalse(context.HasErrors);
   }
 
   [TestMethod]
-  public void TryMoveTo_FromReadyToDone_StateChanged()
+  public void MoveTo_FromReadyToDone_StateChanged()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -268,7 +274,7 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
-  public void TryMoveTo_FromDoneToDone_FalseReturned()
+  public void MoveTo_FromDoneToDone_ContextHasErrors()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -279,15 +285,17 @@ public sealed class SurveyEntityTest
       candidateName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
+    ExecutingContext context = new();
+
     // Act
-    surveyEntity.MoveTo(SurveyState.Done, new ExecutingContext());
+    surveyEntity.MoveTo(SurveyState.Done, context);
 
     // Assert
-    //Assert.IsFalse(result);
+    Assert.IsTrue(context.HasErrors);
   }
 
   [TestMethod]
-  public void TryMoveTo_FromCancelledToDone_FalseReturned()
+  public void MoveTo_FromCancelledToDone_ContextHasErrors()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -298,15 +306,17 @@ public sealed class SurveyEntityTest
       candidateName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
+    ExecutingContext context = new();
+
     // Act
-      surveyEntity.MoveTo(SurveyState.Done, new ExecutingContext());
+    surveyEntity.MoveTo(SurveyState.Done, context);
 
     // Assert
-    //Assert.IsFalse(result);
+    Assert.IsTrue(context.HasErrors);
   }
 
   [TestMethod]
-  public void TryMoveTo_FromCancelledToDone_StateKept()
+  public void MoveTo_FromCancelledToDone_StateNotChanged()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -325,7 +335,28 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
-  public void TryMoveTo_FromDraftToCancelled_TrueReturned()
+  public void MoveTo_FromDraftToCancelled_ContextHasNoErrors()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Draft,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.MoveTo(SurveyState.Cancelled, context);
+
+    // Assert
+    Assert.IsFalse(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void MoveTo_FromDraftToCancelled_StateChanged()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -340,30 +371,11 @@ public sealed class SurveyEntityTest
     surveyEntity.MoveTo(SurveyState.Cancelled, new ExecutingContext());
 
     // Assert
-    //Assert.IsTrue(result);
-  }
-
-  [TestMethod]
-  public void TryMoveTo_FromDraftToCancelled_StateChanged()
-  {
-    // Assert
-    SurveyEntity surveyEntity = new(
-      surveyId     : default,
-      state        : SurveyState.Draft,
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
-
-    // Act
-    surveyEntity.MoveTo(SurveyState.Cancelled, new ExecutingContext());
-
-    // Assert
     Assert.AreEqual(SurveyState.Cancelled, surveyEntity.State);
   }
 
   [TestMethod]
-  public void TryMoveTo_FromReadyToCancelled_TrueReturned()
+  public void MoveTo_FromReadyToCancelled_ContextHasNoErrors()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -374,15 +386,17 @@ public sealed class SurveyEntityTest
       candidateName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
+    ExecutingContext context = new();
+
     // Act
-    surveyEntity.MoveTo(SurveyState.Cancelled, new ExecutingContext());
+    surveyEntity.MoveTo(SurveyState.Cancelled, context);
 
     // Assert
-    //Assert.IsTrue(result);
+    Assert.IsFalse(context.HasErrors);
   }
 
   [TestMethod]
-  public void TryMoveTo_FromReadyToCancelled_StateChanged()
+  public void MoveTo_FromReadyToCancelled_StateChanged()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -401,7 +415,7 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
-  public void TryMoveTo_FromDoneToCancelled_FalseReturned()
+  public void MoveTo_FromDoneToCancelled_ContextHasErrors()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -412,15 +426,17 @@ public sealed class SurveyEntityTest
       candidateName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
+    ExecutingContext context = new();
+
     // Act
-    surveyEntity.MoveTo(SurveyState.Cancelled, new ExecutingContext());
+    surveyEntity.MoveTo(SurveyState.Cancelled, context);
 
     // Assert
-    //Assert.IsFalse(result);
+    Assert.IsTrue(context.HasErrors);
   }
 
   [TestMethod]
-  public void TryMoveTo_FromDoneToCancelled_StateKept()
+  public void MoveTo_FromDoneToCancelled_StateNotChanged()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -439,7 +455,7 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
-  public void TryMoveTo_FromCancelledToCancelled_FalseReturned()
+  public void MoveTo_FromCancelledToCancelled_ContextHasErrors()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -450,11 +466,13 @@ public sealed class SurveyEntityTest
       candidateName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
+    ExecutingContext context = new();
+
     // Act
-    surveyEntity.MoveTo(SurveyState.Cancelled, new ExecutingContext());
+    surveyEntity.MoveTo(SurveyState.Cancelled, context);
 
     // Assert
-    //Assert.IsFalse(result);
+    Assert.IsTrue(context.HasErrors);
   }
 
   [TestMethod]
