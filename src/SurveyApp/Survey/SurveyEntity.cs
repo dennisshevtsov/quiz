@@ -91,4 +91,29 @@ public sealed class SurveyEntity
       context.AddError("You cannot change a state of a done or cancelled survey.");
     }
   }
+
+  private void Validate(string title, string description, string candidateName, ExecutingContext context)
+  {
+    if (State != SurveyState.Draft)
+    {
+      context.AddError("You can update only draft surveys.");
+
+      return;
+    }
+
+    if (string.IsNullOrWhiteSpace(title))
+    {
+      context.AddError("Title is required.");
+    }
+
+    if (string.IsNullOrWhiteSpace(description))
+    {
+      context.AddError("Description is required.");
+    }
+
+    if (string.IsNullOrWhiteSpace(candidateName))
+    {
+      context.AddError("Candidate Name is required.");
+    }
+  }
 }
