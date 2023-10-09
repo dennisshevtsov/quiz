@@ -740,7 +740,7 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
-  public void Update_SateIsReady_ContextHasErrors()
+  public void Update_StateIsReady_ContextHasErrors()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -766,7 +766,7 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
-  public void Update_SateIsDone_ContextHasErrors()
+  public void Update_StateIsDone_ContextHasErrors()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -792,7 +792,7 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
-  public void Update_SateIsCancelled_ContextHasErrors()
+  public void Update_StateIsCancelled_ContextHasErrors()
   {
     // Assert
     SurveyEntity surveyEntity = new(
@@ -815,5 +815,31 @@ public sealed class SurveyEntityTest
 
     // Assert
     Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void Update_StateIsDraft_ContextHasNoErrors()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Draft,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Update(
+      title        : Guid.NewGuid().ToString(),
+      description  : Guid.NewGuid().ToString(),
+      candidateName: Guid.NewGuid().ToString(),
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : context);
+
+    // Assert
+    Assert.IsFalse(context.HasErrors);
   }
 }
