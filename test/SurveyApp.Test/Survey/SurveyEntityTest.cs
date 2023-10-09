@@ -492,8 +492,8 @@ public sealed class SurveyEntityTest
     // Act
     surveyEntity.Update(
       title        : newTitle,
-      description  : string.Empty,
-      candidateName: string.Empty,
+      description  : Guid.NewGuid().ToString(),
+      candidateName: Guid.NewGuid().ToString(),
       questions    : Array.Empty<QuestionEntityBase>(),
       context      : new ExecutingContext());
 
@@ -517,9 +517,9 @@ public sealed class SurveyEntityTest
 
     // Act
     surveyEntity.Update(
-      title        : string.Empty,
+      title        : Guid.NewGuid().ToString(),
       description  : newDescription,
-      candidateName: string.Empty,
+      candidateName: Guid.NewGuid().ToString(),
       questions    : Array.Empty<QuestionEntityBase>(),
       context      : new ExecutingContext());
 
@@ -543,8 +543,8 @@ public sealed class SurveyEntityTest
 
     // Act
     surveyEntity.Update(
-      title        : string.Empty,
-      description  : string.Empty,
+      title        : Guid.NewGuid().ToString(),
+      description  : Guid.NewGuid().ToString(),
       candidateName: newCandidateName,
       questions    : Array.Empty<QuestionEntityBase>(),
       context      : new ExecutingContext());
@@ -569,9 +569,9 @@ public sealed class SurveyEntityTest
 
     // Act
     surveyEntity.Update(
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
+      title        : Guid.NewGuid().ToString(),
+      description  : Guid.NewGuid().ToString(),
+      candidateName: Guid.NewGuid().ToString(),
       questions    : newQuestions,
       context      : new ExecutingContext());
 
