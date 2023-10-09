@@ -13,7 +13,9 @@ public sealed class UpdateSurveyRequestDtoTest
     // Arrange
     UpdateSurveyRequestDto updateSurveyRequestDto = new()
     {
-      Title = Guid.NewGuid().ToString(),
+      Title         = Guid.NewGuid().ToString(),
+      Description   = Guid.NewGuid().ToString(),
+      CandidateName = Guid.NewGuid().ToString(),
     };
 
     SurveyEntity surveyEntity = new(
@@ -35,7 +37,9 @@ public sealed class UpdateSurveyRequestDtoTest
     // Arrange
     UpdateSurveyRequestDto updateSurveyRequestDto = new()
     {
-      Description = Guid.NewGuid().ToString(),
+      Title         = Guid.NewGuid().ToString(),
+      Description   = Guid.NewGuid().ToString(),
+      CandidateName = Guid.NewGuid().ToString(),
     };
 
     SurveyEntity surveyEntity = new(
@@ -57,6 +61,8 @@ public sealed class UpdateSurveyRequestDtoTest
     // Arrange
     UpdateSurveyRequestDto updateSurveyRequestDto = new()
     {
+      Title         = Guid.NewGuid().ToString(),
+      Description   = Guid.NewGuid().ToString(),
       CandidateName = Guid.NewGuid().ToString(),
     };
 
@@ -79,7 +85,10 @@ public sealed class UpdateSurveyRequestDtoTest
     // Arrange
     UpdateSurveyRequestDto updateSurveyRequestDto = new()
     {
-      Questions = new QuestionDtoBase[]
+      Title         = Guid.NewGuid().ToString(),
+      Description   = Guid.NewGuid().ToString(),
+      CandidateName = Guid.NewGuid().ToString(),
+      Questions     = new QuestionDtoBase[]
       {
         new YesNoQuestionDto(),
         new TextQuestionDto(),
