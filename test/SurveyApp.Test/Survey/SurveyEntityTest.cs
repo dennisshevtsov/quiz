@@ -492,9 +492,10 @@ public sealed class SurveyEntityTest
     // Act
     surveyEntity.Update(
       title        : newTitle,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    :Array.Empty<QuestionEntityBase>());
+      description  : Guid.NewGuid().ToString(),
+      candidateName: Guid.NewGuid().ToString(),
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : new ExecutingContext());
 
     // Assert
     Assert.AreEqual(newTitle, surveyEntity.Title);
@@ -516,10 +517,11 @@ public sealed class SurveyEntityTest
 
     // Act
     surveyEntity.Update(
-      title        : string.Empty,
+      title        : Guid.NewGuid().ToString(),
       description  : newDescription,
-      candidateName: string.Empty,
-      questions    :Array.Empty<QuestionEntityBase>());
+      candidateName: Guid.NewGuid().ToString(),
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : new ExecutingContext());
 
     // Assert
     Assert.AreEqual(newDescription, surveyEntity.Description);
@@ -541,10 +543,11 @@ public sealed class SurveyEntityTest
 
     // Act
     surveyEntity.Update(
-      title        : string.Empty,
-      description  : string.Empty,
+      title        : Guid.NewGuid().ToString(),
+      description  : Guid.NewGuid().ToString(),
       candidateName: newCandidateName,
-      questions    : Array.Empty<QuestionEntityBase>());
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : new ExecutingContext());
 
     // Assert
     Assert.AreEqual(newCandidateName, surveyEntity.CandidateName);
@@ -566,12 +569,277 @@ public sealed class SurveyEntityTest
 
     // Act
     surveyEntity.Update(
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : newQuestions);
+      title        : Guid.NewGuid().ToString(),
+      description  : Guid.NewGuid().ToString(),
+      candidateName: Guid.NewGuid().ToString(),
+      questions    : newQuestions,
+      context      : new ExecutingContext());
 
     // Assert
     Assert.AreEqual(newQuestions, surveyEntity.Questions);
+  }
+
+  [TestMethod]
+  public void Update_NoTitle_TitleNotUpdated()
+  {
+    // Assert
+    string originalTitle = Guid.NewGuid().ToString();
+
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : default,
+      title        : originalTitle,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    surveyEntity.Update(
+      title        : string.Empty,
+      description  : Guid.NewGuid().ToString(),
+      candidateName: Guid.NewGuid().ToString(),
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : new ExecutingContext());
+
+    // Assert
+    Assert.AreEqual(originalTitle, surveyEntity.Title);
+  }
+
+  [TestMethod]
+  public void Update_NoTitle_ContextHasErrors()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : default,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Update(
+      title        : string.Empty,
+      description  : Guid.NewGuid().ToString(),
+      candidateName: Guid.NewGuid().ToString(),
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void Update_NoDescription_DescriptionNotUpdated()
+  {
+    // Assert
+    string originalDescription = Guid.NewGuid().ToString();
+
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : default,
+      title        : string.Empty,
+      description  : originalDescription,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    surveyEntity.Update(
+      title        : Guid.NewGuid().ToString(),
+      description  : string.Empty,
+      candidateName: Guid.NewGuid().ToString(),
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : new ExecutingContext());
+
+    // Assert
+    Assert.AreEqual(originalDescription, surveyEntity.Description);
+  }
+
+  [TestMethod]
+  public void Update_NoDescription_ContextHasErrors()
+  {
+    // Assert
+    string originalDescription = Guid.NewGuid().ToString();
+
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : default,
+      title        : string.Empty,
+      description  : originalDescription,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Update(
+      title        : Guid.NewGuid().ToString(),
+      description  : string.Empty,
+      candidateName: Guid.NewGuid().ToString(),
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void Update_NoCandidateName_CandidateNameNotUpdated()
+  {
+    // Assert
+    string originalCandidateName = Guid.NewGuid().ToString();
+
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : default,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: originalCandidateName,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    // Act
+    surveyEntity.Update(
+      title        : Guid.NewGuid().ToString(),
+      description  : Guid.NewGuid().ToString(),
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : new ExecutingContext());
+
+    // Assert
+    Assert.AreEqual(originalCandidateName, surveyEntity.CandidateName);
+  }
+
+  [TestMethod]
+  public void Update_NoCandidateName_ContextHasErrors()
+  {
+    // Assert
+    string originalCandidateName = Guid.NewGuid().ToString();
+
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : default,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: originalCandidateName,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Update(
+      title        : Guid.NewGuid().ToString(),
+      description  : Guid.NewGuid().ToString(),
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void Update_StateIsReady_ContextHasErrors()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Ready,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Update(
+      title        : Guid.NewGuid().ToString(),
+      description  : Guid.NewGuid().ToString(),
+      candidateName: Guid.NewGuid().ToString(),
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void Update_StateIsDone_ContextHasErrors()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Done,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Update(
+      title        : Guid.NewGuid().ToString(),
+      description  : Guid.NewGuid().ToString(),
+      candidateName: Guid.NewGuid().ToString(),
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void Update_StateIsCancelled_ContextHasErrors()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Cancelled,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Update(
+      title        : Guid.NewGuid().ToString(),
+      description  : Guid.NewGuid().ToString(),
+      candidateName: Guid.NewGuid().ToString(),
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void Update_StateIsDraft_ContextHasNoErrors()
+  {
+    // Assert
+    SurveyEntity surveyEntity = new(
+      surveyId     : default,
+      state        : SurveyState.Draft,
+      title        : string.Empty,
+      description  : string.Empty,
+      candidateName: string.Empty,
+      questions    : Array.Empty<QuestionEntityBase>());
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Update(
+      title        : Guid.NewGuid().ToString(),
+      description  : Guid.NewGuid().ToString(),
+      candidateName: Guid.NewGuid().ToString(),
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : context);
+
+    // Assert
+    Assert.IsFalse(context.HasErrors);
   }
 }

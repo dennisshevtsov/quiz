@@ -6,8 +6,8 @@ namespace SurveyApp.Survey;
 
 public enum SurveyState : byte
 {
-  Draft    = 0,
-  Ready    = 1,
-  Done     = 2,
+  Draft     = 0,
+  Ready     = 1,
+  Done      = 2,
   Cancelled = 3,
 }

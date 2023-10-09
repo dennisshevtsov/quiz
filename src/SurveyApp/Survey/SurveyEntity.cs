@@ -64,14 +64,25 @@ public sealed class SurveyEntity
     State = state;
   }
 
-  public SurveyEntity Update(string title, string description, string candidateName, QuestionEntityBase[] questions)
+  public void Update(string title, string description, string candidateName, QuestionEntityBase[] questions, ExecutingContext context)
   {
+    Validate
+    (
+      title        : title,
+      description  : description,
+      candidateName: candidateName,
+      context      : context
+    );
+
+    if (context.HasErrors)
+    {
+      return;
+    }
+
     Title         = title;
     Description   = description;
     CandidateName = candidateName;
     Questions     = questions;
-
-    return this;
   }
 
   private void Validate(SurveyState state, ExecutingContext context)
@@ -89,6 +100,31 @@ public sealed class SurveyEntity
     if (State == SurveyState.Done || State == SurveyState.Cancelled)
     {
       context.AddError("You cannot change a state of a done or cancelled survey.");
+    }
+  }
+
+  private void Validate(string title, string description, string candidateName, ExecutingContext context)
+  {
+    if (State != SurveyState.Draft)
+    {
+      context.AddError("You can update only draft surveys.");
+
+      return;
+    }
+
+    if (string.IsNullOrWhiteSpace(title))
+    {
+      context.AddError("Title is required.");
+    }
+
+    if (string.IsNullOrWhiteSpace(description))
+    {
+      context.AddError("Description is required.");
+    }
+
+    if (string.IsNullOrWhiteSpace(candidateName))
+    {
+      context.AddError("Candidate Name is required.");
     }
   }
 }
