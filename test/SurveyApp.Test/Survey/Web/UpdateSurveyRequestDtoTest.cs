@@ -23,7 +23,7 @@ public sealed class UpdateSurveyRequestDtoTest
       questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
-    updateSurveyRequestDto.UpdateSurvey(surveyEntity);
+    updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(updateSurveyRequestDto.Title, surveyEntity.Title);
@@ -45,7 +45,7 @@ public sealed class UpdateSurveyRequestDtoTest
       questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
-    updateSurveyRequestDto.UpdateSurvey(surveyEntity);
+    updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(updateSurveyRequestDto.Description, surveyEntity.Description);
@@ -67,7 +67,7 @@ public sealed class UpdateSurveyRequestDtoTest
       questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
-    updateSurveyRequestDto.UpdateSurvey(surveyEntity);
+    updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(updateSurveyRequestDto.CandidateName, surveyEntity.CandidateName);
@@ -93,7 +93,7 @@ public sealed class UpdateSurveyRequestDtoTest
       questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
-    updateSurveyRequestDto.UpdateSurvey(surveyEntity);
+    updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(updateSurveyRequestDto.Questions.Length, surveyEntity.Questions.Length);

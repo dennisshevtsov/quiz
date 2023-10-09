@@ -64,14 +64,25 @@ public sealed class SurveyEntity
     State = state;
   }
 
-  public SurveyEntity Update(string title, string description, string candidateName, QuestionEntityBase[] questions)
+  public void Update(string title, string description, string candidateName, QuestionEntityBase[] questions, ExecutingContext context)
   {
+    Validate
+    (
+      title        : title,
+      description  : description,
+      candidateName: candidateName,
+      context      : context
+    );
+
+    if (context.HasErrors)
+    {
+      return;
+    }
+
     Title         = title;
     Description   = description;
     CandidateName = candidateName;
     Questions     = questions;
-
-    return this;
   }
 
   private void Validate(SurveyState state, ExecutingContext context)

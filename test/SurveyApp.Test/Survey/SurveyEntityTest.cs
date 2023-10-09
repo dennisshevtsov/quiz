@@ -494,7 +494,8 @@ public sealed class SurveyEntityTest
       title        : newTitle,
       description  : string.Empty,
       candidateName: string.Empty,
-      questions    :Array.Empty<QuestionEntityBase>());
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : new ExecutingContext());
 
     // Assert
     Assert.AreEqual(newTitle, surveyEntity.Title);
@@ -519,7 +520,8 @@ public sealed class SurveyEntityTest
       title        : string.Empty,
       description  : newDescription,
       candidateName: string.Empty,
-      questions    :Array.Empty<QuestionEntityBase>());
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : new ExecutingContext());
 
     // Assert
     Assert.AreEqual(newDescription, surveyEntity.Description);
@@ -544,7 +546,8 @@ public sealed class SurveyEntityTest
       title        : string.Empty,
       description  : string.Empty,
       candidateName: newCandidateName,
-      questions    : Array.Empty<QuestionEntityBase>());
+      questions    : Array.Empty<QuestionEntityBase>(),
+      context      : new ExecutingContext());
 
     // Assert
     Assert.AreEqual(newCandidateName, surveyEntity.CandidateName);
@@ -569,7 +572,8 @@ public sealed class SurveyEntityTest
       title        : string.Empty,
       description  : string.Empty,
       candidateName: string.Empty,
-      questions    : newQuestions);
+      questions    : newQuestions,
+      context      : new ExecutingContext());
 
     // Assert
     Assert.AreEqual(newQuestions, surveyEntity.Questions);
