@@ -241,7 +241,12 @@ public sealed class SurveyControllerTest
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                          .ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
 
-    UpdateSurveyRequestDto updateSurveyRequestDto = new();
+    UpdateSurveyRequestDto updateSurveyRequestDto = new()
+    {
+      Title         = Guid.NewGuid().ToString(),
+      Description   = Guid.NewGuid().ToString(),
+      CandidateName = Guid.NewGuid().ToString(),
+    };
 
     // Act
     IActionResult actionResult = await _surveyController.UpdateSurvey(updateSurveyRequestDto, CancellationToken.None);
