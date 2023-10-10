@@ -730,7 +730,13 @@ public sealed class SurveyEntityTest
     return constructorInfo ?? throw new Exception("No proper constructor.");
   }
 
-  public static SurveyEntity CreateTestSurvey(Guid surveyId, SurveyState state, string title, string description, string candidateName, QuestionEntityBase[] questions)
+  public static SurveyEntity CreateTestSurvey(
+    Guid surveyId = default,
+    SurveyState state = default,
+    string title = "",
+    string description = "",
+    string candidateName = "",
+    QuestionEntityBase[] questions = null!)
   {
     object[] parameters = new object[]
     {
@@ -739,7 +745,7 @@ public sealed class SurveyEntityTest
       title,
       description,
       candidateName,
-      questions,
+      questions ?? Array.Empty<QuestionEntityBase>(),
     };
 
     object newInstance = SurveyEntityTest.SurveyEntityConstructor.Invoke(parameters);

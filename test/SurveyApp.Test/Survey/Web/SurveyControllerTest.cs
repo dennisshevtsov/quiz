@@ -3,11 +3,9 @@
 // See LICENSE in the project root for license information.
 
 using System.Linq.Expressions;
-
 using Microsoft.AspNetCore.Mvc;
-using SurveyApp.Survey.Web;
-using SurveyApp.Survey;
 using SurveyApp.SurveyTemplate;
+using SurveyApp.Survey.Test;
 
 namespace SurveyApp.Survey.Web.Test;
 
@@ -33,8 +31,7 @@ public sealed class SurveyControllerTest
   {
     // Arrange
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity));
-                         //.ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey());
 
     GetSurveyRequestDto getSurveyRequestDto = new();
 
@@ -51,8 +48,7 @@ public sealed class SurveyControllerTest
   {
     // Arrange
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity));
-                         //.ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey());
 
     GetSurveyRequestDto getSurveyRequestDto = new();
 
@@ -108,8 +104,7 @@ public sealed class SurveyControllerTest
   {
     // Arrange
     _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity)!);
-                         //.ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey());
 
     AddSurveyRequestDto addSurveyRequestDto = new()
     {
@@ -135,8 +130,7 @@ public sealed class SurveyControllerTest
   {
     // Arrange
     _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity)!);
-                         //.ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey());
 
     AddSurveyRequestDto addSurveyRequestDto = new();
 
@@ -153,8 +147,7 @@ public sealed class SurveyControllerTest
   {
     // Arrange
     _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity)!);
-                         //.ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey());
 
     AddSurveyRequestDto addSurveyRequestDto = new();
 
@@ -173,8 +166,7 @@ public sealed class SurveyControllerTest
     Guid surveyId = Guid.NewGuid();
 
     _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity)!);
-                         //.ReturnsAsync(new SurveyEntity(surveyId, SurveyState.Draft, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey());
 
     AddSurveyRequestDto addSurveyRequestDto = new();
 
@@ -233,8 +225,7 @@ public sealed class SurveyControllerTest
   {
     // Arrange
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity));
-                         //.ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey());
 
     UpdateSurveyRequestDto updateSurveyRequestDto = new()
     {
@@ -255,8 +246,7 @@ public sealed class SurveyControllerTest
   {
     // Arrange
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity));
-                         //.ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey());
 
     UpdateSurveyRequestDto updateSurveyRequestDto = new();
 
@@ -272,8 +262,7 @@ public sealed class SurveyControllerTest
   {
     // Arrange
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity));
-                         //.ReturnsAsync(new SurveyEntity(string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey());
 
     UpdateSurveyRequestDto updateSurveyRequestDto = new();
 
@@ -291,8 +280,7 @@ public sealed class SurveyControllerTest
     Guid surveyId = Guid.NewGuid();
 
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity));
-                         //.ReturnsAsync(new SurveyEntity(surveyId, SurveyState.Draft, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey(surveyId: surveyId));
 
     UpdateSurveyRequestDto updateSurveyRequestDto = new()
     {
@@ -351,8 +339,7 @@ public sealed class SurveyControllerTest
   {
     // Arrange
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity));
-                         //.ReturnsAsync(new SurveyEntity(Guid.NewGuid(), SurveyState.Done, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey(state: SurveyState.Done));
 
     Guid surveyId = Guid.NewGuid();
     SurveyState state = SurveyState.Cancelled;
@@ -369,8 +356,7 @@ public sealed class SurveyControllerTest
   {
     // Arrange
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity));
-                         //.ReturnsAsync(new SurveyEntity(Guid.NewGuid(), SurveyState.Ready, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey(state: SurveyState.Ready));
 
     Guid surveyId = Guid.NewGuid();
     SurveyState state = SurveyState.Done;
@@ -389,9 +375,14 @@ public sealed class SurveyControllerTest
     Guid surveyId = Guid.NewGuid();
     SurveyState state = SurveyState.Done;
 
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      surveyId: surveyId,
+      state: SurveyState.Ready
+    );
+
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(default(SurveyEntity));
-                         //.ReturnsAsync(new SurveyEntity(surveyId, SurveyState.Ready, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>()));
+                         .ReturnsAsync(surveyEntity);
 
     // Act
     IActionResult actionResult = await _surveyController.MoveToState(surveyId, state, CancellationToken.None);
