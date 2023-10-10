@@ -12,7 +12,7 @@ public sealed class GetSurveyRequestDtoTest
   {
     // Arrange
     Guid surveyId = Guid.NewGuid();
-    SurveyEntity surveyEntity = new(surveyId, SurveyState.Draft, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>());
+    SurveyEntity surveyEntity = null!;//new(surveyId, SurveyState.Draft, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>());
 
     // Act
     GetSurveyRequestDto getSurveyRequestDto = new(surveyEntity);

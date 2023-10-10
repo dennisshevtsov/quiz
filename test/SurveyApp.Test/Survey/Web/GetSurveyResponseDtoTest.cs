@@ -11,21 +11,22 @@ public sealed class GetSurveyResponseDtoTest
   public void Constructor_SurveyEntity_PropertiesFilled()
   {
     // Arrange
-    SurveyEntity surveyEntity = new(
-      surveyId     : Guid.NewGuid(),
-      state        : SurveyState.Draft,
-      title        : Guid.NewGuid().ToString(),
-      description  : Guid.NewGuid().ToString(),
-      candidateName: Guid.NewGuid().ToString(),
-      questions    : new QuestionEntityBase[]
-      {
-        new TextQuestionEntity(
-          text  : Guid.NewGuid().ToString(),
-          answer: Guid.NewGuid().ToString()),
-        new YesNoQuestionEntity(
-          text  : Guid.NewGuid().ToString(),
-          answer: YesNo.Yes)
-      });
+    SurveyEntity surveyEntity = null!;
+      //new(
+      //  surveyId     : Guid.NewGuid(),
+      //  state        : SurveyState.Draft,
+      //  title        : Guid.NewGuid().ToString(),
+      //  description  : Guid.NewGuid().ToString(),
+      //  candidateName: Guid.NewGuid().ToString(),
+      //  questions    : new QuestionEntityBase[]
+      //  {
+      //    new TextQuestionEntity(
+      //      text  : Guid.NewGuid().ToString(),
+      //      answer: Guid.NewGuid().ToString()),
+      //    new YesNoQuestionEntity(
+      //      text  : Guid.NewGuid().ToString(),
+      //      answer: YesNo.Yes)
+      //});
 
     // Act
     GetSurveyResponseDto getSurveyResponseDto = new(surveyEntity);

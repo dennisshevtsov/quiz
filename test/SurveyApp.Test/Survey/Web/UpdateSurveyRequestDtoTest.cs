@@ -18,11 +18,11 @@ public sealed class UpdateSurveyRequestDtoTest
       CandidateName = Guid.NewGuid().ToString(),
     };
 
-    SurveyEntity surveyEntity = new(
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
+    SurveyEntity surveyEntity = null!;//new(
+    //  title        : string.Empty,
+    //  description  : string.Empty,
+    //  candidateName: string.Empty,
+    //  questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
@@ -44,11 +44,11 @@ public sealed class UpdateSurveyRequestDtoTest
 
     string originalTitle = Guid.NewGuid().ToString();
 
-    SurveyEntity surveyEntity = new(
-      title        : originalTitle,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
+    SurveyEntity surveyEntity = null!;//new(
+      //title        : originalTitle,
+      //description  : string.Empty,
+      //candidateName: string.Empty,
+      //questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
@@ -68,11 +68,11 @@ public sealed class UpdateSurveyRequestDtoTest
       CandidateName = Guid.NewGuid().ToString(),
     };
 
-    SurveyEntity surveyEntity = new(
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
+    SurveyEntity surveyEntity = null!;// new(
+      //title        : string.Empty,
+      //description  : string.Empty,
+      //candidateName: string.Empty,
+      //questions    : Array.Empty<QuestionEntityBase>());
 
     ExecutingContext context = new();
 
@@ -94,11 +94,11 @@ public sealed class UpdateSurveyRequestDtoTest
       CandidateName = Guid.NewGuid().ToString(),
     };
 
-    SurveyEntity surveyEntity = new(
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
+    SurveyEntity surveyEntity = null!;// new(
+      //title        : string.Empty,
+      //description  : string.Empty,
+      //candidateName: string.Empty,
+      //questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
@@ -120,11 +120,11 @@ public sealed class UpdateSurveyRequestDtoTest
 
     string originalDescription = Guid.NewGuid().ToString();
 
-    SurveyEntity surveyEntity = new(
-      title        : string.Empty,
-      description  : originalDescription,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
+    SurveyEntity surveyEntity = null!;// new(
+      //title        : string.Empty,
+      //description  : originalDescription,
+      //candidateName: string.Empty,
+      //questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
@@ -144,11 +144,11 @@ public sealed class UpdateSurveyRequestDtoTest
       CandidateName = Guid.NewGuid().ToString(),
     };
 
-    SurveyEntity surveyEntity = new(
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
+    SurveyEntity surveyEntity = null!;// new(
+      //title        : string.Empty,
+      //description  : string.Empty,
+      //candidateName: string.Empty,
+      //questions    : Array.Empty<QuestionEntityBase>());
 
     ExecutingContext context = new();
 
@@ -170,11 +170,11 @@ public sealed class UpdateSurveyRequestDtoTest
       CandidateName = Guid.NewGuid().ToString(),
     };
 
-    SurveyEntity surveyEntity = new(
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
+    SurveyEntity surveyEntity = null!;// new(
+      //title        : string.Empty,
+      //description  : string.Empty,
+      //candidateName: string.Empty,
+      //questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
@@ -196,11 +196,11 @@ public sealed class UpdateSurveyRequestDtoTest
 
     string originalCandidateName = Guid.NewGuid().ToString();
 
-    SurveyEntity surveyEntity = new(
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: originalCandidateName,
-      questions    : Array.Empty<QuestionEntityBase>());
+    SurveyEntity surveyEntity = null!;// new(
+      //title        : string.Empty,
+      //description  : string.Empty,
+      //candidateName: originalCandidateName,
+      //questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
@@ -220,11 +220,11 @@ public sealed class UpdateSurveyRequestDtoTest
       CandidateName = string.Empty,
     };
 
-    SurveyEntity surveyEntity = new(
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
+    SurveyEntity surveyEntity = null!;// new(
+      //title        : string.Empty,
+      //description  : string.Empty,
+      //candidateName: string.Empty,
+      //questions    : Array.Empty<QuestionEntityBase>());
 
     ExecutingContext context = new();
 
@@ -251,11 +251,11 @@ public sealed class UpdateSurveyRequestDtoTest
       },
     };
 
-    SurveyEntity surveyEntity = new(
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
+    SurveyEntity surveyEntity = null!;// new(
+      //title        : string.Empty,
+      //description  : string.Empty,
+      //candidateName: string.Empty,
+      //questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());

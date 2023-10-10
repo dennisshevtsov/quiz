@@ -8,19 +8,5 @@ namespace SurveyApp.Survey.Web;
 
 public sealed class AddSurveyRequestDto : IComposable
 {
-  public string Title { get; set; } = string.Empty;
-
-  public string Description { get; set; } = string.Empty;
-
-  public string CandidateName { get; set; } = string.Empty;
-
-  public QuestionDtoBase[] Questions { get; set; } = Array.Empty<QuestionDtoBase>();
-
-  public SurveyEntity ToSurveyEntity() => new
-  (
-    title        : Title,
-    description  : Description,
-    candidateName: CandidateName,
-    questions    : QuestionDtoBase.ToQuestionEntityCollection(Questions)
-  );
+  public Guid SurveyTemplateId { get; set; }
 }
