@@ -134,13 +134,26 @@ public sealed class SurveyControllerTest
   }
 
   [TestMethod]
-  public async Task AddSurvey_AddSurveyRequestDto_CreatedAtActionResultReturned()
+  public async Task AddSurvey_ExistingSurveyTemplate_CreatedAtActionResultReturned()
   {
     // Arrange
-    _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
-                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey());
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
+    )!;
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(surveyTemplateEntity);
 
-    AddSurveyRequestDto addSurveyRequestDto = new();
+    _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync((SurveyEntity surveyEntity, CancellationToken cancellationToken) => surveyEntity);
+
+    AddSurveyRequestDto addSurveyRequestDto = new()
+    {
+      SurveyTemplateId = Guid.NewGuid(),
+    };
 
     // Act
     IActionResult actionResult = await _surveyController.AddSurvey(
