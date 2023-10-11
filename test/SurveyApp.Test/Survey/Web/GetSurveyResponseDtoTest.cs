@@ -60,4 +60,58 @@ public sealed class GetSurveyResponseDtoTest
     // Assert
     Assert.AreEqual(surveyEntity.CandidateName, getSurveyResponseDto.CandidateName);
   }
+
+  [TestMethod]
+  public void Constructor_SurveyEntity_QuestionFilledFilled()
+  {
+    // Arrange
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      questions: new QuestionEntityBase[]
+      {
+        new YesNoQuestionEntity
+        (
+          text  : Guid.NewGuid().ToString(),
+          answer: YesNo.None
+        ),
+        new TextQuestionEntity
+        (
+          text  : Guid.NewGuid().ToString(),
+          answer: null
+        ),
+        new MultipleChoiceQuestionEntity
+        (
+          text   : Guid.NewGuid().ToString(),
+          choices: new string[]
+          {
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+          },
+          answers: new string[]
+          {
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+          }
+        ),
+        new SingleChoiceQuestionEntity
+        (
+          text   : Guid.NewGuid().ToString(),
+          choices: new string[]
+          {
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+          },
+          answer : Guid.NewGuid().ToString()
+        ),
+      }
+    );
+
+    // Act
+    GetSurveyResponseDto getSurveyResponseDto = new(surveyEntity);
+
+    // Assert
+    Assert.AreEqual(surveyEntity.Questions.Length, getSurveyResponseDto.Questions.Length);
+  }
 }
