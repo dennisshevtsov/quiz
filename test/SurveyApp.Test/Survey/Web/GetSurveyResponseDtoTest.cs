@@ -47,4 +47,17 @@ public sealed class GetSurveyResponseDtoTest
     // Assert
     Assert.AreEqual(surveyEntity.Description, getSurveyResponseDto.Description);
   }
+
+  [TestMethod]
+  public void Constructor_SurveyEntity_CandidateNameFilled()
+  {
+    // Arrange
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey();
+
+    // Act
+    GetSurveyResponseDto getSurveyResponseDto = new(surveyEntity);
+
+    // Assert
+    Assert.AreEqual(surveyEntity.CandidateName, getSurveyResponseDto.CandidateName);
+  }
 }
