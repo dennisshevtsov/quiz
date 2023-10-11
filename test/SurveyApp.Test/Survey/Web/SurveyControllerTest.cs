@@ -112,12 +112,28 @@ public sealed class SurveyControllerTest
     };
 
     // Act
-    IActionResult actionResult = await _surveyController.AddSurvey(
-      addSurveyRequestDto, CancellationToken.None);
+    await _surveyController.AddSurvey(addSurveyRequestDto, CancellationToken.None);
 
     // Assert
     Expression<Func<Guid, bool>> match = id => id == addSurveyRequestDto.SurveyTemplateId;
     _surveyTemplateRepositoryMock.Verify(repository => repository.GetSurveyTemplateAsync(It.Is(match), It.IsAny<CancellationToken>()));
+  }
+
+  [TestMethod]
+  public async Task AddSurvey_UnknownSurveyTemplate_NotFoundReturned()
+  {
+    // Arrange
+    _surveyTemplateRepositoryMock.Setup(repository => repository.GetSurveyTemplateAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(default(SurveyTemplateEntity));
+
+    AddSurveyRequestDto addSurveyRequestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyController.AddSurvey(
+      addSurveyRequestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType<NotFoundResult>(actionResult);
   }
 
   [TestMethod]
@@ -140,8 +156,7 @@ public sealed class SurveyControllerTest
     AddSurveyRequestDto addSurveyRequestDto = new();
 
     // Act
-    IActionResult actionResult = await _surveyController.AddSurvey(
-      addSurveyRequestDto, CancellationToken.None);
+    await _surveyController.AddSurvey(addSurveyRequestDto, CancellationToken.None);
 
     // Assert
     Expression<Func<SurveyEntity, bool>> match =
