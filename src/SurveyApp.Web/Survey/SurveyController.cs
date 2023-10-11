@@ -3,21 +3,25 @@
 // See LICENSE in the project root for license information.
 
 using Microsoft.AspNetCore.Mvc;
+using SurveyApp.SurveyTemplate;
 
 namespace SurveyApp.Survey.Web;
 
 [ApiController]
-[Route("api/survey")]
 public sealed class SurveyController : ControllerBase
 {
   private readonly ISurveyRepository _surveyRepository;
+  private readonly ISurveyTemplateRepository _surveyTemplateRepository;
 
-  public SurveyController(ISurveyRepository surveyRepository)
+  public SurveyController(
+    ISurveyRepository surveyRepository,
+    ISurveyTemplateRepository surveyTemplateRepository)
   {
     _surveyRepository = surveyRepository ?? throw new ArgumentNullException(nameof(surveyRepository));
+    _surveyTemplateRepository = surveyTemplateRepository ?? throw new ArgumentNullException(nameof(surveyTemplateRepository));
   }
 
-  [HttpGet("{surveyId}", Name = nameof(SurveyController.GetSurvey))]
+  [HttpGet("api/survey/{surveyId}", Name = nameof(SurveyController.GetSurvey))]
   public async Task<IActionResult> GetSurvey(GetSurveyRequestDto requestDto, CancellationToken cancellationToken)
   {
     SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(requestDto.SurveyId, cancellationToken);
@@ -30,15 +34,23 @@ public sealed class SurveyController : ControllerBase
     return Ok(new GetSurveyResponseDto(surveyEntity));
   }
 
-  [HttpPost(Name = nameof(SurveyController.AddSurvey))]
+  [HttpPost("api/survey-template/{surveyTemplateId}/survey", Name = nameof(SurveyController.AddSurvey))]
   public async Task<IActionResult> AddSurvey(AddSurveyRequestDto requestDto, CancellationToken cancellationToken)
   {
-    SurveyEntity surveyEntity = await _surveyRepository.AddSurveyAsync(requestDto.ToSurveyEntity(), cancellationToken);
+    SurveyTemplateEntity? surveyTemplateEntity = await _surveyTemplateRepository.GetSurveyTemplateAsync(requestDto.SurveyTemplateId, cancellationToken);
+
+    if (surveyTemplateEntity == null)
+    {
+      return NotFound();
+    }
+
+    SurveyEntity surveyEntity = new(surveyTemplateEntity);
+    await _surveyRepository.AddSurveyAsync(surveyEntity, cancellationToken);
 
     return CreatedAtAction(nameof(SurveyController.GetSurvey), new GetSurveyRequestDto(surveyEntity), new GetSurveyResponseDto(surveyEntity));
   }
 
-  [HttpPut("{surveyId}", Name = nameof(SurveyController.UpdateSurvey))]
+  [HttpPut("api/survey/{surveyId}", Name = nameof(SurveyController.UpdateSurvey))]
   public async Task<IActionResult> UpdateSurvey(UpdateSurveyRequestDto requestDto, CancellationToken cancellationToken)
   {
     SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(requestDto.SurveyId, cancellationToken);
@@ -61,7 +73,7 @@ public sealed class SurveyController : ControllerBase
     return NoContent();
   }
 
-  [HttpGet("{surveyId}/state/{state}", Name = nameof(SurveyController.MoveToState))]
+  [HttpGet("api/survey/{surveyId}/state/{state}", Name = nameof(SurveyController.MoveToState))]
   public async Task<IActionResult> MoveToState(Guid surveyId, SurveyState state, CancellationToken cancellationToken)
   {
     SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(surveyId, cancellationToken);
@@ -84,7 +96,7 @@ public sealed class SurveyController : ControllerBase
     return NoContent();
   }
 
-  [HttpPost("{surveyId}/question", Name = nameof(SurveyController.UpdateQuestions))]
+  [HttpPost("api/survey/{surveyId}/question", Name = nameof(SurveyController.UpdateQuestions))]
   public async Task<IActionResult> UpdateQuestions(UpdateQuestionsRequestDto requestDto, CancellationToken cancellationToken)
   {
     SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(requestDto.SurveyId, cancellationToken);

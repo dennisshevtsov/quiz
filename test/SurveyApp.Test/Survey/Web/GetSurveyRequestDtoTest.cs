@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using SurveyApp.Survey.Test;
+
 namespace SurveyApp.Survey.Web.Test;
 
 [TestClass]
@@ -11,13 +13,12 @@ public sealed class GetSurveyRequestDtoTest
   public void Constructor_SurveyEntity_SurveyIdFilled()
   {
     // Arrange
-    Guid surveyId = Guid.NewGuid();
-    SurveyEntity surveyEntity = new(surveyId, SurveyState.Draft, string.Empty, string.Empty, string.Empty, Array.Empty<QuestionEntityBase>());
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey();
 
     // Act
     GetSurveyRequestDto getSurveyRequestDto = new(surveyEntity);
 
     // Assert
-    Assert.AreEqual(surveyId, getSurveyRequestDto.SurveyId);
+    Assert.AreEqual(surveyEntity.SurveyId, getSurveyRequestDto.SurveyId);
   }
 }

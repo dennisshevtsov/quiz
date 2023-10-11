@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using SurveyApp.Survey.Test;
+
 namespace SurveyApp.Survey.Web.Test;
 
 [TestClass]
@@ -18,7 +20,9 @@ public sealed class UpdateSurveyRequestDtoTest
       CandidateName = Guid.NewGuid().ToString(),
     };
 
-    SurveyEntity surveyEntity = new(
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+      surveyId     : default,
+      state        : default,
       title        : string.Empty,
       description  : string.Empty,
       candidateName: string.Empty,
@@ -44,7 +48,9 @@ public sealed class UpdateSurveyRequestDtoTest
 
     string originalTitle = Guid.NewGuid().ToString();
 
-    SurveyEntity surveyEntity = new(
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+      surveyId     : default,
+      state        : default,
       title        : originalTitle,
       description  : string.Empty,
       candidateName: string.Empty,
@@ -68,7 +74,9 @@ public sealed class UpdateSurveyRequestDtoTest
       CandidateName = Guid.NewGuid().ToString(),
     };
 
-    SurveyEntity surveyEntity = new(
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+      surveyId     : default,
+      state        : default,
       title        : string.Empty,
       description  : string.Empty,
       candidateName: string.Empty,
@@ -94,7 +102,9 @@ public sealed class UpdateSurveyRequestDtoTest
       CandidateName = Guid.NewGuid().ToString(),
     };
 
-    SurveyEntity surveyEntity = new(
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+      surveyId     : default,
+      state        : default,
       title        : string.Empty,
       description  : string.Empty,
       candidateName: string.Empty,
@@ -120,7 +130,9 @@ public sealed class UpdateSurveyRequestDtoTest
 
     string originalDescription = Guid.NewGuid().ToString();
 
-    SurveyEntity surveyEntity = new(
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+      surveyId     : default,
+      state        : default,
       title        : string.Empty,
       description  : originalDescription,
       candidateName: string.Empty,
@@ -144,7 +156,9 @@ public sealed class UpdateSurveyRequestDtoTest
       CandidateName = Guid.NewGuid().ToString(),
     };
 
-    SurveyEntity surveyEntity = new(
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+      surveyId     : default,
+      state        : default,
       title        : string.Empty,
       description  : string.Empty,
       candidateName: string.Empty,
@@ -170,7 +184,9 @@ public sealed class UpdateSurveyRequestDtoTest
       CandidateName = Guid.NewGuid().ToString(),
     };
 
-    SurveyEntity surveyEntity = new(
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+      surveyId     : default,
+      state        : default,
       title        : string.Empty,
       description  : string.Empty,
       candidateName: string.Empty,
@@ -196,7 +212,9 @@ public sealed class UpdateSurveyRequestDtoTest
 
     string originalCandidateName = Guid.NewGuid().ToString();
 
-    SurveyEntity surveyEntity = new(
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+      surveyId     : default,
+      state        : default,
       title        : string.Empty,
       description  : string.Empty,
       candidateName: originalCandidateName,
@@ -220,7 +238,9 @@ public sealed class UpdateSurveyRequestDtoTest
       CandidateName = string.Empty,
     };
 
-    SurveyEntity surveyEntity = new(
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+      surveyId     : default,
+      state        : default,
       title        : string.Empty,
       description  : string.Empty,
       candidateName: string.Empty,
@@ -251,7 +271,9 @@ public sealed class UpdateSurveyRequestDtoTest
       },
     };
 
-    SurveyEntity surveyEntity = new(
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+      surveyId     : default,
+      state        : default,
       title        : string.Empty,
       description  : string.Empty,
       candidateName: string.Empty,
