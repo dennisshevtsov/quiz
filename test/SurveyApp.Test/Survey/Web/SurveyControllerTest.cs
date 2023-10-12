@@ -298,9 +298,7 @@ public sealed class SurveyControllerTest
 
     UpdateSurveyRequestDto updateSurveyRequestDto = new()
     {
-      Title         = Guid.NewGuid().ToString(),
-      Description   = Guid.NewGuid().ToString(),
-      CandidateName = Guid.NewGuid().ToString(),
+      IntervieweeName = Guid.NewGuid().ToString(),
     };
 
     // Act
@@ -354,22 +352,7 @@ public sealed class SurveyControllerTest
     UpdateSurveyRequestDto updateSurveyRequestDto = new()
     {
       SurveyId      = surveyId,
-      Title         = Guid.NewGuid().ToString(),
-      Description   = Guid.NewGuid().ToString(),
-      CandidateName = Guid.NewGuid().ToString(),
-      Questions     = new QuestionDtoBase[]
-      {
-        new TextQuestionDto
-        {
-          QuestionType = QuestionType.Text,
-          Text         = Guid.NewGuid().ToString(),
-        },
-        new YesNoQuestionDto
-        {
-          QuestionType = QuestionType.YesNo,
-          Text         = Guid.NewGuid().ToString(),
-        },
-      }
+      IntervieweeName = Guid.NewGuid().ToString(),
     };
 
     // Act
@@ -377,11 +360,8 @@ public sealed class SurveyControllerTest
 
     // Assert
     Expression<Func<SurveyEntity, bool>> match =
-      entity => entity.SurveyId         == surveyId                             &&
-                entity.Title            == updateSurveyRequestDto.Title         &&
-                entity.Description      == updateSurveyRequestDto.Description   &&
-                entity.CandidateName    == updateSurveyRequestDto.CandidateName &&
-                entity.Questions.Length == updateSurveyRequestDto.Questions.Length;
+      entity => entity.SurveyId         == surveyId &&
+                entity.IntervieweeName  == updateSurveyRequestDto.IntervieweeName;
 
     _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.Is(match), It.IsAny<CancellationToken>()));
   }

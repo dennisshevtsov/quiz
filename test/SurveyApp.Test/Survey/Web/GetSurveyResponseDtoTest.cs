@@ -58,7 +58,7 @@ public sealed class GetSurveyResponseDtoTest
     GetSurveyResponseDto getSurveyResponseDto = new(surveyEntity);
 
     // Assert
-    Assert.AreEqual(surveyEntity.CandidateName, getSurveyResponseDto.CandidateName);
+    Assert.AreEqual(surveyEntity.IntervieweeName, getSurveyResponseDto.IntervieweeName);
   }
 
   [TestMethod]
