@@ -14,7 +14,7 @@ public sealed class UpdateSurveyRequestDto : IComposable
 
   public string Description { get; set; } = string.Empty;
 
-  public string CandidateName { get; set; } = string.Empty;
+  public string IntervieweeName { get; set; } = string.Empty;
 
   public QuestionDtoBase[] Questions { get; set; } = Array.Empty<QuestionDtoBase>();
 
@@ -22,7 +22,7 @@ public sealed class UpdateSurveyRequestDto : IComposable
     surveyEntity.Update(
       title        : Title,
       description  : Description,
-      candidateName: CandidateName,
+      candidateName: IntervieweeName,
       questions    : QuestionDtoBase.ToQuestionEntityCollection(Questions),
       context      : context);
 }

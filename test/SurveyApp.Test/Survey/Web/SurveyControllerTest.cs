@@ -300,7 +300,7 @@ public sealed class SurveyControllerTest
     {
       Title         = Guid.NewGuid().ToString(),
       Description   = Guid.NewGuid().ToString(),
-      CandidateName = Guid.NewGuid().ToString(),
+      IntervieweeName = Guid.NewGuid().ToString(),
     };
 
     // Act
@@ -356,7 +356,7 @@ public sealed class SurveyControllerTest
       SurveyId      = surveyId,
       Title         = Guid.NewGuid().ToString(),
       Description   = Guid.NewGuid().ToString(),
-      CandidateName = Guid.NewGuid().ToString(),
+      IntervieweeName = Guid.NewGuid().ToString(),
       Questions     = new QuestionDtoBase[]
       {
         new TextQuestionDto
@@ -380,7 +380,7 @@ public sealed class SurveyControllerTest
       entity => entity.SurveyId         == surveyId                             &&
                 entity.Title            == updateSurveyRequestDto.Title         &&
                 entity.Description      == updateSurveyRequestDto.Description   &&
-                entity.CandidateName    == updateSurveyRequestDto.CandidateName &&
+                entity.CandidateName    == updateSurveyRequestDto.IntervieweeName &&
                 entity.Questions.Length == updateSurveyRequestDto.Questions.Length;
 
     _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.Is(match), It.IsAny<CancellationToken>()));

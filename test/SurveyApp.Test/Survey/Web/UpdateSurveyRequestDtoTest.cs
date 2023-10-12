@@ -17,7 +17,7 @@ public sealed class UpdateSurveyRequestDtoTest
     {
       Title         = Guid.NewGuid().ToString(),
       Description   = Guid.NewGuid().ToString(),
-      CandidateName = Guid.NewGuid().ToString(),
+      IntervieweeName = Guid.NewGuid().ToString(),
     };
 
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
@@ -43,7 +43,7 @@ public sealed class UpdateSurveyRequestDtoTest
     {
       Title         = string.Empty,
       Description   = Guid.NewGuid().ToString(),
-      CandidateName = Guid.NewGuid().ToString(),
+      IntervieweeName = Guid.NewGuid().ToString(),
     };
 
     string originalTitle = Guid.NewGuid().ToString();
@@ -71,7 +71,7 @@ public sealed class UpdateSurveyRequestDtoTest
     {
       Title         = string.Empty,
       Description   = Guid.NewGuid().ToString(),
-      CandidateName = Guid.NewGuid().ToString(),
+      IntervieweeName = Guid.NewGuid().ToString(),
     };
 
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
@@ -99,7 +99,7 @@ public sealed class UpdateSurveyRequestDtoTest
     {
       Title         = Guid.NewGuid().ToString(),
       Description   = Guid.NewGuid().ToString(),
-      CandidateName = Guid.NewGuid().ToString(),
+      IntervieweeName = Guid.NewGuid().ToString(),
     };
 
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
@@ -125,7 +125,7 @@ public sealed class UpdateSurveyRequestDtoTest
     {
       Title         = Guid.NewGuid().ToString(),
       Description   = string.Empty,
-      CandidateName = Guid.NewGuid().ToString(),
+      IntervieweeName = Guid.NewGuid().ToString(),
     };
 
     string originalDescription = Guid.NewGuid().ToString();
@@ -153,7 +153,7 @@ public sealed class UpdateSurveyRequestDtoTest
     {
       Title         = Guid.NewGuid().ToString(),
       Description   = string.Empty,
-      CandidateName = Guid.NewGuid().ToString(),
+      IntervieweeName = Guid.NewGuid().ToString(),
     };
 
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
@@ -174,14 +174,14 @@ public sealed class UpdateSurveyRequestDtoTest
   }
 
   [TestMethod]
-  public void UpdateSurvey_SurveyEntity_CandidateNameUpdated()
+  public void UpdateSurvey_SurveyEntity_IntervieweeNameUpdated()
   {
     // Arrange
     UpdateSurveyRequestDto updateSurveyRequestDto = new()
     {
       Title         = Guid.NewGuid().ToString(),
       Description   = Guid.NewGuid().ToString(),
-      CandidateName = Guid.NewGuid().ToString(),
+      IntervieweeName = Guid.NewGuid().ToString(),
     };
 
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
@@ -196,18 +196,18 @@ public sealed class UpdateSurveyRequestDtoTest
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
 
     // Assert
-    Assert.AreEqual(updateSurveyRequestDto.CandidateName, surveyEntity.CandidateName);
+    Assert.AreEqual(updateSurveyRequestDto.IntervieweeName, surveyEntity.CandidateName);
   }
 
   [TestMethod]
-  public void UpdateSurvey_NoCandidateName_TitleNotUpdated()
+  public void UpdateSurvey_NoIntervieweeName_TitleNotUpdated()
   {
     // Arrange
     UpdateSurveyRequestDto updateSurveyRequestDto = new()
     {
       Title         = Guid.NewGuid().ToString(),
       Description   = Guid.NewGuid().ToString(),
-      CandidateName = string.Empty,
+      IntervieweeName = string.Empty,
     };
 
     string originalCandidateName = Guid.NewGuid().ToString();
@@ -228,14 +228,14 @@ public sealed class UpdateSurveyRequestDtoTest
   }
 
   [TestMethod]
-  public void UpdateSurvey_NoCandidateName_ContextHasErrors()
+  public void UpdateSurvey_NoIntervieweeName_ContextHasErrors()
   {
     // Arrange
     UpdateSurveyRequestDto updateSurveyRequestDto = new()
     {
       Title         = Guid.NewGuid().ToString(),
       Description   = Guid.NewGuid().ToString(),
-      CandidateName = string.Empty,
+      IntervieweeName = string.Empty,
     };
 
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
@@ -263,7 +263,7 @@ public sealed class UpdateSurveyRequestDtoTest
     {
       Title         = Guid.NewGuid().ToString(),
       Description   = Guid.NewGuid().ToString(),
-      CandidateName = Guid.NewGuid().ToString(),
+      IntervieweeName = Guid.NewGuid().ToString(),
       Questions     = new QuestionDtoBase[]
       {
         new YesNoQuestionDto(),
