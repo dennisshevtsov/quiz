@@ -22,7 +22,7 @@ public sealed class UpdateSurveyRequestDto : IComposable
     surveyEntity.Update(
       title        : Title,
       description  : Description,
-      candidateName: IntervieweeName,
+      intervieweeName: IntervieweeName,
       questions    : QuestionDtoBase.ToQuestionEntityCollection(Questions),
       context      : context);
 }

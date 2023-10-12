@@ -25,7 +25,7 @@ public sealed class UpdateSurveyRequestDtoTest
       state        : default,
       title        : string.Empty,
       description  : string.Empty,
-      candidateName: string.Empty,
+      intervieweeName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
@@ -53,7 +53,7 @@ public sealed class UpdateSurveyRequestDtoTest
       state        : default,
       title        : originalTitle,
       description  : string.Empty,
-      candidateName: string.Empty,
+      intervieweeName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
@@ -79,7 +79,7 @@ public sealed class UpdateSurveyRequestDtoTest
       state        : default,
       title        : string.Empty,
       description  : string.Empty,
-      candidateName: string.Empty,
+      intervieweeName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
     ExecutingContext context = new();
@@ -107,7 +107,7 @@ public sealed class UpdateSurveyRequestDtoTest
       state        : default,
       title        : string.Empty,
       description  : string.Empty,
-      candidateName: string.Empty,
+      intervieweeName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
@@ -135,7 +135,7 @@ public sealed class UpdateSurveyRequestDtoTest
       state        : default,
       title        : string.Empty,
       description  : originalDescription,
-      candidateName: string.Empty,
+      intervieweeName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
     // Act
@@ -161,7 +161,7 @@ public sealed class UpdateSurveyRequestDtoTest
       state        : default,
       title        : string.Empty,
       description  : string.Empty,
-      candidateName: string.Empty,
+      intervieweeName: string.Empty,
       questions    : Array.Empty<QuestionEntityBase>());
 
     ExecutingContext context = new();
@@ -185,18 +185,18 @@ public sealed class UpdateSurveyRequestDtoTest
     };
 
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
-      surveyId     : default,
-      state        : default,
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
+      surveyId       : default,
+      state          : default,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>());
 
     // Act
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
 
     // Assert
-    Assert.AreEqual(updateSurveyRequestDto.IntervieweeName, surveyEntity.CandidateName);
+    Assert.AreEqual(updateSurveyRequestDto.IntervieweeName, surveyEntity.IntervieweeName);
   }
 
   [TestMethod]
@@ -213,18 +213,18 @@ public sealed class UpdateSurveyRequestDtoTest
     string originalCandidateName = Guid.NewGuid().ToString();
 
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
-      surveyId     : default,
-      state        : default,
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: originalCandidateName,
-      questions    : Array.Empty<QuestionEntityBase>());
+      surveyId       : default,
+      state          : default,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: originalCandidateName,
+      questions      : Array.Empty<QuestionEntityBase>());
 
     // Act
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
 
     // Assert
-    Assert.AreEqual(originalCandidateName, surveyEntity.CandidateName);
+    Assert.AreEqual(originalCandidateName, surveyEntity.IntervieweeName);
   }
 
   [TestMethod]
@@ -239,12 +239,12 @@ public sealed class UpdateSurveyRequestDtoTest
     };
 
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
-      surveyId     : default,
-      state        : default,
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
+      surveyId       : default,
+      state          : default,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>());
 
     ExecutingContext context = new();
 
@@ -272,12 +272,12 @@ public sealed class UpdateSurveyRequestDtoTest
     };
 
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
-      surveyId     : default,
-      state        : default,
-      title        : string.Empty,
-      description  : string.Empty,
-      candidateName: string.Empty,
-      questions    : Array.Empty<QuestionEntityBase>());
+      surveyId       : default,
+      state          : default,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>());
 
     // Act
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());

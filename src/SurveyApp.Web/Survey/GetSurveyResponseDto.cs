@@ -8,12 +8,12 @@ public sealed class GetSurveyResponseDto
 {
   public GetSurveyResponseDto(SurveyEntity surveyEntity)
   {
-    SurveyId      = surveyEntity.SurveyId;
-    Title         = surveyEntity.Title;
-    Description   = surveyEntity.Description;
-    CandidateName = surveyEntity.CandidateName;
-    Questions     = Questions = surveyEntity.Questions.Select(QuestionDtoBase.FromQuestionTemplateEntity)
-                                                      .ToArray();
+    SurveyId        = surveyEntity.SurveyId;
+    Title           = surveyEntity.Title;
+    Description     = surveyEntity.Description;
+    IntervieweeName = surveyEntity.IntervieweeName;
+    Questions       = surveyEntity.Questions.Select(QuestionDtoBase.FromQuestionTemplateEntity)
+                                            .ToArray();
   }
 
   public Guid SurveyId { get; }
@@ -22,7 +22,7 @@ public sealed class GetSurveyResponseDto
 
   public string Description { get; }
 
-  public string CandidateName { get; set; }
+  public string IntervieweeName { get; set; }
 
   public QuestionDtoBase[] Questions { get; }
 }

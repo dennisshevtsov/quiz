@@ -380,7 +380,7 @@ public sealed class SurveyControllerTest
       entity => entity.SurveyId         == surveyId                             &&
                 entity.Title            == updateSurveyRequestDto.Title         &&
                 entity.Description      == updateSurveyRequestDto.Description   &&
-                entity.CandidateName    == updateSurveyRequestDto.IntervieweeName &&
+                entity.IntervieweeName  == updateSurveyRequestDto.IntervieweeName &&
                 entity.Questions.Length == updateSurveyRequestDto.Questions.Length;
 
     _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.Is(match), It.IsAny<CancellationToken>()));
