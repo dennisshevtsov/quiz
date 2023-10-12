@@ -338,7 +338,7 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
-  public void Update_NewTitle_TitleUpdated()
+  public void Update_NewIntervieweeName_IntervieweeNameUpdated()
   {
     // Assert
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
@@ -349,202 +349,13 @@ public sealed class SurveyEntityTest
       intervieweeName: string.Empty,
       questions      : Array.Empty<QuestionEntityBase>());
 
-    string newTitle = Guid.NewGuid().ToString();
+    string newInervieweeName = Guid.NewGuid().ToString();
 
     // Act
-    surveyEntity.Update(
-      title          : newTitle,
-      description    : Guid.NewGuid().ToString(),
-      intervieweeName: Guid.NewGuid().ToString(),
-      questions      : Array.Empty<QuestionEntityBase>(),
-      context        : new ExecutingContext());
+    surveyEntity.Update(newInervieweeName, new ExecutingContext());
 
     // Assert
-    Assert.AreEqual(newTitle, surveyEntity.Title);
-  }
-
-  [TestMethod]
-  public void Update_NewDescription_DescriptionUpdated()
-  {
-    // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
-      surveyId       : Guid.NewGuid(),
-      state          : default,
-      title          : string.Empty,
-      description    : string.Empty,
-      intervieweeName: string.Empty,
-      questions      : Array.Empty<QuestionEntityBase>());
-
-    string newDescription = Guid.NewGuid().ToString();
-
-    // Act
-    surveyEntity.Update(
-      title          : Guid.NewGuid().ToString(),
-      description    : newDescription,
-      intervieweeName: Guid.NewGuid().ToString(),
-      questions      : Array.Empty<QuestionEntityBase>(),
-      context        : new ExecutingContext());
-
-    // Assert
-    Assert.AreEqual(newDescription, surveyEntity.Description);
-  }
-
-  [TestMethod]
-  public void Update_NewCandidateName_CandidateNameUpdated()
-  {
-    // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
-      surveyId       : Guid.NewGuid(),
-      state          : default,
-      title          : string.Empty,
-      description    : string.Empty,
-      intervieweeName: string.Empty,
-      questions      : Array.Empty<QuestionEntityBase>());
-
-    string newCandidateName = Guid.NewGuid().ToString();
-
-    // Act
-    surveyEntity.Update(
-      title          : Guid.NewGuid().ToString(),
-      description    : Guid.NewGuid().ToString(),
-      intervieweeName: newCandidateName,
-      questions      : Array.Empty<QuestionEntityBase>(),
-      context        : new ExecutingContext());
-
-    // Assert
-    Assert.AreEqual(newCandidateName, surveyEntity.IntervieweeName);
-  }
-
-  [TestMethod]
-  public void Update_NewQuestions_QuestionsUpdated()
-  {
-    // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
-      surveyId       : Guid.NewGuid(),
-      state          : default,
-      title          : string.Empty,
-      description    : string.Empty,
-      intervieweeName: string.Empty,
-      questions      : Array.Empty<QuestionEntityBase>());
-
-    QuestionEntityBase[] newQuestions = new QuestionEntityBase[0];
-
-    // Act
-    surveyEntity.Update(
-      title          : Guid.NewGuid().ToString(),
-      description    : Guid.NewGuid().ToString(),
-      intervieweeName: Guid.NewGuid().ToString(),
-      questions      : newQuestions,
-      context        : new ExecutingContext());
-
-    // Assert
-    Assert.AreEqual(newQuestions, surveyEntity.Questions);
-  }
-
-  [TestMethod]
-  public void Update_NoTitle_TitleNotUpdated()
-  {
-    // Assert
-    string originalTitle = Guid.NewGuid().ToString();
-
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
-      surveyId       : Guid.NewGuid(),
-      state          : default,
-      title          : originalTitle,
-      description    : string.Empty,
-      intervieweeName: string.Empty,
-      questions      : Array.Empty<QuestionEntityBase>());
-
-    // Act
-    surveyEntity.Update(
-      title          : string.Empty,
-      description    : Guid.NewGuid().ToString(),
-      intervieweeName: Guid.NewGuid().ToString(),
-      questions      : Array.Empty<QuestionEntityBase>(),
-      context        : new ExecutingContext());
-
-    // Assert
-    Assert.AreEqual(originalTitle, surveyEntity.Title);
-  }
-
-  [TestMethod]
-  public void Update_NoTitle_ContextHasErrors()
-  {
-    // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
-      surveyId       : Guid.NewGuid(),
-      state          : default,
-      title          : string.Empty,
-      description    : string.Empty,
-      intervieweeName: string.Empty,
-      questions      : Array.Empty<QuestionEntityBase>());
-
-    ExecutingContext context = new();
-
-    // Act
-    surveyEntity.Update(
-      title          : string.Empty,
-      description    : Guid.NewGuid().ToString(),
-      intervieweeName: Guid.NewGuid().ToString(),
-      questions      : Array.Empty<QuestionEntityBase>(),
-      context        : context);
-
-    // Assert
-    Assert.IsTrue(context.HasErrors);
-  }
-
-  [TestMethod]
-  public void Update_NoDescription_DescriptionNotUpdated()
-  {
-    // Assert
-    string originalDescription = Guid.NewGuid().ToString();
-
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
-      surveyId       : Guid.NewGuid(),
-      state          : default,
-      title          : string.Empty,
-      description    : originalDescription,
-      intervieweeName: string.Empty,
-      questions      : Array.Empty<QuestionEntityBase>());
-
-    // Act
-    surveyEntity.Update(
-      title          : Guid.NewGuid().ToString(),
-      description    : string.Empty,
-      intervieweeName: Guid.NewGuid().ToString(),
-      questions      : Array.Empty<QuestionEntityBase>(),
-      context        : new ExecutingContext());
-
-    // Assert
-    Assert.AreEqual(originalDescription, surveyEntity.Description);
-  }
-
-  [TestMethod]
-  public void Update_NoDescription_ContextHasErrors()
-  {
-    // Assert
-    string originalDescription = Guid.NewGuid().ToString();
-
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
-      surveyId       : Guid.NewGuid(),
-      state          : default,
-      title          : string.Empty,
-      description    : originalDescription,
-      intervieweeName: string.Empty,
-      questions      : Array.Empty<QuestionEntityBase>());
-
-    ExecutingContext context = new();
-
-    // Act
-    surveyEntity.Update(
-      title          : Guid.NewGuid().ToString(),
-      description    : string.Empty,
-      intervieweeName: Guid.NewGuid().ToString(),
-      questions      : Array.Empty<QuestionEntityBase>(),
-      context        : context);
-
-    // Assert
-    Assert.IsTrue(context.HasErrors);
+    Assert.AreEqual(newInervieweeName, surveyEntity.IntervieweeName);
   }
 
   [TestMethod]
@@ -562,12 +373,7 @@ public sealed class SurveyEntityTest
       questions      : Array.Empty<QuestionEntityBase>());
 
     // Act
-    surveyEntity.Update(
-      title          : Guid.NewGuid().ToString(),
-      description    : Guid.NewGuid().ToString(),
-      intervieweeName: string.Empty,
-      questions      : Array.Empty<QuestionEntityBase>(),
-      context        : new ExecutingContext());
+    surveyEntity.Update(string.Empty, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(originalIntervieweeName, surveyEntity.IntervieweeName);
@@ -590,12 +396,7 @@ public sealed class SurveyEntityTest
     ExecutingContext context = new();
 
     // Act
-    surveyEntity.Update(
-      title          : Guid.NewGuid().ToString(),
-      description    : Guid.NewGuid().ToString(),
-      intervieweeName: string.Empty,
-      questions      : Array.Empty<QuestionEntityBase>(),
-      context        : context);
+    surveyEntity.Update(string.Empty, context);
 
     // Assert
     Assert.IsTrue(context.HasErrors);
@@ -616,12 +417,7 @@ public sealed class SurveyEntityTest
     ExecutingContext context = new();
 
     // Act
-    surveyEntity.Update(
-      title          : Guid.NewGuid().ToString(),
-      description    : Guid.NewGuid().ToString(),
-      intervieweeName: Guid.NewGuid().ToString(),
-      questions      : Array.Empty<QuestionEntityBase>(),
-      context        : context);
+    surveyEntity.Update(Guid.NewGuid().ToString(), context);
 
     // Assert
     Assert.IsTrue(context.HasErrors);
@@ -642,12 +438,7 @@ public sealed class SurveyEntityTest
     ExecutingContext context = new();
 
     // Act
-    surveyEntity.Update(
-      title          : Guid.NewGuid().ToString(),
-      description    : Guid.NewGuid().ToString(),
-      intervieweeName: Guid.NewGuid().ToString(),
-      questions      : Array.Empty<QuestionEntityBase>(),
-      context        : context);
+    surveyEntity.Update(Guid.NewGuid().ToString(), context);
 
     // Assert
     Assert.IsTrue(context.HasErrors);
@@ -668,12 +459,7 @@ public sealed class SurveyEntityTest
     ExecutingContext context = new();
 
     // Act
-    surveyEntity.Update(
-      title        : Guid.NewGuid().ToString(),
-      description  : Guid.NewGuid().ToString(),
-      intervieweeName: Guid.NewGuid().ToString(),
-      questions    : Array.Empty<QuestionEntityBase>(),
-      context      : context);
+    surveyEntity.Update(Guid.NewGuid().ToString(), context);
 
     // Assert
     Assert.IsTrue(context.HasErrors);
@@ -694,12 +480,7 @@ public sealed class SurveyEntityTest
     ExecutingContext context = new();
 
     // Act
-    surveyEntity.Update(
-      title          : Guid.NewGuid().ToString(),
-      description    : Guid.NewGuid().ToString(),
-      intervieweeName: Guid.NewGuid().ToString(),
-      questions      : Array.Empty<QuestionEntityBase>(),
-      context        : context);
+    surveyEntity.Update(Guid.NewGuid().ToString(), context);
 
     // Assert
     Assert.IsFalse(context.HasErrors);
@@ -707,7 +488,7 @@ public sealed class SurveyEntityTest
 
   private static ConstructorInfo? _surveyEntityConstructor;
 
-  private static ConstructorInfo SurveyEntityConstructor => _surveyEntityConstructor ?? GetSurveyEntityConstructor();
+  private static ConstructorInfo SurveyEntityConstructor => _surveyEntityConstructor ?? (_surveyEntityConstructor = GetSurveyEntityConstructor());
 
   private static ConstructorInfo GetSurveyEntityConstructor()
   {

@@ -40,17 +40,17 @@ public sealed class SurveyEntity
   )
   { }
 
-  public Guid SurveyId { get; private set; }
+  public Guid SurveyId { get; }
 
   public SurveyState State { get; private set; }
 
-  public string Title { get; private set; }
+  public string Title { get; }
 
-  public string Description { get; private set; }
+  public string Description { get; }
 
   public string IntervieweeName { get; private set; }
 
-  public QuestionEntityBase[] Questions { get; private set; }
+  public QuestionEntityBase[] Questions { get; }
 
   public void MoveTo(SurveyState state, ExecutingContext context)
   {
@@ -64,25 +64,16 @@ public sealed class SurveyEntity
     State = state;
   }
 
-  public void Update(string title, string description, string intervieweeName, QuestionEntityBase[] questions, ExecutingContext context)
+  public void Update(string intervieweeName, ExecutingContext context)
   {
-    Validate
-    (
-      title        : title,
-      description  : description,
-      candidateName: intervieweeName,
-      context      : context
-    );
+    Validate(intervieweeName, context);
 
     if (context.HasErrors)
     {
       return;
     }
 
-    Title           = title;
-    Description     = description;
     IntervieweeName = intervieweeName;
-    Questions       = questions;
   }
 
   private void Validate(SurveyState state, ExecutingContext context)
@@ -103,7 +94,7 @@ public sealed class SurveyEntity
     }
   }
 
-  private void Validate(string title, string description, string candidateName, ExecutingContext context)
+  private void Validate(string intervieweeName, ExecutingContext context)
   {
     if (State != SurveyState.Draft)
     {
@@ -112,19 +103,9 @@ public sealed class SurveyEntity
       return;
     }
 
-    if (string.IsNullOrWhiteSpace(title))
+    if (string.IsNullOrWhiteSpace(intervieweeName))
     {
-      context.AddError("Title is required.");
-    }
-
-    if (string.IsNullOrWhiteSpace(description))
-    {
-      context.AddError("Description is required.");
-    }
-
-    if (string.IsNullOrWhiteSpace(candidateName))
-    {
-      context.AddError("Candidate Name is required.");
+      context.AddError("Interviewee Name is required.");
     }
   }
 }
