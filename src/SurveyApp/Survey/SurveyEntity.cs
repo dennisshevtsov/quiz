@@ -3,6 +3,7 @@
 // See LICENSE in the project root for license information.
 
 using SurveyApp.SurveyTemplate;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SurveyApp.Survey;
 
@@ -51,6 +52,23 @@ public sealed class SurveyEntity
   public string IntervieweeName { get; private set; }
 
   public QuestionEntityBase[] Questions { get; }
+
+  public static SurveyEntity? New(string intervieweeName, SurveyTemplateEntity template, ExecutingContext context)
+  {
+    ValidateIntervieweeName(intervieweeName, context);
+
+    if (context.HasErrors)
+    {
+      return null;
+    }
+
+    SurveyEntity surveyEntity = new(template)
+    {
+      IntervieweeName = intervieweeName,
+    };
+
+    return surveyEntity;
+  }
 
   public void MoveTo(SurveyState state, ExecutingContext context)
   {
@@ -103,6 +121,11 @@ public sealed class SurveyEntity
       return;
     }
 
+    ValidateIntervieweeName(intervieweeName, context);
+  }
+
+  private static void ValidateIntervieweeName(string intervieweeName, ExecutingContext context)
+  {
     if (string.IsNullOrWhiteSpace(intervieweeName))
     {
       context.AddError("Interviewee Name is required.");

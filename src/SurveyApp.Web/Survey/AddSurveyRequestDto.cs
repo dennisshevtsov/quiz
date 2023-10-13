@@ -9,4 +9,6 @@ namespace SurveyApp.Survey.Web;
 public sealed class AddSurveyRequestDto : IComposable
 {
   public Guid SurveyTemplateId { get; set; }
+
+  public string IntervieweeName { get; set; } = string.Empty;
 }

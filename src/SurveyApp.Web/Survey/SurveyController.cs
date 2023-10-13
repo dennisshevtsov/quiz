@@ -44,10 +44,27 @@ public sealed class SurveyController : ControllerBase
       return NotFound();
     }
 
-    SurveyEntity surveyEntity = new(surveyTemplateEntity);
-    await _surveyRepository.AddSurveyAsync(surveyEntity, cancellationToken);
+    ExecutingContext context = new();
+    SurveyEntity? surveyEntity = SurveyEntity.New
+    (
+      intervieweeName: requestDto.IntervieweeName,
+      template       : surveyTemplateEntity,
+      context        : context
+    );
 
-    return CreatedAtAction(nameof(SurveyController.GetSurvey), new GetSurveyRequestDto(surveyEntity), new GetSurveyResponseDto(surveyEntity));
+    if (context.HasErrors)
+    {
+      return BadRequest(context.Errors);
+    }
+
+    await _surveyRepository.AddSurveyAsync(surveyEntity!, cancellationToken);
+
+    return CreatedAtAction
+    (
+      actionName : nameof(SurveyController.GetSurvey),
+      routeValues: new GetSurveyRequestDto(surveyEntity!),
+      value      : new GetSurveyResponseDto(surveyEntity!)
+    );
   }
 
   [HttpPut("api/survey/{surveyId}", Name = nameof(SurveyController.UpdateSurvey))]
