@@ -153,7 +153,10 @@ public sealed class SurveyControllerTest
     _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
                          .ReturnsAsync((SurveyEntity surveyEntity, CancellationToken cancellationToken) => surveyEntity);
 
-    AddSurveyRequestDto addSurveyRequestDto = new();
+    AddSurveyRequestDto addSurveyRequestDto = new()
+    {
+      IntervieweeName = Guid.NewGuid().ToString(),
+    };
 
     // Act
     await _surveyController.AddSurvey(addSurveyRequestDto, CancellationToken.None);
@@ -183,7 +186,10 @@ public sealed class SurveyControllerTest
     _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
                          .ReturnsAsync((SurveyEntity surveyEntity, CancellationToken cancellationToken) => surveyEntity);
 
-    AddSurveyRequestDto addSurveyRequestDto = new();
+    AddSurveyRequestDto addSurveyRequestDto = new()
+    {
+      IntervieweeName = Guid.NewGuid().ToString(),
+    };
 
     // Act
     IActionResult actionResult = await _surveyController.AddSurvey(
@@ -210,7 +216,10 @@ public sealed class SurveyControllerTest
     _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
                          .ReturnsAsync((SurveyEntity surveyEntity, CancellationToken cancellationToken) => surveyEntity);
 
-    AddSurveyRequestDto addSurveyRequestDto = new();
+    AddSurveyRequestDto addSurveyRequestDto = new()
+    {
+      IntervieweeName = Guid.NewGuid().ToString(),
+    };
 
     // Act
     IActionResult actionResult = await _surveyController.AddSurvey(
@@ -237,7 +246,10 @@ public sealed class SurveyControllerTest
     _surveyRepositoryMock.Setup(repository => repository.AddSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()))
                          .ReturnsAsync((SurveyEntity surveyEntity, CancellationToken cancellationToken) => surveyEntity);
 
-    AddSurveyRequestDto addSurveyRequestDto = new();
+    AddSurveyRequestDto addSurveyRequestDto = new()
+    {
+      IntervieweeName = Guid.NewGuid().ToString(),
+    };
 
     // Act
     IActionResult actionResult = await _surveyController.AddSurvey(
