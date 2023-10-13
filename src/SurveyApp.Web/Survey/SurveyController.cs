@@ -47,9 +47,9 @@ public sealed class SurveyController : ControllerBase
     ExecutingContext context = new();
     SurveyEntity? surveyEntity = SurveyEntity.New
     (
-      intervieweeName     : requestDto.IntervieweeName,
-      surveyTemplateEntity: surveyTemplateEntity,
-      context             : context
+      intervieweeName: requestDto.IntervieweeName,
+      template       : surveyTemplateEntity,
+      context        : context
     );
 
     if (context.HasErrors)

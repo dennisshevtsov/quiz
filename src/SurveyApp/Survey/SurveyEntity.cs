@@ -53,7 +53,7 @@ public sealed class SurveyEntity
 
   public QuestionEntityBase[] Questions { get; }
 
-  public static SurveyEntity? New(string intervieweeName, SurveyTemplateEntity surveyTemplateEntity, ExecutingContext context)
+  public static SurveyEntity? New(string intervieweeName, SurveyTemplateEntity template, ExecutingContext context)
   {
     ValidateIntervieweeName(intervieweeName, context);
 
@@ -62,7 +62,7 @@ public sealed class SurveyEntity
       return null;
     }
 
-    SurveyEntity surveyEntity = new(surveyTemplateEntity)
+    SurveyEntity surveyEntity = new(template)
     {
       IntervieweeName = intervieweeName,
     };

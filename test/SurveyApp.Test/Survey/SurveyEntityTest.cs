@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using SurveyApp.SurveyTemplate;
 using System.Reflection;
 
 namespace SurveyApp.Survey.Test;
@@ -9,6 +10,84 @@ namespace SurveyApp.Survey.Test;
 [TestClass]
 public sealed class SurveyEntityTest
 {
+  [TestMethod]
+  public void New_IntervieweeName_SurveyEntityCreated()
+  {
+    // Assert
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
+    )!;
+
+    ExecutingContext context = new();
+
+    // Act
+    SurveyEntity? surveyEntity = SurveyEntity.New
+    (
+      intervieweeName: Guid.NewGuid().ToString(),
+      template       : surveyTemplateEntity,
+      context        : context
+    );
+
+    // Assert
+    Assert.IsNotNull(surveyEntity);
+  }
+
+  [TestMethod]
+  public void New_IntervieweeName_ContextHasNoErrors()
+  {
+    // Assert
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
+    )!;
+
+    ExecutingContext context = new();
+
+    // Act
+    SurveyEntity.New
+    (
+      intervieweeName: Guid.NewGuid().ToString(),
+      template       : surveyTemplateEntity,
+      context        : context
+    );
+
+    // Assert
+    Assert.IsFalse(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void New_NoIntervieweeName_ContextHasErrors()
+  {
+    // Assert
+    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    (
+      title      : Guid.NewGuid().ToString(),
+      description: Guid.NewGuid().ToString(),
+      questions  : Array.Empty<QuestionTemplateEntityBase>(),
+      context    : new ExecutingContext()
+    )!;
+
+    ExecutingContext context = new();
+
+    // Act
+    SurveyEntity.New
+    (
+      intervieweeName: string.Empty,
+      template       : surveyTemplateEntity,
+      context        : context
+    );
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
   [TestMethod]
   public void MoveTo_UnknownState_ContextHasErrors()
   {
