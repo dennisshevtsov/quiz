@@ -8,7 +8,7 @@ public sealed class MultipleChoiceAnswerDto : AnswerDtoBase
 {
   public string[] Answers { get; set; } = Array.Empty<string>();
 
-  public override void Update(QuestionEntityBase questionEntity)
+  public override void SetAnswer(QuestionEntityBase questionEntity)
   {
     if (questionEntity is MultipleChoiceQuestionEntity multipleChoiceQuestionEntity)
     {

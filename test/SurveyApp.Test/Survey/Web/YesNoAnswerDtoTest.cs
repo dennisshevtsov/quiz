@@ -24,7 +24,7 @@ public sealed class YesNoAnswerDtoTest
     };
 
     // Act
-    yesNoAnswerDto.Update(yesNoQuestionEntity);
+    yesNoAnswerDto.SetAnswer(yesNoQuestionEntity);
 
     // Assert
     Assert.AreEqual(answer, yesNoQuestionEntity.Answer);

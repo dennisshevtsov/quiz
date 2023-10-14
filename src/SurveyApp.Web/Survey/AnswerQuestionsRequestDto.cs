@@ -6,17 +6,17 @@ using Patchable;
 
 namespace SurveyApp.Survey.Web;
 
-public sealed class UpdateQuestionsRequestDto : IComposable
+public sealed class AnswerQuestionsRequestDto : IComposable
 {
   public Guid SurveyId { get; set; }
 
   public AnswerDtoBase[] Answers { get; set; } = Array.Empty<AnswerDtoBase>();
 
-  public void Update(SurveyEntity surveyEntity)
+  public void Answer(SurveyEntity surveyEntity)
   {
     for (int i = 0; i < surveyEntity.Questions.Length; i++)
     {
-      Answers[i].Update(surveyEntity.Questions[i]);
+      Answers[i].SetAnswer(surveyEntity.Questions[i]);
     }
   }
 }

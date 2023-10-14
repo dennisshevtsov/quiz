@@ -31,7 +31,7 @@ public sealed class SingleChoiceAnswerDtoTest
     );
 
     // Act
-    singleChoiceAnswerDto.Update(singleChoiceQuestionEntity);
+    singleChoiceAnswerDto.SetAnswer(singleChoiceQuestionEntity);
 
     // Assert
     Assert.AreEqual(answer, singleChoiceQuestionEntity.Answer);
@@ -60,7 +60,7 @@ public sealed class SingleChoiceAnswerDtoTest
     );
 
     // Act
-    singleChoiceAnswerDto.Update(singleChoiceQuestionEntity);
+    singleChoiceAnswerDto.SetAnswer(singleChoiceQuestionEntity);
 
     // Assert
     Assert.AreEqual(answer, singleChoiceQuestionEntity.Answer);

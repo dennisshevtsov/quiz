@@ -8,7 +8,7 @@ public sealed class SingleChoiceAnswerDto : AnswerDtoBase
 {
   public string? Answer { get; set; }
 
-  public override void Update(QuestionEntityBase questionEntity)
+  public override void SetAnswer(QuestionEntityBase questionEntity)
   {
     if (questionEntity is SingleChoiceQuestionEntity singleChoiceQuestionEntity)
     {

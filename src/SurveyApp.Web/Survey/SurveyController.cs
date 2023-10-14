@@ -113,8 +113,8 @@ public sealed class SurveyController : ControllerBase
     return NoContent();
   }
 
-  [HttpPost("api/survey/{surveyId}/question", Name = nameof(SurveyController.UpdateQuestions))]
-  public async Task<IActionResult> UpdateQuestions(UpdateQuestionsRequestDto requestDto, CancellationToken cancellationToken)
+  [HttpPost("api/survey/{surveyId}/question", Name = nameof(SurveyController.Answer))]
+  public async Task<IActionResult> Answer(AnswerQuestionsRequestDto requestDto, CancellationToken cancellationToken)
   {
     SurveyEntity? surveyEntity = await _surveyRepository.GetSurveyAsync(requestDto.SurveyId, cancellationToken);
 
@@ -123,7 +123,7 @@ public sealed class SurveyController : ControllerBase
       return NotFound();
     }
 
-    requestDto.Update(surveyEntity);
+    requestDto.Answer(surveyEntity);
 
     return NoContent();
   }
