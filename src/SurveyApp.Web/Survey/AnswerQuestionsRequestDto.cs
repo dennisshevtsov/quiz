@@ -18,5 +18,10 @@ public sealed class AnswerQuestionsRequestDto : IComposable
     {
       Answers[i].SetAnswer(surveyEntity.Questions[i], context);
     }
+
+    if (!context.HasErrors)
+    {
+      surveyEntity.Answer(context);
+    }
   }
 }

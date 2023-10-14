@@ -126,6 +126,13 @@ public sealed class SurveyController : ControllerBase
     ExecutingContext context = new();
     requestDto.Answer(surveyEntity, context);
 
+    if (context.HasErrors)
+    {
+      return BadRequest(context.Errors);
+    }
+
+    await _surveyRepository.UpdateSurveyAsync(surveyEntity, cancellationToken);
+
     return NoContent();
   }
 }
