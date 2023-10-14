@@ -95,7 +95,7 @@ public sealed class SingleChoiceQuestionEntityTest
     );
 
     // Act
-    singleChoiceQuestionEntity.SetAnswer(answer);
+    singleChoiceQuestionEntity.SetAnswer(answer, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(answer, singleChoiceQuestionEntity.Answer);
@@ -121,7 +121,7 @@ public sealed class SingleChoiceQuestionEntityTest
     );
 
     // Act
-    singleChoiceQuestionEntity.SetAnswer(unknownAnswer);
+    singleChoiceQuestionEntity.SetAnswer(unknownAnswer, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(orignalAnswer, singleChoiceQuestionEntity.Answer);

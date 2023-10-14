@@ -34,7 +34,7 @@ public sealed class MultipleChoiceAnswerDtoTest
     );
 
     // Act
-    multipleChoiceAnswerDto.SetAnswer(multipleChoiceQuestionEntity);
+    multipleChoiceAnswerDto.SetAnswer(multipleChoiceQuestionEntity, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(answers.Length, multipleChoiceQuestionEntity.Answers.Length);
@@ -73,7 +73,7 @@ public sealed class MultipleChoiceAnswerDtoTest
     );
 
     // Act
-    multipleChoiceAnswerDto.SetAnswer(multipleChoiceQuestionEntity);
+    multipleChoiceAnswerDto.SetAnswer(multipleChoiceQuestionEntity, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(answers, multipleChoiceQuestionEntity.Answers);

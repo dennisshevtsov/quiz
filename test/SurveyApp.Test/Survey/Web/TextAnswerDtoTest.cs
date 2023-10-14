@@ -24,7 +24,7 @@ public sealed class TextAnswerDtoTest
     };
 
     // Act
-    textAnswerDto.SetAnswer(textQuestionEntity);
+    textAnswerDto.SetAnswer(textQuestionEntity, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(answer, textQuestionEntity.Answer);
