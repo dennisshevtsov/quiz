@@ -8,11 +8,11 @@ public sealed class MultipleChoiceAnswerDto : AnswerDtoBase
 {
   public string[] Answers { get; set; } = Array.Empty<string>();
 
-  public override void SetAnswer(QuestionEntityBase questionEntity)
+  public override void SetAnswer(QuestionEntityBase questionEntity, ExecutingContext context)
   {
     if (questionEntity is MultipleChoiceQuestionEntity multipleChoiceQuestionEntity)
     {
-      multipleChoiceQuestionEntity.SetAnswers(Answers);
+      multipleChoiceQuestionEntity.SetAnswers(Answers, context);
     }
   }
 }

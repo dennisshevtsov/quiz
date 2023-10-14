@@ -8,7 +8,7 @@ public sealed class TextAnswerDto : AnswerDtoBase
 {
   public string? Answer { get; set; }
 
-  public override void SetAnswer(QuestionEntityBase questionEntity)
+  public override void SetAnswer(QuestionEntityBase questionEntity, ExecutingContext context)
   {
     if (questionEntity is TextQuestionEntity textQuestionEntity)
     {

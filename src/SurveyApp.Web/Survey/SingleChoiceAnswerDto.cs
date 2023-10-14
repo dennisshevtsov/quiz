@@ -8,11 +8,11 @@ public sealed class SingleChoiceAnswerDto : AnswerDtoBase
 {
   public string? Answer { get; set; }
 
-  public override void SetAnswer(QuestionEntityBase questionEntity)
+  public override void SetAnswer(QuestionEntityBase questionEntity, ExecutingContext context)
   {
     if (questionEntity is SingleChoiceQuestionEntity singleChoiceQuestionEntity)
     {
-      singleChoiceQuestionEntity.SetAnswer(Answer);
+      singleChoiceQuestionEntity.SetAnswer(Answer, context);
     }
   }
 }

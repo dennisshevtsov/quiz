@@ -123,7 +123,8 @@ public sealed class SurveyController : ControllerBase
       return NotFound();
     }
 
-    requestDto.Answer(surveyEntity);
+    ExecutingContext context = new();
+    requestDto.Answer(surveyEntity, context);
 
     return NoContent();
   }
