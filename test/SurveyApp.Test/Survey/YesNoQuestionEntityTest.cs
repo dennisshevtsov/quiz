@@ -143,7 +143,7 @@ public sealed class YesNoQuestionEntityTest
     YesNoQuestionEntity yesNoQuestionEntity = new
     (
       text  : Guid.NewGuid().ToString(),
-      answer: YesNo.Yes
+      answer: originalAnswer
     );
 
     YesNo unknownAnswer = (YesNo)100;

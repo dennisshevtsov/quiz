@@ -23,7 +23,7 @@ public sealed class YesNoQuestionEntity : QuestionEntityBase
 
   public void SetAnswer(YesNo answer, ExecutingContext context)
   {
-    if (answer < YesNo.None && answer > YesNo.No)
+    if (answer < YesNo.None || answer > YesNo.No)
     {
       context.AddError("Unknown answer type.");
       return;
