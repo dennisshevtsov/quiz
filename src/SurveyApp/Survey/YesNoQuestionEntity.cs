@@ -21,11 +21,14 @@ public sealed class YesNoQuestionEntity : QuestionEntityBase
 
   public YesNo Answer { get; private set; }
 
-  public void SetAnswer(YesNo answer)
+  public void SetAnswer(YesNo answer, ExecutingContext context)
   {
-    if (answer >= YesNo.None && answer <= YesNo.No)
+    if (answer < YesNo.None && answer > YesNo.No)
     {
-      Answer = answer;
+      context.AddError("Unknown answer type.");
+      return;
     }
+
+    Answer = answer;
   }
 }

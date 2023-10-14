@@ -91,7 +91,7 @@ public sealed class YesNoQuestionEntityTest
     YesNo answer = YesNo.Yes;
 
     // Act
-    yesNoQuestionEntity.SetAnswer(answer);
+    yesNoQuestionEntity.SetAnswer(answer, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(answer, yesNoQuestionEntity.Answer);
@@ -110,7 +110,7 @@ public sealed class YesNoQuestionEntityTest
     YesNo answer = YesNo.No;
 
     // Act
-    yesNoQuestionEntity.SetAnswer(answer);
+    yesNoQuestionEntity.SetAnswer(answer, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(answer, yesNoQuestionEntity.Answer);
@@ -129,7 +129,7 @@ public sealed class YesNoQuestionEntityTest
     YesNo answer = YesNo.No;
 
     // Act
-    yesNoQuestionEntity.SetAnswer(answer);
+    yesNoQuestionEntity.SetAnswer(answer, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(answer, yesNoQuestionEntity.Answer);
@@ -149,7 +149,7 @@ public sealed class YesNoQuestionEntityTest
     YesNo unknownAnswer = (YesNo)100;
 
     // Act
-    yesNoQuestionEntity.SetAnswer(unknownAnswer);
+    yesNoQuestionEntity.SetAnswer(unknownAnswer, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(originalAnswer, yesNoQuestionEntity.Answer);

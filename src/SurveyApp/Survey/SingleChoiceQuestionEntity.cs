@@ -24,7 +24,7 @@ public sealed class SingleChoiceQuestionEntity : QuestionEntityBase
 
   public string? Answer { get; private set; }
 
-  public void SetAnswer(string? answer)
+  public void SetAnswer(string? answer, ExecutingContext context)
   {
     if (string.IsNullOrEmpty(answer))
     {
@@ -37,8 +37,10 @@ public sealed class SingleChoiceQuestionEntity : QuestionEntityBase
       if (string.Equals(Choices[i], answer, StringComparison.OrdinalIgnoreCase))
       {
         Answer = answer;
-        break;
+        return;
       }
     }
+
+    context.AddError("Unknown choice.");
   }
 }

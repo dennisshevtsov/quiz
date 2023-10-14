@@ -24,7 +24,7 @@ public sealed class MultipleChoiceQuestionEntity : QuestionEntityBase
 
   public string[] Answers { get; private set; }
 
-  public void SetAnswers(string[] answers)
+  public void SetAnswers(string[] answers, ExecutingContext context)
   {
     if (answers.Length == 0)
     {
@@ -49,6 +49,9 @@ public sealed class MultipleChoiceQuestionEntity : QuestionEntityBase
     if (index == answers.Length)
     {
       Answers = temp;
+      return;
     }
+
+    context.AddError("Unknown choice.");
   }
 }

@@ -8,11 +8,11 @@ public sealed class YesNoAnswerDto : AnswerDtoBase
 {
   public YesNo Answer { get; set; }
 
-  public override void Update(QuestionEntityBase questionEntity)
+  public override void SetAnswer(QuestionEntityBase questionEntity, ExecutingContext context)
   {
     if (questionEntity is YesNoQuestionEntity yesNoQuestionEntity)
     {
-      yesNoQuestionEntity.SetAnswer(Answer);
+      yesNoQuestionEntity.SetAnswer(Answer, context);
     }
   }
 }

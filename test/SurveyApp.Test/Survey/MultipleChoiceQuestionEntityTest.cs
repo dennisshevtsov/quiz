@@ -103,7 +103,7 @@ public sealed class MultipleChoiceQuestionEntityTest
     );
 
     // Act
-    multipleChoiceQuestionEntity.SetAnswers(answers);
+    multipleChoiceQuestionEntity.SetAnswers(answers, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(answers.Length, multipleChoiceQuestionEntity.Answers.Length);
@@ -142,7 +142,7 @@ public sealed class MultipleChoiceQuestionEntityTest
     );
 
     // Act
-    multipleChoiceQuestionEntity.SetAnswers(unknownAnswers);
+    multipleChoiceQuestionEntity.SetAnswers(unknownAnswers, new ExecutingContext());
 
     // Assert
     Assert.AreEqual(originalAnswers, multipleChoiceQuestionEntity.Answers);
