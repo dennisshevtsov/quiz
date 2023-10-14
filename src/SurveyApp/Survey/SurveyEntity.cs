@@ -94,6 +94,17 @@ public sealed class SurveyEntity
     IntervieweeName = intervieweeName;
   }
 
+  public void Answer(ExecutingContext context)
+  {
+    if (State != SurveyState.Ready)
+    {
+      context.AddError("Only survey in Ready state can be answered.");
+      return;
+    }
+
+    State = SurveyState.Done;
+  }
+
   private void Validate(SurveyState state, ExecutingContext context)
   {
     if (state < SurveyState.Draft || state > SurveyState.Cancelled)
