@@ -3,7 +3,6 @@
 // See LICENSE in the project root for license information.
 
 using SurveyApp.SurveyTemplate;
-using System.Diagnostics.CodeAnalysis;
 
 namespace SurveyApp.Survey;
 
