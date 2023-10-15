@@ -500,7 +500,7 @@ public sealed class SurveyControllerTest
   }
 
   [TestMethod]
-  public async Task Answer_InvalidRequest_BadRequestReturned()
+  public async Task Answer_AnswerQuestionsRequestDtoWithErrors_BadRequestReturned()
   {
     // Arrange
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
@@ -536,7 +536,7 @@ public sealed class SurveyControllerTest
   }
 
   [TestMethod]
-  public async Task Answer_InvalidRequest_UpdateSurveyAsyncNotCalled()
+  public async Task Answer_AnswerQuestionsRequestDtoWithErrors_UpdateSurveyAsyncNotCalled()
   {
     // Arrange
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
