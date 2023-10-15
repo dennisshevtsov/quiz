@@ -469,7 +469,7 @@ public sealed class SurveyControllerTest
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
     (
       surveyId: surveyId,
-      state: SurveyState.Ready
+      state   : SurveyState.Ready
     );
 
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
@@ -481,5 +481,134 @@ public sealed class SurveyControllerTest
     // Assert
     Expression<Func<SurveyEntity, bool>> match = entity => entity.SurveyId == surveyId && entity.State == state;
     _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.Is(match), It.IsAny<CancellationToken>()));
+  }
+
+  [TestMethod]
+  public async Task Answer_UnknownSurvey_NotFoundReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(default(SurveyEntity));
+
+    AnswerQuestionsRequestDto requestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyController.Answer(requestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+  }
+
+  [TestMethod]
+  public async Task Answer_AnswerQuestionsRequestDtoWithErrors_BadRequestReturned()
+  {
+    // Arrange
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      questions: new QuestionEntityBase[]
+      {
+        new YesNoQuestionEntity
+        (
+          text  : Guid.NewGuid().ToString(),
+          answer: YesNo.No
+        ),
+      }
+    );
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(surveyEntity);
+
+    AnswerQuestionsRequestDto requestDto = new()
+    {
+      Answers = new AnswerDtoBase[]
+      {
+        new YesNoAnswerDto
+        {
+          Answer = (YesNo)100,
+        },
+      },
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyController.Answer(requestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(BadRequestObjectResult));
+  }
+
+  [TestMethod]
+  public async Task Answer_AnswerQuestionsRequestDtoWithErrors_UpdateSurveyAsyncNotCalled()
+  {
+    // Arrange
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      questions: new QuestionEntityBase[]
+      {
+        new YesNoQuestionEntity
+        (
+          text  : Guid.NewGuid().ToString(),
+          answer: YesNo.No
+        ),
+      }
+    );
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(surveyEntity);
+
+    AnswerQuestionsRequestDto requestDto = new()
+    {
+      Answers = new AnswerDtoBase[]
+      {
+        new YesNoAnswerDto
+        {
+          Answer = (YesNo)100,
+        },
+      },
+    };
+
+    // Act
+    await _surveyController.Answer(requestDto, CancellationToken.None);
+
+    // Assert
+    _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.IsAny<SurveyEntity>(), It.IsAny<CancellationToken>()), Times.Never);
+  }
+
+  [TestMethod]
+  public async Task Answer_AnswerQuestionsRequestDto_UpdateSurveyAsyncCalled()
+  {
+    // Arrange
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      state: SurveyState.Ready
+    );
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(surveyEntity);
+
+    AnswerQuestionsRequestDto requestDto = new();
+
+    // Act
+    await _surveyController.Answer(requestDto, CancellationToken.None);
+
+    // Assert
+    Expression<Func<SurveyEntity, bool>> match = entity => entity.SurveyId == surveyEntity.SurveyId;
+    _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.Is<SurveyEntity>(match), It.IsAny<CancellationToken>()));
+  }
+
+  [TestMethod]
+  public async Task Answer_AnswerQuestionsRequestDto_NoContentReturned()
+  {
+    // Arrange
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      state: SurveyState.Ready
+    );
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(surveyEntity);
+
+    AnswerQuestionsRequestDto requestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyController.Answer(requestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NoContentResult));
   }
 }
