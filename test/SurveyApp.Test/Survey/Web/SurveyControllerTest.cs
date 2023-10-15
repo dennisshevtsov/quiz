@@ -482,4 +482,20 @@ public sealed class SurveyControllerTest
     Expression<Func<SurveyEntity, bool>> match = entity => entity.SurveyId == surveyId && entity.State == state;
     _surveyRepositoryMock.Verify(repository => repository.UpdateSurveyAsync(It.Is(match), It.IsAny<CancellationToken>()));
   }
+
+  [TestMethod]
+  public async Task Answer_UnknownSurvey_NotFoundReturned()
+  {
+    // Arrange
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(default(SurveyEntity));
+
+    AnswerQuestionsRequestDto requestDto = new();
+
+    // Act
+    IActionResult actionResult = await _surveyController.Answer(requestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+  }
 }
