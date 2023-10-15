@@ -469,7 +469,7 @@ public sealed class SurveyControllerTest
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
     (
       surveyId: surveyId,
-      state: SurveyState.Ready
+      state   : SurveyState.Ready
     );
 
     _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
@@ -497,5 +497,41 @@ public sealed class SurveyControllerTest
 
     // Assert
     Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+  }
+
+  [TestMethod]
+  public async Task Answer_InvalidYesNoQuestion_BadRequestReturned()
+  {
+    // Arrange
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      questions: new QuestionEntityBase[]
+      {
+        new YesNoQuestionEntity
+        (
+          text  : Guid.NewGuid().ToString(),
+          answer: YesNo.No
+        ),
+      }
+    );
+    _surveyRepositoryMock.Setup(repository => repository.GetSurveyAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                         .ReturnsAsync(SurveyEntityTest.CreateTestSurvey());
+
+    AnswerQuestionsRequestDto requestDto = new()
+    {
+      Answers = new AnswerDtoBase[]
+      {
+        new YesNoAnswerDto
+        {
+          Answer = (YesNo)100,
+        },
+      },
+    };
+
+    // Act
+    IActionResult actionResult = await _surveyController.Answer(requestDto, CancellationToken.None);
+
+    // Assert
+    Assert.IsInstanceOfType(actionResult, typeof(BadRequestObjectResult));
   }
 }
