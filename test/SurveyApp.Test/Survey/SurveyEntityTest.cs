@@ -662,6 +662,30 @@ public sealed class SurveyEntityTest
     Assert.AreEqual(originalState, surveyEntity.State);
   }
 
+  [TestMethod]
+  public void Answer_CancelledSurvey_ContextHasErrors()
+  {
+    // Assert
+    SurveyState originalState = SurveyState.Cancelled;
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      surveyId       : default,
+      state          : originalState,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Answer(context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
   private static ConstructorInfo? _surveyEntityConstructor;
 
   private static ConstructorInfo SurveyEntityConstructor => _surveyEntityConstructor ?? (_surveyEntityConstructor = GetSurveyEntityConstructor());
