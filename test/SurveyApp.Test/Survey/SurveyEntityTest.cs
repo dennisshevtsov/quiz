@@ -615,6 +615,30 @@ public sealed class SurveyEntityTest
   }
 
   [TestMethod]
+  public void Answer_DraftSurvey_ContextHasErrors()
+  {
+    // Assert
+    SurveyState originalState = SurveyState.Draft;
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      surveyId       : default,
+      state          : originalState,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Answer(context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
   public void Answer_CancelledSurvey_StateNotUpdated()
   {
     // Assert
