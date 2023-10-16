@@ -95,6 +95,11 @@ public sealed class SurveyEntity
 
   public void Answer(ExecutingContext context)
   {
+    if (context.HasErrors)
+    {
+      return;
+    }
+
     if (State != SurveyState.Ready)
     {
       context.AddError("Only survey in Ready state can be answered.");

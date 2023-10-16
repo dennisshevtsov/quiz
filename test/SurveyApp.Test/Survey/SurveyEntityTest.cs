@@ -565,6 +565,199 @@ public sealed class SurveyEntityTest
     Assert.IsFalse(context.HasErrors);
   }
 
+  [TestMethod]
+  public void Answer_ContextWithErrors_StateNotUpdated()
+  {
+    // Assert
+    SurveyState originalState = SurveyState.Ready;
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      surveyId       : default,
+      state          : originalState,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
+
+    ExecutingContext context = new();
+    context.AddError(Guid.NewGuid().ToString());
+
+    // Act
+    surveyEntity.Answer(context);
+
+    // Assert
+    Assert.AreEqual(originalState, surveyEntity.State);
+  }
+
+  [TestMethod]
+  public void Answer_DraftSurvey_StateNotUpdated()
+  {
+    // Assert
+    SurveyState originalState = SurveyState.Draft;
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      surveyId       : default,
+      state          : originalState,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Answer(context);
+
+    // Assert
+    Assert.AreEqual(originalState, surveyEntity.State);
+  }
+
+  [TestMethod]
+  public void Answer_DraftSurvey_ContextHasErrors()
+  {
+    // Assert
+    SurveyState originalState = SurveyState.Draft;
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      surveyId       : default,
+      state          : originalState,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Answer(context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void Answer_DoneSurvey_ContextHasErrors()
+  {
+    // Assert
+    SurveyState originalState = SurveyState.Done;
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      surveyId       : default,
+      state          : originalState,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Answer(context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void Answer_CancelledSurvey_StateNotUpdated()
+  {
+    // Assert
+    SurveyState originalState = SurveyState.Cancelled;
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      surveyId       : default,
+      state          : originalState,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Answer(context);
+
+    // Assert
+    Assert.AreEqual(originalState, surveyEntity.State);
+  }
+
+  [TestMethod]
+  public void Answer_CancelledSurvey_ContextHasErrors()
+  {
+    // Assert
+    SurveyState originalState = SurveyState.Cancelled;
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      surveyId       : default,
+      state          : originalState,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Answer(context);
+
+    // Assert
+    Assert.IsTrue(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void Answer_ReadySurvey_ContextHasNoErrors()
+  {
+    // Assert
+    SurveyState originalState = SurveyState.Ready;
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      surveyId       : default,
+      state          : originalState,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Answer(context);
+
+    // Assert
+    Assert.IsFalse(context.HasErrors);
+  }
+
+  [TestMethod]
+  public void Answer_ReadySurvey_StateIsDone()
+  {
+    // Assert
+    SurveyState originalState = SurveyState.Ready;
+    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    (
+      surveyId       : default,
+      state          : originalState,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
+
+    ExecutingContext context = new();
+
+    // Act
+    surveyEntity.Answer(context);
+
+    // Assert
+    Assert.AreEqual(SurveyState.Done, surveyEntity.State);
+  }
+
   private static ConstructorInfo? _surveyEntityConstructor;
 
   private static ConstructorInfo SurveyEntityConstructor => _surveyEntityConstructor ?? (_surveyEntityConstructor = GetSurveyEntityConstructor());
