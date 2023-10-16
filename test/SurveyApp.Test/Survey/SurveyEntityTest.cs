@@ -714,7 +714,7 @@ public sealed class SurveyEntityTest
   public void Answer_ReadySurvey_ContextHasNoErrors()
   {
     // Assert
-    SurveyState originalState = SurveyState.Cancelled;
+    SurveyState originalState = SurveyState.Ready;
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
     (
       surveyId       : default,
