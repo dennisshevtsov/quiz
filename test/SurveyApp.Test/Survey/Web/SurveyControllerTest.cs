@@ -572,7 +572,7 @@ public sealed class SurveyControllerTest
   }
 
   [TestMethod]
-  public async Task Answer_AnswerQuestionsRequestDto_UpdateSurveyAsyncCalled()
+  public async Task Answer_AnswerQuestionsRequestDtoWithoutErrors_UpdateSurveyAsyncCalled()
   {
     // Arrange
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
@@ -593,7 +593,7 @@ public sealed class SurveyControllerTest
   }
 
   [TestMethod]
-  public async Task Answer_AnswerQuestionsRequestDto_NoContentReturned()
+  public async Task Answer_AnswerQuestionsRequestDtoWithoutErrors_NoContentReturned()
   {
     // Arrange
     SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
