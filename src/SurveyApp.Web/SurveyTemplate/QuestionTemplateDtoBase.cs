@@ -13,6 +13,7 @@ namespace SurveyApp.SurveyTemplate.Web;
 [JsonDerivedType(typeof(SingleChoiceQuestionTemplateDto), (int)QuestionType.SingleChoice)]
 public abstract class QuestionTemplateDtoBase
 {
+  [JsonPropertyName("text")]
   public string Text { get; set; } = string.Empty;
 
   public QuestionType QuestionType { get; set; }

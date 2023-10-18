@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using System.Text.Json.Serialization;
+
 namespace SurveyApp.SurveyTemplate.Web;
 
 public sealed class MultipleChoiceQuestionTemplateDto : QuestionTemplateDtoBase
@@ -15,6 +17,7 @@ public sealed class MultipleChoiceQuestionTemplateDto : QuestionTemplateDtoBase
     QuestionType = QuestionType.MultipleChoice;
   }
 
+  [JsonPropertyName("choices")]
   public string[] Choices { get; set; } = Array.Empty<string>();
 
   public override QuestionTemplateEntityBase? ToTemplateQuestionEntity(ExecutingContext context) => MultipleChoiceQuestionTemplateEntity.New
