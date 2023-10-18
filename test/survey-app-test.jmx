@@ -202,6 +202,159 @@
             <boolProp name="ISREGEX">true</boolProp>
           </JSONPathAssertion>
           <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain 4 Questions" enabled="true">
+            <stringProp name="JSON_PATH">$.questions.size()</stringProp>
+            <stringProp name="EXPECTED_VALUE">4</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Text Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[0].questionType</stringProp>
+            <stringProp name="EXPECTED_VALUE">0</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Text for Text Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[0].text</stringProp>
+            <stringProp name="EXPECTED_VALUE">${addSurveyTemplateQuestion0Text}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Yes No Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[1].questionType</stringProp>
+            <stringProp name="EXPECTED_VALUE">1</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Text for Yes No Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[1].text</stringProp>
+            <stringProp name="EXPECTED_VALUE">${addSurveyTemplateQuestion1Text}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Multiple Choice Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[2].questionType</stringProp>
+            <stringProp name="EXPECTED_VALUE">2</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Text for Multiple Choice Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[2].text</stringProp>
+            <stringProp name="EXPECTED_VALUE">${addSurveyTemplateQuestion2Text}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain 3 Choices for Multiple Choice Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[2].choices.size()</stringProp>
+            <stringProp name="EXPECTED_VALUE">3</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Choice0 for Multiple Choice Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[2].choices[0]</stringProp>
+            <stringProp name="EXPECTED_VALUE">${addSurveyTemplateQuestion2Choice0}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Choice1 for Multiple Choice Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[2].choices[1]</stringProp>
+            <stringProp name="EXPECTED_VALUE">${addSurveyTemplateQuestion2Choice1}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Choice2 for Multiple Choice Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[2].choices[2]</stringProp>
+            <stringProp name="EXPECTED_VALUE">${addSurveyTemplateQuestion2Choice2}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Single Choice Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[3].questionType</stringProp>
+            <stringProp name="EXPECTED_VALUE">3</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Text for Single Choice Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[3].text</stringProp>
+            <stringProp name="EXPECTED_VALUE">${addSurveyTemplateQuestion3Text}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain 3 Choices for Single Choice Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[3].choices.size()</stringProp>
+            <stringProp name="EXPECTED_VALUE">3</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Choice0 for Single Choice Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[3].choices[0]</stringProp>
+            <stringProp name="EXPECTED_VALUE">${addSurveyTemplateQuestion3Choice0}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Choice1 for Single Choice Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[3].choices[1]</stringProp>
+            <stringProp name="EXPECTED_VALUE">${addSurveyTemplateQuestion3Choice1}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Choice2 for Single Choice Question" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[3].choices[2]</stringProp>
+            <stringProp name="EXPECTED_VALUE">${addSurveyTemplateQuestion3Choice2}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
         </hashTree>
         <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Add Survey" enabled="true">
           <collectionProp name="Arguments.arguments">
