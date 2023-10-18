@@ -47,6 +47,56 @@
               <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
+            <elementProp name="addSurveyTemplateQuestion0Text" elementType="Argument">
+              <stringProp name="Argument.name">addSurveyTemplateQuestion0Text</stringProp>
+              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="addSurveyTemplateQuestion1Text" elementType="Argument">
+              <stringProp name="Argument.name">addSurveyTemplateQuestion1Text</stringProp>
+              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="addSurveyTemplateQuestion2Text" elementType="Argument">
+              <stringProp name="Argument.name">addSurveyTemplateQuestion2Text</stringProp>
+              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="addSurveyTemplateQuestion2Choice0" elementType="Argument">
+              <stringProp name="Argument.name">addSurveyTemplateQuestion2Choice0</stringProp>
+              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="addSurveyTemplateQuestion2Choice1" elementType="Argument">
+              <stringProp name="Argument.name">addSurveyTemplateQuestion2Choice1</stringProp>
+              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="addSurveyTemplateQuestion2Choice2" elementType="Argument">
+              <stringProp name="Argument.name">addSurveyTemplateQuestion2Choice2</stringProp>
+              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="addSurveyTemplateQuestion3Text" elementType="Argument">
+              <stringProp name="Argument.name">addSurveyTemplateQuestion3Text</stringProp>
+              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="addSurveyTemplateQuestion3Choice0" elementType="Argument">
+              <stringProp name="Argument.name">addSurveyTemplateQuestion3Choice0</stringProp>
+              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="addSurveyTemplateQuestion3Choice1" elementType="Argument">
+              <stringProp name="Argument.name">addSurveyTemplateQuestion3Choice1</stringProp>
+              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="addSurveyTemplateQuestion3Choice2" elementType="Argument">
+              <stringProp name="Argument.name">addSurveyTemplateQuestion3Choice2</stringProp>
+              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
           </collectionProp>
         </Arguments>
         <hashTree/>
@@ -59,7 +109,34 @@
                 <stringProp name="Argument.value">{&#xd;
 	&quot;title&quot;: &quot;${addSurveyTemplateTitle}&quot;,&#xd;
 	&quot;description&quot;: &quot;${addSurveyTemplateDescription}&quot;,&#xd;
-	&quot;questions&quot;: []&#xd;
+	&quot;questions&quot;: [&#xd;
+		{&#xd;
+			&quot;questionType&quot;: 0,&#xd;
+			&quot;text&quot;: &quot;${addSurveyTemplateQuestion0Text}&quot;&#xd;
+		},&#xd;
+		{&#xd;
+			&quot;questionType&quot;: 1,&#xd;
+			&quot;text&quot;: &quot;${addSurveyTemplateQuestion1Text}&quot;&#xd;
+		},&#xd;
+		{&#xd;
+			&quot;questionType&quot;: 2,&#xd;
+			&quot;text&quot;: &quot;${addSurveyTemplateQuestion2Text}&quot;,&#xd;
+			&quot;choices&quot;: [&#xd;
+				&quot;${addSurveyTemplateQuestion2Choice0}&quot;,&#xd;
+				&quot;${addSurveyTemplateQuestion2Choice1}&quot;,&#xd;
+				&quot;${addSurveyTemplateQuestion2Choice2}&quot;&#xd;
+			]&#xd;
+		},&#xd;
+		{&#xd;
+			&quot;questionType&quot;: 3,&#xd;
+			&quot;text&quot;: &quot;${addSurveyTemplateQuestion3Text}&quot;,&#xd;
+			&quot;choices&quot;: [&#xd;
+				&quot;${addSurveyTemplateQuestion3Choice0}&quot;,&#xd;
+				&quot;${addSurveyTemplateQuestion3Choice1}&quot;,&#xd;
+				&quot;${addSurveyTemplateQuestion3Choice2}&quot;&#xd;
+			]&#xd;
+		}&#xd;
+	]&#xd;
 }&#xd;
 </stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
