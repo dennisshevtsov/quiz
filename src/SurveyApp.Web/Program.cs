@@ -10,4 +10,6 @@ builder.Services.AddControllers(options => options.AddPatchable());
 WebApplication app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseRouting();
+app.MapControllers();
 app.Run();
