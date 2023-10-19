@@ -536,6 +536,85 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Answer Survey" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="answerSurveyQuestion0" elementType="Argument">
+              <stringProp name="Argument.name">answerSurveyQuestion0</stringProp>
+              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="answerSurveyQuestion1" elementType="Argument">
+              <stringProp name="Argument.name">answerSurveyQuestion1</stringProp>
+              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="answerSurveyQuestion2Choice0" elementType="Argument">
+              <stringProp name="Argument.name">answerSurveyQuestion2Choice0</stringProp>
+              <stringProp name="Argument.value">${addSurveyTemplateQuestion2Choice0}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="answerSurveyQuestion2Choice1" elementType="Argument">
+              <stringProp name="Argument.name">answerSurveyQuestion2Choice1</stringProp>
+              <stringProp name="Argument.value">${addSurveyTemplateQuestion2Choice1}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="answerSurveyQuestion3" elementType="Argument">
+              <stringProp name="Argument.name">answerSurveyQuestion3</stringProp>
+              <stringProp name="Argument.value">${addSurveyTemplateQuestion3Choice1}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Answer Survey" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+	&quot;answers&quot;: [&#xd;
+		{&#xd;
+			&quot;questionType&quot;: 0,&#xd;
+			&quot;answer&quot;: &quot;${answerSurveyQuestion0}&quot;&#xd;
+		},&#xd;
+		{&#xd;
+			&quot;questionType&quot;: 1,&#xd;
+			&quot;answer&quot;: &quot;${answerSurveyQuestion1}&quot;&#xd;
+		},&#xd;
+		{&#xd;
+			&quot;questionType&quot;: 2,&#xd;
+			&quot;answers&quot;: [&#xd;
+				&quot;${answerSurveyQuestion2Choice0}&quot;,&#xd;
+				&quot;${answerSurveyQuestion2Choice1}&quot;&#xd;
+			]&#xd;
+		},&#xd;
+		{&#xd;
+			&quot;questionType&quot;: 3,&#xd;
+			&quot;answer&quot;: &quot;${answerSurveyQuestion3}&quot;&#xd;
+		}&#xd;
+	]&#xd;
+}&#xd;
+</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">5001</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">api/survey/${surveyId}/question</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="Survey App Test Listener" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
