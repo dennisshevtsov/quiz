@@ -18,12 +18,20 @@ public sealed class SurveyEntityTypeConfiguration : IEntityTypeConfiguration<Sur
            .HasColumnName("id")
            .IsRequired();
 
+    builder.Property(entity => entity.State)
+           .HasColumnName("state")
+           .IsRequired();
+
     builder.Property(entity => entity.Title)
            .HasColumnName("title")
            .IsRequired();
 
     builder.Property(entity => entity.Description)
            .HasColumnName("description")
+           .IsRequired();
+
+    builder.Property(entity => entity.IntervieweeName)
+           .HasColumnName("intervieweeName")
            .IsRequired();
 
     builder.Property(entity => entity.Questions)
