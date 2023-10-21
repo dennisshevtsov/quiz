@@ -11,6 +11,24 @@ public sealed class SurveyEntityTypeConfiguration : IEntityTypeConfiguration<Sur
 {
   public void Configure(EntityTypeBuilder<SurveyEntity> builder)
   {
-    throw new NotImplementedException();
+    builder.ToTable("survey");
+    builder.HasKey(entity => entity.SurveyId);
+
+    builder.Property(entity => entity.SurveyId)
+           .HasColumnName("id")
+           .IsRequired();
+
+    builder.Property(entity => entity.Title)
+           .HasColumnName("title")
+           .IsRequired();
+
+    builder.Property(entity => entity.Description)
+           .HasColumnName("description")
+           .IsRequired();
+
+    builder.Property(entity => entity.Questions)
+           .HasColumnName("questions")
+           .HasColumnType("jsonb")
+           .IsRequired();
   }
 }
