@@ -11,6 +11,24 @@ public sealed class SurveyTemplateEntityTypeConfiguration : IEntityTypeConfigura
 {
   public void Configure(EntityTypeBuilder<SurveyTemplateEntity> builder)
   {
-    
+    builder.ToTable("survey_template");
+    builder.HasKey(entity => entity.SurveyTemplateId);
+
+    builder.Property(entity => entity.SurveyTemplateId)
+           .HasColumnName("id")
+           .IsRequired();
+
+    builder.Property(entity => entity.Title)
+           .HasColumnName("title")
+           .IsRequired();
+
+    builder.Property(entity => entity.Description)
+           .HasColumnName("description")
+           .IsRequired();
+
+    builder.Property(entity => entity.Questions)
+           .HasColumnName("questions")
+           .HasColumnType("jsonb")
+           .IsRequired();
   }
 }
