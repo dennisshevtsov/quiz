@@ -2,27 +2,43 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using Microsoft.EntityFrameworkCore;
+
 namespace SurveyApp.SurveyTemplate.Data;
 
 public sealed class SurveyTemplateEfRepository : ISurveyTemplateRepository
 {
-  public Task<SurveyTemplateEntity?> GetSurveyTemplateAsync(Guid surveyTemplateId, CancellationToken cancellationToken)
+  private readonly DbContext _dbContext;
+
+  public SurveyTemplateEfRepository(DbContext dbContext)
   {
-    throw new NotImplementedException();
+    _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
   }
 
-  public Task<SurveyTemplateEntity> AddSurveyTemplateAsync(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
+  public Task<SurveyTemplateEntity?> GetSurveyTemplateAsync(Guid surveyTemplateId, CancellationToken cancellationToken) =>
+    _dbContext.Set<SurveyTemplateEntity>()
+              .AsNoTracking()
+              .Where(entity => entity.SurveyTemplateId == surveyTemplateId)
+              .FirstOrDefaultAsync(cancellationToken);
+
+  public async Task<SurveyTemplateEntity> AddSurveyTemplateAsync(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
   {
-    throw new NotImplementedException();
+    _dbContext.Add(surveyTemplateEntity);
+    await _dbContext.SaveChangesAsync(cancellationToken);
+
+    return surveyTemplateEntity;
   }
 
-  public Task UpdateSurveyTemplateAsync(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
+  public async Task UpdateSurveyTemplateAsync(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
   {
-    throw new NotImplementedException();
+    _dbContext.Update(surveyTemplateEntity);
+    await _dbContext.SaveChangesAsync(cancellationToken);
   }
 
-  public Task DeleteSurveyTemplateAsync(Guid surveyTemplateId, CancellationToken cancellationToken)
+  public async Task DeleteSurveyTemplateAsync(Guid surveyTemplateId, CancellationToken cancellationToken)
   {
-    throw new NotImplementedException();
+    await _dbContext.Set<SurveyTemplateEntity>()
+                    .Where(entity => entity.SurveyTemplateId == surveyTemplateId)
+                    .ExecuteDeleteAsync(cancellationToken);
   }
 }
