@@ -13,4 +13,11 @@ public static class DataServicesExtensions
 
     return services;
   }
+
+  public static IServiceCollection AddDataEf(this IServiceCollection services)
+  {
+    services.AddSurveyTemplateDataEf();
+
+    return services;
+  }
 }
