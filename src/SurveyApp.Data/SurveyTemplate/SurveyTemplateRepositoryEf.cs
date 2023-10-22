@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SurveyApp.SurveyTemplate.Data;
 
-public sealed class SurveyTemplateEfRepository : ISurveyTemplateRepository
+public sealed class SurveyTemplateRepositoryEf : ISurveyTemplateRepository
 {
   private readonly DbContext _dbContext;
 
-  public SurveyTemplateEfRepository(DbContext dbContext)
+  public SurveyTemplateRepositoryEf(DbContext dbContext)
   {
     _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
   }
