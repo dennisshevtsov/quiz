@@ -20,9 +20,8 @@ public sealed class DbContextTest
   [TestInitialize]
   public void Initialize()
   {
-    IConfiguration configuration =
-      new ConfigurationBuilder().AddJsonFile("appsettings.json")
-                                .Build();
+    IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json")
+                                                             .Build();
 
     ServiceCollection services = new ServiceCollection();
     services.AddDataEf(configuration);
@@ -39,7 +38,7 @@ public sealed class DbContextTest
   }
 
   [TestMethod]
-  public async Task SaveChangesAsync_NewSurveyTemplate_ExceptionNotThrown()
+  public async Task SaveChangesAsync_AddedSurveyTemplate_ExceptionNotThrown()
   {
     // Arange
     SurveyTemplateEntity surveyTemplateEntity = new
