@@ -3,6 +3,7 @@
 // See LICENSE in the project root for license information.
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SurveyApp.SurveyTemplate;
 
@@ -19,8 +20,12 @@ public sealed class DbContextTest
   [TestInitialize]
   public void Initialize()
   {
+    IConfiguration configuration =
+      new ConfigurationBuilder().AddJsonFile("appsettings.json")
+                                .Build();
+
     ServiceCollection services = new ServiceCollection();
-    services.AddDataEf();
+    services.AddDataEf(configuration);
 
     _scope = services.BuildServiceProvider().CreateScope();
     _context = _scope.ServiceProvider.GetRequiredService<DbContext>();
