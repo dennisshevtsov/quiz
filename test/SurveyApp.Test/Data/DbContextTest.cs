@@ -4,6 +4,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SurveyApp.SurveyTemplate;
 
 namespace SurveyApp.Data.Test;
 
@@ -30,5 +31,26 @@ public sealed class DbContextTest
   {
     _context?.Database.EnsureDeleted();
     _scope?.Dispose();
+  }
+
+  [TestMethod]
+  public async Task SaveChangesAsync_NewSurveyTemplate_ExceptionNotThrown()
+  {
+    // Arange
+    SurveyTemplateEntity surveyTemplateEntity = new
+    (
+      surveyTemplateId: Guid.NewGuid(),
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : Array.Empty<QuestionTemplateEntityBase>()
+    );
+
+    _context.Add(surveyTemplateEntity);
+
+    // Act
+    Func<Task> act = () => _context.SaveChangesAsync();
+
+    // Assert
+    await act();
   }
 }
