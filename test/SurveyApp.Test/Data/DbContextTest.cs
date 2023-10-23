@@ -27,7 +27,9 @@ public sealed class DbContextTest
     services.AddDataEf(configuration);
 
     _scope = services.BuildServiceProvider().CreateScope();
+
     _context = _scope.ServiceProvider.GetRequiredService<DbContext>();
+    _context.Database.EnsureCreated();
   }
 
   [TestCleanup]
