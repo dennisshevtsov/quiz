@@ -80,6 +80,38 @@ public sealed class DbContextTest
     Assert.AreEqual(expected.Description, actual.Description);
   }
 
+  [TestMethod]
+  public async Task SaveChangesAsync_ModifiedSurveyTemplate_SurveyTemplateUpdated()
+  {
+    // Arange
+    SurveyTemplateEntity original = await AddTestSurveyTemplateAsync();
+
+    SurveyTemplateEntity updated = new
+    (
+      surveyTemplateId: original.SurveyTemplateId,
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : Array.Empty<QuestionTemplateEntityBase>()
+    );
+
+    _context.Entry(updated).State = EntityState.Modified;
+
+    // Act
+    await _context.SaveChangesAsync();
+
+    // Assert
+    SurveyTemplateEntity? actual =
+      await _context.Set<SurveyTemplateEntity>()
+                    .AsNoTracking()
+                    .Where(entity => entity.SurveyTemplateId == original.SurveyTemplateId)
+                    .FirstOrDefaultAsync();
+
+    Assert.IsNotNull(actual);
+    Assert.AreEqual(updated.SurveyTemplateId, actual.SurveyTemplateId);
+    Assert.AreEqual(updated.Title, actual.Title);
+    Assert.AreEqual(updated.Description, actual.Description);
+  }
+
   private async Task<SurveyTemplateEntity> AddTestSurveyTemplateAsync()
   {
     SurveyTemplateEntity surveyTemplateEntity = new
