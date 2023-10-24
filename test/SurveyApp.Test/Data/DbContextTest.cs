@@ -75,6 +75,9 @@ public sealed class DbContextTest
 
     // Assert
     Assert.IsNotNull(actual);
+    Assert.AreEqual(expected.SurveyTemplateId, actual.SurveyTemplateId);
+    Assert.AreEqual(expected.Title, actual.Title);
+    Assert.AreEqual(expected.Description, actual.Description);
   }
 
   private async Task<SurveyTemplateEntity> AddTestSurveyTemplateAsync()
