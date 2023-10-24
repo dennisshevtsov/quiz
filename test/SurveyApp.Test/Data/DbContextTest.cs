@@ -61,19 +61,6 @@ public sealed class DbContextTest
   }
 
   [TestMethod]
-  public async Task FirstOrDefaultAsync_ExitingSurveyTemplateId_SurveyTemplateReturned()
-  {
-    // Arange
-    SurveyTemplateEntity expected = await AddTestSurveyTemplateAsync();
-
-    // Act
-    SurveyTemplateEntity? actual = await GetSurveyTemplateAsync(expected.SurveyTemplateId);
-
-    // Assert
-    DbContextTest.AreEqual(expected, actual);
-  }
-
-  [TestMethod]
   public async Task SaveChangesAsync_ModifiedSurveyTemplate_SurveyTemplateUpdated()
   {
     // Arange
@@ -95,6 +82,35 @@ public sealed class DbContextTest
     // Assert
     SurveyTemplateEntity? actual = await GetSurveyTemplateAsync(original.SurveyTemplateId);
     DbContextTest.AreEqual(updated, actual);
+  }
+
+  [TestMethod]
+  public async Task SaveChangesAsync_DeletedSurveyTemplate_SurveyTemplateDeleted()
+  {
+    // Arange
+    SurveyTemplateEntity original = await AddTestSurveyTemplateAsync();
+
+    _context.Entry(original).State = EntityState.Deleted;
+
+    // Act
+    await _context.SaveChangesAsync();
+
+    // Assert
+    SurveyTemplateEntity? actual = await GetSurveyTemplateAsync(original.SurveyTemplateId);
+    Assert.IsNull(actual);
+  }
+
+  [TestMethod]
+  public async Task FirstOrDefaultAsync_ExitingSurveyTemplateId_SurveyTemplateReturned()
+  {
+    // Arange
+    SurveyTemplateEntity expected = await AddTestSurveyTemplateAsync();
+
+    // Act
+    SurveyTemplateEntity? actual = await GetSurveyTemplateAsync(expected.SurveyTemplateId);
+
+    // Assert
+    DbContextTest.AreEqual(expected, actual);
   }
 
   private async Task<SurveyTemplateEntity> AddTestSurveyTemplateAsync()
