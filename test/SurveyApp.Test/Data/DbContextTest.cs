@@ -59,4 +59,38 @@ public sealed class DbContextTest
     // Assert
     await act();
   }
+
+  [TestMethod]
+  public async Task SaveChangesAsync_ExitingSurveyTemplate_SurveyTemplateReturned()
+  {
+    // Arange
+    SurveyTemplateEntity expected = await AddTestSurveyTemplateAsync();
+
+    // Act
+    SurveyTemplateEntity? actual =
+      await _context.Set<SurveyTemplateEntity>()
+                    .AsNoTracking()
+                    .Where(entity => entity.SurveyTemplateId == expected.SurveyTemplateId)
+                    .FirstOrDefaultAsync();
+
+    // Assert
+    Assert.IsNotNull(actual);
+  }
+
+  private async Task<SurveyTemplateEntity> AddTestSurveyTemplateAsync()
+  {
+    SurveyTemplateEntity surveyTemplateEntity = new
+    (
+      surveyTemplateId: Guid.NewGuid(),
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : Array.Empty<QuestionTemplateEntityBase>()
+    );
+
+    _context.Add(surveyTemplateEntity);
+    await _context.SaveChangesAsync();
+    _context.Entry(surveyTemplateEntity).State = EntityState.Detached;
+
+    return surveyTemplateEntity;
+  }
 }
