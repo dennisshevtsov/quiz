@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SurveyApp.SurveyTemplate;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SurveyApp.Data.Test;
 
@@ -74,10 +75,7 @@ public sealed class DbContextTest
                     .FirstOrDefaultAsync();
 
     // Assert
-    Assert.IsNotNull(actual);
-    Assert.AreEqual(expected.SurveyTemplateId, actual.SurveyTemplateId);
-    Assert.AreEqual(expected.Title, actual.Title);
-    Assert.AreEqual(expected.Description, actual.Description);
+    DbContextTest.AreEqual(expected, actual);
   }
 
   [TestMethod]
@@ -106,10 +104,7 @@ public sealed class DbContextTest
                     .Where(entity => entity.SurveyTemplateId == original.SurveyTemplateId)
                     .FirstOrDefaultAsync();
 
-    Assert.IsNotNull(actual);
-    Assert.AreEqual(updated.SurveyTemplateId, actual.SurveyTemplateId);
-    Assert.AreEqual(updated.Title, actual.Title);
-    Assert.AreEqual(updated.Description, actual.Description);
+    DbContextTest.AreEqual(updated, actual);
   }
 
   private async Task<SurveyTemplateEntity> AddTestSurveyTemplateAsync()
@@ -127,5 +122,13 @@ public sealed class DbContextTest
     _context.Entry(surveyTemplateEntity).State = EntityState.Detached;
 
     return surveyTemplateEntity;
+  }
+
+  private static void AreEqual(SurveyTemplateEntity expected, SurveyTemplateEntity? actual)
+  {
+    Assert.IsNotNull(actual);
+    Assert.AreEqual(expected.SurveyTemplateId, actual.SurveyTemplateId);
+    Assert.AreEqual(expected.Title, actual.Title);
+    Assert.AreEqual(expected.Description, actual.Description);
   }
 }
