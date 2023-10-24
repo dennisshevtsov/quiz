@@ -2,10 +2,13 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using System.Text.Json.Serialization;
+
 namespace SurveyApp.SurveyTemplate;
 
 public sealed class TextQuestionTemplateEntity : QuestionTemplateEntityBase
 {
+  [JsonConstructor]
   public TextQuestionTemplateEntity(string text) : base(text) { }
 
   public TextQuestionTemplateEntity(TextQuestionTemplateEntity textQuestionTemplateEntity)
