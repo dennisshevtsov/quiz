@@ -6,7 +6,7 @@ namespace SurveyApp.SurveyTemplate;
 
 public sealed class SingleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
 {
-  private SingleChoiceQuestionTemplateEntity(string text, string[] choices) : base(text)
+  public SingleChoiceQuestionTemplateEntity(string text, string[] choices) : base(text)
   {
     Choices = choices;
   }

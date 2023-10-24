@@ -6,7 +6,7 @@ namespace SurveyApp.SurveyTemplate;
 
 public sealed class TextQuestionTemplateEntity : QuestionTemplateEntityBase
 {
-  private TextQuestionTemplateEntity(string text) : base(text) { }
+  public TextQuestionTemplateEntity(string text) : base(text) { }
 
   public TextQuestionTemplateEntity(TextQuestionTemplateEntity textQuestionTemplateEntity)
     : this(textQuestionTemplateEntity.Text)

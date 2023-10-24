@@ -120,7 +120,37 @@ public sealed class DbContextTest
       surveyTemplateId: Guid.NewGuid(),
       title           : Guid.NewGuid().ToString(),
       description     : Guid.NewGuid().ToString(),
-      questions       : Array.Empty<QuestionTemplateEntityBase>()
+      questions       : new QuestionTemplateEntityBase[]
+      {
+        new TextQuestionTemplateEntity
+        (
+          text: Guid.NewGuid().ToString()
+        ),
+        new YesNoQuestionTemplateEntity
+        (
+          text: Guid.NewGuid().ToString()
+        ),
+        new MultipleChoiceQuestionTemplateEntity
+        (
+          text   : Guid.NewGuid().ToString(),
+          choices: new[]
+          {
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+          }
+        ),
+        new SingleChoiceQuestionTemplateEntity
+        (
+          text   : Guid.NewGuid().ToString(),
+          choices: new[]
+          {
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+          }
+        )
+      }
     );
 
     _context.Add(surveyTemplateEntity);
