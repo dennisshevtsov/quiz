@@ -61,7 +61,7 @@ public sealed class DbContextTest
   }
 
   [TestMethod]
-  public async Task SaveChangesAsync_ExitingSurveyTemplate_SurveyTemplateReturned()
+  public async Task FirstOrDefaultAsync_ExitingSurveyTemplateId_SurveyTemplateReturned()
   {
     // Arange
     SurveyTemplateEntity expected = await AddTestSurveyTemplateAsync();
