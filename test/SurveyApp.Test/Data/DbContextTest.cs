@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SurveyApp.SurveyTemplate;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SurveyApp.Data.Test;
 
@@ -68,11 +67,7 @@ public sealed class DbContextTest
     SurveyTemplateEntity expected = await AddTestSurveyTemplateAsync();
 
     // Act
-    SurveyTemplateEntity? actual =
-      await _context.Set<SurveyTemplateEntity>()
-                    .AsNoTracking()
-                    .Where(entity => entity.SurveyTemplateId == expected.SurveyTemplateId)
-                    .FirstOrDefaultAsync();
+    SurveyTemplateEntity? actual = await GetSurveyTemplateAsync(expected.SurveyTemplateId);
 
     // Assert
     DbContextTest.AreEqual(expected, actual);
@@ -98,12 +93,7 @@ public sealed class DbContextTest
     await _context.SaveChangesAsync();
 
     // Assert
-    SurveyTemplateEntity? actual =
-      await _context.Set<SurveyTemplateEntity>()
-                    .AsNoTracking()
-                    .Where(entity => entity.SurveyTemplateId == original.SurveyTemplateId)
-                    .FirstOrDefaultAsync();
-
+    SurveyTemplateEntity? actual = await GetSurveyTemplateAsync(original.SurveyTemplateId);
     DbContextTest.AreEqual(updated, actual);
   }
 
@@ -123,6 +113,12 @@ public sealed class DbContextTest
 
     return surveyTemplateEntity;
   }
+
+  private Task<SurveyTemplateEntity?> GetSurveyTemplateAsync(Guid surveyTemplateId) =>
+    _context.Set<SurveyTemplateEntity>()
+            .AsNoTracking()
+            .Where(entity => entity.SurveyTemplateId == surveyTemplateId)
+            .FirstOrDefaultAsync();
 
   private static void AreEqual(SurveyTemplateEntity expected, SurveyTemplateEntity? actual)
   {
