@@ -13,54 +13,52 @@ public sealed class UpdateSurveyTemplateRequestDtoTest
     // Arrange
     UpdateSurveyTemplateRequestDto updateSurveyTemplateRequestDto = new()
     {
-      Title = Guid.NewGuid().ToString(),
+      Title       = Guid.NewGuid().ToString(),
       Description = Guid.NewGuid().ToString(),
-      Questions = new QuestionTemplateDtoBase[]
+      Questions   = new QuestionTemplateDtoBase[]
       {
         new YesNoQuestionTemplateDto
         {
           QuestionType = QuestionType.YesNo,
-          Text = Guid.NewGuid().ToString(),
+          Text         = Guid.NewGuid().ToString(),
         },
         new TextQuestionTemplateDto
         {
           QuestionType = QuestionType.Text,
-          Text = Guid.NewGuid().ToString(),
+          Text         = Guid.NewGuid().ToString(),
         },
       },
     };
 
     QuestionTemplateEntityBase[] questionTemplateEntityCollection = new QuestionTemplateEntityBase[]
     {
-      MultipleChoiceQuestionTemplateEntity.New
+      new MultipleChoiceQuestionTemplateEntity
       (
         text   : Guid.NewGuid().ToString(),
         choices: new[]
         {
           Guid.NewGuid().ToString(),
           Guid.NewGuid().ToString(),
-        },
-        context: new ExecutingContext()
+        }
       )!,
-      SingleChoiceQuestionTemplateEntity.New
+      new SingleChoiceQuestionTemplateEntity
       (
         text   : Guid.NewGuid().ToString(),
         choices: new[]
         {
           Guid.NewGuid().ToString(),
           Guid.NewGuid().ToString(),
-        },
-        context: new ExecutingContext()
+        }
       )!,
     };
 
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    SurveyTemplateEntity surveyTemplateEntity =  new
     (
-      title      : Guid.NewGuid().ToString(),
-      description: Guid.NewGuid().ToString(),
-      questions  : questionTemplateEntityCollection,
-      context    : new ExecutingContext()
-    )!;
+      surveyTemplateId: Guid.NewGuid(),
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : Array.Empty<QuestionTemplateEntityBase>()
+    );
 
     Guid surveyTemplateId = surveyTemplateEntity.SurveyTemplateId;
 

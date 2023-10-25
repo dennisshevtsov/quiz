@@ -2,22 +2,67 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using System.Text.Json.Serialization;
+
 namespace SurveyApp.SurveyTemplate;
 
 public sealed class SingleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
 {
-  private SingleChoiceQuestionTemplateEntity(string text, string[] choices) : base(text)
+  [JsonConstructor]
+  public SingleChoiceQuestionTemplateEntity(string text, string[] choices) : base(text)
   {
     Choices = choices;
   }
 
-  public SingleChoiceQuestionTemplateEntity(SingleChoiceQuestionTemplateEntity singleChoiceQuestionTemplateEntity)
-    : this(singleChoiceQuestionTemplateEntity.Text, singleChoiceQuestionTemplateEntity.Choices)
-  { }
+  public SingleChoiceQuestionTemplateEntity(SingleChoiceQuestionTemplateEntity template)
+    : this(template.Text, template.Choices) { }
 
   public override QuestionType QuestionType => QuestionType.SingleChoice;
 
   public string[] Choices { get; private set; }
+
+  public override bool Equals(QuestionTemplateEntityBase? other)
+  {
+    if (other == null)
+    {
+      return false;
+    }
+
+    if (object.ReferenceEquals(other, this))
+    {
+      return true;
+    }
+
+    if (other is not SingleChoiceQuestionTemplateEntity entity)
+    {
+      return false;
+    }
+
+    if (Text != entity.Text)
+    {
+      return false;
+    }
+
+    if (Choices == entity.Choices)
+    {
+      return true;
+    }
+
+    if (Choices.Length != entity.Choices.Length)
+    {
+      return false;
+    }
+
+    for (int i = 0; i < Choices.Length; i++)
+    {
+      if (Choices[i] != entity.Choices[i])
+      {
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   public static void Validate(string text, string[] choices, ExecutingContext context)
   {

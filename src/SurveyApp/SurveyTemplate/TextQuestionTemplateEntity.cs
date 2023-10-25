@@ -2,17 +2,35 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using System.Text.Json.Serialization;
+
 namespace SurveyApp.SurveyTemplate;
 
 public sealed class TextQuestionTemplateEntity : QuestionTemplateEntityBase
 {
-  private TextQuestionTemplateEntity(string text) : base(text) { }
+  [JsonConstructor]
+  public TextQuestionTemplateEntity(string text) : base(text) { }
 
-  public TextQuestionTemplateEntity(TextQuestionTemplateEntity textQuestionTemplateEntity)
-    : this(textQuestionTemplateEntity.Text)
+  public TextQuestionTemplateEntity(TextQuestionTemplateEntity template)
+    : this(template.Text)
   { }
 
   public override QuestionType QuestionType => QuestionType.Text;
+
+  public override bool Equals(QuestionTemplateEntityBase? other)
+  {
+    if (other == null)
+    {
+      return false;
+    }
+
+    if (object.ReferenceEquals(other, this))
+    {
+      return true;
+    }
+
+    return Text == other.Text;
+  }
 
   public static void Validate(string text, ExecutingContext context)
   {

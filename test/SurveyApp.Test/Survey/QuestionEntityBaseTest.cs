@@ -107,5 +107,7 @@ public sealed class QuestionEntityBaseTest
     public UnknownQuestionTemplateEntity() : base(string.Empty) { }
 
     public override QuestionType QuestionType => (QuestionType)100;
+
+    public override bool Equals(QuestionTemplateEntityBase? other) => false;
   }
 }
