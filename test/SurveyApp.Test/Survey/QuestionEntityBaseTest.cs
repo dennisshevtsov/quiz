@@ -102,10 +102,12 @@ public sealed class QuestionEntityBaseTest
     Assert.ThrowsException<NotSupportedException>(act);
   }
 
-  private sealed record class UnknownQuestionTemplateEntity : QuestionTemplateEntityBase
+  private sealed class UnknownQuestionTemplateEntity : QuestionTemplateEntityBase
   {
     public UnknownQuestionTemplateEntity() : base(string.Empty) { }
 
     public override QuestionType QuestionType => (QuestionType)100;
+
+    public override bool Equals(QuestionTemplateEntityBase? other) => false;
   }
 }

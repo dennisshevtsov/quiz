@@ -17,6 +17,21 @@ public sealed class TextQuestionTemplateEntity : QuestionTemplateEntityBase
 
   public override QuestionType QuestionType => QuestionType.Text;
 
+  public override bool Equals(QuestionTemplateEntityBase? other)
+  {
+    if (other == null)
+    {
+      return false;
+    }
+
+    if (object.ReferenceEquals(other, this))
+    {
+      return true;
+    }
+
+    return Text == other.Text;
+  }
+
   public static void Validate(string text, ExecutingContext context)
   {
     if (string.IsNullOrEmpty(text))

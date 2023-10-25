@@ -16,7 +16,7 @@ namespace SurveyApp.SurveyTemplate;
 [JsonDerivedType(typeof(YesNoQuestionTemplateEntity), (int)QuestionType.YesNo)]
 [JsonDerivedType(typeof(MultipleChoiceQuestionTemplateEntity), (int)QuestionType.MultipleChoice)]
 [JsonDerivedType(typeof(SingleChoiceQuestionTemplateEntity), (int)QuestionType.SingleChoice)]
-public abstract class QuestionTemplateEntityBase
+public abstract class QuestionTemplateEntityBase : IEquatable<QuestionTemplateEntityBase>
 {
   protected QuestionTemplateEntityBase(string text)
   {
@@ -26,4 +26,6 @@ public abstract class QuestionTemplateEntityBase
   public string Text { get; private set; }
 
   public abstract QuestionType QuestionType { get; }
+
+  public abstract bool Equals(QuestionTemplateEntityBase? other);
 }

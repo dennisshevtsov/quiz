@@ -175,6 +175,9 @@ public sealed class DbContextTest
 
     Assert.AreEqual(expected.Questions.Length, actual.Questions.Length);
 
-    //for ()
+    for (int i = 0; i < expected.Questions.Length; i++)
+    {
+      Assert.AreEqual(expected.Questions[i], actual.Questions[i]);
+    }
   }
 }
