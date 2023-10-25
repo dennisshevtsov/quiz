@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace SurveyApp.SurveyTemplate;
 
-public sealed class MultipleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
+public sealed record class MultipleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
 {
   [JsonConstructor]
   public MultipleChoiceQuestionTemplateEntity(string text, string[] choices) : base(text)
@@ -14,9 +14,11 @@ public sealed class MultipleChoiceQuestionTemplateEntity : QuestionTemplateEntit
     Choices = choices;
   }
 
-  public MultipleChoiceQuestionTemplateEntity(MultipleChoiceQuestionTemplateEntity multipleChoiceQuestionTemplateEntity)
-    : this(multipleChoiceQuestionTemplateEntity.Text, multipleChoiceQuestionTemplateEntity.Choices)
-  { }
+  public MultipleChoiceQuestionTemplateEntity(MultipleChoiceQuestionTemplateEntity template)
+    : base(template)
+  {
+    Choices = template.Choices;
+  }
 
   public override QuestionType QuestionType => QuestionType.MultipleChoice;
 

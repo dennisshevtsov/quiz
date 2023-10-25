@@ -172,5 +172,9 @@ public sealed class DbContextTest
     Assert.AreEqual(expected.SurveyTemplateId, actual.SurveyTemplateId);
     Assert.AreEqual(expected.Title, actual.Title);
     Assert.AreEqual(expected.Description, actual.Description);
+
+    Assert.AreEqual(expected.Questions.Length, actual.Questions.Length);
+
+    //for ()
   }
 }

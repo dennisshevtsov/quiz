@@ -102,7 +102,7 @@ public sealed class QuestionEntityBaseTest
     Assert.ThrowsException<NotSupportedException>(act);
   }
 
-  private sealed class UnknownQuestionTemplateEntity : QuestionTemplateEntityBase
+  private sealed record class UnknownQuestionTemplateEntity : QuestionTemplateEntityBase
   {
     public UnknownQuestionTemplateEntity() : base(string.Empty) { }
 
