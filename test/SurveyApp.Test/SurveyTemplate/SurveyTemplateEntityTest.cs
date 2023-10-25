@@ -317,7 +317,7 @@ public sealed class SurveyTemplateEntityTest
     );
 
     // Assert
-    AreEqual(expectedSurveyTemplateEntity, surveyTemplateEntity);
+    Assert.AreEqual(expectedSurveyTemplateEntity, surveyTemplateEntity);
   }
 
   [TestMethod]
@@ -373,7 +373,7 @@ public sealed class SurveyTemplateEntityTest
     );
 
     // Assert
-    AreEqual(expectedSurveyTemplateEntity, surveyTemplateEntity);
+    Assert.AreEqual(expectedSurveyTemplateEntity, surveyTemplateEntity);
   }
 
   [TestMethod]
@@ -401,12 +401,5 @@ public sealed class SurveyTemplateEntityTest
 
     // Assert
     Assert.IsFalse(context.HasErrors);
-  }
-
-  private static void AreEqual(SurveyTemplateEntity expected, SurveyTemplateEntity actual)
-  {
-    Assert.AreEqual(expected.Title, actual.Title);
-    Assert.AreEqual(expected.Description, actual.Description);
-    Assert.AreEqual(expected.Questions, actual.Questions);
   }
 }
