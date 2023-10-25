@@ -6,13 +6,13 @@ using System.Text.Json.Serialization;
 
 namespace SurveyApp.SurveyTemplate;
 
-public sealed record class TextQuestionTemplateEntity : QuestionTemplateEntityBase
+public sealed class TextQuestionTemplateEntity : QuestionTemplateEntityBase
 {
   [JsonConstructor]
   public TextQuestionTemplateEntity(string text) : base(text) { }
 
-  public TextQuestionTemplateEntity(TextQuestionTemplateEntity textQuestionTemplateEntity)
-    : base(textQuestionTemplateEntity)
+  public TextQuestionTemplateEntity(TextQuestionTemplateEntity template)
+    : this(template.Text)
   { }
 
   public override QuestionType QuestionType => QuestionType.Text;

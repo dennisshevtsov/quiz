@@ -16,16 +16,11 @@ namespace SurveyApp.SurveyTemplate;
 [JsonDerivedType(typeof(YesNoQuestionTemplateEntity), (int)QuestionType.YesNo)]
 [JsonDerivedType(typeof(MultipleChoiceQuestionTemplateEntity), (int)QuestionType.MultipleChoice)]
 [JsonDerivedType(typeof(SingleChoiceQuestionTemplateEntity), (int)QuestionType.SingleChoice)]
-public abstract record class QuestionTemplateEntityBase
+public abstract class QuestionTemplateEntityBase
 {
   protected QuestionTemplateEntityBase(string text)
   {
     Text = text;
-  }
-
-  protected QuestionTemplateEntityBase(QuestionTemplateEntityBase template)
-  {
-    Text = template.Text;
   }
 
   public string Text { get; private set; }

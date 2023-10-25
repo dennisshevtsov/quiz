@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace SurveyApp.SurveyTemplate;
 
-public sealed record class SingleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
+public sealed class SingleChoiceQuestionTemplateEntity : QuestionTemplateEntityBase
 {
   [JsonConstructor]
   public SingleChoiceQuestionTemplateEntity(string text, string[] choices) : base(text)
@@ -15,10 +15,7 @@ public sealed record class SingleChoiceQuestionTemplateEntity : QuestionTemplate
   }
 
   public SingleChoiceQuestionTemplateEntity(SingleChoiceQuestionTemplateEntity template)
-    : base(template)
-  {
-    Choices = template.Choices;
-  }
+    : this(template.Text, template.Choices) { }
 
   public override QuestionType QuestionType => QuestionType.SingleChoice;
 
