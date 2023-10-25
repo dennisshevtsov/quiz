@@ -81,7 +81,7 @@ public sealed class DbContextTest
 
     // Assert
     SurveyTemplateEntity? actual = await GetSurveyTemplateAsync(original.SurveyTemplateId);
-    DbContextTest.AreEqual(updated, actual);
+    Assert.AreEqual(updated, actual);
   }
 
   [TestMethod]
@@ -110,7 +110,7 @@ public sealed class DbContextTest
     SurveyTemplateEntity? actual = await GetSurveyTemplateAsync(expected.SurveyTemplateId);
 
     // Assert
-    DbContextTest.AreEqual(expected, actual);
+    Assert.AreEqual(expected, actual);
   }
 
   private async Task<SurveyTemplateEntity> AddTestSurveyTemplateAsync()
@@ -165,19 +165,4 @@ public sealed class DbContextTest
             .AsNoTracking()
             .Where(entity => entity.SurveyTemplateId == surveyTemplateId)
             .FirstOrDefaultAsync();
-
-  private static void AreEqual(SurveyTemplateEntity expected, SurveyTemplateEntity? actual)
-  {
-    Assert.IsNotNull(actual);
-    Assert.AreEqual(expected.SurveyTemplateId, actual.SurveyTemplateId);
-    Assert.AreEqual(expected.Title, actual.Title);
-    Assert.AreEqual(expected.Description, actual.Description);
-
-    Assert.AreEqual(expected.Questions.Length, actual.Questions.Length);
-
-    for (int i = 0; i < expected.Questions.Length; i++)
-    {
-      Assert.AreEqual(expected.Questions[i], actual.Questions[i]);
-    }
-  }
 }

@@ -4,7 +4,7 @@
 
 namespace SurveyApp.SurveyTemplate;
 
-public sealed class SurveyTemplateEntity
+public sealed class SurveyTemplateEntity : IEquatable<SurveyTemplateEntity>
 {
   public SurveyTemplateEntity(Guid surveyTemplateId, string title, string description, QuestionTemplateEntityBase[] questions)
   {
@@ -30,6 +30,37 @@ public sealed class SurveyTemplateEntity
   public string Description { get; private set; }
 
   public QuestionTemplateEntityBase[] Questions { get; private set; }
+
+  public bool Equals(SurveyTemplateEntity? other)
+  {
+    if (other == null)
+    {
+      return false;
+    }
+
+    if (object.ReferenceEquals(this, other))
+    {
+      return true;
+    }
+
+    if (SurveyTemplateId != other.SurveyTemplateId ||
+        Title != other.Title ||
+        Description != other.Description ||
+        Questions.Length != other.Questions.Length)
+    {
+      return false;
+    }
+
+    for (int i = 0; i < other.Questions.Length; i++)
+    {
+      if (!Questions[i].Equals(other.Questions[i]))
+      {
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   public void Update(string title, string description, QuestionTemplateEntityBase[] questions, ExecutingContext context)
   {
