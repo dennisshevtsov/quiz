@@ -195,13 +195,13 @@ public sealed class SurveyTemplateEntityTest
     // Arrange
     string title = Guid.NewGuid().ToString();
 
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    SurveyTemplateEntity surveyTemplateEntity = new
     (
-      title      : Guid.NewGuid().ToString(),
-      description: Guid.NewGuid().ToString(),
-      questions  : Array.Empty<QuestionTemplateEntityBase>(),
-      context    : new ExecutingContext()
-    )!;
+      surveyTemplateId: Guid.NewGuid(),
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : Array.Empty<QuestionTemplateEntityBase>()
+    );
 
     // Act
     surveyTemplateEntity.Update(
@@ -220,13 +220,13 @@ public sealed class SurveyTemplateEntityTest
     // Arrange
     string description = Guid.NewGuid().ToString();
 
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    SurveyTemplateEntity surveyTemplateEntity = new
     (
-      title      : Guid.NewGuid().ToString(),
-      description: Guid.NewGuid().ToString(),
-      questions  : Array.Empty<QuestionTemplateEntityBase>(),
-      context    : new ExecutingContext()
-    )!;
+      surveyTemplateId: Guid.NewGuid(),
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : Array.Empty<QuestionTemplateEntityBase>()
+    );
 
     // Act
     surveyTemplateEntity.Update(
@@ -245,13 +245,13 @@ public sealed class SurveyTemplateEntityTest
     // Arrange
     QuestionTemplateEntityBase[] questions = new QuestionTemplateEntityBase[0];
 
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    SurveyTemplateEntity surveyTemplateEntity = new
     (
-      title      : Guid.NewGuid().ToString(),
-      description: Guid.NewGuid().ToString(),
-      questions  : Array.Empty<QuestionTemplateEntityBase>(),
-      context    : new ExecutingContext()
-    )!;
+      surveyTemplateId: Guid.NewGuid(),
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : Array.Empty<QuestionTemplateEntityBase>()
+    );
 
     // Act
     surveyTemplateEntity.Update(
@@ -268,13 +268,13 @@ public sealed class SurveyTemplateEntityTest
   public void Update_NoTitle_ErrorsReturned()
   {
     // Arrange
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    SurveyTemplateEntity surveyTemplateEntity = new
     (
-      title      : Guid.NewGuid().ToString(),
-      description: Guid.NewGuid().ToString(),
-      questions  : Array.Empty<QuestionTemplateEntityBase>(),
-      context    : new ExecutingContext()
-    )!;
+      surveyTemplateId: Guid.NewGuid(),
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : Array.Empty<QuestionTemplateEntityBase>()
+    );
 
     ExecutingContext context = new();
 
@@ -295,13 +295,13 @@ public sealed class SurveyTemplateEntityTest
   public void Update_NoTitle_EntityNotUpdated()
   {
     // Arrange
-    SurveyTemplateEntity expectedSurveyTemplateEntity = SurveyTemplateEntity.New
+    SurveyTemplateEntity expectedSurveyTemplateEntity = new
     (
-      title      : Guid.NewGuid().ToString(),
-      description: Guid.NewGuid().ToString(),
-      questions  : new QuestionTemplateEntityBase[0],
-      context    : new ExecutingContext()
-    )!;
+      surveyTemplateId: Guid.NewGuid(),
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : Array.Empty<QuestionTemplateEntityBase>()
+    );
 
     SurveyTemplateEntity surveyTemplateEntity = new(expectedSurveyTemplateEntity);
 
@@ -324,13 +324,13 @@ public sealed class SurveyTemplateEntityTest
   public void Update_NoDescription_ErrorsReturned()
   {
     // Arrange
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    SurveyTemplateEntity surveyTemplateEntity = new
     (
-      title      : Guid.NewGuid().ToString(),
-      description: Guid.NewGuid().ToString(),
-      questions  : Array.Empty<QuestionTemplateEntityBase>(),
-      context    : new ExecutingContext()
-    )!;
+      surveyTemplateId: Guid.NewGuid(),
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : Array.Empty<QuestionTemplateEntityBase>()
+    );
 
     ExecutingContext context = new();
 
@@ -351,13 +351,13 @@ public sealed class SurveyTemplateEntityTest
   public void Update_NoDescription_EntityNotUpdated()
   {
     // Arrange
-    SurveyTemplateEntity expectedSurveyTemplateEntity = SurveyTemplateEntity.New
+    SurveyTemplateEntity expectedSurveyTemplateEntity = new
     (
-      title      : Guid.NewGuid().ToString(),
-      description: Guid.NewGuid().ToString(),
-      questions  : new QuestionTemplateEntityBase[0],
-      context    : new ExecutingContext()
-    )!;
+      surveyTemplateId: Guid.NewGuid(),
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : new QuestionTemplateEntityBase[0]
+    );
 
     SurveyTemplateEntity surveyTemplateEntity = new(expectedSurveyTemplateEntity);
 
@@ -380,13 +380,13 @@ public sealed class SurveyTemplateEntityTest
   public void Update_FullListOfParameters_NoError()
   {
     // Arrange
-    SurveyTemplateEntity surveyTemplateEntity = SurveyTemplateEntity.New
+    SurveyTemplateEntity surveyTemplateEntity = new
     (
-      title      : Guid.NewGuid().ToString(),
-      description: Guid.NewGuid().ToString(),
-      questions  : Array.Empty<QuestionTemplateEntityBase>(),
-      context    : new ExecutingContext()
-    )!;
+      surveyTemplateId: Guid.NewGuid(),
+      title           : Guid.NewGuid().ToString(),
+      description     : Guid.NewGuid().ToString(),
+      questions       : Array.Empty<QuestionTemplateEntityBase>()
+    );
 
     ExecutingContext context = new();
 
