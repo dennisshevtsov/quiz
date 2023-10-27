@@ -163,6 +163,22 @@ public sealed class DbContextTest
     Assert.AreEqual(updated, actual);
   }
 
+  [TestMethod]
+  public async Task SaveChangesAsync_SurveyDeleted_SurveyDeleted()
+  {
+    // Arange
+    SurveyEntity original = await AddTestSurveyAsync();
+
+    _context.Entry(original).State = EntityState.Deleted;
+
+    // Act
+    await _context.SaveChangesAsync();
+
+    // Assert
+    SurveyEntity? actual = await GetSurveyAsync(original.SurveyId);
+    Assert.IsNull(actual);
+  }
+
   private async Task<SurveyTemplateEntity> AddTestSurveyTemplateAsync()
   {
     SurveyTemplateEntity surveyTemplateEntity = new
