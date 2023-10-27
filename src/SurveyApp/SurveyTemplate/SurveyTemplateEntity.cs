@@ -44,8 +44,8 @@ public sealed class SurveyTemplateEntity : IEquatable<SurveyTemplateEntity>
     }
 
     if (SurveyTemplateId != other.SurveyTemplateId ||
-        Title != other.Title ||
-        Description != other.Description ||
+        Title            != other.Title            ||
+        Description      != other.Description      ||
         Questions.Length != other.Questions.Length)
     {
       return false;
