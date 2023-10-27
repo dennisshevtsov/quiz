@@ -5,6 +5,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SurveyApp.Survey;
 using SurveyApp.SurveyTemplate;
 
 namespace SurveyApp.Data.Test;
@@ -111,6 +112,29 @@ public sealed class DbContextTest
 
     // Assert
     Assert.AreEqual(expected, actual);
+  }
+
+  [TestMethod]
+  public async Task SaveChangesAsync_AddedSurvey_ExceptionNotThrown()
+  {
+    // Arange
+    SurveyEntity surveyEntity = new
+    (
+      surveyId       : Guid.NewGuid(),
+      state          : SurveyState.Draft,
+      title          : Guid.NewGuid().ToString(),
+      description    : Guid.NewGuid().ToString(),
+      intervieweeName: Guid.NewGuid().ToString(),
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
+
+    _context.Add(surveyEntity);
+
+    // Act
+    Func<Task> act = () => _context.SaveChangesAsync();
+
+    // Assert
+    await act();
   }
 
   private async Task<SurveyTemplateEntity> AddTestSurveyTemplateAsync()
