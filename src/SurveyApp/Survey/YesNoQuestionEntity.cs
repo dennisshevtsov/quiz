@@ -21,6 +21,26 @@ public sealed class YesNoQuestionEntity : QuestionEntityBase
 
   public YesNo Answer { get; private set; }
 
+  public override bool Equals(QuestionEntityBase? other)
+  {
+    if (other == null)
+    {
+      return false;
+    }
+
+    if (object.ReferenceEquals(other, this))
+    {
+      return true;
+    }
+
+    if (other is not YesNoQuestionEntity entity)
+    {
+      return false;
+    }
+
+    return Text == entity.Text && Answer == entity.Answer;
+  }
+
   public void SetAnswer(YesNo answer, ExecutingContext context)
   {
     if (answer < YesNo.None || answer > YesNo.No)

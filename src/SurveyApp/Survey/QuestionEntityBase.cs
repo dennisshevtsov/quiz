@@ -6,7 +6,7 @@ using SurveyApp.SurveyTemplate;
 
 namespace SurveyApp.Survey;
 
-public abstract class QuestionEntityBase
+public abstract class QuestionEntityBase : IEquatable<QuestionEntityBase>
 {
   protected QuestionEntityBase(string text)
   {
@@ -16,6 +16,8 @@ public abstract class QuestionEntityBase
   public string Text { get; private set; }
 
   public abstract QuestionType QuestionType { get; }
+
+  public abstract bool Equals(QuestionEntityBase? other);
 
   public static QuestionEntityBase Copy(QuestionTemplateEntityBase questionTemplateEntity) =>
     questionTemplateEntity.QuestionType switch

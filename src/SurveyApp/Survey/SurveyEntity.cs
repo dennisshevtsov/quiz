@@ -6,7 +6,7 @@ using SurveyApp.SurveyTemplate;
 
 namespace SurveyApp.Survey;
 
-public sealed class SurveyEntity
+public sealed class SurveyEntity : IEquatable<SurveyEntity>
 {
   public SurveyEntity(Guid surveyId, SurveyState state, string title, string description, string intervieweeName, QuestionEntityBase[] questions)
   {
@@ -51,6 +51,39 @@ public sealed class SurveyEntity
   public string IntervieweeName { get; private set; }
 
   public QuestionEntityBase[] Questions { get; }
+
+  public bool Equals(SurveyEntity? other)
+  {
+    if (other == null)
+    {
+      return false;
+    }
+
+    if (object.ReferenceEquals(this, other))
+    {
+      return true;
+    }
+
+    if (SurveyId         != other.SurveyId        ||
+        State            != other.State           ||
+        Title            != other.Title           ||
+        Description      != other.Description     ||
+        IntervieweeName  != other.IntervieweeName ||
+        Questions.Length != other.Questions.Length)
+    {
+      return false;
+    }
+
+    for (int i = 0; i < other.Questions.Length; i++)
+    {
+      if (!Questions[i].Equals(other.Questions[i]))
+      {
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   public static SurveyEntity? New(string intervieweeName, SurveyTemplateEntity template, ExecutingContext context)
   {

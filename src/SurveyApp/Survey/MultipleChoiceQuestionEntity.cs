@@ -24,6 +24,67 @@ public sealed class MultipleChoiceQuestionEntity : QuestionEntityBase
 
   public string[] Answers { get; private set; }
 
+  public override bool Equals(QuestionEntityBase? other)
+  {
+    if (other == null)
+    {
+      return false;
+    }
+
+    if (object.ReferenceEquals(other, this))
+    {
+      return true;
+    }
+
+    if (other is not MultipleChoiceQuestionEntity entity)
+    {
+      return false;
+    }
+
+    if (Text != entity.Text)
+    {
+      return false;
+    }
+
+    if (Choices == entity.Choices)
+    {
+      return true;
+    }
+
+    if (Choices.Length != entity.Choices.Length)
+    {
+      return false;
+    }
+
+    for (int i = 0; i < Choices.Length; i++)
+    {
+      if (Choices[i] != entity.Choices[i])
+      {
+        return false;
+      }
+    }
+
+    if (Answers == entity.Answers)
+    {
+      return true;
+    }
+
+    if (Answers.Length != entity.Answers.Length)
+    {
+      return false;
+    }
+
+    for (int i = 0; i < Answers.Length; i++)
+    {
+      if (Answers[i] != entity.Answers[i])
+      {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   public void SetAnswers(string[] answers, ExecutingContext context)
   {
     if (answers.Length == 0)
