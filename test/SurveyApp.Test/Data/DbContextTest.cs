@@ -192,7 +192,6 @@ public sealed class DbContextTest
     Assert.AreEqual(expected, actual);
   }
 
-
   private async Task<SurveyTemplateEntity> AddTestSurveyTemplateAsync()
   {
     SurveyTemplateEntity surveyTemplateEntity = new

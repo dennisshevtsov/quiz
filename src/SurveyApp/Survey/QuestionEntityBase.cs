@@ -3,9 +3,15 @@
 // See LICENSE in the project root for license information.
 
 using SurveyApp.SurveyTemplate;
+using System.Text.Json.Serialization;
 
 namespace SurveyApp.Survey;
 
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "$")]
+[JsonDerivedType(typeof(TextQuestionEntity), (int)QuestionType.Text)]
+[JsonDerivedType(typeof(YesNoQuestionEntity), (int)QuestionType.YesNo)]
+[JsonDerivedType(typeof(MultipleChoiceQuestionEntity), (int)QuestionType.MultipleChoice)]
+[JsonDerivedType(typeof(SingleChoiceQuestionEntity), (int)QuestionType.SingleChoice)]
 public abstract class QuestionEntityBase : IEquatable<QuestionEntityBase>
 {
   protected QuestionEntityBase(string text)

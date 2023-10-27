@@ -3,11 +3,13 @@
 // See LICENSE in the project root for license information.
 
 using SurveyApp.SurveyTemplate;
+using System.Text.Json.Serialization;
 
 namespace SurveyApp.Survey;
 
 public sealed class TextQuestionEntity : QuestionEntityBase
 {
+  [JsonConstructor]
   public TextQuestionEntity(string text, string? answer) : base(text)
   {
     Answer = answer;
