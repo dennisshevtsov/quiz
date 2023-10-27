@@ -8,7 +8,7 @@ namespace SurveyApp.Survey;
 
 public sealed class SurveyEntity
 {
-  private SurveyEntity(Guid surveyId, SurveyState state, string title, string description, string intervieweeName, QuestionEntityBase[] questions)
+  public SurveyEntity(Guid surveyId, SurveyState state, string title, string description, string intervieweeName, QuestionEntityBase[] questions)
   {
     SurveyId        = surveyId;
     State           = state;
@@ -18,7 +18,7 @@ public sealed class SurveyEntity
     Questions       = questions;
   }
 
-  private SurveyEntity(string title, string description, string intervieweeName, QuestionEntityBase[] questions)
+  public SurveyEntity(string title, string description, string intervieweeName, QuestionEntityBase[] questions)
   : this
   (
     surveyId       : Guid.NewGuid(),
