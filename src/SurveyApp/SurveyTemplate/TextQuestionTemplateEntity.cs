@@ -29,7 +29,12 @@ public sealed class TextQuestionTemplateEntity : QuestionTemplateEntityBase
       return true;
     }
 
-    return Text == other.Text;
+    if (other is not TextQuestionTemplateEntity entity)
+    {
+      return false;
+    }
+
+    return Text == entity.Text;
   }
 
   public static void Validate(string text, ExecutingContext context)
