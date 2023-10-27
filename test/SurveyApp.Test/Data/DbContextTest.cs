@@ -179,6 +179,20 @@ public sealed class DbContextTest
     Assert.IsNull(actual);
   }
 
+  [TestMethod]
+  public async Task FirstOrDefaultAsync_ExitingSurveyId_SurveyReturned()
+  {
+    // Arange
+    SurveyEntity expected = await AddTestSurveyAsync();
+
+    // Act
+    SurveyEntity? actual = await GetSurveyAsync(expected.SurveyId);
+
+    // Assert
+    Assert.AreEqual(expected, actual);
+  }
+
+
   private async Task<SurveyTemplateEntity> AddTestSurveyTemplateAsync()
   {
     SurveyTemplateEntity surveyTemplateEntity = new
