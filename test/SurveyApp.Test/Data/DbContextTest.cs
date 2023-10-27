@@ -41,7 +41,7 @@ public sealed class DbContextTest
   }
 
   [TestMethod]
-  public async Task SaveChangesAsync_AddedSurveyTemplate_ExceptionNotThrown()
+  public async Task SaveChangesAsync_SurveyTemplateAdded_ExceptionNotThrown()
   {
     // Arange
     SurveyTemplateEntity surveyTemplateEntity = new
@@ -62,7 +62,7 @@ public sealed class DbContextTest
   }
 
   [TestMethod]
-  public async Task SaveChangesAsync_ModifiedSurveyTemplate_SurveyTemplateUpdated()
+  public async Task SaveChangesAsync_SurveyTemplateModified_SurveyTemplateUpdated()
   {
     // Arange
     SurveyTemplateEntity original = await AddTestSurveyTemplateAsync();
@@ -86,7 +86,7 @@ public sealed class DbContextTest
   }
 
   [TestMethod]
-  public async Task SaveChangesAsync_DeletedSurveyTemplate_SurveyTemplateDeleted()
+  public async Task SaveChangesAsync_SurveyTemplateDeleted_SurveyTemplateDeleted()
   {
     // Arange
     SurveyTemplateEntity original = await AddTestSurveyTemplateAsync();
@@ -115,7 +115,7 @@ public sealed class DbContextTest
   }
 
   [TestMethod]
-  public async Task SaveChangesAsync_AddedSurvey_ExceptionNotThrown()
+  public async Task SaveChangesAsync_SurveyAdded_ExceptionNotThrown()
   {
     // Arange
     SurveyEntity surveyEntity = new
@@ -135,6 +135,32 @@ public sealed class DbContextTest
 
     // Assert
     await act();
+  }
+
+    [TestMethod]
+  public async Task SaveChangesAsync_SurveyModified_SurveyTemplateUpdated()
+  {
+    // Arange
+    SurveyEntity original = await AddTestSurveyAsync();
+
+    SurveyEntity updated = new
+    (
+      surveyId       : original.SurveyId,
+      state          : SurveyState.Draft,
+      title          : Guid.NewGuid().ToString(),
+      description    : Guid.NewGuid().ToString(),
+      intervieweeName: Guid.NewGuid().ToString(),
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
+
+    _context.Entry(updated).State = EntityState.Modified;
+
+    // Act
+    await _context.SaveChangesAsync();
+
+    // Assert
+    SurveyEntity? actual = await GetSurveyAsync(original.SurveyId);
+    Assert.AreEqual(updated, actual);
   }
 
   private async Task<SurveyTemplateEntity> AddTestSurveyTemplateAsync()
@@ -188,5 +214,64 @@ public sealed class DbContextTest
     _context.Set<SurveyTemplateEntity>()
             .AsNoTracking()
             .Where(entity => entity.SurveyTemplateId == surveyTemplateId)
+            .FirstOrDefaultAsync();
+
+  private async Task<SurveyEntity> AddTestSurveyAsync()
+  {
+    SurveyEntity surveyEntity = new
+    (
+      surveyId       : Guid.NewGuid(),
+      state          : SurveyState.Draft,
+      title          : Guid.NewGuid().ToString(),
+      description    : Guid.NewGuid().ToString(),
+      intervieweeName: Guid.NewGuid().ToString(),
+      questions      : new QuestionEntityBase[]
+      {
+        new TextQuestionEntity
+        (
+          text  : Guid.NewGuid().ToString(),
+          answer: null
+        ),
+        new YesNoQuestionEntity
+        (
+          text  : Guid.NewGuid().ToString(),
+          answer: YesNo.None
+        ),
+        new MultipleChoiceQuestionEntity
+        (
+          text   : Guid.NewGuid().ToString(),
+          choices: new[]
+          {
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+          },
+          answers: Array.Empty<string>()
+        ),
+        new SingleChoiceQuestionEntity
+        (
+          text   : Guid.NewGuid().ToString(),
+          choices: new[]
+          {
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+            Guid.NewGuid().ToString(),
+          },
+          answer : null
+        ),
+      }
+    );
+
+    _context.Add(surveyEntity);
+    await _context.SaveChangesAsync();
+    _context.Entry(surveyEntity).State = EntityState.Detached;
+
+    return surveyEntity;
+  }
+
+  private Task<SurveyEntity?> GetSurveyAsync(Guid surveyId) =>
+    _context.Set<SurveyEntity>()
+            .AsNoTracking()
+            .Where(entity => entity.SurveyId == surveyId)
             .FirstOrDefaultAsync();
 }
