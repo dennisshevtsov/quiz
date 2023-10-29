@@ -5,7 +5,7 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddData();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers(options => options.AddPatchable());
+builder.Services.AddControllers(options => options.AddComposable());
 
 WebApplication app = builder.Build();
 app.UseSwagger();

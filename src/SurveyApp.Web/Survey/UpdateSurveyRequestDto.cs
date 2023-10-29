@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using Patchable;
+using Composable;
 
 namespace SurveyApp.Survey.Web;
 
