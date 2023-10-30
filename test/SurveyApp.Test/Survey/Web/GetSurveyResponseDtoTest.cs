@@ -13,7 +13,15 @@ public sealed class GetSurveyResponseDtoTest
   public void Constructor_SurveyEntity_SurveyIdFilled()
   {
     // Arrange
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey();
+    SurveyEntity surveyEntity = new
+    (
+      surveyId       : default,
+      state          : SurveyState.Draft,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
 
     // Act
     GetSurveyResponseDto getSurveyResponseDto = new(surveyEntity);
@@ -26,7 +34,15 @@ public sealed class GetSurveyResponseDtoTest
   public void Constructor_SurveyEntity_TitleFilled()
   {
     // Arrange
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey();
+    SurveyEntity surveyEntity = new
+    (
+      surveyId       : default,
+      state          : SurveyState.Draft,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
 
     // Act
     GetSurveyResponseDto getSurveyResponseDto = new(surveyEntity);
@@ -39,7 +55,15 @@ public sealed class GetSurveyResponseDtoTest
   public void Constructor_SurveyEntity_DescriptionFilled()
   {
     // Arrange
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey();
+    SurveyEntity surveyEntity = new
+    (
+      surveyId       : default,
+      state          : SurveyState.Draft,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
 
     // Act
     GetSurveyResponseDto getSurveyResponseDto = new(surveyEntity);
@@ -52,7 +76,15 @@ public sealed class GetSurveyResponseDtoTest
   public void Constructor_SurveyEntity_CandidateNameFilled()
   {
     // Arrange
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey();
+    SurveyEntity surveyEntity = new
+    (
+      surveyId       : default,
+      state          : SurveyState.Draft,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
 
     // Act
     GetSurveyResponseDto getSurveyResponseDto = new(surveyEntity);
@@ -65,9 +97,14 @@ public sealed class GetSurveyResponseDtoTest
   public void Constructor_SurveyEntity_QuestionFilledFilled()
   {
     // Arrange
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    SurveyEntity surveyEntity = new
     (
-      questions: new QuestionEntityBase[]
+      surveyId       : default,
+      state          : SurveyState.Draft,
+      title          : string.Empty,
+      description    : string.Empty,
+      intervieweeName: string.Empty,
+      questions      : new QuestionEntityBase[]
       {
         new YesNoQuestionEntity
         (
