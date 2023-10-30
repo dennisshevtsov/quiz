@@ -18,13 +18,15 @@ public sealed class UpdateSurveyRequestDtoTest
       IntervieweeName = Guid.NewGuid().ToString(),
     };
 
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new
+    (
       surveyId       : default,
       state          : default,
       title          : string.Empty,
       description    : string.Empty,
       intervieweeName: string.Empty,
-      questions      : Array.Empty<QuestionEntityBase>());
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
 
     // Act
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
@@ -44,13 +46,15 @@ public sealed class UpdateSurveyRequestDtoTest
 
     string originalCandidateName = Guid.NewGuid().ToString();
 
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new
+    (
       surveyId       : default,
       state          : default,
       title          : string.Empty,
       description    : string.Empty,
       intervieweeName: originalCandidateName,
-      questions      : Array.Empty<QuestionEntityBase>());
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
 
     // Act
     updateSurveyRequestDto.UpdateSurvey(surveyEntity, new ExecutingContext());
@@ -68,13 +72,15 @@ public sealed class UpdateSurveyRequestDtoTest
       IntervieweeName = string.Empty,
     };
 
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new
+    (
       surveyId       : default,
       state          : default,
       title          : string.Empty,
       description    : string.Empty,
       intervieweeName: string.Empty,
-      questions      : Array.Empty<QuestionEntityBase>());
+      questions      : Array.Empty<QuestionEntityBase>()
+    );
 
     ExecutingContext context = new();
 
