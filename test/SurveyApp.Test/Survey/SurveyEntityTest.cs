@@ -92,7 +92,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_UnknownState_ContextHasErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Draft,
       title          : string.Empty,
@@ -117,7 +117,7 @@ public sealed class SurveyEntityTest
     // Assert
     SurveyState state = SurveyState.Ready;
 
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : state,
       title          : string.Empty,
@@ -138,7 +138,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromDraftToDone_ContextHasErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Draft,
       title          : string.Empty,
@@ -159,7 +159,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromDraftToDone_StateNotChanged()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Draft,
       title          : string.Empty,
@@ -178,7 +178,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromReadyToDone_ContextHasNoErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Ready,
       title          : string.Empty,
@@ -199,7 +199,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromReadyToDone_StateChanged()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Ready,
       title          : string.Empty,
@@ -218,7 +218,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromDoneToDone_ContextHasErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Done,
       title          : string.Empty,
@@ -239,7 +239,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromCancelledToDone_ContextHasErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Cancelled,
       title          : string.Empty,
@@ -260,7 +260,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromCancelledToDone_StateNotChanged()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Cancelled,
       title          : string.Empty,
@@ -279,7 +279,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromDraftToCancelled_ContextHasNoErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Draft,
       title          : string.Empty,
@@ -300,7 +300,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromDraftToCancelled_StateChanged()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Draft,
       title          : string.Empty,
@@ -319,7 +319,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromReadyToCancelled_ContextHasNoErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Ready,
       title          : string.Empty,
@@ -340,7 +340,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromReadyToCancelled_StateChanged()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Ready,
       title          : string.Empty,
@@ -359,7 +359,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromDoneToCancelled_ContextHasErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Done,
       title          : string.Empty,
@@ -380,7 +380,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromDoneToCancelled_StateNotChanged()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Done,
       title          : string.Empty,
@@ -399,7 +399,7 @@ public sealed class SurveyEntityTest
   public void MoveTo_FromCancelledToCancelled_ContextHasErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Cancelled,
       title          : string.Empty,
@@ -420,7 +420,7 @@ public sealed class SurveyEntityTest
   public void Update_NewIntervieweeName_IntervieweeNameUpdated()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : default,
       title          : string.Empty,
@@ -443,7 +443,7 @@ public sealed class SurveyEntityTest
     // Assert
     string originalIntervieweeName = Guid.NewGuid().ToString();
 
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : default,
       title          : string.Empty,
@@ -464,7 +464,7 @@ public sealed class SurveyEntityTest
     // Assert
     string originalIntervieweeName = Guid.NewGuid().ToString();
 
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : default,
       title          : string.Empty,
@@ -485,7 +485,7 @@ public sealed class SurveyEntityTest
   public void Update_StateIsReady_ContextHasErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Ready,
       title          : string.Empty,
@@ -506,7 +506,7 @@ public sealed class SurveyEntityTest
   public void Update_StateIsDone_ContextHasErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : Guid.NewGuid(),
       state          : SurveyState.Done,
       title          : string.Empty,
@@ -527,7 +527,7 @@ public sealed class SurveyEntityTest
   public void Update_StateIsCancelled_ContextHasErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : default,
       state          : SurveyState.Cancelled,
       title          : string.Empty,
@@ -548,7 +548,7 @@ public sealed class SurveyEntityTest
   public void Update_StateIsDraft_ContextHasNoErrors()
   {
     // Assert
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey(
+    SurveyEntity surveyEntity = new(
       surveyId       : default,
       state          : SurveyState.Draft,
       title          : string.Empty,
@@ -570,7 +570,7 @@ public sealed class SurveyEntityTest
   {
     // Assert
     SurveyState originalState = SurveyState.Ready;
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    SurveyEntity surveyEntity = new
     (
       surveyId       : default,
       state          : originalState,
@@ -595,7 +595,7 @@ public sealed class SurveyEntityTest
   {
     // Assert
     SurveyState originalState = SurveyState.Draft;
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    SurveyEntity surveyEntity = new
     (
       surveyId       : default,
       state          : originalState,
@@ -619,7 +619,7 @@ public sealed class SurveyEntityTest
   {
     // Assert
     SurveyState originalState = SurveyState.Draft;
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    SurveyEntity surveyEntity = new
     (
       surveyId       : default,
       state          : originalState,
@@ -643,7 +643,7 @@ public sealed class SurveyEntityTest
   {
     // Assert
     SurveyState originalState = SurveyState.Done;
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    SurveyEntity surveyEntity = new
     (
       surveyId       : default,
       state          : originalState,
@@ -667,7 +667,7 @@ public sealed class SurveyEntityTest
   {
     // Assert
     SurveyState originalState = SurveyState.Cancelled;
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    SurveyEntity surveyEntity = new
     (
       surveyId       : default,
       state          : originalState,
@@ -691,7 +691,7 @@ public sealed class SurveyEntityTest
   {
     // Assert
     SurveyState originalState = SurveyState.Cancelled;
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    SurveyEntity surveyEntity = new
     (
       surveyId       : default,
       state          : originalState,
@@ -715,7 +715,7 @@ public sealed class SurveyEntityTest
   {
     // Assert
     SurveyState originalState = SurveyState.Ready;
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    SurveyEntity surveyEntity = new
     (
       surveyId       : default,
       state          : originalState,
@@ -739,7 +739,7 @@ public sealed class SurveyEntityTest
   {
     // Assert
     SurveyState originalState = SurveyState.Ready;
-    SurveyEntity surveyEntity = SurveyEntityTest.CreateTestSurvey
+    SurveyEntity surveyEntity = new
     (
       surveyId       : default,
       state          : originalState,
