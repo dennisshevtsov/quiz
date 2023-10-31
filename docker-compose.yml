@@ -1,0 +1,26 @@
+version: '3.5'
+
+services:
+  survey-app:
+    container_name: survey-app
+    image: survey-app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: survey-app-build
+    ports:
+      - "5001:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - CONNECTIONSTRING="Host=survey-db;Port=5432;Database=survey_db_test;Username=dev;Password=dev"
+    depends_on:
+      - survey-db
+  survey-db:
+    container_name: survey-db
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=dev
