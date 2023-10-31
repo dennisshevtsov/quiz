@@ -3,6 +3,7 @@ version: '3.5'
 services:
   survey-app:
     container_name: survey-app
+    image: survey-app
     build:
       context: .
       dockerfile: ./Dockerfile
