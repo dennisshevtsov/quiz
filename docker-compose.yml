@@ -2,10 +2,11 @@ version: '3.5'
 
 services:
   survey-app:
+    container_name: survey-app
     build:
       context: .
       dockerfile: ./Dockerfile
-      target: final
+      target: survey-app-build
     ports:
       - "5001:80"
     environment:
@@ -15,6 +16,7 @@ services:
     depends_on:
       - survey-db
   survey-db:
+    container_name: survey-db
     image: postgres:12
     ports:
       - "5432:5432"
