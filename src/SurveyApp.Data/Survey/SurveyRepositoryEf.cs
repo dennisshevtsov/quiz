@@ -3,6 +3,7 @@
 // See LICENSE in the project root for license information.
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SurveyApp.Survey;
 
 namespace SurveyApp.Data.Survey;
@@ -16,23 +17,32 @@ public sealed class SurveyRepositoryEf : ISurveyRepository
     _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
   }
 
-  public Task<SurveyEntity?> GetSurveyAsync(Guid surveyId, CancellationToken cancellationToken)
+  public Task<SurveyEntity?> GetSurveyAsync(Guid surveyId, CancellationToken cancellationToken) =>
+    _dbContext.Set<SurveyEntity>()
+              .AsNoTracking()
+              .Where(entity => entity.SurveyId == surveyId)
+              .FirstOrDefaultAsync(cancellationToken);
+
+  public async Task<SurveyEntity> AddSurveyAsync(SurveyEntity surveyEntity, CancellationToken cancellationToken)
   {
-    throw new NotImplementedException();
+    EntityEntry<SurveyEntity> surveyEntityEntry = _dbContext.Entry(surveyEntity);
+    surveyEntityEntry.State = EntityState.Added;
+    await _dbContext.SaveChangesAsync(cancellationToken);
+    surveyEntityEntry.State = EntityState.Detached;
+
+    return surveyEntity;
   }
 
-  public Task<SurveyEntity> AddSurveyAsync(SurveyEntity surveyEntity, CancellationToken cancellationToken)
+  public async Task UpdateSurveyAsync(SurveyEntity surveyEntity, CancellationToken cancellationToken)
   {
-    throw new NotImplementedException();
+    EntityEntry<SurveyEntity> surveyEntityEntry = _dbContext.Entry(surveyEntity);
+    surveyEntityEntry.State = EntityState.Modified;
+    await _dbContext.SaveChangesAsync(cancellationToken);
+    surveyEntityEntry.State = EntityState.Detached;
   }
 
-  public Task UpdateSurveyAsync(SurveyEntity surveyEntity, CancellationToken cancellationToken)
-  {
-    throw new NotImplementedException();
-  }
-
-  public Task DeleteSurveyAsync(Guid surveyId, CancellationToken cancellationToken)
-  {
-    throw new NotImplementedException();
-  }
+  public Task DeleteSurveyAsync(Guid surveyId, CancellationToken cancellationToken) =>
+    _dbContext.Set<SurveyEntity>()
+              .Where(entity => entity.SurveyId == surveyId)
+              .ExecuteDeleteAsync(cancellationToken);
 }
