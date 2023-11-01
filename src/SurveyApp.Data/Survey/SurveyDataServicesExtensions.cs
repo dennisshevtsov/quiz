@@ -15,4 +15,11 @@ public static class SurveyDataServicesExtensions
 
     return services;
   }
+
+  public static IServiceCollection AddSurveyDataEf(this IServiceCollection services)
+  {
+    services.AddSingleton<ISurveyRepository, SurveyRepositoryEf>();
+
+    return services;
+  }
 }

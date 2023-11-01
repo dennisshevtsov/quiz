@@ -3,6 +3,7 @@
 // See LICENSE in the project root for license information.
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace SurveyApp.SurveyTemplate.Data;
 
@@ -23,16 +24,20 @@ public sealed class SurveyTemplateRepositoryEf : ISurveyTemplateRepository
 
   public async Task<SurveyTemplateEntity> AddSurveyTemplateAsync(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
   {
-    _dbContext.Add(surveyTemplateEntity);
+    EntityEntry<SurveyTemplateEntity> surveyTemplateEntityEntry = _dbContext.Entry(surveyTemplateEntity);
+    surveyTemplateEntityEntry.State = EntityState.Added;
     await _dbContext.SaveChangesAsync(cancellationToken);
+    surveyTemplateEntityEntry.State = EntityState.Detached;
 
     return surveyTemplateEntity;
   }
 
   public async Task UpdateSurveyTemplateAsync(SurveyTemplateEntity surveyTemplateEntity, CancellationToken cancellationToken)
   {
-    _dbContext.Update(surveyTemplateEntity);
+    EntityEntry<SurveyTemplateEntity> surveyTemplateEntityEntry = _dbContext.Entry(surveyTemplateEntity);
+    surveyTemplateEntityEntry.State = EntityState.Modified;
     await _dbContext.SaveChangesAsync(cancellationToken);
+    surveyTemplateEntityEntry.State = EntityState.Detached;
   }
 
   public async Task DeleteSurveyTemplateAsync(Guid surveyTemplateId, CancellationToken cancellationToken)
