@@ -15,6 +15,7 @@ public static class DataServicesExtensions
   {
     services.AddSurveyData();
     services.AddSurveyTemplateData();
+
     return services;
   }
 
@@ -29,6 +30,7 @@ public static class DataServicesExtensions
       builder.UseNpgsql(options.ConnectionString);
     });
 
+    services.AddSurveyDataEf();
     services.AddSurveyTemplateDataEf();
 
     return services;

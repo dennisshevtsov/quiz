@@ -4,9 +4,8 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using SurveyApp.Survey;
 
-namespace SurveyApp.Data.Survey;
+namespace SurveyApp.Survey.Data;
 
 public sealed class SurveyRepositoryEf : ISurveyRepository
 {
