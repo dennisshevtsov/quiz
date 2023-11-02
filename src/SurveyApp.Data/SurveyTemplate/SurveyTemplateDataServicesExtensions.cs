@@ -9,13 +9,6 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class SurveyTemplateDataServicesExtensions
 {
-  public static IServiceCollection AddSurveyTemplateData(this IServiceCollection services)
-  {
-    services.AddSingleton<ISurveyTemplateRepository, SurveyTemplateRepository>();
-
-    return services;
-  }
-
   public static IServiceCollection AddSurveyTemplateDataEf(this IServiceCollection services)
   {
     services.AddSingleton<ISurveyTemplateRepository, SurveyTemplateRepositoryEf>();

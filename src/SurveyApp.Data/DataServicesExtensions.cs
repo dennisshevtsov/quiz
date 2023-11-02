@@ -11,14 +11,6 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DataServicesExtensions
 {
-  public static IServiceCollection AddData(this IServiceCollection services)
-  {
-    services.AddSurveyData();
-    services.AddSurveyTemplateData();
-
-    return services;
-  }
-
   public static IServiceCollection AddDataEf(this IServiceCollection services, IConfiguration configuration)
   {
     services.Configure<AppDbOptions>(configuration);
