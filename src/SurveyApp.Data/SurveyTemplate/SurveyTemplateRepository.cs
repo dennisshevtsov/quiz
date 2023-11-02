@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace SurveyApp.SurveyTemplate.Data;
 
-public sealed class SurveyTemplateRepositoryEf : ISurveyTemplateRepository
+public sealed class SurveyTemplateRepository : ISurveyTemplateRepository
 {
   private readonly DbContext _dbContext;
 
-  public SurveyTemplateRepositoryEf(DbContext dbContext)
+  public SurveyTemplateRepository(DbContext dbContext)
   {
     _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
   }
