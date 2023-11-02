@@ -25,7 +25,7 @@ public sealed class DbContextTest
                                                              .Build();
 
     ServiceCollection services = new ServiceCollection();
-    services.AddDataEf(configuration);
+    services.AddData(configuration);
 
     _scope = services.BuildServiceProvider().CreateScope();
 

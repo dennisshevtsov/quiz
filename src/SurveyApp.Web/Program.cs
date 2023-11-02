@@ -3,7 +3,7 @@
 // See LICENSE in the project root for license information.
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-builder.Services.AddData();
+builder.Services.AddData(builder.Configuration);
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers(options => options.AddComposable());
 

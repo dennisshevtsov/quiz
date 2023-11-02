@@ -15,11 +15,4 @@ public static class SurveyTemplateDataServicesExtensions
 
     return services;
   }
-
-  public static IServiceCollection AddSurveyTemplateDataEf(this IServiceCollection services)
-  {
-    services.AddSingleton<ISurveyTemplateRepository, SurveyTemplateRepositoryEf>();
-
-    return services;
-  }
 }

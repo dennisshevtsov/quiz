@@ -7,7 +7,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-      target: survey-app-build
+      target: survey-app
     ports:
       - "5001:80"
     environment:

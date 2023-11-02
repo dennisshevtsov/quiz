@@ -2,43 +2,46 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+
 namespace SurveyApp.Survey.Data;
 
 public sealed class SurveyRepository : ISurveyRepository
 {
-  private readonly Dictionary<Guid, SurveyEntity> _surveys = new();
+  private readonly DbContext _dbContext;
 
-  public Task<SurveyEntity?> GetSurveyAsync(Guid surveyId, CancellationToken cancellationToken)
+  public SurveyRepository(DbContext dbContext)
   {
-    if (_surveys.ContainsKey(surveyId))
-    {
-      return Task.FromResult<SurveyEntity?>(_surveys[surveyId]);
-    }
-
-    return Task.FromResult(default(SurveyEntity));
+    _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
   }
 
-  public Task<SurveyEntity> AddSurveyAsync(SurveyEntity surveyEntity, CancellationToken cancellationToken)
-  {
-    _surveys[surveyEntity.SurveyId] = surveyEntity;
+  public Task<SurveyEntity?> GetSurveyAsync(Guid surveyId, CancellationToken cancellationToken) =>
+    _dbContext.Set<SurveyEntity>()
+              .AsNoTracking()
+              .Where(entity => entity.SurveyId == surveyId)
+              .FirstOrDefaultAsync(cancellationToken);
 
-    return Task.FromResult(surveyEntity);
+  public async Task<SurveyEntity> AddSurveyAsync(SurveyEntity surveyEntity, CancellationToken cancellationToken)
+  {
+    EntityEntry<SurveyEntity> surveyEntityEntry = _dbContext.Entry(surveyEntity);
+    surveyEntityEntry.State = EntityState.Added;
+    await _dbContext.SaveChangesAsync(cancellationToken);
+    surveyEntityEntry.State = EntityState.Detached;
+
+    return surveyEntity;
   }
 
-  public Task UpdateSurveyAsync(SurveyEntity surveyEntity, CancellationToken cancellationToken)
+  public async Task UpdateSurveyAsync(SurveyEntity surveyEntity, CancellationToken cancellationToken)
   {
-    if (_surveys.ContainsKey(surveyEntity.SurveyId))
-    {
-      _surveys[surveyEntity.SurveyId] = surveyEntity;
-    }
-
-    return Task.CompletedTask;
+    EntityEntry<SurveyEntity> surveyEntityEntry = _dbContext.Entry(surveyEntity);
+    surveyEntityEntry.State = EntityState.Modified;
+    await _dbContext.SaveChangesAsync(cancellationToken);
+    surveyEntityEntry.State = EntityState.Detached;
   }
 
-  public Task DeleteSurveyAsync(Guid surveyId, CancellationToken cancellationToken)
-  {
-    _surveys.Remove(surveyId);
-
-    return Task.CompletedTask;
-  }
+  public Task DeleteSurveyAsync(Guid surveyId, CancellationToken cancellationToken) =>
+    _dbContext.Set<SurveyEntity>()
+              .Where(entity => entity.SurveyId == surveyId)
+              .ExecuteDeleteAsync(cancellationToken);
 }

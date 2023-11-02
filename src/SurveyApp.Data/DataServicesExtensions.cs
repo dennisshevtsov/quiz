@@ -11,15 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DataServicesExtensions
 {
-  public static IServiceCollection AddData(this IServiceCollection services)
-  {
-    services.AddSurveyData();
-    services.AddSurveyTemplateData();
-
-    return services;
-  }
-
-  public static IServiceCollection AddDataEf(this IServiceCollection services, IConfiguration configuration)
+  public static IServiceCollection AddData(this IServiceCollection services, IConfiguration configuration)
   {
     services.Configure<AppDbOptions>(configuration);
     services.AddDbContext<DbContext, AppDbContext>((provider, builder) =>
@@ -30,8 +22,8 @@ public static class DataServicesExtensions
       builder.UseNpgsql(options.ConnectionString);
     });
 
-    services.AddSurveyDataEf();
-    services.AddSurveyTemplateDataEf();
+    services.AddSurveyData();
+    services.AddSurveyTemplateData();
 
     return services;
   }
