@@ -15,10 +15,10 @@ COPY . .
 WORKDIR "/src/src/SurveyApp.Web"
 RUN dotnet build "SurveyApp.Web.csproj" -c Release -o /app/build
 
-FROM build AS survey-app-publish
+FROM build AS publish
 RUN dotnet publish "SurveyApp.Web.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-FROM base AS survey-app-build
+FROM base AS survey-app
 WORKDIR /app
-COPY --from=survey-app-publish /app/publish .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "SurveyApp.Web.dll"]
