@@ -11,9 +11,9 @@ public sealed class TextQuestionDto : QuestionDtoBase
     Answer = string.Empty;
   }
 
-  public TextQuestionDto(TextQuestionEntity textQuestionEntity) : this()
+  public TextQuestionDto(TextQuestionEntity question) : this()
   {
-    Text = textQuestionEntity.Text;
+    Text = question.Text;
   }
 
   public string Answer { get; set; }
