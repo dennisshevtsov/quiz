@@ -6,7 +6,7 @@ namespace SurveyApp.Survey.Web;
 
 public sealed class TextQuestionDto : QuestionDtoBase
 {
-  public TextQuestionDto()
+  public TextQuestionDto() : base()
   {
     Answer = string.Empty;
   }

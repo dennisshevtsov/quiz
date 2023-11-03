@@ -13,7 +13,12 @@ namespace SurveyApp.Survey.Web;
 [JsonDerivedType(typeof(SingleChoiceQuestionDto), (int)QuestionType.SingleChoice)]
 public abstract class QuestionDtoBase
 {
-  public string Text { get; set; } = string.Empty;
+  protected QuestionDtoBase()
+  {
+    Text = string.Empty;
+  }
+
+  public string Text { get; set; }
 
   public QuestionType QuestionType { get; set; }
 
