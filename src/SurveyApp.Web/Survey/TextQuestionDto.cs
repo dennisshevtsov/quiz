@@ -11,12 +11,13 @@ public sealed class TextQuestionDto : QuestionDtoBase
     Answer = string.Empty;
   }
 
-  public TextQuestionDto(TextQuestionEntity question) : this()
+  public TextQuestionDto(TextQuestionEntity question)
   {
-    Text = question.Text;
+    Text   = question.Text;
+    Answer = question.Answer;
   }
 
-  public string Answer { get; set; }
+  public string? Answer { get; set; }
 
   public override QuestionEntityBase ToQuestionEntity() => new TextQuestionEntity
   (

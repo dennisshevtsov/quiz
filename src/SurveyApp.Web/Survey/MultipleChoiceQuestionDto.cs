@@ -12,10 +12,11 @@ public sealed class MultipleChoiceQuestionDto : QuestionDtoBase
     Answers = Array.Empty<string>();
   }
 
-  public MultipleChoiceQuestionDto(MultipleChoiceQuestionEntity question) : this()
+  public MultipleChoiceQuestionDto(MultipleChoiceQuestionEntity question)
   {
     Text    = question.Text;
     Choices = question.Choices;
+    Answers = question.Answers;
   }
 
   public string[] Choices { get; set; }

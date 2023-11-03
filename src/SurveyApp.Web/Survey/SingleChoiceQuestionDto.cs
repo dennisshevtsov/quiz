@@ -12,15 +12,16 @@ public sealed class SingleChoiceQuestionDto : QuestionDtoBase
     Answer  = string.Empty;
   }
 
-  public SingleChoiceQuestionDto(SingleChoiceQuestionEntity question) : this()
+  public SingleChoiceQuestionDto(SingleChoiceQuestionEntity question)
   {
     Text    = question.Text;
     Choices = question.Choices;
+    Answer  = question.Answer;
   }
 
   public string[] Choices { get; set; }
 
-  public string Answer { get; set; }
+  public string? Answer { get; set; }
 
   public override QuestionEntityBase ToQuestionEntity() => new SingleChoiceQuestionEntity
   (
