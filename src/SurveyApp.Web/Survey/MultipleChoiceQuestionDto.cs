@@ -8,6 +8,7 @@ public sealed class MultipleChoiceQuestionDto : QuestionDtoBase
 {
   public MultipleChoiceQuestionDto() : base()
   {
+    Choices = Array.Empty<string>();
     Answers = Array.Empty<string>();
   }
 
@@ -17,7 +18,7 @@ public sealed class MultipleChoiceQuestionDto : QuestionDtoBase
     Choices = question.Choices;
   }
 
-  public string[] Choices { get; set; } = Array.Empty<string>();
+  public string[] Choices { get; set; }
 
   public string[] Answers { get; set; }
 
