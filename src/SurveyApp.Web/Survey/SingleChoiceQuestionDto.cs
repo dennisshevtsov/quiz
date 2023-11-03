@@ -26,6 +26,6 @@ public sealed class SingleChoiceQuestionDto : QuestionDtoBase
   (
     text   : Text,
     choices: Choices,
-    answer : null
+    answer : Answer
   );
 }

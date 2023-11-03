@@ -26,6 +26,6 @@ public sealed class MultipleChoiceQuestionDto : QuestionDtoBase
   (
     text   : Text,
     choices: Choices,
-    answers: Array.Empty<string>()
+    answers: Answers
   );
 }
