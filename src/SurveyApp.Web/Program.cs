@@ -8,6 +8,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers(options => options.AddComposable());
 
 WebApplication app = builder.Build();
+app.UseData();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseRouting();
