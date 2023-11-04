@@ -11,9 +11,9 @@ services:
     ports:
       - "5001:80"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
-      - CONNECTIONSTRING="Host=survey-db;Port=5432;Database=survey_db_test;Username=dev;Password=dev"
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:80
+      CONNECTIONSTRING: "Host=survey-db;Port=5432;Database=survey_db_test;Username=dev;Password=dev;Include Error Detail=true"
     depends_on:
       - survey-db
   survey-db:
@@ -22,5 +22,5 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=dev
-      - POSTGRES_PASSWORD=dev
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
