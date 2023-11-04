@@ -13,8 +13,9 @@ public sealed class YesNoQuestionDto : QuestionDtoBase
 
   public YesNoQuestionDto(YesNoQuestionEntity question)
   {
-    Text   = question.Text;
-    Answer = question.Answer;
+    Text         = question.Text;
+    Answer       = question.Answer;
+    QuestionType = question.QuestionType;
   }
 
   public YesNo Answer { get; set; }

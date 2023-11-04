@@ -13,8 +13,9 @@ public sealed class TextQuestionDto : QuestionDtoBase
 
   public TextQuestionDto(TextQuestionEntity question)
   {
-    Text   = question.Text;
-    Answer = question.Answer;
+    Text         = question.Text;
+    Answer       = question.Answer;
+    QuestionType = question.QuestionType;
   }
 
   public string? Answer { get; set; }

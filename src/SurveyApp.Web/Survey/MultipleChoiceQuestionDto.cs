@@ -14,9 +14,10 @@ public sealed class MultipleChoiceQuestionDto : QuestionDtoBase
 
   public MultipleChoiceQuestionDto(MultipleChoiceQuestionEntity question)
   {
-    Text    = question.Text;
-    Choices = question.Choices;
-    Answers = question.Answers;
+    Text         = question.Text;
+    Choices      = question.Choices;
+    Answers      = question.Answers;
+    QuestionType = question.QuestionType;
   }
 
   public string[] Choices { get; set; }

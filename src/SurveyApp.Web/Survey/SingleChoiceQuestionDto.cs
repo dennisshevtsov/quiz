@@ -14,9 +14,10 @@ public sealed class SingleChoiceQuestionDto : QuestionDtoBase
 
   public SingleChoiceQuestionDto(SingleChoiceQuestionEntity question)
   {
-    Text    = question.Text;
-    Choices = question.Choices;
-    Answer  = question.Answer;
+    Text         = question.Text;
+    Choices      = question.Choices;
+    Answer       = question.Answer;
+    QuestionType = question.QuestionType;
   }
 
   public string[] Choices { get; set; }
