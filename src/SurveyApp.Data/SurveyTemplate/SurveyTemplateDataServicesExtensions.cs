@@ -11,7 +11,7 @@ public static class SurveyTemplateDataServicesExtensions
 {
   public static IServiceCollection AddSurveyTemplateData(this IServiceCollection services)
   {
-    services.AddSingleton<ISurveyTemplateRepository, SurveyTemplateRepository>();
+    services.AddScoped<ISurveyTemplateRepository, SurveyTemplateRepository>();
 
     return services;
   }
