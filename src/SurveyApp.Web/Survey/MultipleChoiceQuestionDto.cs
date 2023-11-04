@@ -6,15 +6,23 @@ namespace SurveyApp.Survey.Web;
 
 public sealed class MultipleChoiceQuestionDto : QuestionDtoBase
 {
-  public MultipleChoiceQuestionDto() { }
-
-  public MultipleChoiceQuestionDto(MultipleChoiceQuestionEntity multipleChoiceQuestionEntity)
+  public MultipleChoiceQuestionDto() : base()
   {
-    Text    = multipleChoiceQuestionEntity.Text;
-    Choices = multipleChoiceQuestionEntity.Choices;
+    Choices = Array.Empty<string>();
+    Answers = Array.Empty<string>();
   }
 
-  public string[] Choices { get; set; } = Array.Empty<string>();
+  public MultipleChoiceQuestionDto(MultipleChoiceQuestionEntity question)
+  {
+    Text         = question.Text;
+    Choices      = question.Choices;
+    Answers      = question.Answers;
+    QuestionType = question.QuestionType;
+  }
+
+  public string[] Choices { get; set; }
+
+  public string[] Answers { get; set; }
 
   public override QuestionEntityBase ToQuestionEntity() => new MultipleChoiceQuestionEntity
   (

@@ -6,12 +6,19 @@ namespace SurveyApp.Survey.Web;
 
 public sealed class YesNoQuestionDto : QuestionDtoBase
 {
-  public YesNoQuestionDto() { }
-
-  public YesNoQuestionDto(YesNoQuestionEntity yesNoQuestionEntity)
+  public YesNoQuestionDto() : base()
   {
-    Text = yesNoQuestionEntity.Text;
+    Answer = YesNo.None;
   }
+
+  public YesNoQuestionDto(YesNoQuestionEntity question)
+  {
+    Text         = question.Text;
+    Answer       = question.Answer;
+    QuestionType = question.QuestionType;
+  }
+
+  public YesNo Answer { get; set; }
 
   public override QuestionEntityBase ToQuestionEntity() => new YesNoQuestionEntity
   (

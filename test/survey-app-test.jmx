@@ -545,7 +545,7 @@
             </elementProp>
             <elementProp name="answerSurveyQuestion1" elementType="Argument">
               <stringProp name="Argument.name">answerSurveyQuestion1</stringProp>
-              <stringProp name="Argument.value">${__RandomString(5, ABCDEFGHIJKLMNOPQRSTUVXYZ)}</stringProp>
+              <stringProp name="Argument.value">1</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="answerSurveyQuestion2Choice0" elementType="Argument">
@@ -580,7 +580,7 @@
 		},&#xd;
 		{&#xd;
 			&quot;questionType&quot;: 1,&#xd;
-			&quot;answer&quot;: &quot;${answerSurveyQuestion1}&quot;&#xd;
+			&quot;answer&quot;: ${answerSurveyQuestion1}&#xd;
 		},&#xd;
 		{&#xd;
 			&quot;questionType&quot;: 2,&#xd;
@@ -615,6 +615,71 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Survey" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">5001</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">api/survey/${surveyId}</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Questions[0].Answer" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[0].answer</stringProp>
+            <stringProp name="EXPECTED_VALUE">${answerSurveyQuestion0}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Questions[1].Answer" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[1].answer</stringProp>
+            <stringProp name="EXPECTED_VALUE">${answerSurveyQuestion1}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Questions[2].Answers[0]" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[2].answers[0]</stringProp>
+            <stringProp name="EXPECTED_VALUE">${answerSurveyQuestion2Choice0}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Questions[2].Answers[1]" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[2].answers[1]</stringProp>
+            <stringProp name="EXPECTED_VALUE">${answerSurveyQuestion2Choice1}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Should contain Questions[3].Answer" enabled="true">
+            <stringProp name="JSON_PATH">$.questions[3].answer</stringProp>
+            <stringProp name="EXPECTED_VALUE">${answerSurveyQuestion3}</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+        </hashTree>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="Survey App Test Listener" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>

@@ -2,10 +2,13 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
+using System.Text.Json.Serialization;
+
 namespace SurveyApp.Survey.Web;
 
 public sealed class YesNoAnswerDto : AnswerDtoBase
 {
+  [JsonPropertyName("answer")]
   public YesNo Answer { get; set; }
 
   public override void SetAnswer(QuestionEntityBase questionEntity, ExecutingContext context)
