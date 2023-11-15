@@ -6,7 +6,7 @@ services:
     image: survey-app
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./src/SurveyApp.Web/Dockerfile
       target: survey-app
     ports:
       - "5001:80"
