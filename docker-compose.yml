@@ -6,7 +6,7 @@ services:
     image: survey-app
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./src/SurveyApp.Web/Dockerfile
       target: survey-app
     ports:
       - "5001:80"
@@ -18,7 +18,7 @@ services:
       - survey-db
   survey-db:
     container_name: survey-db
-    image: postgres:12
+    image: postgres:16
     ports:
       - "5432:5432"
     environment:

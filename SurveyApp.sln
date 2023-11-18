@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyApp", "src\SurveyApp\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyApp.Test", "test\SurveyApp.Test\SurveyApp.Test.csproj", "{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F7E43736-5F51-4B0C-ACE6-F23695740496}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4418E7C-C049-4F40-B336-F7EE4F4AAA3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7E43736-5F51-4B0C-ACE6-F23695740496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7E43736-5F51-4B0C-ACE6-F23695740496}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7E43736-5F51-4B0C-ACE6-F23695740496}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7E43736-5F51-4B0C-ACE6-F23695740496}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
